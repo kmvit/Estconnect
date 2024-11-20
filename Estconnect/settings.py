@@ -13,17 +13,13 @@ import os
 import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Инициализация environ
 env = environ.Env(
-    # Укажите типы переменных по умолчанию
     DEBUG=(bool, False)
 )
 
-# Чтение .env файла
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
