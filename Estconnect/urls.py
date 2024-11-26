@@ -4,9 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('pages.urls')),  # Подключение маршрутов страниц
-    path('users/', include('users.urls')),  # Пользовательские маршруты
     path('admin/', admin.site.urls),  # Админка
+    path('users/', include('users.urls')),  # Пользовательские маршруты
+    path('', include('pages.urls')),  # Подключение маршрутов страниц
 ]
 # Подключение медиафайлов в режиме разработки
 if settings.DEBUG:
