@@ -2,4 +2,4 @@ from django.shortcuts import render
 
 
 def home_view(request):
-    return render(request, 'home.html', {'title': 'Главная страница'})
+    return render(request, 'core/home.html', {'title': 'Главная страница'})
