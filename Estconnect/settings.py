@@ -15,7 +15,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -41,11 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users',
-    'core'
+    'core',
+    'pages',
+
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,13 +70,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.menu_pages',
+                'pages.context_processors.site_settings',
+                # Добавленный контекст-процессор
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'Estconnect.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -114,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -126,12 +127,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# Папка для загруженных файлов
+MEDIA_URL = '/media/'  # URL для медиафайлов
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Путь к папке для медиафайлов
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

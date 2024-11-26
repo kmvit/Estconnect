@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="{% block meta_description %}Стандартное описание{% endblock %}">
+    <meta name="keywords"
+          content="{% block meta_keywords %}Ключевые слова{% endblock %}">
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+</head>
+<body>
+<!-- Шапка -->
+<header>
+    <div>
+        {% if site_settings.logo %}
+            <a href="/"><img src="{{ site_settings.logo.url }}" alt="Логотип"></a>
+        {% else %}
+            <a href="/"><img src="/static/default_logo.png" alt="Логотип"></a>
+        {% endif %}
+    </div>
+    <div>
+        <p>Телефон: {{ site_settings.phone }}</p>
+        <p>Email: <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+    </div>
+    <nav>
+        <ul>
+            {% for page in menu_pages %}
+                <li><a href="{% if page.is_homepage %}/
+                    {% else %}/{{ page.slug }}/{% endif %}">{{ page.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <div>
+        {% if user.is_authenticated %}
+            <span>Здравствуйте, {{ user.username }}!</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Войти</a>
+        {% endif %}
+    </div>
+</header>
+
+
+<!-- Основной контент -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Подвал -->
+<footer>
+    <p>© 2024 Мой сайт. Все права защищены.</p>
+    <div class="social-media">
+        {% if site_settings.instagram %}
+            <a href="{{ site_settings.instagram }}" target="_blank">Instagram</a>
+        {% endif %}
+        {% if site_settings.vk %}
+            <a href="{{ site_settings.vk }}" target="_blank">VK</a>
+        {% endif %}
+        {% if site_settings.facebook %}
+            <a href="{{ site_settings.facebook }}" target="_blank">Facebook</a>
+        {% endif %}
+        {% if site_settings.youtube %}
+            <a href="{{ site_settings.youtube }}" target="_blank">YouTube</a>
+        {% endif %}
+    </div>
+</footer>
+
+</body>
+</html>
