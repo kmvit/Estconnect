@@ -21,7 +21,15 @@
     </div>
     <div>
         <p>Телефон: {{ site_settings.phone }}</p>
-        <p>Email: <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></p>
+        <p>Email: <a
+                href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+        </p>
+    </div>
+    <div>
+        <ul>
+            <li><a href="">RU</a></li>
+            <li><a href="">EN</a></li>
+        </ul>
     </div>
     <nav>
         <ul>
@@ -56,7 +64,8 @@
     <p>© 2024 Мой сайт. Все права защищены.</p>
     <div class="social-media">
         {% if site_settings.instagram %}
-            <a href="{{ site_settings.instagram }}" target="_blank">Instagram</a>
+            <a href="{{ site_settings.instagram }}"
+               target="_blank">Instagram</a>
         {% endif %}
         {% if site_settings.vk %}
             <a href="{{ site_settings.vk }}" target="_blank">VK</a>
@@ -67,6 +76,13 @@
         {% if site_settings.youtube %}
             <a href="{{ site_settings.youtube }}" target="_blank">YouTube</a>
         {% endif %}
+    </div>
+    <div>
+        <ul>
+            <li><a href="">Terms of use</a></li>
+            <li><a href="">KYC/AMl policy</a></li>
+            <li><a href="">Privacy policy</a></li>
+        </ul>
     </div>
 </footer>
 
