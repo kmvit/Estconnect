@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
-from .forms import CustomUserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from .forms import CustomUserCreationForm, CustomLoginForm
 
 
 def register(request):
@@ -13,11 +13,6 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
-
-
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from .forms import CustomLoginForm
 
 
 def login_view(request):

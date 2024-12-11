@@ -98,7 +98,7 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = [
     'users.auth_backends.CustomAuthBackend',  # Наш кастомный бэкэнд
-    'django.contrib.auth.backends.ModelBackend',  # Стандартный бэкэнд
+    # 'django.contrib.auth.backends.ModelBackend',  # Стандартный бэкэнд
 ]
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

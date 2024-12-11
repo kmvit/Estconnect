@@ -17,6 +17,8 @@
                 <p><strong>Email:</strong> <a
                         href="mailto:{{ developer.email }}">{{ developer.email }}</a>
                 </p>
+                <a href="{% url 'edit_developer_profile' developer.id %}"
+               class="btn btn-primary">Редактировать профиль</a>
             </div>
         </div>
         <h2 class="my-4">Объекты застройки</h2>
@@ -39,7 +41,8 @@
                             <p class="card-text"><strong>Класс
                                 жилья:</strong> {{ obj.housing_class.name }}
                             </p>
-                            <a href="{% url 'construction_object_detail' pk=obj.id %}" class="btn btn-primary">Подробнее</a>
+                            <a href="{% url 'construction_object_detail' pk=obj.id %}"
+                               class="btn btn-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>

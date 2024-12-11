@@ -69,7 +69,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="{% if user.role == 'developer' %}
-                                     {% url 'developer_detail' user.id %}
+                                     {% url 'developer_detail' user.developer_profile.id %}
                                  {% elif user.role == 'agent' %}
                                      {% url 'agent_detail' user.id %}
                                  {% else %}
