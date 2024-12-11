@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),  # Админка
     path('users/', include('users.urls')),  # Пользовательские маршруты
+    path('developers/', include('developers.urls')),
+    # Пользовательские маршруты
+    path('support/', include('support.urls')),
     path('', include('pages.urls')),  # Подключение маршрутов страниц
 ]
 # Подключение медиафайлов в режиме разработки

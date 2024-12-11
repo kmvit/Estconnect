@@ -1,0 +1,68 @@
+{% extends 'developer_base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Список всех объектов</h1>
+        <!-- Кнопки сортировки -->
+        <div class="mb-4">
+            <a href="?sort_by=developer"
+               class="btn btn-outline-primary {% if current_sort == 'developer' %}active{% endif %}">
+                Сортировка по застройщику
+            </a>
+            <a href="?sort_by=price"
+               class="btn btn-outline-primary {% if current_sort == 'price' %}active{% endif %}">
+                Сортировка по цене
+            </a>
+            <a href="?sort_by=type"
+               class="btn btn-outline-primary {% if current_sort == 'type' %}active{% endif %}">
+                Сортировка по типу недвижимости
+            </a>
+        </div>
+
+        <!-- Карта -->
+        <div id="map" style="height: 500px;" class="mb-4"></div>
+
+        <!-- Карточки объектов -->
+        <div class="row">
+            {% for obj in construction_objects %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        {% if obj.images.first %}
+                            <img src="{{ obj.images.first.image.url }}"
+                                 class="card-img-top"
+                                 alt="Фото {{ obj.name }}">
+                        {% else %}
+                            <img src="/static/default_image.png"
+                                 class="card-img-top" alt="Нет фото">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ obj.name }}</h5>
+                            <p class="card-text"><strong>Цена за
+                                квадрат:</strong> {{ obj.price_per_sqm }} ₽</p>
+                            <p class="card-text">
+                                <strong>Адрес:</strong> {{ obj.address }}</p>
+                            <a href="{% url 'construction_object_detail' obj.id %}"
+                               class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const map = L.map('map').setView([55.751244, 37.618423], 5); // Центр карты (Россия)
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        const objects = {{ map_data|safe }};
+
+        objects.forEach(obj => {
+            if (obj.latitude && obj.longitude) {
+                L.marker([obj.latitude, obj.longitude]).addTo(map)
+                    .bindPopup(`<b>${obj.name}</b><br>${obj.address}`);
+            }
+        });
+    </script>
+{% endblock %}

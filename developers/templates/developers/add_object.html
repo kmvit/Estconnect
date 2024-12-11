@@ -1,0 +1,30 @@
+{% extends "developer_base.html" %}
+
+{% block title %}Добавление объекта{% endblock %}
+
+{% block content %}
+    <h2>Добавление объекта</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Основная форма -->
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+
+        <!-- Формы изображений -->
+        <h3>Добавить изображения</h3>
+        <div class="mb-3">
+            {{ formset.management_form }}
+            {% for subform in formset %}
+                <div class="mb-3">
+                    {{ subform.image.label_tag }}<br>
+                    {{ subform.image }}
+                    {{ subform.DELETE }} Удалить
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Добавить объект</button>
+    </form>
+{% endblock %}

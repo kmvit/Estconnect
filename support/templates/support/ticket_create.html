@@ -1,0 +1,21 @@
+{% extends "developer_base.html" %}
+
+{% block title %}Создать обращение{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Создать новое обращение</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        <div class="mb-3">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+{% endblock %}

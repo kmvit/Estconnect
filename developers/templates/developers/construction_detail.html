@@ -1,0 +1,204 @@
+{% extends 'developer_base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">{{ construction_object.name }}</h1>
+        <!-- Секция кнопок -->
+        <div class="mb-4">
+            <button class="btn btn-primary"
+                    onclick="window.open('https://docs.google.com/your-developer-files')">
+                Файлы застройщика
+            </button>
+            <button class="btn btn-secondary"
+                    onclick="window.open('https://docs.google.com/your-commissions-files')">
+                Комиссии
+            </button>
+            <button class="btn btn-info" data-bs-toggle="modal"
+                    data-bs-target="#contactsModal">
+                Контакты
+            </button>
+            <button class="btn btn-outline-secondary" disabled>
+                Чат с оператором
+            </button>
+        </div>
+
+        <!-- Всплывающее окно для контактов -->
+        <div class="modal fade" id="contactsModal" tabindex="-1"
+             aria-labelledby="contactsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contactsModalLabel">
+                            Контакты</h5>
+                        <button type="button" class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Адрес
+                            объекта:</strong> {{ construction_object.address }}
+                        </p>
+                        <h6>Контактные номера:</h6>
+                        <ul>
+                            <li>Менеджер 1: +7 123 456 7890</li>
+                            <li>Менеджер 2: +7 098 765 4321</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Общая информация</h2>
+        <p><strong>Цена за квадратный
+            метр:</strong> {{ construction_object.price_per_sqm }} ₽</p>
+        <p><strong>Класс
+            жилья:</strong> {{ construction_object.housing_class.name }}</p>
+        <p><strong>Тип
+            жилья:</strong> {{ construction_object.housing_type.name }}</p>
+        <p><strong>Срок
+            сдачи:</strong> {{ construction_object.completion_date }}</p>
+        <p><strong>Парковка:</strong>
+            {% if construction_object.parking == "underground" %}
+                Подземная{% endif %}
+            {% if construction_object.parking == "ground" %}Наземная{% endif %}
+            {% if construction_object.parking == "none" %}Нет{% endif %}
+        </p>
+        <p><strong>Количество
+            корпусов:</strong> {{ construction_object.buildings }}</p>
+        <p><strong>Этажность:</strong> {{ construction_object.floors }}</p>
+        <p><strong>Адрес:</strong> {{ construction_object.address }}</p>
+        <p><strong>Страна:</strong> {{ construction_object.country.name }}</p>
+        <p><strong>Город:</strong> {{ construction_object.city.name }}</p>
+        <p><strong>Район:</strong> {{ construction_object.district.name }}</p>
+        <p><strong>Описание:</strong> {{ construction_object.description }}</p>
+
+        <h2>Фотографии</h2>
+        <div class="row">
+            {% for image in construction_object.images.all %}
+                <div class="col-md-4 mb-4">
+                    <img src="{{ image.image.url }}" class="img-fluid"
+                         alt="Фото {{ construction_object.name }}">
+                </div>
+            {% empty %}
+                <p>Фотографий пока нет.</p>
+            {% endfor %}
+        </div>
+
+        <h2>Карта</h2>
+        <div id="map" style="height: 400px;"></div>
+
+        <script>
+            const map = L.map('map').setView([{{ construction_object.latitude }}, {{ construction_object.longitude }}], 15);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+
+            L.marker([{{ construction_object.latitude }}, {{ construction_object.longitude }}]).addTo(map)
+                .bindPopup(`<b>{{ construction_object.name }}</b><br>{{ construction_object.address }}`);
+        </script>
+    </div>
+
+{% endblock %}
+<div class="container">
+    <h1 class="my-4">{{ construction_object.name }}</h1>
+
+    <!-- Секция кнопок -->
+    <div class="mb-4">
+        <button class="btn btn-primary"
+                onclick="window.open('https://docs.google.com/your-developer-files')">
+            Файлы застройщика
+        </button>
+        <button class="btn btn-secondary"
+                onclick="window.open('https://docs.google.com/your-commissions-files')">
+            Комиссии
+        </button>
+        <button class="btn btn-info" data-bs-toggle="modal"
+                data-bs-target="#contactsModal">
+            Контакты
+        </button>
+        <button class="btn btn-outline-secondary" disabled>
+            Чат с оператором
+        </button>
+    </div>
+
+    <!-- Всплывающее окно для контактов -->
+    <div class="modal fade" id="contactsModal" tabindex="-1"
+         aria-labelledby="contactsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactsModalLabel">
+                        Контакты</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Адрес
+                        объекта:</strong> {{ construction_object.address }}</p>
+                    <h6>Контактные номера:</h6>
+                    <ul>
+                        <li>Менеджер 1: +7 123 456 7890</li>
+                        <li>Менеджер 2: +7 098 765 4321</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Закрыть
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Остальная информация об объекте -->
+    <h2>Общая информация</h2>
+    <p><strong>Цена за квадратный
+        метр:</strong> {{ construction_object.price_per_sqm }} ₽</p>
+    <p><strong>Класс
+        жилья:</strong> {{ construction_object.housing_class.name }}</p>
+    <p><strong>Тип жилья:</strong> {{ construction_object.housing_type.name }}
+    </p>
+    <p><strong>Описание:</strong> {{ construction_object.description }}</p>
+    <h2>Фотографии</h2>
+    <div class="row">
+        {% for image in construction_object.images.all %}
+            <div class="col-md-4 mb-4">
+                <img src="{{ image.image.url }}" class="img-fluid"
+                     alt="Фото {{ construction_object.name }}">
+            </div>
+        {% empty %}
+            <p>Фотографий пока нет.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Карта -->
+    <h2>Карта</h2>
+    <div id="map" style="height: 400px;"></div>
+    <script>
+        // Проверяем, что переданы координаты
+        const latitude = {{ construction_object.latitude|default:"null" }};
+        const longitude = {{ construction_object.longitude|default:"null" }};
+
+        if (latitude && longitude) {
+            // Инициализация карты
+            const map = L.map('map').setView([latitude, longitude], 15);
+
+            // Добавление слоя карты OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+
+            // Добавление маркера
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup(`<b>{{ construction_object.name }}</b><br>{{ construction_object.address }}`);
+        } else {
+            console.error("Координаты объекта не заданы.");
+            document.getElementById('map').innerText = "Карта недоступна: координаты не заданы.";
+        }
+    </script>
+</div>
