@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
     """
     phone = forms.CharField(
         label="Телефон",
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Пример: 8XXXXXXXXXX'}),
     )
 
@@ -29,13 +29,13 @@ class CustomUserCreationForm(UserCreationForm):
             choice[0] != 'admin'
         ]
 
-    def clean_phone(self):
-        phone = self.cleaned_data['phone']
-        # Проверка формата телефона
-        if not re.match(r'^8\d{9}$', phone):
-            raise forms.ValidationError(
-                "Телефон должен быть в формате: 8XXXXXXXXXX")
-        return phone
+    # def clean_phone(self):
+    #     phone = self.cleaned_data['phone']
+    #     # Проверка формата телефона
+    #     if not re.match(r'^8\d{9}$', phone):
+    #         raise forms.ValidationError(
+    #             "Телефон должен быть в формате: 8XXXXXXXXXX")
+    #     return phone
 
 
 class CustomLoginForm(forms.Form):

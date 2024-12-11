@@ -1,5 +1,36 @@
 from django import forms
-from .models import ConstructionObject, ConstructionObjectImage
+from .models import ConstructionObject, ConstructionObjectImage, Developer
+
+
+class DeveloperProfileForm(forms.ModelForm):
+    class Meta:
+        model = Developer
+        fields = [
+            'name',
+            'company',
+            'image',
+            'phone',
+            'email',
+            'contact_person',
+            'preferred_contact_method',
+        ]
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'company': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'contact_person': forms.TextInput(attrs={'class': 'form-control'}),
+            'preferred_contact_method': forms.Select(attrs={'class': 'form-select'}),
+        }
+        labels = {
+            'name': 'Название',
+            'company': 'Компания',
+            'image': 'Изображение',
+            'phone': 'Номер телефона',
+            'email': 'Почта',
+            'contact_person': 'Контактное лицо',
+            'preferred_contact_method': 'Предпочтительный канал связи',
+        }
 
 
 class ConstructionObjectForm(forms.ModelForm):

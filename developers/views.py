@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
-from .forms import ConstructionObjectImageForm, ConstructionObjectForm
+from .forms import ConstructionObjectImageForm, ConstructionObjectForm, \
+    DeveloperProfileForm
 from .models import Developer, ConstructionObject, ConstructionObjectImage
 import logging
 
@@ -22,6 +24,26 @@ class DeveloperDetailView(DetailView):
         context['construction_objects'] = ConstructionObject.objects.filter(
             developer=self.object, is_published=True)
         return context
+
+
+@login_required
+def edit_developer_profile(request, developer_id):
+    """Редактирование профиля застройщика"""
+    developer = get_object_or_404(Developer, id=developer_id)
+
+    if developer.user != request.user:
+        raise PermissionDenied  # Ограничиваем доступ только к своему профилю
+
+    if request.method == 'POST':
+        form = DeveloperProfileForm(request.POST, request.FILES, instance=developer)
+        if form.is_valid():
+            form.save()
+            return redirect('developer_detail', pk=developer.id)
+    else:
+        form = DeveloperProfileForm(instance=developer)
+
+    return render(request, 'developers/developer_edit.html', {'form': form, 'developer': developer})
+
 
 
 class ConstructionObjectListView(ListView):
