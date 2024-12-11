@@ -1,0 +1,21 @@
+{% extends "developer_base.html" %}
+
+{% block title %}Мои обращения{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Ваши обращения</h1>
+    <a href="{% url 'create_ticket' %}" class="btn btn-primary mb-3">Создать новое обращение</a>
+    <ul class="list-group">
+        {% for ticket in tickets %}
+            <li class="list-group-item">
+                <a href="{% url 'ticket_detail' ticket.id %}">
+                    {{ ticket.title }} ({{ ticket.get_status_display }})
+                </a>
+            </li>
+        {% empty %}
+            <p>У вас пока нет обращений.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

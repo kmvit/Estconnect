@@ -1,0 +1,33 @@
+{% extends "developer_base.html" %}
+
+{% block title %}Статус объектов{% endblock %}
+
+{% block content %}
+<h2>Статус ваших объектов</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in objects %}
+        <tr>
+            <td>{{ obj.name }}</td>
+            <td>
+                {% if obj.is_published %}
+                    Опубликован
+                {% else %}
+                    На модерации
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">У вас пока нет объектов.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'developer_base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">{{ developer.name }}</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {% if developer.image %}
+                    <img src="{{ developer.image.url }}"
+                         alt="Логотип {{ developer.name }}" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <p><strong>Компания:</strong> {{ developer.company }}</p>
+                <p><strong>Контактное
+                    лицо:</strong> {{ developer.contact_person }}</p>
+                <p><strong>Телефон:</strong> {{ developer.phone }}</p>
+                <p><strong>Email:</strong> <a
+                        href="mailto:{{ developer.email }}">{{ developer.email }}</a>
+                </p>
+            </div>
+        </div>
+        <h2 class="my-4">Объекты застройки</h2>
+        <div class="row">
+            {% for obj in construction_objects %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        {% if obj.images.first %}
+                            <img src="{{ obj.images.first.image.url }}"
+                                 class="card-img-top"
+                                 alt="Фото {{ obj.name }}">
+                        {% else %}
+                            <img src="/static/default_image.png"
+                                 class="card-img-top" alt="Нет фото">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ obj.name }}</h5>
+                            <p class="card-text"><strong>Цена за
+                                квадрат:</strong> {{ obj.price_per_sqm }} ₽</p>
+                            <p class="card-text"><strong>Класс
+                                жилья:</strong> {{ obj.housing_class.name }}
+                            </p>
+                            <a href="{% url 'construction_object_detail' pk=obj.id %}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

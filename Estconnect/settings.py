@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'users',
     'core',
     'pages',
+    'developers',
+    'support',
 
 ]
 
