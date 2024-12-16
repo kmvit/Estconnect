@@ -1,14 +1,20 @@
 from django.contrib import admin
 from .models import (
     Developer, ConstructionObject, ConstructionObjectImage,
-    Country, City, District, HousingClass, HousingType
+    Country, City, District, HousingClass, HousingType, ContactMethod
 )
+
+
+@admin.register(ContactMethod)
+class ContactMethodAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(Developer)
 class DeveloperAdmin(admin.ModelAdmin):
     list_display = (
-    'name', 'company', 'phone', 'email', 'preferred_contact_method')
+        'name', 'company', 'phone', 'email', 'preferred_contact_method')
     search_fields = ('name', 'company', 'phone', 'email')
 
 
@@ -32,11 +38,12 @@ class ConstructionObjectImageInline(admin.TabularInline):
 @admin.register(ConstructionObject)
 class ConstructionObjectAdmin(admin.ModelAdmin):
     list_display = (
-    'name', 'developer', 'price_per_sqm', 'completion_date', 'city', 'country',
-    'is_published')
+        'name', 'developer', 'price_per_sqm', 'completion_date', 'city',
+        'country',
+        'is_published')
     list_filter = (
-    'housing_class', 'housing_type', 'parking', 'country', 'city',
-    'is_published')
+        'housing_class', 'housing_type', 'parking', 'country', 'city',
+        'is_published')
     search_fields = ('name', 'developer__name', 'location')
     inlines = [ConstructionObjectImageInline]  # Добавляем инлайн
 
