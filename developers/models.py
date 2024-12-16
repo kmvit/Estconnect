@@ -67,6 +67,18 @@ class HousingType(models.Model):
         return self.name
 
 
+class ContactMethod(models.Model):
+    name = models.CharField("Название канала связи", max_length=50,
+                            unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Канал связи"
+        verbose_name_plural = "Каналы связи"
+
+
 # Застройщики
 class Developer(models.Model):
     user = models.OneToOneField(
@@ -82,14 +94,12 @@ class Developer(models.Model):
     phone = models.CharField("Номер телефона", max_length=20)
     email = models.EmailField("Почта")
     contact_person = models.CharField("Контактное лицо", max_length=200)
-    preferred_contact_method = models.CharField(
-        "Предпочтительный канал связи",
-        max_length=50,
-        choices=[
-            ("phone", "Телефон"),
-            ("email", "Email"),
-            ("messenger", "Мессенджер"),
-        ],
+    preferred_contact_method = models.ForeignKey(
+        ContactMethod,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Предпочтительный канал связи"
     )
 
     class Meta:
