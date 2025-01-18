@@ -1,7 +1,6 @@
 from django.contrib import admin
-
-from django.contrib import admin
 from .models import CustomUser
+
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -11,7 +10,10 @@ class CustomUserAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('username', 'email', 'password', 'role', 'company_name',
-                       'country', 'legal_address', 'phone', 'website')
+                       'country', 'city', 'district', 'legal_address', 'phone',
+                        'contact_person', 'preferred_contact_method',
+                       'image',
+                       'website')
         }),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
     )
@@ -26,4 +28,3 @@ class CustomUserAdmin(admin.ModelAdmin):
         if obj.role == 'admin' and not change:
             obj.is_staff = True  # CAM-менеджеры автоматически становятся staff
         super().save_model(request, obj, form, change)
-

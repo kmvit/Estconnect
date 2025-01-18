@@ -54,3 +54,31 @@ class CustomLoginForm(forms.Form):
         required=True,
         widget=forms.PasswordInput(attrs={'placeholder': 'Пароль'}),
     )
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = [
+            'company_name',
+            'country',
+            'city',
+            'district',
+            'legal_address',
+            'phone',
+            'website',
+            'preferred_contact_method',
+            'contact_person',
+            'image'
+        ]
+        widgets = {
+            'company_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'legal_address': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': 3}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'website': forms.URLInput(attrs={'class': 'form-control'}),
+            'preferred_contact_method': forms.Select(
+                attrs={'class': 'form-select'}),
+            'contact_person': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+        }
