@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
-    Developer, ConstructionObject, ConstructionObjectImage,
-    Country, City, District, HousingClass, HousingType, ContactMethod
+    ConstructionObject, ConstructionObjectImage, HousingClass,
+    HousingType, ContactMethod
 )
 
 
@@ -9,13 +9,6 @@ from .models import (
 class ContactMethodAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
-
-
-@admin.register(Developer)
-class DeveloperAdmin(admin.ModelAdmin):
-    list_display = (
-        'name', 'company', 'phone', 'email', 'preferred_contact_method')
-    search_fields = ('name', 'company', 'phone', 'email')
 
 
 # Инлайн для фотографий объектов
@@ -38,31 +31,13 @@ class ConstructionObjectImageInline(admin.TabularInline):
 @admin.register(ConstructionObject)
 class ConstructionObjectAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 'developer', 'price_per_sqm', 'completion_date', 'city',
-        'country',
+        'name', 'developer', 'price_per_sqm', 'completion_date',
         'is_published')
     list_filter = (
-        'housing_class', 'housing_type', 'parking', 'country', 'city',
+        'housing_class', 'housing_type', 'parking',
         'is_published')
     search_fields = ('name', 'developer__name', 'location')
     inlines = [ConstructionObjectImageInline]  # Добавляем инлайн
-
-
-@admin.register(Country)
-class CountryAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-
-
-@admin.register(City)
-class CityAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-    list_filter = ('country',)
-
-
-@admin.register(District)
-class DistrictAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-    list_filter = ('city',)
 
 
 @admin.register(HousingClass)

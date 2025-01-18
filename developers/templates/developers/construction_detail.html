@@ -1,4 +1,4 @@
-{% extends 'developer_base.html' %}
+{% extends 'profile_base.html' %}
 {% block content %}
     <div class="container">
         <h1 class="my-4">{{ construction_object.name }}</h1>
@@ -70,9 +70,9 @@
             корпусов:</strong> {{ construction_object.buildings }}</p>
         <p><strong>Этажность:</strong> {{ construction_object.floors }}</p>
         <p><strong>Адрес:</strong> {{ construction_object.address }}</p>
-        <p><strong>Страна:</strong> {{ construction_object.country.name }}</p>
-        <p><strong>Город:</strong> {{ construction_object.city.name }}</p>
-        <p><strong>Район:</strong> {{ construction_object.district.name }}</p>
+        <p><strong>Страна:</strong> {{ construction_object.developer.country.name }}</p>
+        <p><strong>Город:</strong> {{ construction_object.developer.city.name }}</p>
+        <p><strong>Район:</strong> {{ construction_object.developer.district.name }}</p>
         <p><strong>Описание:</strong> {{ construction_object.description }}</p>
 
         <h2>Фотографии</h2>

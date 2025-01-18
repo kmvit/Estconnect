@@ -1,12 +1,9 @@
 from django.urls import path
-from .views import DeveloperDetailView, ConstructionObjectListView, \
+from .views import ConstructionObjectListView, \
     ConstructionObjectDetailView, add_construction_object, \
-    DeveloperObjectsStatusView, edit_developer_profile
+    DeveloperObjectsStatusView
 
 urlpatterns = [
-    path('<int:pk>/', DeveloperDetailView.as_view(), name='developer_detail'),
-    path('<int:developer_id>/edit/', edit_developer_profile,
-         name='edit_developer_profile'),
     path('objects/', ConstructionObjectListView.as_view(),
          name='construction_object_list'),
     path('objects/add/', add_construction_object,

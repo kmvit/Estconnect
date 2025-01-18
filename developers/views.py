@@ -1,49 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 
-from .forms import ConstructionObjectImageForm, ConstructionObjectForm, \
-    DeveloperProfileForm
-from .models import Developer, ConstructionObject, ConstructionObjectImage
+from .forms import ConstructionObjectImageForm, ConstructionObjectForm
+from .models import ConstructionObject, ConstructionObjectImage
 import logging
 
 logger = logging.getLogger(__name__)
-
-
-# Страница застройщика
-class DeveloperDetailView(DetailView):
-    model = Developer
-    template_name = 'developers/developer_detail.html'
-    context_object_name = 'developer'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Добавляем объекты застройки в контекст
-        context['construction_objects'] = ConstructionObject.objects.filter(
-            developer=self.object, is_published=True)
-        return context
-
-
-@login_required
-def edit_developer_profile(request, developer_id):
-    """Редактирование профиля застройщика"""
-    developer = get_object_or_404(Developer, id=developer_id)
-
-    if developer.user != request.user:
-        raise PermissionDenied  # Ограничиваем доступ только к своему профилю
-
-    if request.method == 'POST':
-        form = DeveloperProfileForm(request.POST, request.FILES, instance=developer)
-        if form.is_valid():
-            form.save()
-            return redirect('developer_detail', pk=developer.id)
-    else:
-        form = DeveloperProfileForm(instance=developer)
-
-    return render(request, 'developers/developer_edit.html', {'form': form, 'developer': developer})
-
 
 
 class ConstructionObjectListView(ListView):
@@ -102,7 +66,7 @@ def add_construction_object(request):
         form = ConstructionObjectForm(request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.developer = request.user.developer_profile
+            obj.developer = request.user
             obj.is_published = False  # Устанавливаем статус "Не опубликован"
             obj.save()
 
@@ -126,4 +90,4 @@ class DeveloperObjectsStatusView(ListView):
 
     def get_queryset(self):
         return ConstructionObject.objects.filter(
-            developer=self.request.user.developer_profile)
+            developer=self.request.user)
