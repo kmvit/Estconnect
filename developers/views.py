@@ -27,7 +27,7 @@ class ConstructionObjectListView(ListView):
             queryset = queryset.order_by('price_per_sqm')  # Сортировка по цене
         elif sort_by == 'developer':
             queryset = queryset.order_by(
-                'developer__name')  # Сортировка по застройщику
+                'developer')  # Сортировка по застройщику
         elif sort_by == 'type':
             queryset = queryset.order_by(
                 'housing_type__name')  # Сортировка по типу недвижимости
