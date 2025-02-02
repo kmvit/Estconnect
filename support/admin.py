@@ -7,7 +7,7 @@ class SupportMessageInline(admin.TabularInline):
 
 @admin.register(SupportTicket)
 class SupportTicketAdmin(admin.ModelAdmin):
-    list_display = ('title', 'creator', 'manager', 'status', 'created_at', 'updated_at')
+    list_display = ('category', 'creator', 'manager', 'status', 'created_at', 'updated_at')
     list_filter = ('status',)
-    search_fields = ('title', 'creator__username', 'manager__username')
+    search_fields = ('category', 'creator__username', 'manager__username')
     inlines = [SupportMessageInline]

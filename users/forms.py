@@ -67,6 +67,8 @@ class UserProfileForm(forms.ModelForm):
             'legal_address',
             'phone',
             'website',
+            'email',
+            'fio',
             'preferred_contact_method',
             'contact_person',
             'image'
@@ -76,6 +78,8 @@ class UserProfileForm(forms.ModelForm):
             'legal_address': forms.Textarea(
                 attrs={'class': 'form-control', 'rows': 3}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'fio': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'website': forms.URLInput(attrs={'class': 'form-control'}),
             'preferred_contact_method': forms.Select(
                 attrs={'class': 'form-select'}),

@@ -27,6 +27,10 @@ class CustomUser(AbstractUser):
                                      verbose_name='Юридический адрес')
     phone = models.CharField(max_length=20, blank=True, null=True,
                              verbose_name='Телефон')
+    email = models.EmailField(blank=True, null=True,
+                              verbose_name='Адрес электронной почты')
+    fio = models.CharField(max_length=255, blank=True, null=True,
+                           verbose_name='ФИО')
     website = models.URLField(blank=True, null=True, verbose_name='Вебсайт')
 
     preferred_contact_method = models.CharField(

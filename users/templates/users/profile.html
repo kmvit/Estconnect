@@ -1,34 +1,43 @@
 {% extends "profile_base.html" %}
 {% block title %}Профиль{% endblock %}
 {% block content %}
-<div class="container">
-  <h1 class="my-4">Мой профиль</h1>
-  <dl class="row">
-    <dt class="col-sm-3">Имя пользователя</dt>
-    <dd class="col-sm-9">{{ user.username }}</dd>
+    <div class="container">
+        <h1 class="my-4">Мой профиль</h1>
+        <dl class="row">
+            <dt class="col-sm-3">Имя пользователя</dt>
+            <dd class="col-sm-9">{{ user.username }}</dd>
 
-    <dt class="col-sm-3">Роль</dt>
-    <dd class="col-sm-9">{{ user.get_role_display }}</dd>
+            <dt class="col-sm-3">Роль</dt>
+            <dd class="col-sm-9">{{ user.get_role_display }}</dd>
 
-    <dt class="col-sm-3">Компания</dt>
-    <dd class="col-sm-9">{{ user.company_name }}</dd>
+            <dt class="col-sm-3">Компания</dt>
+            <dd class="col-sm-9">{{ user.company_name }}</dd>
 
-    <dt class="col-sm-3">Телефон</dt>
-    <dd class="col-sm-9">{{ user.phone }}</dd>
+            <dt class="col-sm-3">Телефон</dt>
+            <dd class="col-sm-9">{{ user.phone }}</dd>
 
-    <dt class="col-sm-3">Контактное лицо</dt>
-    <dd class="col-sm-9">{{ user.contact_person }}</dd>
+            <dt class="col-sm-3">Контактное лицо</dt>
+            <dd class="col-sm-9">{{ user.contact_person }}</dd>
 
-    <dt class="col-sm-3">Метод связи</dt>
-    <dd class="col-sm-9">{{ user.get_preferred_contact_method_display }}</dd>
+            <dt class="col-sm-3">Метод связи</dt>
+            <dd class="col-sm-9">{{ user.get_preferred_contact_method_display }}</dd>
 
-    {% if user.image %}
-    <dt class="col-sm-3">Аватар</dt>
-    <dd class="col-sm-9">
-      <img src="{{ user.image.url }}" alt="Avatar" style="max-height: 100px;">
-    </dd>
-    {% endif %}
-  </dl>
-  <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редактировать профиль</a>
-</div>
+            <dt class="col-sm-3">Сайт</dt>
+            <dd class="col-sm-9">{{ user.website }}</dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">{{ user.email }}</dd>
+            <dt class="col-sm-3">ФИО</dt>
+            <dd class="col-sm-9">{{ user.fio }}</dd>
+
+            {% if user.image %}
+                <dt class="col-sm-3">Аватар</dt>
+                <dd class="col-sm-9">
+                    <img src="{{ user.image.url }}" alt="Avatar"
+                         style="max-height: 100px;">
+                </dd>
+            {% endif %}
+        </dl>
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary">Редактировать
+            профиль</a>
+    </div>
 {% endblock %}
