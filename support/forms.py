@@ -11,13 +11,13 @@ class SupportTicketForm(forms.ModelForm):
 
     class Meta:
         model = SupportTicket
-        fields = ['title']
+        fields = ['category']
+
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control',
-                                            'placeholder': 'Введите тему'}),
+            'category': forms.Select(attrs={'class': 'form-select'}),
         }
         labels = {
-            'title': 'Тема',
+            'category': 'Категория',
         }
 
 

@@ -8,6 +8,11 @@ class SupportTicket(models.Model):
         ('open', 'Открыто'),
         ('closed', 'Закрыто'),
     ]
+    CATEGORY_CHOICES = [
+        ('site', 'Проблемы с сайтом'),
+        ('payment', 'Оплата'),
+        ('account', 'Личный кабинет'),
+    ]
 
     creator = models.ForeignKey(
         User,
@@ -24,7 +29,12 @@ class SupportTicket(models.Model):
         null=True,
         blank=True
     )
-    title = models.CharField('Тема обращения', max_length=255)
+    category = models.CharField(
+        'Категория',
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default='site'
+    )
     status = models.CharField(
         'Статус',
         max_length=10,
@@ -35,7 +45,7 @@ class SupportTicket(models.Model):
     updated_at = models.DateTimeField('Дата обновления', auto_now=True)
 
     def __str__(self):
-        return f"{self.title} ({self.get_status_display()})"
+        return f"{self.get_category_display()} ({self.get_status_display()})"
 
     class Meta:
         verbose_name = 'Обращение'
