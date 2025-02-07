@@ -79,6 +79,8 @@ class ConstructionObject(models.Model):
         # Показывать в админке только пользователей с role='developer'
         verbose_name='Застройщик'
     )
+    documentation_link = models.URLField("Ссылка на документацию", blank=True,
+                                         null=True)
     is_published = models.BooleanField("Опубликован",
                                        default=False)
 

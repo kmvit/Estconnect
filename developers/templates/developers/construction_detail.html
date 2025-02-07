@@ -4,10 +4,17 @@
         <h1 class="my-4">{{ construction_object.name }}</h1>
         <!-- Секция кнопок -->
         <div class="mb-4">
-            <button class="btn btn-primary"
-                    onclick="window.open('https://docs.google.com/your-developer-files')">
-                Файлы застройщика
-            </button>
+            <!-- Ссылка на документацию -->
+            {% if construction_object.documentation_link %}
+                <p><strong>Файлы застройщика:</strong>
+                    <a href="{{ construction_object.documentation_link }}"
+                       target="_blank">
+                        {{ construction_object.documentation_link }}
+                    </a>
+                </p>
+            {% else %}
+                <p><em>Документация не указана.</em></p>
+            {% endif %}
             <button class="btn btn-secondary"
                     onclick="window.open('https://docs.google.com/your-commissions-files')">
                 Комиссии
@@ -20,6 +27,18 @@
                 Чат с оператором
             </button>
         </div>
+        <!-- Информация о застройщике -->
+        <h2>Застройщик</h2>
+        <p>
+            <strong>Компания:</strong> {{ construction_object.developer.company_name }}
+        </p>
+        <p><strong>Контактное
+            лицо:</strong> {{ construction_object.developer.contact_person }}
+        </p>
+        <p><strong>Телефон:</strong> {{ construction_object.developer.phone }}
+        </p>
+        <p><strong>Email:</strong> {{ construction_object.developer.email }}
+        </p>
 
         <!-- Всплывающее окно для контактов -->
         <div class="modal fade" id="contactsModal" tabindex="-1"
@@ -70,9 +89,15 @@
             корпусов:</strong> {{ construction_object.buildings }}</p>
         <p><strong>Этажность:</strong> {{ construction_object.floors }}</p>
         <p><strong>Адрес:</strong> {{ construction_object.address }}</p>
-        <p><strong>Страна:</strong> {{ construction_object.developer.country.name }}</p>
-        <p><strong>Город:</strong> {{ construction_object.developer.city.name }}</p>
-        <p><strong>Район:</strong> {{ construction_object.developer.district.name }}</p>
+        <p>
+            <strong>Страна:</strong> {{ construction_object.developer.country.name }}
+        </p>
+        <p>
+            <strong>Город:</strong> {{ construction_object.developer.city.name }}
+        </p>
+        <p>
+            <strong>Район:</strong> {{ construction_object.developer.district.name }}
+        </p>
         <p><strong>Описание:</strong> {{ construction_object.description }}</p>
 
         <h2>Фотографии</h2>
