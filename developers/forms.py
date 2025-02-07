@@ -8,13 +8,15 @@ class ConstructionObjectForm(forms.ModelForm):
         fields = [
             'name', 'price_per_sqm', 'housing_class', 'housing_type',
             'address', 'completion_date', 'parking',
-            'buildings', 'floors', 'description'
+            'buildings', 'floors', 'documentation_link', 'description'
         ]
         widgets = {
             'completion_date': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'form-control',
             }),
+            'documentation_link': forms.URLInput(
+                attrs={'class': 'form-control'}),
             'description': forms.Textarea(
                 attrs={'rows': 3, 'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
