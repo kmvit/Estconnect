@@ -54,6 +54,8 @@ class ConstructionObject(models.Model):
     housing_type = models.ForeignKey(HousingType, on_delete=models.CASCADE,
                                      verbose_name="Тип жилья")
     completion_date = models.DateField("Срок сдачи")
+    square = models.DecimalField("Площадь", max_digits=10, decimal_places=2,
+                                 blank=True, null=True)
     parking = models.CharField(
         "Парковка",
         max_length=50,
@@ -71,6 +73,7 @@ class ConstructionObject(models.Model):
     longitude = models.FloatField("Долгота", blank=True, null=True)
 
     description = models.TextField("Описание", blank=True, null=True)
+    updated_at = models.DateTimeField("Дата обновления", auto_now=True)
     developer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

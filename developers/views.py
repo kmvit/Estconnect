@@ -16,23 +16,26 @@ class ConstructionObjectListView(ListView):
     context_object_name = 'construction_objects'
 
     def get_queryset(self):
-        # Базовый запрос: только опубликованные объекты
-        queryset = ConstructionObject.objects.filter(is_published=True)
-
+        qs = ConstructionObject.objects.filter(is_published=True)
         # Получаем параметр сортировки из запроса
         sort_by = self.request.GET.get('sort_by', None)
+        if sort_by == 'price_desc':
+            qs = qs.order_by('-price_per_sqm')
+        elif sort_by == 'price_asc':
+            qs = qs.order_by('price_per_sqm')
+        elif sort_by == 'date_desc':
+            qs = qs.order_by('-updated_at')
+        elif sort_by == 'date_asc':
+            qs = qs.order_by('updated_at')
+        elif sort_by == 'square_asc':
+            qs = qs.order_by('square')
+        elif sort_by == 'square_desc':
+            qs = qs.order_by('-square')
+        else:
+            # Сортировка по умолчанию (e.g. новые сначала)
+            qs = qs.order_by('-updated_at')
 
-        # Применяем сортировку в зависимости от значения sort_by
-        if sort_by == 'price':
-            queryset = queryset.order_by('price_per_sqm')  # Сортировка по цене
-        elif sort_by == 'developer':
-            queryset = queryset.order_by(
-                'developer')  # Сортировка по застройщику
-        elif sort_by == 'type':
-            queryset = queryset.order_by(
-                'housing_type__name')  # Сортировка по типу недвижимости
-
-        return queryset
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
