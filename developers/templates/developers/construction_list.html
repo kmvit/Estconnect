@@ -4,17 +4,35 @@
         <h1 class="my-4">Список всех объектов</h1>
         <!-- Кнопки сортировки -->
         <div class="mb-4">
-            <a href="?sort_by=developer"
-               class="btn btn-outline-primary {% if current_sort == 'developer' %}active{% endif %}">
-                Сортировка по застройщику
+            <span>Сортировка:</span>
+            <!-- Цена -->
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=price_desc">
+                Цена: Сначала дороже
             </a>
-            <a href="?sort_by=price"
-               class="btn btn-outline-primary {% if current_sort == 'price' %}active{% endif %}">
-                Сортировка по цене
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=price_asc">
+                Цена: Сначала дешевле
             </a>
-            <a href="?sort_by=type"
-               class="btn btn-outline-primary {% if current_sort == 'type' %}active{% endif %}">
-                Сортировка по типу недвижимости
+
+            <!-- Дата обновления -->
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=date_desc">
+                Новые объекты
+            </a>
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=date_asc">
+                Старые объекты
+            </a>
+
+            <!-- Площадь -->
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=square_asc">
+                Площадь: от меньшей к большей
+            </a>
+            <a class="btn btn-outline-primary btn-sm"
+               href="?sort_by=square_desc">
+                Площадь: от большей к меньшей
             </a>
         </div>
 
