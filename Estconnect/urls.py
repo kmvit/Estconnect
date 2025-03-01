@@ -3,7 +3,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from users.admin import cam_admin_site
+
 urlpatterns = [
+    path('cam-admin/', cam_admin_site.urls),  # Админка КАМ-менеджера
     path('admin/', admin.site.urls),  # Админка
     path('users/', include('users.urls')),  # Пользовательские маршруты
     path('developers/', include('developers.urls')),

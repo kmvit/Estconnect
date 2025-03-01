@@ -57,3 +57,22 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
+
+
+class UserActivityLog(models.Model):
+    """
+    Лог действий пользователей в системе
+    """
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,
+                             verbose_name="Клиент")
+    action = models.CharField(max_length=255, verbose_name="Действие")
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name="Дата и время")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.action} - {self.created_at.strftime('%d.%m.%Y %H:%M')}"
+
+    class Meta:
+        verbose_name = "Лог активности"
+        verbose_name_plural = "Логи активности"
+        ordering = ['-created_at']

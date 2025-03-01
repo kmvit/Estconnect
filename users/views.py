@@ -2,12 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from django.views.generic import ListView, DetailView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate, get_user_model
 
 from developers.models import ConstructionObject
 from .forms import CustomUserCreationForm, CustomLoginForm, UserProfileForm
-from .models import CustomUser
+from .models import CustomUser, UserActivityLog
 
 User = get_user_model()
 
@@ -51,6 +51,18 @@ def logout_view(request):
 
 
 @login_required
+def admin_profile_view(request, id):
+    """
+    Просмотр профиля другого пользователя (только для админов и КАМ-менеджеров)
+    """
+    if request.user.role != 'admin':  # Ограничиваем доступ
+        return redirect('profile')
+
+    user = get_object_or_404(User, id=id)
+    return render(request, 'users/profile.html', {'user': user})
+
+
+@login_required
 def profile_view(request):
     """
     Универсальное представление профиля:
@@ -71,6 +83,8 @@ def profile_edit_view(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
+            UserActivityLog.objects.create(user=user,
+                                           action="Обновил описание в профиле")
             form.save()
             return redirect('profile')
     else:

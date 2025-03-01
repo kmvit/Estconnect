@@ -31,7 +31,7 @@ class ConstructionObjectImageInline(admin.TabularInline):
 @admin.register(ConstructionObject)
 class ConstructionObjectAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 'developer', 'price_per_sqm', 'completion_date',
+        'name', 'developer', 'housing_type', 'price_per_sqm', 'completion_date',
         'is_published')
     list_filter = (
         'housing_class', 'housing_type', 'parking',
