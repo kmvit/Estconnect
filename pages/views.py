@@ -1,14 +1,68 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Page
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
-def home_view(request):
-    # Получаем страницу, помеченную как главная
-    homepage = get_object_or_404(Page, is_homepage=True)
-    return render(request, ' pages/home.html', {'page': homepage})
+def index(request):
+    """Главная страница"""
+    return render(request, 'pages/index.html')
 
 
-def page_view(request, slug):
-    # Получаем страницу по slug
-    page = get_object_or_404(Page, slug=slug)
-    return render(request, ' pages/page.html', {'page': page})
+def page_two(request):
+    """Страница с информацией о делегировании задач"""
+    return render(request, 'pages/page-two.html')
+
+
+def page_three(request):
+    """Страница 'Почему EstConnect?'"""
+    return render(request, 'pages/page-three.html')
+
+
+def page_four(request):
+    """Страница о преимуществах сотрудничества"""
+    return render(request, 'pages/page-four.html')
+
+
+def page_five(request):
+    """Страница с преимуществами и слайдером"""
+    return render(request, 'pages/page-five.html')
+
+
+def sign_in(request):
+    """Страница выбора типа входа"""
+    return render(request, 'pages/sign-in.html')
+
+
+def login_view(request):
+    """Страница авторизации существующего пользователя"""
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        remember = request.POST.get('remember')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            if not remember:
+                request.session.set_expiry(0)  # Сессия истекает при закрытии браузера
+            return redirect('pages:index')
+        else:
+            messages.error(request, 'Неверное имя пользователя или пароль')
+    
+    return render(request, 'pages/login.html')
+
+
+def register(request):
+    """Страница регистрации нового пользователя"""
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('pages:index')
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'pages/register.html', {'form': form})

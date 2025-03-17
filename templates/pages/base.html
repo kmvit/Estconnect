@@ -1,0 +1,113 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>{% block title %}ESTCONNECT{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/vendor/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header class="header">
+    <div class="header-logo">
+        <a href="{% url 'pages:index' %}">
+            <img src="{% static 'images/logo.svg' %}" alt="логотип">
+        </a>
+    </div>
+    <nav class="menu" id="menu">
+        <div class="close-menu" id="close">
+            <img src="{% static 'assets/icons/close-icon.svg' %}" alt="">
+        </div>
+        <ul class="menu-items">
+            <li class="menu-item">
+                <a href="{% url 'pages:page_two' %}" class="menu-item-link">О нас</a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'pages:page_three' %}" class="menu-item-link">О продукте</a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'pages:page_four' %}" class="menu-item-link">Почему мы</a>
+            </li>
+            <li class="menu-item">
+                <a href="{% url 'pages:page_five' %}" class="menu-item-link">Прайсинг</a>
+            </li>
+            <li class="menu-item">
+                <a href="#" class="menu-item-link">Контакты</a>
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+            <div class="user-profile">
+                <a href="{% url 'users:profile' %}" class="auth-button profile-button">
+                    <span>{{ user.username }}</span>
+                </a>
+            </div>
+        {% else %}
+            <a href="{% url 'pages:sign-in' %}" class="auth-button">Вход</a>
+        {% endif %}
+    </nav>
+    <div class="burger" id="burger">
+        <img src="{% static 'assets/icons/burger-icon.svg' %}" alt="">
+    </div>
+</header>
+
+<main class="main">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="footer-list">
+        <a href="{% url 'pages:index' %}" class="footer-list-link">Главная</a>
+        <a href="{% url 'pages:page_two' %}" class="footer-list-link">О нас</a>
+        <a href="{% url 'pages:page_three' %}" class="footer-list-link">О продукте</a>
+        <a href="{% url 'pages:page_four' %}" class="footer-list-link">Почему мы</a>
+        <a href="{% url 'pages:page_five' %}" class="footer-list-link">Прайсинг</a>
+    </div>
+    <div class="footer-socials">
+        <a href="#" class="footer-social">
+            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="">
+        </a>
+        <a href="#" class="footer-social">
+            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="">
+        </a>
+        <a href="#" class="footer-social">
+            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="">
+        </a>
+        <a href="#" class="footer-social">
+            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="">
+        </a>
+    </div>
+</footer>
+
+<script src="{% static 'js/vendor/jquery.min.js' %}"></script>
+<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+
+<style>
+    .user-profile {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-button {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+
+    @media (max-width: 768px) {
+        .profile-button {
+            margin-top: 20px;
+        }
+    }
+</style>
+</body>
+</html> 

@@ -1,0 +1,65 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Page Four{% endblock %}
+
+{% block content %}
+<section class="main-screen">
+    <div class="container">
+        <div class="main-screen-info">
+            <h1 class="main-screen-info-title">Почему легко сотрудничать <br> с EstConnect?</h1>
+        </div>
+        <div class="main-screen-image">
+            <img src="{% static 'images/main-screen-img-2.png' %}" alt="">
+        </div>
+    </div>
+</section>
+<section class="text-box">
+    <div class="container">
+        <h3 class="text-box-title text-box-fz-mobile">Наши менеджеры лично выезжают на объекты, и заключают соглашения о сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным предложениям первыми!</h3>
+    </div>
+</section>
+<section class="services">
+    <div class="container">
+        <div class="services-items">
+            <div class="services-item">
+                <div class="services-item-icon">
+                    <img src="{% static 'images/services-icon-1.png' %}" alt="">
+                </div>
+                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+            </div>
+            <div class="services-item">
+                <div class="services-item-icon">
+                    <img src="{% static 'images/services-icon-2.png' %}" alt="">
+                </div>
+                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+            </div>
+            <div class="services-item">
+                <div class="services-item-icon">
+                    <img src="{% static 'images/services-icon-3.png' %}" alt="">
+                </div>
+                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+            </div>
+            <div class="services-item">
+                <div class="services-item-icon">
+                    <img src="{% static 'images/services-icon-4.png' %}" alt="">
+                </div>
+                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+            </div>
+            <div class="services-item">
+                <div class="services-item-icon">
+                    <img src="{% static 'images/services-icon-5.png' %}" alt="">
+                </div>
+                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="auth-cta auth-cta-one-button">
+    <div class="container">
+        <div class="auth-cta-content-one-button">
+            <button class="button auth-cta-button cta-content-one-button">Узнать о тарифах подписки</button>
+        </div>
+    </div>
+</section>
+{% endblock %} 

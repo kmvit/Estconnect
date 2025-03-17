@@ -1,0 +1,166 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block nav_tabs %}
+<a href="#" class="nav-tab active">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24.1 11.7C24.1 11.9 24.1 12.1 24.1 12.3C24.1 12.4 24.1 12.6 24.1 12.6C23.7 13.7 23 14.2 21.9 14.2C21.8 14.2 21.7 14.2 21.6 14.2C21.6 14.3 21.6 14.4 21.6 14.5C21.6 16.8 21.6 19.1 21.6 21.5C21.6 22.6 20.8 23.6 19.8 23.9C19.7 23.9 19.6 23.9 19.6 24C19.5 24 19.2 24.1 19.1 24.1C17.8 24.1 16.5 24.1 15.2 24.1C15.1 24.1 14.9 24 14.9 24C14.6 23.8 14.5 23.6 14.5 23.2C14.5 21.4 14.5 19.6 14.5 17.8C14.5 17 14 16.5 13.2 16.5C12.5 16.5 11.9 16.5 11.2 16.5C10.3 16.5 9.9 17 9.9 17.8C9.9 19.6 9.9 21.4 9.9 23.1C9.9 23.5 9.8 23.8 9.4 24H9.3C7.9 24 6.5 24 5 24C5 24 5 24 4.9 24C3.8 23.9 2.7 22.8 2.7 21.3C2.7 19 2.7 16.8 2.7 14.5C2.7 14.4 2.7 14.3 2.7 14.2C2.5 14.2 2.4 14.2 2.3 14.2C1.5 14.2 0.9 13.8 0.4 13.1C0.3 12.9 0.2 12.7 0.2 12.6C0.2 12.5 0.1 12.2 0.1 12.2C0 12 0 12 0 11.9C0 11.8 0 11.6 0 11.5C0.2 10.9 0.6 10.4 1 10C4.1 7 7 4.1 10 1.1C10.4 0.7 10.8 0.3 11.3 0.1C11.3 0 11.7 0 11.7 0C11.9 0 12.1 0 12.3 0C12.4 0 12.8 0.1 12.8 0.1C13.3 0.3 13.6 0.7 14 1C17 4 20 7 23.1 10.1C23.5 10.5 23.8 10.9 24 11.3C24 11.4 24.1 11.6 24.1 11.7Z" fill="#723CD9"/>
+    </svg>
+</a>
+{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:profile' %}">Профиль</a>
+{% endblock %}
+
+{% block content %}
+<main class="platform_main profile_main">
+    <nav class="breadcrumb">
+        <a href="{% url 'pages:index' %}">Estconnect</a>
+        <span class="separator"> > </span>
+        <span>Профиль</span>
+    </nav>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="object_main-screen">
+        <div class="object_main-screen-header">
+            <h1 class="platform_h1">Профиль</h1>
+        </div>
+        <div class="stroy-content">
+            <form method="post" action="{% url 'users:profile' %}" class="profile_form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="stroy-content-main-screen profile_banner">
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}" alt="Баннер профиля" class="banner-photo">
+                    {% else %}
+                        <img src="{% static 'images/stroy-content-banner-img.png' %}" alt="Баннер профиля по умолчанию" class="banner-photo">
+                    {% endif %}
+                    <label for="id_image" class="profile_banner-add">
+                        <span>Добавить фото</span>
+                        {{ form.image }}
+                    </label>
+                    <div class="stroy-content-logo">
+                        <div class="profile_logo">
+                            <label for="id_profile_photo" class="profile_logo-add">
+                                <span>Добавить фото</span>
+                                {{ form.profile_photo }}
+                            </label>
+                        </div>
+                        {% if user.profile_photo %}
+                            <img src="{{ user.profile_photo.url }}" alt="Фото профиля" class="profile-photo">
+                        {% else %}
+                            <img src="{% static 'images/profile_photo-picture.png' %}" alt="Фото профиля по умолчанию" class="profile-photo">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="profile_statuses">
+                    <div class="profile_status">
+                        <p class="profile_status-title">{{ user.subscription_type|default:"Business" }}</p>
+                        <p class="profile_status-text">Текущий тариф</p>
+                    </div>
+                    <div class="profile_status">
+                        <div class="profile_status-icon">
+                            <img src="{% static 'assets/icons/calendar-icon.svg' %}" alt="">
+                        </div>
+                        <p class="profile_status-text">Действителен до {{ user.subscription_end_date|date:"d.m.Y"|default:"05.12.2025" }}</p>
+                        <p class="profile_status-actions">
+                            <button type="button" class="platform_button_two">Изменить</button>
+                            <button type="button" class="platform_button_one">Продлить</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="profile_personalData">
+                    <div class="profile_block-header">
+                        <div class="profile_block-header-icon">
+                            <img src="{% static 'assets/icons/personalData-icon.svg' %}" alt="">
+                        </div>
+                        <h4 class="profile_block-header-title">Личные данные</h4>
+                    </div>
+                    <div class="profile_personalData-data">
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Имя</p>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Фамилия</p>
+                            {{ form.last_name }}
+                        </div>
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Компания</p>
+                            {{ form.company_name }}
+                        </div>
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Язык</p>
+                            {{ form.language }}
+                        </div>
+                    </div>
+                </div>
+                <div class="profile_contactInformation">
+                    <div class="profile_block-header">
+                        <div class="profile_block-header-icon">
+                            <img src="{% static 'assets/icons/contactInformation-icon.svg' %}" alt="">
+                        </div>
+                        <h4 class="profile_block-header-title">Контактная информация</h4>
+                    </div>
+                    <div class="profile_contactInformation-data">
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Контактный номер</p>
+                            {{ form.phone }}
+                        </div>
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Электронный адрес</p>
+                            {{ form.email }}
+                        </div>
+                        <div class="estate-search-form-item">
+                            <p class="estate-search-form-item-subtitle">Предпочтительный канал связи</p>
+                            {{ form.preferred_contact_method }}
+                        </div>
+                    </div>
+                </div>
+                <div class="profile_actions">
+                    <button type="submit" class="platform_button_one">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% block extra_js %}
+<script>
+// Обработчик для фото профиля
+document.getElementById('id_profile_photo').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.querySelector('.profile-photo').src = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+// Обработчик для баннера
+document.getElementById('id_image').addEventListener('change', function(e) {
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.querySelector('.banner-photo').src = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+</script>
+{% endblock %}
+{% endblock %} 

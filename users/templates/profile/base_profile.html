@@ -1,0 +1,140 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/vendor/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/support.css' %}">
+</head>
+<body class="platform_body">
+
+<div class="platform_page">
+    <div class="nav-tabs-wrapper">
+        <nav class="nav-tabs">
+            {% block nav_tabs %}{% endblock %}
+        </nav>
+    </div>
+    <nav class="navigation">
+        <div class="header-logo platform_header-logo">
+            <a href="{% url 'pages:index' %}"><img src="{% static 'images/platform-logo.svg' %}" alt="логотип"></a>
+        </div>
+        <div class="navigation-content">
+            <div class="navigation-list">
+                <a href="{% url 'users:profile' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/home.svg' %}" alt="">
+                    <span>Главная</span>
+                </a>
+                <a href="" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/finance.svg' %}" alt="">
+                    <span>Финансове операции</span>
+                </a>
+                <a href="{% url 'users:object_list' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/view.svg' %}" alt="">
+                    <span>Просмотр объектов</span>
+                </a>
+                {% if user.role == 'developer' %}
+                <a href="{% url 'users:agent_list' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/builder.svg' %}" alt="">
+                    <span>Каталог агентов</span>
+                </a>
+                {% elif user.role == 'agent' %}
+                <a href="{% url 'users:developer_list' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/builder.svg' %}" alt="">
+                    <span>Все застройщики</span>
+                </a>
+                {% endif %}
+                <a href="{% url 'support:support_list' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/help.svg' %}" alt="">
+                    <span>Тех. поддержка</span>
+                </a>
+            </div>
+            <div class="navigation-footer">
+                <a href="" class="navigation-footer-link">Политика конфиденциальности</a>
+                <a href="" class="navigation-footer-link">Условия использования</a>
+                <p class="navigation-footer-copyright">© 2025 Estconnect</p>
+            </div>
+        </div>
+    </nav>
+    <div class="platform_content">
+        <header class="platform_header">
+            <div class="platform_header-logo_mobile">
+                <img src="{% static 'images/platform_header-logo_mobile.svg' %}" alt="логотип">
+            </div>
+            <div class="platform_header-open">
+                <img src="{% static 'assets/icons/burger-icon.svg' %}" alt="">
+            </div>
+            <div class="platform_header_mobile">
+                <div class="platform_header-close">
+                    <img src="{% static 'assets/icons/close-icon.svg' %}" alt="">
+                </div>
+                <div class="platform_header-left">
+                    <div class="platform_header-rate">
+                        <p class="platform_header-rate-title">{{ user.subscription_plan|default:"Business" }}</p>
+                        <div class="platform_header-rate-content">
+                            <p class="platform_header-rate-text">Тариф</p>
+                            <a href="#"><img src="{% static 'assets/icons/question-icon.svg' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="platform_header-status">
+                        <div class="platform_header-status-icon">
+                            {% block status_icon %}{% endblock %}
+                        </div>
+                        <div class="platform_header-status-content">
+                            <p class="platform_header-status-title">{{ user.get_role_display }}</p>
+                            <p class="platform_header-status-text">Статус</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="platform_header-right">
+                    {% if user.role == 'developer' %}
+                    <a href="{% url 'users:object_add' %}" class="platform_button_two platform_header-button">Добавить объект</a>
+                    {% endif %}
+                    <div class="platform_header-actions">
+                        <a href="{% url 'users:favourites' %}" class="platform_header-favourites">
+                            <img src="{% static 'assets/icons/favourites-icon.svg' %}" alt="">
+                        </a>
+                        <a href="" class="platform_header-notifications">
+                            <img src="{% static 'assets/icons/notifications-icon.svg' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="platform_header-user-dropdown">
+                        <div class="platform_header-user-dropdown-button-wrapper">
+                            <span class="platform_header-user-dropdown-button">
+                                {{ user.get_full_name }}
+                            </span>
+                            <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="platform_header-user-dropdown-icon">
+                        </div>
+                        <div class="platform_header-user-dropdown-content">
+                           <div class="platform_header-user-dropdown-content-item">
+                            <a href="{% url 'users:profile' %}">Профиль</a>
+                           </div>
+                           <div class="platform_header-user-dropdown-content-item">
+                            <a href="{% url 'users:logout' %}">Выйти</a>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="platform_main">
+            <nav class="breadcrumb">
+                {% block breadcrumb %}{% endblock %}
+            </nav>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</div>
+
+<script src="{% static 'js/vendor/jquery.min.js' %}"></script>
+<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html> 

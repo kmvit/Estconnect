@@ -1,0 +1,303 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Добавление объекта{% endblock %}
+
+{% block nav_tabs %}
+<a href="#" class="nav-tab active">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24.1 11.7C24.1 11.9 24.1 12.1 24.1 12.3C24.1 12.4 24.1 12.6 24.1 12.6C23.7 13.7 23 14.2 21.9 14.2C21.8 14.2 21.7 14.2 21.6 14.2C21.6 14.3 21.6 14.4 21.6 14.5C21.6 16.8 21.6 19.1 21.6 21.5C21.6 22.6 20.8 23.6 19.8 23.9C19.7 23.9 19.6 23.9 19.6 24C19.5 24 19.2 24.1 19.1 24.1C17.8 24.1 16.5 24.1 15.2 24.1C15.1 24.1 14.9 24 14.9 24C14.6 23.8 14.5 23.6 14.5 23.2C14.5 21.4 14.5 19.6 14.5 17.8C14.5 17 14 16.5 13.2 16.5C12.5 16.5 11.9 16.5 11.2 16.5C10.3 16.5 9.9 17 9.9 17.8C9.9 19.6 9.9 21.4 9.9 23.1C9.9 23.5 9.8 23.8 9.4 24H9.3C7.9 24 6.5 24 5 24C5 24 5 24 4.9 24C3.8 23.9 2.7 22.8 2.7 21.3C2.7 19 2.7 16.8 2.7 14.5C2.7 14.4 2.7 14.3 2.7 14.2C2.5 14.2 2.4 14.2 2.3 14.2C1.5 14.2 0.9 13.8 0.4 13.1C0.3 12.9 0.2 12.7 0.2 12.6C0.2 12.5 0.1 12.2 0.1 12.2C0 12 0 12 0 11.9C0 11.8 0 11.6 0 11.5C0.2 10.9 0.6 10.4 1 10C4.1 7 7 4.1 10 1.1C10.4 0.7 10.8 0.3 11.3 0.1C11.3 0 11.7 0 11.7 0C11.9 0 12.1 0 12.3 0C12.4 0 12.8 0.1 12.8 0.1C13.3 0.3 13.6 0.7 14 1C17 4 20 7 23.1 10.1C23.5 10.5 23.8 10.9 24 11.3C24 11.4 24.1 11.6 24.1 11.7Z" fill="#723CD9"/>
+    </svg>
+</a>
+{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:object_list' %}">Объекты</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:object_add' %}">Добавление объекта</a>
+{% endblock %}
+
+{% block content %}
+    <h1 class="catalog-content-title">
+        Добавление объекта
+    </h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+    <div class="form-errors">
+        <p>Пожалуйста, исправьте следующие ошибки:</p>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="object-plus-form">
+        {% csrf_token %}
+        
+        <div class="object-plus-form-block">
+            <div class="estate-search-form-item object-plus-form-item-name">
+                <p class="estate-search-form-item-subtitle">Название объекта</p>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="error-message">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="estate-search-form-item">
+                <p class="estate-search-form-item-subtitle">Описание</p>
+                {{ form.description }}
+                {% if form.description.errors %}
+                <div class="error-message">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="object-plus-form-block">
+            <div class="object-plus-form-header">
+                <p class="finance_operations-title">Местонахождение</p>
+                <a href="#" class="finance_operations-viewAll">Показать на карте</a>
+            </div>
+            <div class="account-form-items">
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Страна</p>
+                    {{ form.country }}
+                    {% if form.country.errors %}
+                    <div class="error-message">{{ form.country.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Город</p>
+                    {{ form.city }}
+                    {% if form.city.errors %}
+                    <div class="error-message">{{ form.city.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Район</p>
+                    {{ form.district }}
+                    {% if form.district.errors %}
+                    <div class="error-message">{{ form.district.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="object-plus-form-block">
+            <div class="object-plus-form-header">
+                <p class="finance_operations-title">Характеристики</p>
+            </div>
+            <div class="account-form-items">
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Тип недвижимости</p>
+                    {{ form.property_type }}
+                    {% if form.property_type.errors %}
+                    <div class="error-message">{{ form.property_type.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Класс жилья</p>
+                    {{ form.comfort_type }}
+                    {% if form.comfort_type.errors %}
+                    <div class="error-message">{{ form.comfort_type.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Перечень удобств</p>
+                    {{ form.amenities }}
+                    {% if form.amenities.errors %}
+                    <div class="error-message">{{ form.amenities.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="object-plus-form-block">
+            <div class="object-plus-form-header">
+                <p class="finance_operations-title">Цена и сроки</p>
+            </div>
+            <div class="account-form-items">
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Цена за м²</p>
+                    {{ form.price_per_sqm }}
+                    {% if form.price_per_sqm.errors %}
+                    <div class="error-message">{{ form.price_per_sqm.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Статус проекта</p>
+                    {{ form.project_status }}
+                    {% if form.project_status.errors %}
+                    <div class="error-message">{{ form.project_status.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Дата сдачи</p>
+                    {{ form.completion_date }}
+                    {% if form.completion_date.errors %}
+                    <div class="error-message">{{ form.completion_date.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="object-plus-form-block">
+            <div class="object-plus-form-header">
+                <p class="finance_operations-title">Фотографии</p>
+            </div>
+            <div class="upload-container">
+                <div class="upload-box" id="imagePreview">
+                    <img src="{% static 'images/placeholder-img.png' %}" alt="Загрузка" class="placeholder-img">
+                </div>
+                <div class="file-upload">
+                    <label for="{{ form.images.id_for_label }}">Выберите файлы</label>
+                    {{ form.images }}
+                </div>
+                <p class="file-upload-text">
+                    JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте.
+                    Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены
+                </p>
+                <div class="file-upload-line"></div>
+            </div>
+            {% if form.images.errors %}
+            <div class="error-message">{{ form.images.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="platform_button_one">Сохранить</button>
+            <a href="{% url 'users:object_list' %}" class="platform_button_two">Отмена</a>
+        </div>
+    </form>
+
+    <style>
+    .preview-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .preview-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .image-count {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        display: none;
+    }
+
+    .delete-image {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .delete-image img {
+        width: 12px;
+        height: 12px;
+        object-fit: contain;
+    }
+
+    .delete-image:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .placeholder-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.querySelector('input[type="file"]');
+        const imagePreview = document.getElementById('imagePreview');
+        const placeholderImg = imagePreview.querySelector('.placeholder-img');
+
+        imageInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            imagePreview.innerHTML = ''; // Очищаем предпросмотр
+
+            if (files.length === 0) {
+                // Если файлы не выбраны, показываем плейсхолдер
+                imagePreview.innerHTML = '<img src="{% static "assets/images/placeholder-img.png" %}" alt="Загрузка" class="placeholder-img">';
+                return;
+            }
+
+            // Создаем контейнер для превью
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'preview-container';
+
+            // Создаем элемент для отображения количества изображений
+            const imageCount = document.createElement('div');
+            imageCount.className = 'image-count';
+            if (files.length > 1) {
+                imageCount.textContent = `+${files.length - 1}`;
+                imageCount.style.display = 'block';
+            }
+
+            // Создаем элемент для первого изображения
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContainer.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview" class="preview-image">
+                        <button type="button" class="delete-image">
+                            <img src="{% static 'assets/icons/delete-icon.svg' %}" alt="Удалить">
+                        </button>
+                        ${imageCount.outerHTML}
+                    `;
+                    imagePreview.appendChild(previewContainer);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Обработка удаления изображений
+        imagePreview.addEventListener('click', function(e) {
+            if (e.target.closest('.delete-image')) {
+                imageInput.value = ''; // Очищаем input
+                imagePreview.innerHTML = '<img src="{% static "assets/images/placeholder-img.png" %}" alt="Загрузка" class="placeholder-img">';
+            }
+        });
+    });
+    </script>
+{% endblock %} 

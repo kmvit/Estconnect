@@ -1,0 +1,164 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Избранное{% endblock %}
+
+{% block nav_tabs %}
+<a href="#" class="nav-tab active">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24.1 11.7C24.1 11.9 24.1 12.1 24.1 12.3C24.1 12.4 24.1 12.6 24.1 12.6C23.7 13.7 23 14.2 21.9 14.2C21.8 14.2 21.7 14.2 21.6 14.2C21.6 14.3 21.6 14.4 21.6 14.5C21.6 16.8 21.6 19.1 21.6 21.5C21.6 22.6 20.8 23.6 19.8 23.9C19.7 23.9 19.6 23.9 19.6 24C19.5 24 19.2 24.1 19.1 24.1C17.8 24.1 16.5 24.1 15.2 24.1C15.1 24.1 14.9 24 14.9 24C14.6 23.8 14.5 23.6 14.5 23.2C14.5 21.4 14.5 19.6 14.5 17.8C14.5 17 14 16.5 13.2 16.5C12.5 16.5 11.9 16.5 11.2 16.5C10.3 16.5 9.9 17 9.9 17.8C9.9 19.6 9.9 21.4 9.9 23.1C9.9 23.5 9.8 23.8 9.4 24H9.3C7.9 24 6.5 24 5 24C5 24 5 24 4.9 24C3.8 23.9 2.7 22.8 2.7 21.3C2.7 19 2.7 16.8 2.7 14.5C2.7 14.4 2.7 14.3 2.7 14.2C2.5 14.2 2.4 14.2 2.3 14.2C1.5 14.2 0.9 13.8 0.4 13.1C0.3 12.9 0.2 12.7 0.2 12.6C0.2 12.5 0.1 12.2 0.1 12.2C0 12 0 12 0 11.9C0 11.8 0 11.6 0 11.5C0.2 10.9 0.6 10.4 1 10C4.1 7 7 4.1 10 1.1C10.4 0.7 10.8 0.3 11.3 0.1C11.3 0 11.7 0 11.7 0C11.9 0 12.1 0 12.3 0C12.4 0 12.8 0.1 12.8 0.1C13.3 0.3 13.6 0.7 14 1C17 4 20 7 23.1 10.1C23.5 10.5 23.8 10.9 24 11.3C24 11.4 24.1 11.6 24.1 11.7Z" fill="#723CD9"/>
+    </svg>
+</a>
+{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:object_list' %}">Объекты</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:favourites' %}">Избранное</a>
+{% endblock %}
+
+{% block content %}
+<div class="favourites_switcher">
+    <button class="favourites_switch active" id="favourites_switch-objects">
+        Объекты
+    </button>
+    <button class="favourites_switch" id="favourites_switch-devs">
+        Застройщики
+    </button>
+</div>
+
+<div class="favourites_content">
+    <div class="object_other-items favourites_content-objects" id="favourites_content-objects">
+        {% if favourite_objects %}
+            {% for object in favourite_objects %}
+            <div class="object-card">
+                <div class="object-card-image">
+                    <div class="object-card-image-photo-count">
+                        <div class="object-card-image-photo-count-icon">
+                            <img src="{% static 'assets/icons/photo-icon.svg' %}" alt="">
+                        </div>
+                        <p class="object-card-image-photo-text">{{ object.images.count }}</p>
+                    </div>
+                    {% if object.images.first %}
+                        <img src="{{ object.images.first.image.url }}" alt="{{ object.name }}">
+                    {% else %}
+                        <img src="{% static 'images/object-card-img.png' %}" alt="{{ object.name }}">
+                    {% endif %}
+                </div>
+                <div class="object-card-content">
+                    <a href="javascript:void(0)" 
+                    class="object-card-content-favourite {% if object in request.user.favourite_objects.all %}active{% endif %}"
+                    data-object-id="{{ object.id }}"
+                    onclick="toggleFavourite(this)">
+                     {% if object in request.user.favourite_objects.all %}
+                         <img src="{% static 'assets/icons/favourites-icon.png' %}" alt="" class="favourites-icon-img">
+                     {% else %}
+                         <img src="{% static 'assets/icons/favourites-icon-outline.png' %}" alt="" class="favourites-icon-img">
+                     {% endif %}
+                 </a>
+                    <h3 class="object-card-title">{{ object.name }}</h3>
+                    <div class="object-card-place">
+                        <div class="object-card-place-icon">
+                            <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                        </div>
+                        <div class="object-card-place-text">{{ object.country.name }}, {{ object.city.name }}</div>
+                    </div>
+                    <p class="object-card-price">от {{ object.price_per_sqm }} $</p>
+                    <div class="object-card-info">
+                        <div class="object-card-info-item">
+                            <div class="object-card-info-item-icon">
+                                <img src="{% static 'assets/icons/key-icon.svg' %}" alt="">
+                            </div>
+                            <p class="object-card-info-item-text">{{ object.completion_date|date:"Y" }}</p>
+                        </div>
+                        <div class="object-card-info-item">
+                            <div class="object-card-info-item-icon">
+                                <img src="{% static 'assets/icons/ladder-icon.svg' %}" alt="">
+                            </div>
+                            <p class="object-card-info-item-text">{{ object.floors }}</p>
+                        </div>
+                    </div>
+                    <p class="object-card-description">
+                        {{ object.description|truncatewords:30 }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <p>У вас пока нет избранных объектов</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="object_other-items favourites_content-objects" id="favourites_content-devs" style="display: none;">
+        {% if favourite_developers %}
+            {% for developer in favourite_developers %}
+            <div class="person-card">
+                <div class="person-card-image">
+                    {% if developer.profile_photo %}
+                        <img src="{{ developer.profile_photo.url }}" alt="{{ developer.company_name }}">
+                    {% else %}
+                        <img src="{% static 'images/person-card-img.png' %}" alt="{{ developer.company_name }}">
+                    {% endif %}
+                </div>
+                <div class="person-card-content">
+                    <a href="{% url 'users:toggle_favourite_developer' developer.pk %}" class="object-card-content-favourite">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" fill="#723CD9"/>
+                        </svg>
+                    </a>
+                    <h3 class="object-card-title">{{ developer.company_name }}</h3>
+                    <div class="object-card-place">
+                        <div class="object-card-place-icon">
+                            <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                        </div>
+                        <div class="object-card-place-text">{{ developer.country.name }}, {{ developer.city.name }}</div>
+                    </div>
+                    <div class="object-card-info">
+                        <div class="object-card-info-item">
+                            <div class="object-card-info-item-icon">
+                                <img src="{% static 'assets/icons/construction-icon.svg' %}" alt="">
+                            </div>
+                            <p class="object-card-info-item-text">{{ developer.founded_year }}</p>
+                        </div>
+                    </div>
+                    <p class="object-card-description">
+                        {{ developer.description|truncatewords:30 }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <p>У вас пока нет избранных застройщиков</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const objectsSwitch = document.getElementById('favourites_switch-objects');
+    const devsSwitch = document.getElementById('favourites_switch-devs');
+    const objectsContent = document.getElementById('favourites_content-objects');
+    const devsContent = document.getElementById('favourites_content-devs');
+
+    objectsSwitch.addEventListener('click', function() {
+        objectsSwitch.classList.add('active');
+        devsSwitch.classList.remove('active');
+        objectsContent.style.display = 'grid';
+        devsContent.style.display = 'none';
+    });
+
+    devsSwitch.addEventListener('click', function() {
+        devsSwitch.classList.add('active');
+        objectsSwitch.classList.remove('active');
+        devsContent.style.display = 'grid';
+        objectsContent.style.display = 'none';
+    });
+});
+</script>
+{% endblock %} 

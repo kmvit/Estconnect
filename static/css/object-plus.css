@@ -1,0 +1,191 @@
+.object-plus-form {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.object-plus-form-block {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.object-plus-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.object-plus-form-item-name {
+    margin-bottom: 24px;
+}
+
+.account-form-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.estate-search-form-item-subtitle {
+    font-size: 14px;
+    color: #48484A;
+    margin-bottom: 8px;
+}
+
+.estate-search-form-item input,
+.estate-search-form-item select,
+.estate-search-form-item textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #E5E5EA;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1C1C1E;
+}
+
+.estate-search-form-item textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.search-dropdown {
+    position: relative;
+}
+
+.search-dropdown-button-wrapper {
+    position: relative;
+}
+
+.search-dropdown-button {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #E5E5EA;
+    border-radius: 8px;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-size: 14px;
+    color: #1C1C1E;
+    appearance: none;
+}
+
+.search-dropdown-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.images-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.preview-item {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 150px;
+    border: 2px dashed #E5E5EA;
+    border-radius: 8px;
+    color: #8E8E93;
+}
+
+.upload-placeholder svg {
+    width: 48px;
+    height: 48px;
+}
+
+.upload-placeholder p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.delete-checkbox {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.delete-checkbox label {
+    font-size: 14px;
+    color: #FF3B30;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.object-plus-form-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.platform_button_two {
+    min-width: 120px;
+}
+
+.image-upload-item {
+    position: relative;
+}
+
+.image-upload-item input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .object-plus-form-block {
+        padding: 16px;
+    }
+
+    .account-form-items {
+        grid-template-columns: 1fr;
+    }
+
+    .object-plus-form-actions {
+        flex-direction: column;
+    }
+
+    .platform_button_two {
+        width: 100%;
+    }
+} 

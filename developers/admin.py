@@ -30,14 +30,12 @@ class ConstructionObjectImageInline(admin.TabularInline):
 # Админка для объектов застройки
 @admin.register(ConstructionObject)
 class ConstructionObjectAdmin(admin.ModelAdmin):
-    list_display = (
-        'name', 'developer', 'housing_type', 'price_per_sqm', 'completion_date',
-        'is_published')
-    list_filter = (
-        'housing_class', 'housing_type', 'parking',
-        'is_published')
-    search_fields = ('name', 'developer__name', 'location')
-    inlines = [ConstructionObjectImageInline]  # Добавляем инлайн
+    list_display = ('name', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
+    list_filter = ('property_type', 'comfort_type', 'project_status', 'ownership_type', 'is_published')
+    search_fields = ('name', 'city', 'district')
+    inlines = [ConstructionObjectImageInline]
+    date_hierarchy = 'created_at'
+    list_per_page = 20
 
 
 @admin.register(HousingClass)
@@ -52,4 +50,6 @@ class HousingTypeAdmin(admin.ModelAdmin):
 
 @admin.register(ConstructionObjectImage)
 class ConstructionObjectImageAdmin(admin.ModelAdmin):
-    list_display = ('construction_object', 'image')
+    list_display = ('construction_object', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('construction_object__address',)
