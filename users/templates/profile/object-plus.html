@@ -70,7 +70,7 @@
         <div class="object-plus-form-block">
             <div class="object-plus-form-header">
                 <p class="finance_operations-title">Местонахождение</p>
-                <a href="#" class="finance_operations-viewAll">Показать на карте</a>
+                <a href="#" class="finance_operations-viewAll" id="showMapBtn">Показать на карте</a>
             </div>
             <div class="account-form-items">
                 <div class="estate-search-form-item">
@@ -93,6 +93,19 @@
                     {% if form.district.errors %}
                     <div class="error-message">{{ form.district.errors }}</div>
                     {% endif %}
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Адрес</p>
+                    {{ form.address }}
+                    {% if form.address.errors %}
+                    <div class="error-message">{{ form.address.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="mapContainer" class="map-container" style="display: none;">
+                <div id="map" style="width: 100%; height: 400px;"></div>
+                <div class="map-controls">
+                    <button type="button" class="platform_button_two" id="closeMapBtn">Закрыть карту</button>
                 </div>
             </div>
         </div>
@@ -243,8 +256,21 @@
         height: 100%;
         object-fit: cover;
     }
+
+    .map-container {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .map-controls {
+        padding: 10px;
+        text-align: right;
+    }
     </style>
 
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ebfaa2bc-030a-4956-bcab-79036adf117f&lang=ru_RU" type="text/javascript"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const imageInput = document.querySelector('input[type="file"]');
@@ -297,6 +323,66 @@
                 imageInput.value = ''; // Очищаем input
                 imagePreview.innerHTML = '<img src="{% static "assets/images/placeholder-img.png" %}" alt="Загрузка" class="placeholder-img">';
             }
+        });
+
+        // Инициализация карты
+        let map, placemark;
+        const mapContainer = document.getElementById('mapContainer');
+        const showMapBtn = document.getElementById('showMapBtn');
+        const closeMapBtn = document.getElementById('closeMapBtn');
+        const addressInput = document.getElementById('{{ form.address.id_for_label }}');
+
+        function initMap() {
+            if (typeof ymaps === 'undefined') {
+                console.error('API Яндекс.Карт не загружен');
+                return;
+            }
+
+            ymaps.ready(function() {
+                map = new ymaps.Map('map', {
+                    center: [55.76, 37.64], // Москва
+                    zoom: 10,
+                    controls: ['zoomControl', 'searchControl']
+                });
+
+                // Обработчик клика по карте
+                map.events.add('click', function(e) {
+                    const coords = e.get('coords');
+                    
+                    // Удаляем предыдущий маркер
+                    if (placemark) {
+                        map.geoObjects.remove(placemark);
+                    }
+
+                    // Создаем новый маркер
+                    placemark = new ymaps.Placemark(coords, {}, {
+                        preset: 'islands#redDotIcon'
+                    });
+
+                    // Добавляем маркер на карту
+                    map.geoObjects.add(placemark);
+
+                    // Получаем адрес по координатам
+                    ymaps.geocode(coords).then(function(res) {
+                        const address = res.geoObjects.get(0).properties.get('metaDataProperty.GeocoderMetaData.Address.formatted');
+                        addressInput.value = address;
+                    });
+                });
+            });
+        }
+
+        // Показать карту
+        showMapBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            mapContainer.style.display = 'block';
+            if (!map) {
+                initMap();
+            }
+        });
+
+        // Закрыть карту
+        closeMapBtn.addEventListener('click', function() {
+            mapContainer.style.display = 'none';
         });
     });
     </script>

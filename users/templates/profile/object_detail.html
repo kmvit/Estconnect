@@ -69,11 +69,11 @@
             <div class="object_main-screen-info-list">
                 <div class="object_main-screen-info-list-item">
                     <p class="object_main-screen-info-list-item-title">Класс жилья:</p>
-                    <p class="object_main-screen-info-list-item-text">{{ object.housing_class }}</p>
+                    <p class="object_main-screen-info-list-item-text">{{ object.get_comfort_type_display }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
                     <p class="object_main-screen-info-list-item-title">Тип дома:</p>
-                    <p class="object_main-screen-info-list-item-text">{{ object.housing_type }}</p>
+                    <p class="object_main-screen-info-list-item-text">{{ object.get_property_type_display }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
                     <p class="object_main-screen-info-list-item-title">Срок сдачи:</p>
@@ -167,7 +167,7 @@
                 </div>
                 <div class="object_information-info">
                     <p class="object_information-char-item-title">Класс</p>
-                    <p class="object_information-char-item-text">{{ object.housing_class }}</p>
+                    <p class="object_information-char-item-text">{{ object.get_comfort_type_display }}</p>
                 </div>
             </div>
             <div class="object_information-char-item">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="object_information-info">
                     <p class="object_information-char-item-title">Тип строения</p>
-                    <p class="object_information-char-item-text">{{ object.housing_type }}</p>
+                    <p class="object_information-char-item-text">{{ object.get_property_type_display }}</p>
                 </div>
             </div>
             <div class="object_information-char-item">
