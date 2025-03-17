@@ -1,11 +1,13 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.urls import reverse
 from django.utils.html import format_html
 
 from developers.admin import ConstructionObjectImageInline
 from users.models import CustomUser, UserActivityLog
-from developers.models import ConstructionObject
+from developers.models import ConstructionObject, ConstructionObjectImage
 from support.models import SupportTicket, SupportMessage
+
 
 
 class СamAdminSite(admin.AdminSite):
@@ -42,7 +44,7 @@ class UserAdmin(admin.ModelAdmin):
                        'country', 'city', 'district', 'legal_address', 'phone',
                        'contact_person', 'preferred_contact_method',
                        'image',
-                       'website')
+                       'website', '_favourite_objects', '_favourite_developers')
         }),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
     )
@@ -54,7 +56,7 @@ class UserAdmin(admin.ModelAdmin):
     )
 
     def goto_profile(self, obj):
-        url = reverse('admin_profile_view',
+        url = reverse('users:admin_profile_view',
                       args=[obj.id])  # Используем новый маршрут
         return format_html(
             '<a href="{}" target="_blank" class="button">Перейти в ЛК</a>',
@@ -96,15 +98,12 @@ class SupportMessageAdmin(admin.ModelAdmin):
 # Раздел застройщиков
 @admin.register(ConstructionObject, site=cam_admin_site)
 class ConstructionObjectAdmin(admin.ModelAdmin):
-    list_display = (
-        'name', 'developer', 'housing_type', 'price_per_sqm',
-        'completion_date',
-        'is_published')
-    list_filter = (
-        'housing_class', 'housing_type', 'parking',
-        'is_published')
-    search_fields = ('name', 'developer__name', 'location')
-    inlines = [ConstructionObjectImageInline]  # Добавляем инлайн
+    list_display = ('address', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
+    list_filter = ('property_type', 'comfort_type', 'project_status', 'ownership_type', 'is_published')
+    search_fields = ('address', 'city', 'district')
+    inlines = [ConstructionObjectImageInline]
+    date_hierarchy = 'created_at'
+    list_per_page = 20
 
 
 @admin.register(UserActivityLog, site=cam_admin_site)
@@ -115,6 +114,10 @@ class UserActivityLogAdmin(admin.ModelAdmin):
         "user__username", "action")  # Поиск по имени пользователя и действию
     ordering = ("-created_at",)  # Сортировка по дате
 
+
+class ConstructionObjectImageInline(admin.TabularInline):
+    model = ConstructionObjectImage
+    extra = 1
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):

@@ -2,6 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.views import View
 
 from .forms import ConstructionObjectImageForm, ConstructionObjectForm
 from .models import ConstructionObject, ConstructionObjectImage
@@ -10,81 +14,100 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class ConstructionObjectListView(ListView):
-    model = ConstructionObject
-    template_name = 'developers/construction_list.html'
-    context_object_name = 'construction_objects'
+class ConstructionObjectViewSet(LoginRequiredMixin, View):
+    """
+    ViewSet для работы с объектами недвижимости.
+    Включает в себя:
+    - список объектов
+    - детальный просмотр
+    - добавление объекта
+    - редактирование объекта
+    - удаление объекта
+    """
+    template_name_list = 'developers/object_list.html'
+    template_name_detail = 'developers/construction_detail.html'
+    template_name_form = 'developers/add_object.html'
+    action = None
 
-    def get_queryset(self):
-        qs = ConstructionObject.objects.filter(is_published=True)
-        # Получаем параметр сортировки из запроса
-        sort_by = self.request.GET.get('sort_by', None)
-        if sort_by == 'price_desc':
-            qs = qs.order_by('-price_per_sqm')
-        elif sort_by == 'price_asc':
-            qs = qs.order_by('price_per_sqm')
-        elif sort_by == 'date_desc':
-            qs = qs.order_by('-updated_at')
-        elif sort_by == 'date_asc':
-            qs = qs.order_by('updated_at')
-        elif sort_by == 'square_asc':
-            qs = qs.order_by('square')
-        elif sort_by == 'square_desc':
-            qs = qs.order_by('-square')
-        else:
-            # Сортировка по умолчанию (e.g. новые сначала)
-            qs = qs.order_by('-updated_at')
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super().as_view(**initkwargs)
+        view.view_class = cls
+        view.view_class.action = initkwargs.get('action')
+        return view
 
-        return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['current_sort'] = self.request.GET.get('sort_by', '')
-        # Добавляем данные для карты
-        context['map_data'] = list(
-            ConstructionObject.objects.filter(latitude__isnull=False,
-                                              longitude__isnull=False)
-            .values('id', 'name', 'address', 'latitude', 'longitude')
+    def get_formset_class(self):
+        return inlineformset_factory(
+            ConstructionObject,
+            ConstructionObjectImage,
+            form=ConstructionObjectImageForm,
+            extra=3,
+            can_delete=True
         )
-        return context
 
+    def get(self, request, pk=None, *args, **kwargs):
+        if pk is not None:
+            # Детальный просмотр объекта
+            obj = ConstructionObject.objects.get(pk=pk)
+            return render(request, self.template_name_detail, {
+                'construction_object': obj
+            })
+        
+        if self.action == 'add':
+            # Форма добавления объекта
+            form = ConstructionObjectForm()
+            return render(request, self.template_name_form, {
+                'form': form
+            })
+        
+        # Список объектов
+        objects = ConstructionObject.objects.filter(developer=request.user)
+        context = {
+            'construction_objects': objects,
+            'current_sort': request.GET.get('sort_by', '')
+        }
+        return render(request, self.template_name_list, context)
 
-class ConstructionObjectDetailView(DetailView):
-    model = ConstructionObject
-    template_name = 'developers/construction_detail.html'
-    context_object_name = 'construction_object'
+    def post(self, request, pk=None, *args, **kwargs):
+        if pk is not None:
+            # Редактирование существующего объекта
+            obj = ConstructionObject.objects.get(pk=pk)
+            form = ConstructionObjectForm(request.POST, request.FILES, instance=obj)
+        else:
+            # Создание нового объекта
+            form = ConstructionObjectForm(request.POST, request.FILES)
 
-
-@login_required
-def add_construction_object(request):
-    ImageFormSet = inlineformset_factory(
-        ConstructionObject,
-        ConstructionObjectImage,
-        form=ConstructionObjectImageForm,
-        extra=3,  # Количество пустых форм для добавления
-        can_delete=True
-    )
-
-    if request.method == 'POST':
-        form = ConstructionObjectForm(request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.developer = request.user
-            obj.is_published = False  # Устанавливаем статус "Не опубликован"
+            if not pk:  # Только для новых объектов
+                obj.developer = request.user
+                obj.is_published = False
             obj.save()
 
-            formset = ImageFormSet(request.POST, request.FILES, instance=obj)
-            if formset.is_valid():
-                formset.save()
-                return redirect('developer_objects_status')
-        else:
-            formset = ImageFormSet(request.POST, request.FILES)
-    else:
-        form = ConstructionObjectForm()
-        formset = ImageFormSet()
+            # Обработка загруженных изображений
+            images = request.FILES.getlist('images')
+            for image in images:
+                ConstructionObjectImage.objects.create(
+                    construction_object=obj,
+                    image=image
+                )
 
-    return render(request, 'developers/add_object.html',
-                  {'form': form, 'formset': formset})
+            messages.success(
+                request,
+                'Объект успешно обновлен' if pk else 'Объект успешно добавлен'
+            )
+            return redirect('developers:object_list')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме')
+            return render(request, self.template_name_form, {
+                'form': form
+            })
+
+    def delete(self, request, pk, *args, **kwargs):
+        obj = ConstructionObject.objects.get(pk=pk)
+        obj.delete()
+        messages.success(request, 'Объект успешно удален')
+        return redirect('developers:object_list')
 
 
 class DeveloperObjectsStatusView(ListView):

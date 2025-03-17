@@ -1,0 +1,112 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Редактирование профиля{% endblock %}
+
+{% block nav_tabs %}
+<a href="#" class="nav-tab active">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24.1 11.7C24.1 11.9 24.1 12.1 24.1 12.3C24.1 12.4 24.1 12.6 24.1 12.6C23.7 13.7 23 14.2 21.9 14.2C21.8 14.2 21.7 14.2 21.6 14.2C21.6 14.3 21.6 14.4 21.6 14.5C21.6 16.8 21.6 19.1 21.6 21.5C21.6 22.6 20.8 23.6 19.8 23.9C19.7 23.9 19.6 23.9 19.6 24C19.5 24 19.2 24.1 19.1 24.1C17.8 24.1 16.5 24.1 15.2 24.1C15.1 24.1 14.9 24 14.9 24C14.6 23.8 14.5 23.6 14.5 23.2C14.5 21.4 14.5 19.6 14.5 17.8C14.5 17 14 16.5 13.2 16.5C12.5 16.5 11.9 16.5 11.2 16.5C10.3 16.5 9.9 17 9.9 17.8C9.9 19.6 9.9 21.4 9.9 23.1C9.9 23.5 9.8 23.8 9.4 24H9.3C7.9 24 6.5 24 5 24C5 24 5 24 4.9 24C3.8 23.9 2.7 22.8 2.7 21.3C2.7 19 2.7 16.8 2.7 14.5C2.7 14.4 2.7 14.3 2.7 14.2C2.5 14.2 2.4 14.2 2.3 14.2C1.5 14.2 0.9 13.8 0.4 13.1C0.3 12.9 0.2 12.7 0.2 12.6C0.2 12.5 0.1 12.2 0.1 12.2C0 12 0 12 0 11.9C0 11.8 0 11.6 0 11.5C0.2 10.9 0.6 10.4 1 10C4.1 7 7 4.1 10 1.1C10.4 0.7 10.8 0.3 11.3 0.1C11.3 0 11.7 0 11.7 0C11.9 0 12.1 0 12.3 0C12.4 0 12.8 0.1 12.8 0.1C13.3 0.3 13.6 0.7 14 1C17 4 20 7 23.1 10.1C23.5 10.5 23.8 10.9 24 11.3C24 11.4 24.1 11.6 24.1 11.7Z" fill="#723CD9"/>
+    </svg>
+</a>
+{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:profile' %}">Профиль</a>
+<span class="separator"> > </span>
+<span>Редактирование</span>
+{% endblock %}
+
+{% block content %}
+<div class="profile-edit-content">
+    <h1 class="profile-edit-title">Редактирование профиля</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="profile-edit-form">
+        {% csrf_token %}
+        
+        <div class="profile-edit-section">
+            <h2 class="profile-edit-section-title">Фото профиля</h2>
+            <div class="profile-edit-avatar">
+                <div class="profile-edit-avatar-preview">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="Аватар">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Аватар">
+                    {% endif %}
+                </div>
+                <div class="profile-edit-avatar-upload">
+                    {{ form.avatar }}
+                    <p class="profile-edit-avatar-hint">Рекомендуемый размер: 200x200px, до 2MB</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-edit-section">
+            <h2 class="profile-edit-section-title">Основная информация</h2>
+            <div class="profile-edit-grid">
+                <div class="profile-edit-field">
+                    <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.phone.id_for_label }}">Телефон</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.country.id_for_label }}">Страна</label>
+                    {{ form.country }}
+                    {{ form.country.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-edit-section">
+            <h2 class="profile-edit-section-title">Информация о компании</h2>
+            <div class="profile-edit-grid">
+                <div class="profile-edit-field">
+                    <label for="{{ form.company_name.id_for_label }}">Название компании</label>
+                    {{ form.company_name }}
+                    {{ form.company_name.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.legal_address.id_for_label }}">Юридический адрес</label>
+                    {{ form.legal_address }}
+                    {{ form.legal_address.errors }}
+                </div>
+                <div class="profile-edit-field">
+                    <label for="{{ form.website.id_for_label }}">Веб-сайт</label>
+                    {{ form.website }}
+                    {{ form.website.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-edit-section">
+            <h2 class="profile-edit-section-title">О себе</h2>
+            <div class="profile-edit-field">
+                {{ form.description }}
+                {{ form.description.errors }}
+            </div>
+        </div>
+
+        <div class="profile-edit-actions">
+            <button type="submit" class="platform_button_one">Сохранить изменения</button>
+            <a href="{% url 'users:profile' %}" class="platform_button_two">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %} 

@@ -1,0 +1,143 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{% static 'css/vendor/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+
+<main class="registration_main">
+    <img src="{% static 'images/registration-image.png' %}" alt="">
+    <div class="registration_wrapper">
+        <div class="registration-content">
+            <div class="registration_content-logo">
+                <img src="{% static 'images/registration-logo.png' %}" alt="">
+            </div>
+            <h4 class="registration_content-title">Регистрация</h4>
+            <form method="post" class="registration-form">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Пожалуйста, исправьте ошибки в форме:
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+                
+                <div class="registration-form-change">
+                    <input type="radio" id="agent" name="role" value="agent">
+                    <label for="agent" class="role-label">
+                        <img src="{% static 'assets/icons/agent-men-icon.svg' %}" alt="">
+                        <span>Агент</span>
+                    </label>
+
+                    <input type="radio" id="developer" name="role" value="developer" checked>
+                    <label for="developer" class="role-label">
+                        <img src="{% static 'assets/icons/builder-men-icon.svg' %}" alt="">
+                        <span>Застройщик</span>
+                    </label>
+                </div>
+
+                <div class="registration-form-items">
+                    <div class="estate-search-form-item">
+                        <div class="objectType-dropdown search-dropdown estate-search-form-item-price-item">
+                            {{ form.country }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.username }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password2 }}
+                    </div>
+                </div>
+
+                <button type="submit" class="button registration-form-button">Регистрация</button>
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" name="terms" class="checkbox" required>
+                    <span class="checkbox-text">Я ознакомлен и согласен <a href="#">с правилами обработки персональных данных</a></span>
+                </label>
+            </form>
+
+            <div class="login-link">
+                <p>Уже есть аккаунт? <a href="{% url 'users:login' %}">Войти</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="{% static 'js/vendor/jquery.min.js' %}"></script>
+<script src="{% static 'js/vendor/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<style>
+    /* Стили для полей формы Django */
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+    }
+    
+    /* Стили для выпадающего списка */
+    select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: white;
+        appearance: none;
+        background-image: url("{% static 'assets/icons/arrow-bottom-icon.svg' %}");
+        background-repeat: no-repeat;
+        background-position: right 0.8rem center;
+        background-size: 1rem;
+        cursor: pointer;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .estate-search-form-item {
+        margin-bottom: 1rem;
+    }
+
+    .objectType-dropdown {
+        width: 100%;
+    }
+</style>
+</body>
+</html>

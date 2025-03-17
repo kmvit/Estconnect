@@ -1,0 +1,149 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Каталог агентов{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="#">Агенты</a>
+{% endblock %}
+
+{% block content %}
+<div class="catalog-content">
+    <h1 class="catalog-content-title">
+        Каталог агентов
+    </h1>
+    <div class="estate-search">
+        <h2 class="estate-search-title">Поиск Агентов</h2>
+        <form action="" method="get" class="catalog-search-form">
+            <div class="estate-search-form-items">
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Страна</p>
+                    <input type="text" name="country" value="{{ request.GET.country }}" class="input estate-search-form-item-input" placeholder="Таиланд">
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Поиск по названию</p>
+                    <input type="text" name="search" value="{{ request.GET.search }}" class="input estate-search-form-item-input"
+                           placeholder="Введите название агента">
+                </div>
+            </div>
+            <button type="submit" class="platform_button_one catalog-search-form-button">Найти</button>
+            {% if request.GET.country or request.GET.search %}
+            <a href="{% url 'users:agent_list' %}" class="platform_button_one catalog-search-form-button" style="margin-left: 10px;">Сбросить</a>
+            {% endif %}
+        </form>
+    </div>
+    <div class="catalog-sort-dropdown-wrapper sort-dropdown-wrapper">
+        <div class="sort-dropdown catalog-sort-dropdown">
+            <div class="sort-dropdown-header">
+                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">Сортировать</p>
+                <div class="sort-dropdown-button-wrapper">
+                    <span class="sort-dropdown-button">
+                        {% if sort == 'name_asc' %}от А до Я
+                        {% elif sort == 'name_desc' %}от Я до А
+                        {% elif sort == 'date_asc' %}от старых пользователей к новым
+                        {% elif sort == 'date_desc' %}от новых пользователей к старым
+                        {% else %}По умолчанию
+                        {% endif %}
+                    </span>
+                    <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="sort-dropdown-icon">
+                </div>
+            </div>
+            <div class="sort-dropdown-content">
+                <div data-sort="name_asc">от А до Я</div>
+                <div data-sort="name_desc">от Я до А</div>
+                <div data-sort="date_asc">от старых пользователей к новым</div>
+                <div data-sort="date_desc">от новых пользователей к старым</div>
+            </div>
+        </div>
+    </div>
+    <div class="catalog-items">
+        {% for agent in agents %}
+        <div class="person-card">
+            <div class="person-card-image">
+                {% if agent.profile_photo %}
+                <img src="{{ agent.profile_photo.url }}" alt="{{ agent.company_name }}" style="width: 209px; height: 209px;">
+                {% else %}
+                <img src="{% static 'images/person-card-img.png' %}" alt="{{ agent.company_name }}" style="width: 209px; height: 209px;">
+                {% endif %}
+            </div>
+            <div class="person-card-content">
+                <a href="" class="object-card-content-favourite">
+                </a>
+                <a href="{% url 'users:agent_detail' agent.id %}"><h3 class="object-card-title">{{ agent.company_name }}</h3></a>
+                <div class="object-card-place">
+                    <div class="object-card-place-icon">
+                        <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                    </div>
+                    <div class="object-card-place-text">{{ agent.country }}, {{ agent.city.name }}</div>
+                </div>
+                <div class="object-card-info">
+                    <div class="object-card-info-item">
+                        <div class="object-card-info-item-icon">
+                            <img src="{% static 'assets/icons/construction-icon.svg' %}" alt="">
+                        </div>
+                        <p class="object-card-info-item-text">{{ agent.created_at|date:"Y" }}</p>
+                    </div>
+                </div>
+                <p class="object-card-description">
+                    {{ agent.description|truncatewords:30 }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if sort %}&sort={{ sort }}{% endif %}" class="pagination-item">
+            <img src="{% static 'assets/icons/arrow-left-icon.svg' %}" alt="">
+        </a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a href="?page={{ num }}{% if sort %}&sort={{ sort }}{% endif %}" class="pagination-item active">{{ num }}</a>
+        {% else %}
+        <a href="?page={{ num }}{% if sort %}&sort={{ sort }}{% endif %}" class="pagination-item">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if sort %}&sort={{ sort }}{% endif %}" class="pagination-item">
+            <img src="{% static 'assets/icons/arrow-right-icon.svg' %}" alt="">
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sortDropdown = document.querySelector('.catalog-sort-dropdown');
+    const sortButton = sortDropdown.querySelector('.sort-dropdown-button-wrapper');
+    const sortContent = sortDropdown.querySelector('.sort-dropdown-content');
+    const sortItems = sortContent.querySelectorAll('div');
+
+    // Обработчик клика по кнопке сортировки
+    sortButton.addEventListener('click', function() {
+        sortContent.classList.toggle('active');
+    });
+
+    // Обработчик клика по пунктам сортировки
+    sortItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const sortValue = this.dataset.sort;
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('sort', sortValue);
+            window.location.href = currentUrl.toString();
+        });
+    });
+
+    // Закрытие выпадающего списка при клике вне его
+    document.addEventListener('click', function(event) {
+        if (!sortDropdown.contains(event.target)) {
+            sortContent.classList.remove('active');
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.core.validators import MinValueValidator
+from django.utils import timezone
 
 from locations.models import Country, City, District
 
@@ -46,66 +48,75 @@ class ContactMethod(models.Model):
 
 # Объекты застройки
 class ConstructionObject(models.Model):
-    name = models.CharField("Название", max_length=200)
-    price_per_sqm = models.DecimalField("Цена за квадрат", max_digits=10,
-                                        decimal_places=2)
-    housing_class = models.ForeignKey(HousingClass, on_delete=models.CASCADE,
-                                      verbose_name="Класс жилья")
-    housing_type = models.ForeignKey(HousingType, on_delete=models.CASCADE,
-                                     verbose_name="Тип жилья")
-    completion_date = models.DateField("Срок сдачи")
-    square = models.DecimalField("Площадь", max_digits=10, decimal_places=2,
-                                 blank=True, null=True)
-    parking = models.CharField(
-        "Парковка",
-        max_length=50,
-        choices=[
-            ("underground", "Подземная"),
-            ("ground", "Наземная"),
-            ("none", "Нет"),
-        ],
-    )
-    buildings = models.PositiveIntegerField("Количество корпусов")
-    floors = models.PositiveIntegerField("Этажность")
-    address = models.CharField("Адрес", max_length=255, blank=True,
-                               null=True)  # Поле для адреса
-    latitude = models.FloatField("Широта", blank=True, null=True)  # Координаты
-    longitude = models.FloatField("Долгота", blank=True, null=True)
+    COMFORT_CHOICES = [
+        ('economy', 'Эконом'),
+        ('comfort', 'Комфорт'),
+        ('business', 'Бизнес'),
+        ('elite', 'Элитный'),
+    ]
 
-    description = models.TextField("Описание", blank=True, null=True)
-    updated_at = models.DateTimeField("Дата обновления", auto_now=True)
-    developer = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='construction_objects',
-        limit_choices_to={'role': 'developer'},
-        # Показывать в админке только пользователей с role='developer'
-        verbose_name='Застройщик'
-    )
-    documentation_link = models.URLField("Ссылка на документацию", blank=True,
-                                         null=True)
-    is_published = models.BooleanField("Опубликован",
-                                       default=False)
+    PROPERTY_TYPE_CHOICES = [
+        ('apartment', 'Квартира'),
+        ('house', 'Дом'),
+        ('commercial', 'Коммерческая недвижимость'),
+        ('land', 'Земельный участок'),
+    ]
 
-    class Meta:
-        verbose_name = "Объект застройки"
-        verbose_name_plural = "Объекты застройки"
+    PROJECT_STATUS_CHOICES = [
+        ('completed', 'Сдан'),
+        ('in_progress', 'В процессе'),
+        ('planned', 'Планируется'),
+    ]
 
+    OWNERSHIP_TYPE_CHOICES = [
+        ('long_term_lease', 'Долгосрочная аренда'),
+        ('ownership', 'Собственность'),
+    ]
+    name = models.CharField(max_length=255, verbose_name='Название объекта', null=True, blank=True)
+    developer = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='construction_objects')
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name='Страна', null=True, blank=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Город', null=True, blank=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name='Район', null=True, blank=True)
+    
+    property_type = models.CharField('Тип недвижимости', max_length=20, choices=PROPERTY_TYPE_CHOICES, null=True, blank=True)
+    comfort_type = models.CharField('Комфорт', max_length=20, choices=COMFORT_CHOICES, null=True, blank=True)
+    amenities = models.TextField(blank=True, null=True, verbose_name='Удобства', help_text='Перечислите удобства через запятую (например: бассейн, парковка, охрана)')
+    
+    ownership_type = models.CharField('Тип права', max_length=20, choices=OWNERSHIP_TYPE_CHOICES, null=True, blank=True)
+    area = models.DecimalField('Площадь (м²)', max_digits=10, decimal_places=2, default=0, blank=True, validators=[MinValueValidator(0)])
+    floors = models.IntegerField('Этажность', null=True, blank=True)
+    project_status = models.CharField('Статус проекта', max_length=20, choices=PROJECT_STATUS_CHOICES, default='in_progress')
+    
+    description = models.TextField(verbose_name='Описание', blank=True, null=True)
+    price_per_sqm = models.DecimalField('Цена за м²', max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)])
+    
+    completion_date = models.DateField('Дата сдачи проекта', null=True, blank=True)
+    address = models.TextField(verbose_name='Адрес', blank=True, null=True)
+    documentations_link = models.URLField(verbose_name='Ссылка на документы', blank=True, null=True) 
+    
+    created_at = models.DateTimeField('Дата создания', default=timezone.now)
+    updated_at = models.DateTimeField('Дата обновления', auto_now=True)
+    is_published = models.BooleanField('Опубликовано', default=False)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.city or 'Город не указан'})"
 
+    class Meta:
+        verbose_name = 'Объект недвижимости'
+        verbose_name_plural = 'Объекты недвижимости'
+        ordering = ['-created_at']
 
 
 class ConstructionObjectImage(models.Model):
-    image = models.ImageField("Изображение", upload_to="construction_objects/")
-    construction_object = models.ForeignKey(ConstructionObject,
-                                            on_delete=models.CASCADE,
-                                            related_name="images")
+    construction_object = models.ForeignKey(
+        ConstructionObject,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+    image = models.ImageField(upload_to='construction_objects/')
+    created_at = models.DateTimeField('Дата создания', default=timezone.now)
 
     class Meta:
-        verbose_name = "Фотография объекта"
-        verbose_name_plural = "Фотографии объектов"
-
-    def __str__(self):
-        return f"Фото для {self.construction_object.name}"
+        verbose_name = 'Изображение объекта'
+        verbose_name_plural = 'Изображения объекта'
+        ordering = ['created_at']
