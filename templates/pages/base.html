@@ -27,16 +27,13 @@
         </div>
         <ul class="menu-items">
             <li class="menu-item">
-                <a href="{% url 'pages:page_two' %}" class="menu-item-link">О нас</a>
+                <a href="{% url 'pages:about-us' %}" class="menu-item-link">О нас</a>
             </li>
             <li class="menu-item">
-                <a href="{% url 'pages:page_three' %}" class="menu-item-link">О продукте</a>
+                <a href="{% url 'pages:about-product' %}" class="menu-item-link">О продукте</a>
             </li>
             <li class="menu-item">
-                <a href="{% url 'pages:page_four' %}" class="menu-item-link">Почему мы</a>
-            </li>
-            <li class="menu-item">
-                <a href="{% url 'pages:page_five' %}" class="menu-item-link">Прайсинг</a>
+                <a href="{% url 'pages:why-we' %}" class="menu-item-link">Почему мы</a>
             </li>
             <li class="menu-item">
                 <a href="#" class="menu-item-link">Контакты</a>
@@ -64,11 +61,10 @@
 <footer class="footer">
     <div class="footer-list">
         <a href="{% url 'pages:index' %}" class="footer-list-link">Главная</a>
-        <a href="{% url 'pages:page_two' %}" class="footer-list-link">О нас</a>
-        <a href="{% url 'pages:page_three' %}" class="footer-list-link">О продукте</a>
-        <a href="{% url 'pages:page_four' %}" class="footer-list-link">Почему мы</a>
-        <a href="{% url 'pages:page_five' %}" class="footer-list-link">Прайсинг</a>
-    </div>
+        <a href="{% url 'pages:about-us' %}" class="footer-list-link">О нас</a>
+        <a href="{% url 'pages:about-product' %}" class="footer-list-link">О продукте</a>
+        <a href="{% url 'pages:why-we' %}" class="footer-list-link">Почему мы</a>
+</div>
     <div class="footer-socials">
         <a href="#" class="footer-social">
             <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="">
