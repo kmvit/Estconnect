@@ -43,7 +43,7 @@ class ProfileView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         user = request.user
         form = UserProfileForm(request.POST, request.FILES, instance=user)
-        
+
         if form.is_valid():
             try:
                 user = form.save()
@@ -53,21 +53,22 @@ class ProfileView(LoginRequiredMixin, View):
                         action="Обновил фото профиля"
                     )
                 messages.success(request, "Фото профиля успешно обновлено")
-                
+
                 if 'image' in request.FILES:
                     UserActivityLog.objects.create(
                         user=user,
                         action="Обновил баннер профиля"
                     )
-                    messages.success(request, "Баннер профиля успешно обновлен")
-                
+                    messages.success(
+                        request, "Баннер профиля успешно обновлен")
+
                 if not ('profile_photo' in request.FILES or 'image' in request.FILES):
                     UserActivityLog.objects.create(
                         user=user,
                         action="Обновил информацию профиля"
                     )
                     messages.success(request, "Профиль успешно обновлен")
-                
+
                 return redirect('users:profile')
             except Exception as e:
                 messages.error(request, f"Ошибка при сохранении: {str(e)}")
@@ -75,7 +76,7 @@ class ProfileView(LoginRequiredMixin, View):
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"Ошибка в поле {field}: {error}")
-        
+
         context = self.get_context_data()
         context['form'] = form
         return render(request, self.template_name, context)
@@ -88,19 +89,19 @@ def register(request):
             user = form.save(commit=False)
             user.role = request.POST.get('role', 'developer')
             user.save()
-            
+
             UserActivityLog.objects.create(
                 user=user,
                 action="Зарегистрировался как {}".format(
                     "застройщик" if user.role == 'developer' else "агент"
                 )
             )
-            
+
             login(request, user)
             return redirect('pages:index')
     else:
         form = CustomUserCreationForm()
-    
+
     return render(request, 'users/register.html', {'form': form})
 
 
@@ -141,66 +142,6 @@ def admin_profile_view(request, id):
     return render(request, 'profile/profile.html', {'user': user})
 
 
-class AgentRequiredMixin(UserPassesTestMixin):
-    def test_func(self):
-        return self.request.user.is_authenticated and self.request.user.role == 'agent'
-
-    def handle_no_permission(self):
-        from django.core.exceptions import PermissionDenied
-        raise PermissionDenied
-
-
-class DeveloperListView(LoginRequiredMixin, AgentRequiredMixin, ListView):
-    """
-    Список застройщиков для агента
-    c сортировкой по алфавиту (company_name), региону (region__name),
-    типу недвижимости (real_estate_type).
-    """
-    model = CustomUser
-    template_name = 'users/developer_list.html'
-    context_object_name = 'developers'
-    paginate_by = 10  # если нужна пагинация, иначе уберите
-
-    def get_queryset(self):
-        qs = CustomUser.objects.filter(role='developer')
-
-        sort_by = self.request.GET.get('sort_by')
-        if sort_by == 'alphabet':
-            # Сортировка по названию компании
-            qs = qs.order_by('company_name')
-        elif sort_by == 'district':
-            # Сортировка по региону (если region — ForeignKey)
-            qs = qs.order_by('district__name')
-        elif sort_by == 'type':
-            # Сортировка по типу недвижимости
-            qs = qs.order_by('real_estate_type')
-        else:
-            # По умолчанию - сортируем по дате создания/имени/чему угодно
-            qs = qs.order_by('company_name')
-
-        return qs
-
-
-class DeveloperDetailView(DetailView):
-    model = User
-    template_name = 'users/developer_detail.html'  # Ваш шаблон
-    context_object_name = 'developer'
-
-    def get_queryset(self):
-        # Фильтруем только тех пользователей, у кого role='developer'
-        return User.objects.filter(role='developer')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Текущий застройщик
-        developer = self.object  # тот пользователь, которого мы смотрим
-        # Получаем список объектов застройки
-        objects_qs = ConstructionObject.objects.filter(developer=developer)
-        context['construction_objects'] = objects_qs
-        return context
-    
-
-
 class AgentListView(LoginRequiredMixin, ListView):
     """
     Список всех агентов:
@@ -214,21 +155,21 @@ class AgentListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = CustomUser.objects.filter(role='agent')
-        
+
         # Получаем параметры поиска
         country = self.request.GET.get('country')
         search = self.request.GET.get('search')
-        
+
         # Применяем фильтры поиска
         if country:
             queryset = queryset.filter(country__name__icontains=country)
-        
+
         if search:
             queryset = queryset.filter(company_name__icontains=search)
-        
+
         # Получаем параметр сортировки из URL
         sort = self.request.GET.get('sort')
-        
+
         # Применяем сортировку в зависимости от параметра
         if sort == 'name_asc':
             queryset = queryset.order_by('company_name')
@@ -241,7 +182,7 @@ class AgentListView(LoginRequiredMixin, ListView):
         else:
             # Сортировка по умолчанию
             queryset = queryset.order_by('-date_joined')
-            
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -262,6 +203,9 @@ class AgentDetailView(LoginRequiredMixin, DetailView):
 
 
 class ProfileObjectsView(LoginRequiredMixin, View):
+    """
+    Представление для просмотра всех объектов
+    """
     template_name_list = 'profile/object_list.html'
     template_name_form = 'profile/object-plus.html'
     template_name_detail = 'profile/object_detail.html'
@@ -270,8 +214,8 @@ class ProfileObjectsView(LoginRequiredMixin, View):
     success_url = reverse_lazy('users:object_list')
 
     def get_queryset(self):
-        queryset = ConstructionObject.objects.filter(developer=self.request.user)
-        
+        queryset = ConstructionObject.objects.filter(is_published=True)
+
         # Получаем параметры поиска из GET-запроса
         search = self.request.GET.get('search')
         country = self.request.GET.get('country')
@@ -295,7 +239,8 @@ class ProfileObjectsView(LoginRequiredMixin, View):
         if name:
             queryset = queryset.filter(name__icontains=name)
         if developer:
-            queryset = queryset.filter(developer__company_name__icontains=developer)
+            queryset = queryset.filter(
+                developer__company_name__icontains=developer)
         if price_from:
             queryset = queryset.filter(price_per_sqm__gte=price_from)
         if price_to:
@@ -334,16 +279,17 @@ class ProfileObjectsView(LoginRequiredMixin, View):
             return render(request, self.template_name_form, {
                 'form': form
             })
-            
+
         if pk is not None:
             # Детальный просмотр объекта
             obj = ConstructionObject.objects.get(pk=pk)
-            other_objects = ConstructionObject.objects.filter(developer=request.user, is_published=True).exclude(pk=pk)
+            other_objects = ConstructionObject.objects.filter(
+                developer=request.user, is_published=True).exclude(pk=pk)
             return render(request, self.template_name_detail, {
                 'other_objects': other_objects,
                 'object': obj
             })
-        
+
         if request.path.endswith('/favourites/'):
             # Просмотр избранных объектов
             context = {
@@ -351,7 +297,7 @@ class ProfileObjectsView(LoginRequiredMixin, View):
                 'favourite_developers': request.user.favourite_developers.all()
             }
             return render(request, self.template_name_favourites, context)
-        
+
         # Список объектов (по умолчанию)
         objects = self.get_queryset()
         context = {
@@ -366,7 +312,8 @@ class ProfileObjectsView(LoginRequiredMixin, View):
         if pk is not None:
             # Редактирование существующего объекта
             obj = ConstructionObject.objects.get(pk=pk)
-            form = ConstructionObjectForm(request.POST, request.FILES, instance=obj)
+            form = ConstructionObjectForm(
+                request.POST, request.FILES, instance=obj)
         else:
             # Создание нового объекта
             form = ConstructionObjectForm(request.POST, request.FILES)
@@ -393,7 +340,8 @@ class ProfileObjectsView(LoginRequiredMixin, View):
                 )
                 return redirect('users:object_list')
             except Exception as e:
-                messages.error(request, f'Ошибка при сохранении объекта: {str(e)}')
+                messages.error(
+                    request, f'Ошибка при сохранении объекта: {str(e)}')
                 return render(request, self.template_name_form, {
                     'form': form
                 })
@@ -415,10 +363,10 @@ def toggle_favourite(request, pk):
     try:
         object = get_object_or_404(ConstructionObject, pk=pk)
 
-        
         # Проверяем наличие связи в промежуточной таблице
-        is_favourite = request.user._favourite_objects.filter(pk=object.pk).exists()
-        
+        is_favourite = request.user._favourite_objects.filter(
+            pk=object.pk).exists()
+
         if is_favourite:
             # Удаляем запись из промежуточной таблицы
             request.user._favourite_objects.through.objects.filter(
@@ -434,7 +382,7 @@ def toggle_favourite(request, pk):
             )
             is_favourite = True
         return JsonResponse({'is_favourite': is_favourite})
-        
+
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
@@ -446,23 +394,160 @@ def toggle_favourite_developer(request, pk):
     """
     try:
         developer = get_object_or_404(CustomUser, pk=pk, role='developer')
-        
-        is_favourite = request.user._favourite_developers.filter(pk=developer.pk).exists()
-        
+
+        is_favourite = request.user._favourite_developers.filter(
+            pk=developer.pk).exists()
+
         if is_favourite:
             request.user._favourite_developers.through.objects.filter(
-                customuser=request.user,
-                developer=developer
+                from_customuser=request.user,
+                to_customuser=developer
             ).delete()
             is_favourite = False
         else:
             request.user._favourite_developers.through.objects.create(
-                customuser=request.user,
-                developer=developer
+                from_customuser=request.user,
+                to_customuser=developer
             )
             is_favourite = True
         return JsonResponse({'is_favourite': is_favourite})
-        
+
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
+
+class ObjectRegistrationView(LoginRequiredMixin, ListView):
+    """
+    Представление для просмотра зарегистрированных объектов
+    """
+    model = ConstructionObject
+    template_name = 'profile/object_registration.html'
+    context_object_name = 'objects'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = ConstructionObject.objects.filter(
+            developer=self.request.user)
+
+        # Фильтрация по статусу публикации
+        status = self.request.GET.get('status')
+        if status == 'published':
+            queryset = queryset.filter(is_published=True)
+        elif status == 'unpublished':
+            queryset = queryset.filter(is_published=False)
+
+        # Фильтрация по дате сдачи
+        completion_date = self.request.GET.get('completion_date')
+        if completion_date:
+            queryset = queryset.filter(completion_date=completion_date)
+
+        # Сортировка
+        sort_by = self.request.GET.get('sort_by', 'newest')
+        if sort_by == 'oldest':
+            queryset = queryset.order_by('created_at')
+        elif sort_by == 'newest':
+            queryset = queryset.order_by('-created_at')
+        else:
+            # По умолчанию сортируем по новым
+            queryset = queryset.order_by('-created_at')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['status_filter'] = self.request.GET.get('status', '')
+        context['completion_date'] = self.request.GET.get(
+            'completion_date', '')
+        context['sort_by'] = self.request.GET.get('sort_by', 'newest')
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if 'toggle_publish' in request.POST:
+            object_id = request.POST.get('object_id')
+            try:
+                obj = ConstructionObject.objects.get(
+                    id=object_id, developer=request.user)
+                obj.is_published = not obj.is_published
+                obj.save()
+                return JsonResponse({
+                    'success': True,
+                    'is_published': obj.is_published
+                })
+            except ConstructionObject.DoesNotExist:
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Объект не найден'
+                }, status=404)
+        return super().post(request, *args, **kwargs)
+
+
+class DeveloperCatalogView(LoginRequiredMixin, ListView):
+    """
+    Список всех застройщиков:
+    - Выводит пользователей с role='developer'
+    - Поддерживает поиск по стране и названию компании
+    - Поддерживает сортировку по имени и дате регистрации
+    """
+    model = CustomUser
+    template_name = 'profile/developer_catalog.html'
+    context_object_name = 'developers'
+    paginate_by = 12
+
+    def get_queryset(self):
+        queryset = CustomUser.objects.filter(role='developer')
+
+        # Получаем параметры поиска
+        country = self.request.GET.get('country')
+        search = self.request.GET.get('search')
+
+        # Применяем фильтры поиска
+        if country:
+            queryset = queryset.filter(country__name__icontains=country)
+
+        if search:
+            queryset = queryset.filter(company_name__icontains=search)
+
+        # Получаем параметр сортировки из URL
+        sort = self.request.GET.get('sort')
+
+        # Применяем сортировку в зависимости от параметра
+        if sort == 'name_asc':
+            queryset = queryset.order_by('company_name')
+        elif sort == 'name_desc':
+            queryset = queryset.order_by('-company_name')
+        elif sort == 'date_asc':
+            queryset = queryset.order_by('date_joined')
+        elif sort == 'date_desc':
+            queryset = queryset.order_by('-date_joined')
+        else:
+            # Сортировка по умолчанию
+            queryset = queryset.order_by('-date_joined')
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort'] = self.request.GET.get('sort')
+        # Добавляем параметры поиска в контекст для сохранения значений в форме
+        context['search_params'] = {
+            'country': self.request.GET.get('country', ''),
+            'search': self.request.GET.get('search', '')
+        }
+        return context
+
+
+class DeveloperDetailView(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    template_name = 'profile/developer_detail.html'
+    context_object_name = 'developer'
+
+    def get_queryset(self):
+        queryset = CustomUser.objects.filter(role='developer')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Получаем всех застройщиков кроме текущего
+        developers = self.get_queryset().exclude(id=self.kwargs['pk'])
+        context['developers'] = developers
+        return context

@@ -50,6 +50,12 @@
                     <span>Все застройщики</span>
                 </a>
                 {% endif %}
+                {% if user.role == 'developer' %}
+                <a href="{% url 'users:object_registration' %}" class="navigation-list-link">
+                    <img src="{% static 'assets/icons/object-icon.svg' %}" alt="">
+                    <span>Регистрация объектов</span>
+                </a>
+                {% endif %}
                 <a href="{% url 'support:support_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/help.svg' %}" alt="">
                     <span>Тех. поддержка</span>

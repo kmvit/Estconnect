@@ -1,0 +1,218 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}Регистрация объектов{% endblock %}
+
+{% block nav_tabs %}
+<a href="#" class="nav-tab active">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M24.1 11.7C24.1 11.9 24.1 12.1 24.1 12.3C24.1 12.4 24.1 12.6 24.1 12.6C23.7 13.7 23 14.2 21.9 14.2C21.8 14.2 21.7 14.2 21.6 14.2C21.6 14.3 21.6 14.4 21.6 14.5C21.6 16.8 21.6 19.1 21.6 21.5C21.6 22.6 20.8 23.6 19.8 23.9C19.7 23.9 19.6 23.9 19.6 24C19.5 24 19.2 24.1 19.1 24.1C17.8 24.1 16.5 24.1 15.2 24.1C15.1 24.1 14.9 24 14.9 24C14.6 23.8 14.5 23.6 14.5 23.2C14.5 21.4 14.5 19.6 14.5 17.8C14.5 17 14 16.5 13.2 16.5C12.5 16.5 11.9 16.5 11.2 16.5C10.3 16.5 9.9 17 9.9 17.8C9.9 19.6 9.9 21.4 9.9 23.1C9.9 23.5 9.8 23.8 9.4 24H9.3C7.9 24 6.5 24 5 24C5 24 5 24 4.9 24C3.8 23.9 2.7 22.8 2.7 21.3C2.7 19 2.7 16.8 2.7 14.5C2.7 14.4 2.7 14.3 2.7 14.2C2.5 14.2 2.4 14.2 2.3 14.2C1.5 14.2 0.9 13.8 0.4 13.1C0.3 12.9 0.2 12.7 0.2 12.6C0.2 12.5 0.1 12.2 0.1 12.2C0 12 0 12 0 11.9C0 11.8 0 11.6 0 11.5C0.2 10.9 0.6 10.4 1 10C4.1 7 7 4.1 10 1.1C10.4 0.7 10.8 0.3 11.3 0.1C11.3 0 11.7 0 11.7 0C11.9 0 12.1 0 12.3 0C12.4 0 12.8 0.1 12.8 0.1C13.3 0.3 13.6 0.7 14 1C17 4 20 7 23.1 10.1C23.5 10.5 23.8 10.9 24 11.3C24 11.4 24.1 11.6 24.1 11.7Z"
+            fill="#723CD9" />
+    </svg>
+</a>
+{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:object_registration' %}">Регистрация объектов</a>
+{% endblock %}
+
+{% block content %}
+<div class="catalog-content">
+    <h1 class="catalog-content-title">
+        Перечень заявок на регистрацию объектов
+    </h1>
+    <div class="estate-search">
+        <h2 class="estate-search-title">Все заявки</h2>
+        <form action="{% url 'users:object_registration' %}" method="get" class="catalog-search-form" id="searchForm">
+            <div class="estate-search-form-items">
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Статус проекта</p>
+                    <div class="objectPlusStatus-dropdown search-dropdown estate-search-form-item-price-item">
+                        <div class="objectPlusStatus-dropdown-button-wrapper search-dropdown-button-wrapper">
+                            <span class="objectPlusStatus-dropdown-button search-dropdown-button">
+                                {% if status_filter == 'published' %}
+                                Опубликованные
+                                {% elif status_filter == 'unpublished' %}
+                                Неопубликованные
+                                {% else %}
+                                Статус
+                                {% endif %}
+                            </span>
+                            <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt=""
+                                class="search-dropdown-icon">
+                        </div>
+                        <div class="objectPlusStatus-dropdown-content search-dropdown-content">
+                            <div data-value="">Все статусы</div>
+                            <div data-value="published">Опубликованные</div>
+                            <div data-value="unpublished">Неопубликованные</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="estate-search-form-item">
+                    <p class="estate-search-form-item-subtitle">Дата сдачи проекта</p>
+                    <input type="date" name="completion_date" value="{{ completion_date }}"
+                        class="input estate-search-form-item-input">
+                </div>
+            </div>
+            <input type="hidden" name="sort_by" value="{{ sort_by }}">
+            <button type="submit" class="platform_button_one catalog-search-form-button">Найти</button>
+        </form>
+    </div>
+    <div class="catalog-sort-dropdown-wrapper sort-dropdown-wrapper">
+        <div class="sort-dropdown catalog-sort-dropdown">
+            <div class="sort-dropdown-header">
+                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">Сортировать</p>
+                <div class="sort-dropdown-button-wrapper">
+                    <span class="sort-dropdown-button">
+                        {% if sort_by == 'oldest' %}
+                        от старых к новым
+                        {% elif sort_by == 'newest' %}
+                        от новых к старым
+                        {% else %}
+                        По умолчанию
+                        {% endif %}
+                    </span>
+                    <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="sort-dropdown-icon">
+                </div>
+            </div>
+            <div class="sort-dropdown-content">
+                <div data-value="oldest">от старых к новым</div>
+                <div data-value="newest">от новых к старым</div>
+            </div>
+        </div>
+    </div>
+    <div class="catalog-items">
+        {% for object in objects %}
+        <div class="object-card">
+            <div class="object-card-image">
+                <div class="object-card-image-photo-count">
+                    <div class="object-card-image-photo-count-icon">
+                        <img src="{% static 'assets/icons/photo-icon.svg' %}" alt="">
+                    </div>
+                    <p class="object-card-image-photo-text">{{ object.images.count }}</p>
+                </div>
+                {% if object.images.first %}
+                <a href="{% url 'users:object_detail' object.pk %}">
+                    <img src="{{ object.images.first.image.url }}" alt="{{ object.name }}"
+                        style="width: 290px; height: 290px; object-fit: cover;">
+                </a>
+                {% else %}
+                <a href="{% url 'users:object_detail' object.pk %}">
+                    <img src="{% static 'images/object-placeholder.jpg' %}" alt="Нет изображения"
+                        style="width: 290px; height: 290px; object-fit: cover;">
+                </a>
+                {% endif %}
+            </div>
+            <div class="object-card-content">
+                <h3 class="object-card-title">{{ object.name }}</h3>
+                <div class="object-card-place">
+                    <div class="object-card-place-icon">
+                        <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                    </div>
+                    <div class="object-card-place-text">{{ object.address }}</div>
+                </div>
+                <p class="object-card-price">{{ object.price_per_sqm }} ₽/м²</p>
+                <div class="object-card-info">
+                    <div class="object-card-info-item">
+                        <div class="object-card-info-item-icon">
+                            <img src="{% static 'assets/icons/key-icon.svg' %}" alt="">
+                        </div>
+                        <p class="object-card-info-item-text">{{ object.completion_date|date:"Y" }}</p>
+                    </div>
+                    <div class="object-card-info-item">
+                        <div class="object-card-info-item-icon">
+                            <img src="{% static 'assets/icons/ladder-icon.svg' %}" alt="">
+                        </div>
+                        <p class="object-card-info-item-text">{{ object.floors }}</p>
+                    </div>
+                </div>
+                <p class="object-card-description">{{ object.description|truncatewords:30 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработка выпадающего списка статусов
+    const statusDropdown = document.querySelector('.objectPlusStatus-dropdown');
+    const statusButton = statusDropdown.querySelector('.objectPlusStatus-dropdown-button');
+    const statusContent = statusDropdown.querySelector('.objectPlusStatus-dropdown-content');
+    const statusItems = statusContent.querySelectorAll('div');
+
+    statusButton.addEventListener('click', function() {
+        statusContent.classList.toggle('active');
+    });
+
+    statusItems.forEach(item => {
+        item.addEventListener('click', function() {
+            statusButton.textContent = this.textContent;
+            statusContent.classList.remove('active');
+            
+            // Добавляем скрытое поле для значения
+            let statusInput = document.querySelector('input[name="status"]');
+            if (!statusInput) {
+                statusInput = document.createElement('input');
+                statusInput.type = 'hidden';
+                statusInput.name = 'status';
+                document.getElementById('searchForm').appendChild(statusInput);
+            }
+            statusInput.value = this.dataset.value;
+        });
+    });
+
+    // Обработка выпадающего списка сортировки
+    const sortDropdown = document.querySelector('.catalog-sort-dropdown');
+    const sortButton = sortDropdown.querySelector('.sort-dropdown-button');
+    const sortContent = sortDropdown.querySelector('.sort-dropdown-content');
+    const sortItems = sortContent.querySelectorAll('div');
+
+    sortButton.addEventListener('click', function() {
+        sortContent.classList.toggle('active');
+    });
+
+    sortItems.forEach(item => {
+        item.addEventListener('click', function() {
+            sortButton.textContent = this.textContent;
+            sortContent.classList.remove('active');
+            
+            // Получаем текущие параметры URL
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Обновляем параметр сортировки
+            if (this.dataset.value) {
+                urlParams.set('sort_by', this.dataset.value);
+            } else {
+                urlParams.delete('sort_by');
+            }
+            
+            // Сохраняем остальные параметры
+            const status = document.querySelector('input[name="status"]')?.value;
+            const completionDate = document.querySelector('input[name="completion_date"]')?.value;
+            
+            if (status) urlParams.set('status', status);
+            if (completionDate) urlParams.set('completion_date', completionDate);
+            
+            // Обновляем URL и перезагружаем страницу
+            window.location.href = `${window.location.pathname}?${urlParams.toString()}`;
+        });
+    });
+
+    // Закрытие выпадающих списков при клике вне их
+    document.addEventListener('click', function(e) {
+        if (!statusDropdown.contains(e.target)) {
+            statusContent.classList.remove('active');
+        }
+        if (!sortDropdown.contains(e.target)) {
+            sortContent.classList.remove('active');
+        }
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

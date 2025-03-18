@@ -105,11 +105,16 @@
                     {% endif %}
                 </div>
                 <div class="person-card-content">
-                    <a href="{% url 'users:toggle_favourite_developer' developer.pk %}" class="object-card-content-favourite">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" fill="#723CD9"/>
-                        </svg>
-                    </a>
+                    <a href="javascript:void(0)" 
+                    class="object-card-content-favourite {% if developer in request.user.favourite_developers.all %}active{% endif %}"
+                    data-developer-id="{{ developer.id }}"
+                    onclick="toggleFavourite(this)">
+                     {% if developer in request.user.favourite_developers.all %}
+                         <img src="{% static 'assets/icons/favourites-icon.png' %}" alt="" class="favourites-icon-img">
+                     {% else %}
+                         <img src="{% static 'assets/icons/favourites-icon-outline.png' %}" alt="" class="favourites-icon-img">
+                     {% endif %}
+                 </a>
                     <h3 class="object-card-title">{{ developer.company_name }}</h3>
                     <div class="object-card-place">
                         <div class="object-card-place-icon">
@@ -138,7 +143,9 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const objectsSwitch = document.getElementById('favourites_switch-objects');
@@ -160,5 +167,70 @@ document.addEventListener('DOMContentLoaded', function() {
         objectsContent.style.display = 'none';
     });
 });
+
+function toggleFavourite(element) {
+    const developerId = element.getAttribute('data-developer-id');
+    const objectId = element.getAttribute('data-object-id');
+    const isDeveloper = !!developerId;
+    const id = isDeveloper ? developerId : objectId;
+    const url = isDeveloper ? `/users/profile/developers/${id}/toggle-favourite/` : `/users/profile/objects/${id}/toggle-favourite/`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // Обновляем состояние кнопки
+        element.classList.toggle('active');
+        
+        // Обновляем иконку
+        const iconImg = element.querySelector('.favourites-icon-img');
+        if (data.is_favourite) {
+            iconImg.src = "{% static 'assets/icons/favourites-icon.png' %}";
+        } else {
+            iconImg.src = "{% static 'assets/icons/favourites-icon-outline.png' %}";
+        }
+
+        // Если элемент удален из избранного, удаляем карточку
+        if (!data.is_favourite) {
+            const card = element.closest('.person-card, .object-card');
+            if (card) {
+                card.remove();
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error: ' + error.message);
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 </script>
 {% endblock %} 

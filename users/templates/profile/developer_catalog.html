@@ -1,21 +1,21 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
 
-{% block title %}Каталог агентов{% endblock %}
+{% block title %}Каталог застройщиков{% endblock %}
 
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="#">Агенты</a>
+<a href="#">Застройщики</a>
 {% endblock %}
 
 {% block content %}
 <div class="catalog-content">
     <h1 class="catalog-content-title">
-        Каталог агентов
+        Каталог застройщиков
     </h1>
     <div class="estate-search">
-        <h2 class="estate-search-title">Поиск Агентов</h2>
+        <h2 class="estate-search-title">Поиск застройщиков</h2>
         <form action="" method="get" class="catalog-search-form">
             <div class="estate-search-form-items">
                 <div class="estate-search-form-item">
@@ -26,12 +26,12 @@
                 <div class="estate-search-form-item">
                     <p class="estate-search-form-item-subtitle">Поиск по названию</p>
                     <input type="text" name="search" value="{{ request.GET.search }}"
-                        class="input estate-search-form-item-input" placeholder="Введите название агента">
+                        class="input estate-search-form-item-input" placeholder="Введите название застройщика">
                 </div>
             </div>
             <button type="submit" class="platform_button_one catalog-search-form-button">Найти</button>
             {% if request.GET.country or request.GET.search %}
-            <a href="{% url 'users:agent_list' %}" class="platform_button_one catalog-search-form-button"
+            <a href="{% url 'users:developer_list' %}" class="platform_button_one catalog-search-form-button"
                 style="margin-left: 10px;">Сбросить</a>
             {% endif %}
         </form>
@@ -61,40 +61,50 @@
         </div>
     </div>
     <div class="catalog-items">
-        {% for agent in agents %}
+        {% for developer in developers %}
         <div class="person-card">
             <div class="person-card-image">
-                {% if agent.profile_photo %}
-                <img src="{{ agent.profile_photo.url }}" alt="{{ agent.company_name }}"
+                {% if developer.profile_photo %}
+                <img src="{{ developer.profile_photo.url }}" alt="{{ developer.company_name }}"
                     style="width: 209px; height: 209px;">
                 {% else %}
-                <img src="{% static 'images/person-card-img.png' %}" alt="{{ agent.company_name }}"
+                <img src="{% static 'images/person-card-img.png' %}" alt="{{ developer.company_name }}"
                     style="width: 209px; height: 209px;">
                 {% endif %}
             </div>
             <div class="person-card-content">
-                <a href="" class="object-card-content-favourite">
+                <a href="javascript:void(0)"
+                    class="object-card-content-favourite {% if developer in request.user.favourite_developers.all %}active{% endif %}"
+                    data-developer-id="{{ developer.id }}" onclick="toggleFavourite(this)">
+                    {% if developer in request.user.favourite_developers.all %}
+                    <img src="{% static 'assets/icons/favourites-icon.png' %}" alt="" class="favourites-icon-img">
+                    {% else %}
+                    <img src="{% static 'assets/icons/favourites-icon-outline.png' %}" alt=""
+                        class="favourites-icon-img">
+                    {% endif %}
                 </a>
-                <a href="{% url 'users:agent_detail' agent.id %}">
-                    <h3 class="object-card-title">{{ agent.company_name }}</h3>
+                <a href="{% url 'users:developer_detail' developer.id %}">
+                    <h3 class="object-card-title">{{ developer.company_name }}</h3>
                 </a>
                 <div class="object-card-place">
                     <div class="object-card-place-icon">
                         <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
                     </div>
-                    <div class="object-card-place-text">{{ agent.country }}, {{ agent.city.name }}</div>
+                    <div class="object-card-place-text">{{ developer.country }}, {{ developer.city.name }}</div>
                 </div>
                 <div class="object-card-info">
                     <div class="object-card-info-item">
                         <div class="object-card-info-item-icon">
                             <img src="{% static 'assets/icons/construction-icon.svg' %}" alt="">
                         </div>
-                        <p class="object-card-info-item-text">{{ agent.date_joined|date:"d.m.Y" }}</p>
+                        <p class="object-card-info-item-text">{{ developer.date_joined|date:"d.m.Y" }}</p>
                     </div>
                 </div>
+
                 <p class="object-card-description">
-                    {{ agent.description|truncatewords:30 }}
+                    {{ developer.description|truncatewords:30 }}
                 </p>
+
             </div>
         </div>
         {% endfor %}
@@ -122,7 +132,9 @@
     </div>
     {% endif %}
 </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const sortDropdown = document.querySelector('.catalog-sort-dropdown');
@@ -152,5 +164,55 @@
             }
         });
     });
+
+    // Функция для добавления/удаления из избранного
+    function toggleFavourite(element) {
+        const developerId = element.dataset.developerId;
+        const isActive = element.classList.contains('active');
+        
+        fetch(`/users/profile/developers/${developerId}/toggle-favourite/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.is_favourite) {
+                element.classList.add('active');
+                element.querySelector('img').src = "{% static 'assets/icons/favourites-icon.png' %}";
+            } else {
+                element.classList.remove('active');
+                element.querySelector('img').src = "{% static 'assets/icons/favourites-icon-outline.png' %}";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Функция для получения CSRF токена
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 </script>
 {% endblock %}

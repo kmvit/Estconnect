@@ -1,0 +1,297 @@
+{% extends 'profile/base_profile.html' %}
+{% load static %}
+
+{% block title %}{{ developer.company_name }}{% endblock %}
+
+{% block breadcrumb %}
+<a href="{% url 'pages:index' %}">Estconnect</a>
+<span class="separator"> > </span>
+<a href="{% url 'users:developer_list' %}">Застройщики</a>
+<span class="separator"> > </span>
+<a href="#">{{ developer.company_name }}</a>
+{% endblock %}
+
+{% block content %}
+<div class="object_main-screen">
+    <div class="object_main-screen-header">
+        <h1 class="platform_h1">{{ developer.company_name }}</h1>
+        <div class="object-card-place">
+            <div class="object-card-place-icon">
+                <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+            </div>
+            <div class="object-card-place-text">{{ developer.country }}, {{ developer.city.name }}</div>
+        </div>
+    </div>
+    <div class="stroy-content">
+        <div class="stroy-content-main-screen">
+            {% if developer.image %}
+            <img src="{{ developer.image.url }}" alt="{{ developer.company_name }}">
+            {% else %}
+            <img src="{% static 'images/stroy-content-banner-img.png' %}" alt="{{ developer.company_name }}">
+            {% endif %}
+            <div class="stroy-content-logo">
+                {% if developer.profile_photo %}
+                <img src="{{ developer.profile_photo.url }}" alt="{{ developer.company_name }}">
+                {% else %}
+                <img src="{% static 'images/stroy-content-logo.png' %}" alt="{{ developer.company_name }}">
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="stroy-content-information">
+            <div class="stroy-content-information-about">
+                <div class="stroy-content-information-about-item">
+                    <div class="stroy-content-information-about-item-icon">
+                        <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-1.svg' %}" alt="">
+                    </div>
+                    <div class="stroy-content-information-about-item-container">
+                        <p class="stroy-content-information-about-item-title">Тип компании</p>
+                        <p class="stroy-content-information-about-item-text">Застройщик</p>
+                    </div>
+                </div>
+                <div class="stroy-content-information-about-item">
+                    <div class="stroy-content-information-about-item-icon">
+                        <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-2.svg' %}" alt="">
+                    </div>
+                    <div class="stroy-content-information-about-item-container">
+                        <p class="stroy-content-information-about-item-title">На платформе</p>
+                        <p class="stroy-content-information-about-item-text">{{ developer.date_joined|date:"d.m.Y" }}
+                        </p>
+                    </div>
+                </div>
+                {% if developer.website %}
+                <div class="stroy-content-information-about-item">
+                    <div class="stroy-content-information-about-item-icon">
+                        <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-3.svg' %}" alt="">
+                    </div>
+                    <div class="stroy-content-information-about-item-container">
+                        <p class="stroy-content-information-about-item-title">Веб-сайт</p>
+                        <p class="stroy-content-information-about-item-text">{{ developer.website }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="stroy-content-information-about-item">
+                    <div class="stroy-content-information-about-item-icon">
+                        <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-4.svg' %}" alt="">
+                    </div>
+                    <div class="stroy-content-information-about-item-container">
+                        <p class="stroy-content-information-about-item-title">Язык общения</p>
+                        <p class="stroy-content-information-about-item-text">{{ developer.languages }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="stroy-content-information-jobTime">
+                <p class="stroy-content-information-jobTime-title">
+                    Время работы
+                </p>
+                <div class="stroy-content-information-jobTime-isOpen">
+                    <div class="stroy-content-information-jobTime-isOpen-icon" style="background:#20BD00"></div>
+                    <p class="stroy-content-information-jobTime-isOpen-text">Открыто сейчас</p>
+                </div>
+                <div class="stroy-content-information-jobTime-days">
+                    <p class="stroy-content-information-jobTime-days-item">
+                        Понедельник - пятница <span>09:30 - 20:30</span>
+                    </p>
+                    <p class="stroy-content-information-jobTime-days-item">
+                        Суббота <span>10:00 - 17:30</span>
+                    </p>
+                    <p class="stroy-content-information-jobTime-days-item">
+                        Воскресенье <span>выходной</span>
+                    </p>
+                </div>
+            </div>
+            <div class="stroy-content-information-socials">
+                <p class="stroy-content-information-socials-title">
+                    Соц. сети
+                </p>
+                <div class="stroy-content-information-socials-items">
+                    <a href="#" class="stroy-content-information-socials-item">
+                        <img src="{% static 'assets/icons/tg-icon-blue.svg' %}" alt="">
+                    </a>
+                    <a href="#" class="stroy-content-information-socials-item">
+                        <img src="{% static 'assets/icons/vk-icon-blue.svg' %}" alt="">
+                    </a>
+                    <a href="#" class="stroy-content-information-socials-item">
+                        <img src="{% static 'assets/icons/inst-icon-blue.svg' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="stroy-content-describe">
+            <div class="stroy-content-block-header">
+                <h4 class="stroy-content-block-title">Описание</h4>
+            </div>
+            <p class="stroy-content-describe-text">
+                {{ developer.description }}
+            </p>
+        </div>
+        <div class="stroy-content-objects">
+            <div class="stroy-content-block-header">
+                <h4 class="stroy-content-block-title">Объекты застройщика</h4>
+
+            </div>
+            <div class="stroy-content-objects-items">
+                {% for object in developer.construction_objects.all|slice:":4" %}
+                <div class="object-card">
+                    <div class="object-card-image">
+                        <div class="object-card-image-photo-count">
+                            <div class="object-card-image-photo-count-icon">
+                                <img src="{% static 'assets/icons/photo-icon.svg' %}" alt="">
+                            </div>
+                            <p class="object-card-image-photo-text">{{ object.images.count }}</p>
+                        </div>
+                        {% if object.images.first %}
+                        <img src="{{ object.images.first.image.url }}" alt="{{ object.name }}">
+                        {% else %}
+                        <img src="{% static 'images/object-card-img.png' %}" alt="{{ object.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="object-card-content">
+
+                        <h3 class="object-card-title">{{ object.name }}</h3>
+                        <div class="object-card-place">
+                            <div class="object-card-place-icon">
+                                <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                            </div>
+                            <div class="object-card-place-text">{{ object.country }}, {{ object.city.name }}</div>
+                        </div>
+                        <p class="object-card-price">от {{ object.price_per_sqm }} $</p>
+                        <div class="object-card-info">
+                            <div class="object-card-info-item">
+                                <div class="object-card-info-item-icon">
+                                    <img src="{% static 'assets/icons/key-icon.svg' %}" alt="">
+                                </div>
+                                <p class="object-card-info-item-text">{{ object.completion_date|date:"Y" }}</p>
+                            </div>
+                            <div class="object-card-info-item">
+                                <div class="object-card-info-item-icon">
+                                    <img src="{% static 'assets/icons/ladder-icon.svg' %}" alt="">
+                                </div>
+                                <p class="object-card-info-item-text">{{ object.floors }}</p>
+                            </div>
+                        </div>
+                        <p class="object-card-description">
+                            {{ object.description|truncatewords:30 }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="stroy-content-devs">
+            <div class="stroy-content-block-header">
+                <h4 class="stroy-content-block-title">Другие застройщики</h4>
+            </div>
+            <div class="stroy-content-devs-items">
+                {% for developer in developers %}
+                <div class="person-card">
+                    <div class="person-card-image">
+                        {% if developer.profile_photo %}
+                        <img src="{{ developer.profile_photo.url }}" alt="{{ developer.company_name }}"
+                            style="width: 209px; height: 209px;">
+                        {% else %}
+                        <img src="{% static 'images/person-card-img.png' %}" alt="{{ developer.company_name }}"
+                            style="width: 209px; height: 209px;">
+                        {% endif %}
+                    </div>
+                    <div class="person-card-content">
+                        <a href="" class="object-card-content-favourite">
+                        </a>
+                        <a href="{% url 'users:developer_detail' developer.id %}">
+                            <h3 class="object-card-title">{{ developer.company_name }}</h3>
+                        </a>
+                        <div class="object-card-place">
+                            <div class="object-card-place-icon">
+                                <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
+                            </div>
+                            <div class="object-card-place-text">{{ developer.country }}, {{ developer.city.name }}</div>
+                        </div>
+                        <div class="object-card-info">
+                            <div class="object-card-info-item">
+                                <div class="object-card-info-item-icon">
+                                    <img src="{% static 'assets/icons/construction-icon.svg' %}" alt="">
+                                </div>
+                                <p class="object-card-info-item-text">{{ developer.date_joined|date:"d.m.Y" }}</p>
+                            </div>
+                        </div>
+                        <p class="object-card-description">
+                            {{ developer.description|truncatewords:30 }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Обработка добавления/удаления из избранного для застройщика
+        const developerFavouriteBtn = document.querySelector('.stroy-content-favourite');
+        if (developerFavouriteBtn) {
+            developerFavouriteBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const developerId = this.dataset.developerId;
+                fetch(`/users/profile/developers/${developerId}/toggle-favourite/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_favourite) {
+                            this.querySelector('img').src = "{% static 'assets/icons/favourite-icon-active.svg' %}";
+                        } else {
+                            this.querySelector('img').src = "{% static 'assets/icons/favourite-icon.svg' %}";
+                        }
+                    });
+            });
+        }
+
+        // Обработка добавления/удаления из избранного для объектов
+        const objectFavouriteBtns = document.querySelectorAll('.object-card-content-favourite');
+        objectFavouriteBtns.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const objectId = this.dataset.objectId;
+                fetch(`/users/profile/objects/${objectId}/toggle-favourite/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_favourite) {
+                            this.querySelector('img').src = "{% static 'assets/icons/favourite-icon-active.svg' %}";
+                        } else {
+                            this.querySelector('img').src = "{% static 'assets/icons/favourite-icon.svg' %}";
+                        }
+                    });
+            });
+        });
+    });
+
+    // Функция для получения CSRF токена
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}
+{% endblock %}
