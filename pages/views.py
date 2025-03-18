@@ -10,24 +10,19 @@ def index(request):
     return render(request, 'pages/index.html')
 
 
-def page_two(request):
-    """Страница с информацией о делегировании задач"""
+def about_us(request):
+    """О продукте"""
+    return render(request, 'pages/page-five.html')
+
+
+def about_product(request):
+    """Страница 'Почему EstConnect?'"""
     return render(request, 'pages/page-two.html')
 
 
-def page_three(request):
-    """Страница 'Почему EstConnect?'"""
-    return render(request, 'pages/page-three.html')
-
-
-def page_four(request):
+def why_we(request):
     """Страница о преимуществах сотрудничества"""
     return render(request, 'pages/page-four.html')
-
-
-def page_five(request):
-    """Страница с преимуществами и слайдером"""
-    return render(request, 'pages/page-five.html')
 
 
 def sign_in(request):
