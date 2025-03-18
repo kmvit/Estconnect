@@ -20,13 +20,14 @@ urlpatterns = [
     path('profile/objects/<int:pk>/delete/', views.ProfileObjectsView.as_view(), name='object_delete'),
     path('profile/objects/<int:pk>/toggle-favourite/', views.toggle_favourite, name='toggle_favourite'),
     path('profile/favourites/', views.ProfileObjectsView.as_view(), name='favourites'),
+    path('profile/objects/registration/', views.ObjectRegistrationView.as_view(), name='object_registration'),
     
     # Застройщики
-    path('developers/', views.DeveloperListView.as_view(), name='developer_list'),
-    path('developers/<int:pk>/', views.DeveloperDetailView.as_view(), name='developer_detail'),
+    path('profile/developers/', views.DeveloperCatalogView.as_view(), name='developer_list'),
+    path('profile/developers/<int:pk>/', views.DeveloperDetailView.as_view(), name='developer_detail'),
     path('profile/developers/<int:pk>/toggle-favourite/', views.toggle_favourite_developer, name='toggle_favourite_developer'),
     
     # Агенты
-    path('agents/', views.AgentListView.as_view(), name='agent_list'),
-    path('agents/<int:pk>/', views.AgentDetailView.as_view(), name='agent_detail'),
+    path('profile/agents/', views.AgentListView.as_view(), name='agent_list'),
+    path('profile/agents/<int:pk>/', views.AgentDetailView.as_view(), name='agent_detail'),
 ]
