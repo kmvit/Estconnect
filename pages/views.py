@@ -24,6 +24,10 @@ def why_we(request):
     """Страница о преимуществах сотрудничества"""
     return render(request, 'pages/page-four.html')
 
+def contacts(request):
+    """Страница контактов"""
+    return render(request, 'pages/contacts.html')
+
 
 def sign_in(request):
     """Страница выбора типа входа"""

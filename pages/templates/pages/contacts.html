@@ -1,0 +1,142 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+<div class="breadcrumb-content">
+    <a href="{% url 'users:profile' %}">Главная</a>
+    <span>/</span>
+    <span>Контакты</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="contacts-page">
+        <h2 class="text-box-title">Офисы Estconnect</h2>
+        <div class="contacts-container">
+            <!-- Левая колонка с контактами -->
+        <div class="contacts-info">
+            <!-- Первый блок контактов -->
+            <div class="contact-block">
+                <h3>Главный офис</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Страна:</span>
+                        <span class="contact-value">Эстония</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Адрес:</span>
+                        <span class="contact-value">ул. Примерная, 123, Таллинн</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-value">+372 1234 5678</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value">info@example.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Второй блок контактов -->
+            <div class="contact-block">
+                <h3>Региональный офис</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Страна:</span>
+                        <span class="contact-value">Эстония</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Адрес:</span>
+                        <span class="contact-value">пр. Деловой, 45, Тарту</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-value">+372 8765 4321</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value">tartu@example.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Третий блок контактов -->
+            <div class="contact-block">
+                <h3>Поддержка</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Страна:</span>
+                        <span class="contact-value">Эстония</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Адрес:</span>
+                        <span class="contact-value">ул. Техническая, 67, Нарва</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-value">+372 2468 1357</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Email:</span>
+                        <span class="contact-value">support@example.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка с картой -->
+        <div class="contacts-map">
+                <div id="map" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=ebfaa2bc-030a-4956-bcab-79036adf117f&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+        var myMap = new ymaps.Map("map", {
+            center: [59.436962, 24.753574], // Координаты центра карты (Таллинн)
+            zoom: 10,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+
+        // Добавляем метки для каждого офиса
+        var offices = [
+            {
+                name: 'Главный офис',
+                coords: [59.436962, 24.753574],
+                address: 'ул. Примерная, 123, Таллинн'
+            },
+            {
+                name: 'Региональный офис',
+                coords: [58.377625, 26.729006],
+                address: 'пр. Деловой, 45, Тарту'
+            },
+            {
+                name: 'Поддержка',
+                coords: [59.377625, 28.190277],
+                address: 'ул. Техническая, 67, Нарва'
+            }
+        ];
+
+        offices.forEach(function(office) {
+            var placemark = new ymaps.Placemark(office.coords, {
+                balloonContent: '<strong>' + office.name + '</strong><br>' + office.address
+            });
+            myMap.geoObjects.add(placemark);
+        });
+    }
+</script>
+{% endblock %} 

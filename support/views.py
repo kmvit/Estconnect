@@ -86,6 +86,7 @@ class SupportViewSet(LoginRequiredMixin, View):
         SupportMessage.objects.create(
             ticket=ticket,
             sender=request.user,
+            sender_type='creator',
             message=message_text
         )
             
@@ -101,6 +102,11 @@ class SupportViewSet(LoginRequiredMixin, View):
             message = form.save(commit=False)
             message.ticket = ticket
             message.sender = request.user
+            # Определяем тип отправителя
+            if request.user == ticket.creator:
+                message.sender_type = 'creator'
+            elif request.user == ticket.manager:
+                message.sender_type = 'manager'
             message.save()
             messages.success(request, 'Сообщение отправлено')
         else:

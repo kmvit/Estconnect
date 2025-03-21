@@ -2,6 +2,7 @@ import re
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 from .models import CustomUser
 from locations.models import Country
 
@@ -313,4 +314,41 @@ class EstateSearchForm(forms.Form):
             'style': 'display: none;'
         }),
         label='Единица измерения'
+    )
+
+
+class InvoiceForm(forms.Form):
+    """
+    Форма для создания счета
+    """
+    COUNTRY_CHOICES = [
+        ('thailand', _('Таиланд')),
+        ('vietnam', _('Вьетнам')),
+        ('cambodia', _('Камбоджа')),
+        ('indonesia', _('Индонезия')),
+        ('malaysia', _('Малайзия')),
+    ]
+
+    PAYMENT_METHOD_CHOICES = [
+        ('bank_transfer', _('Банковский перевод')),
+        ('credit_card', _('Кредитная карта')),
+        ('crypto', _('Криптовалюта')),
+    ]
+
+    country = forms.ChoiceField(
+        choices=COUNTRY_CHOICES,
+        label=_('Страна'),
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    payment_method = forms.ChoiceField(
+        choices=PAYMENT_METHOD_CHOICES,
+        label=_('Способ оплаты'),
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    invoice_email = forms.EmailField(
+        label=_('Email для счета'),
+        widget=forms.EmailInput(attrs={
+            'class': 'input form-control',
+            'placeholder': 'Введите email для счета'
+        })
     )
