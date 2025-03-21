@@ -54,6 +54,11 @@ class SupportTicket(models.Model):
 
 
 class SupportMessage(models.Model):
+    SENDER_TYPE_CHOICES = [
+        ('creator', 'Создатель'),
+        ('manager', 'Менеджер'),
+    ]
+
     ticket = models.ForeignKey(
         SupportTicket,
         on_delete=models.CASCADE,
@@ -65,6 +70,12 @@ class SupportMessage(models.Model):
         on_delete=models.CASCADE,
         related_name='sent_messages',
         verbose_name='Отправитель'
+    )
+    sender_type = models.CharField(
+        'Тип отправителя',
+        max_length=10,
+        choices=SENDER_TYPE_CHOICES,
+        default='creator'
     )
     message = models.TextField('Сообщение')
     created_at = models.DateTimeField('Дата отправки', auto_now_add=True)

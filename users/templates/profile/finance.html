@@ -1,0 +1,146 @@
+{% extends "profile/base_profile.html" %}
+{% load static %}
+{% block content %}
+<nav class="breadcrumb">
+    <a href="{% url 'pages:index' %}">Estconnect</a>
+    <span class="separator"> &gt; </span>
+    <a href="{% url 'users:profile' %}">Профиль</a>
+    <span class="separator"> &gt; </span>
+    <a href="{% url 'users:profile_finance' %}">Финансы</a>
+</nav>
+<h1 class="catalog-content-title">
+    Финансы
+</h1>
+<div class="finance_main-screen">
+    <div class="finance_main-screen-currentBalance-wrapper">
+        <p class="finance_main-screen-currentBalance">{{ user.balance|default:"0" }} $</p>
+        <p class="finance_main-screen-currentBalance-text">Текущий баланс</p>
+    </div>
+    <div class="finance_main-screen-subscription-wrapper">
+        <p class="finance_main-screen-subscription-text">Действие подписки</p>
+        {% if subscription %}
+        <p class="finance_main-screen-subscription">{{ subscription.days_left }} дней</p>
+        <a href="{% url 'subscriptions:extend' %}"
+            class="platform_button_one finance_main-screen-subscription-button">Продлить</a>
+        {% else %}
+        <p class="finance_main-screen-subscription">Нет активной подписки</p>
+        <a href="{% url 'subscriptions:plan_list' %}"
+            class="platform_button_one finance_main-screen-subscription-button">Подписаться</a>
+        {% endif %}
+    </div>
+</div>
+<div class="finance_operations">
+    <div class="finance_operations-header">
+        <p class="finance_operations-title">История операций</p>
+    </div>
+    <div class="finance_operations-rows">
+        <div class="finance_operations-row finance_operations-row-header">
+            <div class="finance_operation finance_operation-date">Дата и время операции</div>
+            <div class="finance_operation finance_operation-type">Тип операции</div>
+            <div class="finance_operation finance_operation-sum">Сумма операции</div>
+            <div class="finance_operation finance_operation-describe">Описание</div>
+            <div class="finance_operation finance_operation-status">Статус</div>
+        </div>
+        <div class="line-rows"></div>
+        {% for operation in operations %}
+        <div class="finance_operations-row">
+            <div class="finance_operation finance_operation-date">{{ operation.created_at|date:"d.m.Y H:i" }}</div>
+            <div class="finance_operation finance_operation-type">{{ operation.get_operation_type_display }}</div>
+            <div class="finance_operation finance_operation-sum">{{ operation.amount }}$</div>
+            <div class="finance_operation finance_operation-describe">{{ operation.description }}</div>
+            <div class="finance_operation finance_operation-status">{{ operation.get_status_display }}</div>
+        </div>
+        {% empty %}
+        <div class="finance_operations-row">
+            <div class="finance_operation" style="text-align: center; grid-column: 1 / -1;">
+                Нет операций
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="pricingPlans finance_pricingPlans">
+    <h3 class="text-box pricingPlans-title">Доступные тарифы</h3>
+    <div class="pricingPlans-items">
+        {% for plan in plans %}
+        <div class="pricingPlans-item finance_pricingPlans-item">
+            <div class="">
+                <p class="pricingPlans-item-title">{{ plan.name }}</p>
+                <p class="pricingPlans-item-price">{{ plan.price }}$</p>
+                <p class="pricingPlans-item-text">{{ plan.description }}</p>
+            </div>
+            <a href="{% url 'subscriptions:create' plan.id %}" class="button pricingPlans-button">Подключить</a>
+        </div>
+        {% empty %}
+        <div class="pricingPlans-item finance_pricingPlans-item">
+            <div class="">
+                <p class="pricingPlans-item-title">Базовый тариф</p>
+                <p class="pricingPlans-item-price">50$</p>
+                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+            </div>
+            <button class="button pricingPlans-button">Подключить</button>
+        </div>
+        <div class="pricingPlans-item finance_pricingPlans-item">
+            <div class="">
+                <p class="pricingPlans-item-title">Расширенный с Due diligence</p>
+                <p class="pricingPlans-item-price">100$</p>
+                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum&nbsp;is simply dummy text of the </p>
+            </div>
+            <button class="button pricingPlans-button">Подключить</button>
+        </div>
+        <div class="pricingPlans-item finance_pricingPlans-item">
+            <div class="">
+                <p class="pricingPlans-item-title">Партнерский тариф</p>
+                <p class="pricingPlans-item-price">150$</p>
+                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum&nbsp;is simply dummy text of the Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem</p>
+            </div>
+            <button class="button pricingPlans-button">Подключить</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<form action="{% url 'users:profile_finance' %}" method="post" class="account-form">
+    {% csrf_token %}
+    <div class="account-form-header">
+        <img src="{% static 'assets/icons/account-icon.svg' %}" alt="">
+        <p class="finance_operations-title">Формирование счета</p>
+    </div>
+    <div class="account-form-items">
+        <div class="estate-search-form-item">
+            <p class="estate-search-form-item-subtitle">Введите страну</p>
+            <div class="accountCountry-dropdown search-dropdown estate-search-form-item-price-item">
+                <div class="accountCountry-dropdown-button-wrapper search-dropdown-button-wrapper">
+                    <span class="accountCountry-dropdown-button search-dropdown-button">
+                        {{ form.country.value|default:"Выберите страну" }}
+                    </span>
+                    <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="search-dropdown-icon">
+                </div>
+                <div class="accountCountry-dropdown-content search-dropdown-content" style="display: none;">
+                    {{ form.country }}
+                </div>
+            </div>
+        </div>
+        <div class="estate-search-form-item">
+            <p class="estate-search-form-item-subtitle">Введите способ оплаты</p>
+            <div class="paymentMethod-dropdown search-dropdown estate-search-form-item-price-item">
+                <div class="paymentMethod-dropdown-button-wrapper search-dropdown-button-wrapper">
+                    <span class="paymentMethod-dropdown-button search-dropdown-button">
+                        {{ form.payment_method.value|default:"Выберите способ оплаты" }}
+                    </span>
+                    <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="search-dropdown-icon">
+                </div>
+                <div class="paymentMethod-dropdown-content search-dropdown-content" style="display: none;">
+                    {{ form.payment_method }}
+                </div>
+            </div>
+        </div>
+        <div class="estate-search-form-item">
+            <p class="estate-search-form-item-subtitle">Куда направить счет</p>
+            <div class="estate-search-form-item-price-item">
+                {{ form.invoice_email }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="account-form-button platform_button_one">Отправить</button>
+</form>
+{% endblock %}

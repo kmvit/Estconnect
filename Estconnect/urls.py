@@ -12,6 +12,7 @@ urlpatterns = [
     path('developers/', include('developers.urls')),
     # Пользовательские маршруты
     path('support/', include('support.urls')),
+    path('subscriptions/', include('subscriptions.urls')),  # Маршруты подписок
     path('', include('pages.urls')),  # Подключение маршрутов страниц
 ]
 # Подключение медиафайлов в режиме разработки

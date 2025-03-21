@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'locations',
     'developers',
     'support',
-
+    'subscriptions',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'Estconnect.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'pages.context_processors.menu_pages',
                 'pages.context_processors.site_settings',
-                # Добавленный контекст-процессор
             ],
         },
     },

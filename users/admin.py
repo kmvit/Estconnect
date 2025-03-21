@@ -25,7 +25,6 @@ class СamAdminSite(admin.AdminSite):
 cam_admin_site = СamAdminSite(name='cam_admin')
 
 
-# Админка для пользователей (агенты и застройщики)
 @admin.register(CustomUser, site=cam_admin_site)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
@@ -71,36 +70,62 @@ class UserAdmin(admin.ModelAdmin):
 
 
 # Обращения (КАМ-менеджер может назначать себя)
-@admin.register(SupportTicket, site=cam_admin_site)
-class SupportTicketAdmin(admin.ModelAdmin):
-    list_display = ('category', 'status', 'creator', 'manager', 'created_at')
-    list_filter = ('status', 'category')
-    search_fields = ('creator__username', 'manager__username')
-    ordering = ['-created_at']
+class SupportMessageInline(admin.TabularInline):
+    model = SupportMessage
+    extra = 0
+    readonly_fields = ('sender_type', 'sender')
+    fields = ('sender', 'sender_type', 'message')
 
     def save_model(self, request, obj, form, change):
-        """
-        Если КАМ-менеджер отвечает на обращение, он автоматически назначается как менеджер.
-        """
-        if not obj.manager and request.user.role == 'admin':
-            obj.manager = request.user
+        if not change:  # Если это создание нового сообщения
+            # Получаем текущий тикет
+            ticket_id = request.resolver_match.kwargs.get('object_id')
+            if ticket_id:
+                ticket = SupportTicket.objects.get(id=ticket_id)
+                # Устанавливаем отправителя как менеджера тикета
+                if ticket.manager:
+                    obj.sender = ticket.manager
+                    obj.sender_type = 'manager'
+                else:
+                    # Если менеджер не назначен, используем текущего пользователя
+                    obj.sender = request.user
+                    obj.sender_type = 'creator'
         super().save_model(request, obj, form, change)
 
+@admin.register(SupportTicket, site=cam_admin_site)
+class SupportTicketAdmin(admin.ModelAdmin):
+    list_display = ('category', 'creator', 'manager', 'status', 'created_at', 'updated_at')
+    list_filter = ('status',)
+    search_fields = ('category', 'creator__username', 'manager__username')
+    inlines = [SupportMessageInline]
+    readonly_fields = ('creator',)
 
-# Сообщения в обращениях
-@admin.register(SupportMessage, site=cam_admin_site)
-class SupportMessageAdmin(admin.ModelAdmin):
-    list_display = ('ticket', 'sender', 'created_at')
-    search_fields = ('sender__username', 'ticket__id')
-    ordering = ['created_at']
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "manager":
+            kwargs["queryset"] = CustomUser.objects.filter(role='admin')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        if not change:  # Если это создание нового объекта
+            obj.creator = request.user
+        super().save_model(request, obj, form, change)
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for instance in instances:
+            if isinstance(instance, SupportMessage):
+                instance.sender = form.instance.manager
+                instance.sender_type = 'manager'
+        formset.save()
+
 
 
 # Раздел застройщиков
 @admin.register(ConstructionObject, site=cam_admin_site)
 class ConstructionObjectAdmin(admin.ModelAdmin):
-    list_display = ('address', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
+    list_display = ('name', 'developer', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
     list_filter = ('property_type', 'comfort_type', 'project_status', 'ownership_type', 'is_published')
-    search_fields = ('address', 'city', 'district')
+    search_fields = ('name', 'city', 'district')
     inlines = [ConstructionObjectImageInline]
     date_hierarchy = 'created_at'
     list_per_page = 20

@@ -45,8 +45,8 @@
         <div class="auth-cta-content">
             <h3 class="auth-cta-title">С нами продавать недвижимость просто!</h3>
             <div class="auth-cta-buttons">
-                <button class="button auth-cta-button">Вход</button>
-                <button class="button auth-cta-button">Регистрация</button>
+                <a href="{% url 'users:login' %}" class="button auth-cta-button">Вход</a>
+                <a href="{% url 'users:register' %}" class="button auth-cta-button">Регистрация</a>
             </div>
         </div>
     </div>

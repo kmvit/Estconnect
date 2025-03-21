@@ -10,13 +10,15 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from developers.forms import ConstructionObjectForm
 from developers.models import ConstructionObject, ConstructionObjectImage
 from developers.views import ConstructionObjectViewSet
 import locations
-from .forms import CustomUserCreationForm, CustomLoginForm, UserProfileForm, EstateSearchForm
+from .forms import CustomUserCreationForm, CustomLoginForm, UserProfileForm, EstateSearchForm, InvoiceForm
 from .models import CustomUser, UserActivityLog
 from locations.models import Country, City, District
+from subscriptions.models import Subscription, SubscriptionPlan, FinancialOperation
 
 User = get_user_model()
 
@@ -551,3 +553,49 @@ class DeveloperDetailView(LoginRequiredMixin, DetailView):
         developers = self.get_queryset().exclude(id=self.kwargs['pk'])
         context['developers'] = developers
         return context
+
+
+class ProfileFinanceView(LoginRequiredMixin, View):
+    """
+    Представление для страницы финансов в профиле:
+    - Отображение текущего баланса
+    - Информация о подписке
+    - История финансовых операций
+    - Доступные тарифы
+    - Форма создания счета
+    """
+    template_name = 'profile/finance.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        subscription = Subscription.objects.filter(
+            user=user,
+            is_active=True
+        ).first()
+        
+        if subscription:
+            subscription.days_left = (subscription.end_date - timezone.now()).days
+        
+        return {
+            'user': user,
+            'subscription': subscription,
+            'operations': FinancialOperation.objects.filter(user=user)[:10],
+            'plans': SubscriptionPlan.objects.filter(is_active=True),
+            'form': InvoiceForm()
+        }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            # TODO: Добавить логику создания счета
+            messages.success(request, "Счет успешно создан")
+            return redirect('users:profile_finance')
+        else:
+            messages.error(request, "Ошибка при создании счета")
+        
+        context = self.get_context_data()
+        context['form'] = form
+        return render(request, self.template_name, context)

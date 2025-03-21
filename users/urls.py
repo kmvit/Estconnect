@@ -11,6 +11,7 @@ urlpatterns = [
     # Профиль пользователя
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('profile/<int:id>/', views.admin_profile_view, name='admin_profile_view'),
+    path('profile/finance/', views.ProfileFinanceView.as_view(), name='profile_finance'),
     
     # Объекты в профиле застройщика
     path('profile/objects/', views.ProfileObjectsView.as_view(), name='object_list'),
