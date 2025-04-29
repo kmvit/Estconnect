@@ -258,4 +258,28 @@
     .ticket-info {
         grid-template-columns: 1fr;
     }
+}
+
+.support-item-block {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.support-item {
+    max-width: 70%;
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 0;
+}
+
+.support-item.user-support {
+    margin-left: auto;
+    background-color: #723CD9;
+    color: white;
+}
+
+.support-item.operator-support {
+    margin-right: auto;
+    background-color: #F2F2F7;
+    color: #1C1C1E;
 } 
