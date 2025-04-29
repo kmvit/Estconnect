@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     ROLE_CHOICES = [
         ('developer', 'Застройщик'),
         ('agent', 'Агент'),
-        ('admin', 'CAM-менеджер'),
+        ('admin', 'КАМ-менеджер'),
     ]
 
     LANGUAGE_CHOICES = [

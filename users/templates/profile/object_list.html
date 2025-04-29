@@ -142,7 +142,7 @@
 
     <div class="katalog_objekt-items">
         {% for object in construction_objects %}
-        <div class="object-card">
+        <div class="object-card" data-object-id="{{ object.id }}">
             <div class="object-card-image">
                 <div class="object-card-image-photo-count">
                     <div class="object-card-image-photo-count-icon">
@@ -214,6 +214,9 @@
 {% block extra_js %}
 <script src="https://api-maps.yandex.ru/v3/?apikey=ebfaa2bc-030a-4956-bcab-79036adf117f&lang=ru_RU"></script>
 <script>
+    // Глобальная переменная для маркеров
+    let markers = [];
+
     // Обработка выпадающих списков
     document.addEventListener('DOMContentLoaded', function () {
         // Обработка расширенного поиска
@@ -343,8 +346,6 @@
     });
 
     // Инициализация карты
-    initMap();
-
     async function initMap() {
         await ymaps3.ready;
 
@@ -385,63 +386,70 @@
             }
         }
 
-        // Создаем массив маркеров
-        const markers = [];
+        // Очищаем массив маркеров перед добавлением новых
+        markers = [];
+
+        // Создаем массив промисов для геокодирования
+        const geocodingPromises = [];
 
         {% for object in construction_objects %}
         {% if object.address %}
-        try {
-            const address = "{{ object.address }}";
-            const coords = await geocodeAddress(address);
+        geocodingPromises.push(
+            (async () => {
+                try {
+                    const address = "{{ object.address }}";
+                    const coords = await geocodeAddress(address);
 
-            if (coords) {
-                console.log('Добавляем маркер для объекта:', {
-                    name: "{{ object.name }}",
-                    address: address,
-                    coords: coords
-                });
+                    if (coords) {
+                        const markerElement = document.createElement('div');
+                        markerElement.className = 'map-marker';
+                        markerElement.setAttribute('data-object-id', "{{ object.id }}");
+                        markerElement.innerHTML = `
+                            <div class="marker-content">
+                                <div class="marker-icon">📍</div>
+                                <div class="marker-title">{{ object.name }}</div>
+                            </div>
+                        `;
 
-                const markerElement = document.createElement('div');
-                markerElement.className = 'map-marker';
-                markerElement.innerHTML = `
-                        <div style="
-                            background: #723CD9;
-                            color: white;
-                            padding: 8px 12px;
-                            border-radius: 8px;
-                            font-size: 14px;
-                            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                            white-space: nowrap;
-                            z-index: 1000;
-                        ">
-                            {{ object.name }}
-                        </div>
-                    `;
+                        const marker = new YMapMarker(
+                            {
+                                coordinates: [coords.longitude, coords.latitude],
+                                properties: {
+                                    objectId: "{{ object.id }}",
+                                    name: "{{ object.name }}",
+                                    address: address
+                                }
+                            },
+                            markerElement
+                        );
 
-                const marker = new YMapMarker(
-                    {
-                        coordinates: [coords.longitude, coords.latitude],
-                        draggable: false,
-                        properties: {
-                            name: "{{ object.name }}",
-                            address: address
-                        }
-                    },
-                    markerElement
-                );
+                        markers.push({
+                            marker: marker,
+                            objectId: "{{ object.id }}",
+                            coordinates: [coords.longitude, coords.latitude]
+                        });
 
-                markers.push(marker);
-            }
-        } catch (error) {
-            console.error('Ошибка при создании маркера:', error);
-        }
+                        // Добавляем обработчики событий для маркера
+                        markerElement.addEventListener('mouseenter', () => {
+                            highlightObject("{{ object.id }}");
+                        });
+                        
+                        markerElement.addEventListener('mouseleave', () => {
+                            unhighlightObject("{{ object.id }}");
+                        });
+
+                        map.addChild(marker);
+                    }
+                } catch (error) {
+                    console.error('Ошибка при добавлении маркера:', error);
+                }
+            })()
+        );
         {% endif %}
         {% endfor %}
 
-        // Добавляем все маркеры на карту
-        markers.forEach(marker => {
-            map.addChild(marker);
-        });
+        // Ждем завершения всех геокодирований
+        await Promise.all(geocodingPromises);
 
         // Если есть маркеры, центрируем карту на первом маркере
         if (markers.length > 0) {
@@ -454,6 +462,11 @@
             });
         }
     }
+
+    // Инициализация карты после загрузки DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        initMap();
+    });
 
     function toggleFavourite(element) {
         const objectId = element.dataset.objectId;
@@ -513,5 +526,101 @@
         }
         return cookieValue;
     }
+
+    // Функция подсветки объекта
+    function highlightObject(objectId) {
+        // Подсветка в списке
+        const listItem = document.querySelector(`.object-card[data-object-id="${objectId}"]`);
+        if (listItem) {
+            listItem.classList.add('highlighted');
+        }
+        
+        // Подсветка на карте
+        if (markers && markers.length > 0) {
+            const markerData = markers.find(m => m.objectId === objectId);
+            if (markerData) {
+                const markerElement = document.querySelector(`.map-marker[data-object-id="${objectId}"]`);
+                if (markerElement) {
+                    markerElement.classList.add('highlighted');
+                }
+            }
+        }
+    }
+
+    // Функция снятия подсветки
+    function unhighlightObject(objectId) {
+        // Снятие подсветки в списке
+        const listItem = document.querySelector(`.object-card[data-object-id="${objectId}"]`);
+        if (listItem) {
+            listItem.classList.remove('highlighted');
+        }
+        
+        // Снятие подсветки на карте
+        if (markers && markers.length > 0) {
+            const markerData = markers.find(m => m.objectId === objectId);
+            if (markerData) {
+                const markerElement = document.querySelector(`.map-marker[data-object-id="${objectId}"]`);
+                if (markerElement) {
+                    markerElement.classList.remove('highlighted');
+                }
+            }
+        }
+    }
+
+    // Добавляем обработчики событий для объектов в списке
+    document.querySelectorAll('.object-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const objectId = card.dataset.objectId;
+            highlightObject(objectId);
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            const objectId = card.dataset.objectId;
+            unhighlightObject(objectId);
+        });
+    });
 </script>
+
+<style>
+.object-card.highlighted {
+    background-color: rgba(114, 60, 217, 0.1);
+    border: 1px solid #723CD9;
+    transition: all 0.3s ease;
+}
+
+.map-marker {
+    position: relative;
+    cursor: pointer;
+}
+
+.marker-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+.marker-icon {
+    font-size: 20px;
+}
+
+.marker-title {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.map-marker.highlighted .marker-content {
+    background: #723CD9;
+    color: white;
+}
+
+.map-marker.highlighted .marker-title {
+    color: white;
+}
+</style>
 {% endblock %}
