@@ -86,14 +86,16 @@ class CustomUser(AbstractUser):
         'developers.ConstructionObject',
         related_name='favourited_by_objects',
         blank=True,
-        verbose_name='Избранные объекты'
+        verbose_name='Избранные объекты',
+        db_constraint=False  # Добавляем это
     )
     _favourite_developers = models.ManyToManyField(
-        'users.CustomUser',
+        'self',  # Используем 'self' вместо 'users.CustomUser'
         related_name='favourited_by_users',
         blank=True,
         verbose_name='Избранные застройщики',
-        limit_choices_to={'role': 'developer'}
+        limit_choices_to={'role': 'developer'},
+        symmetrical=False  # Добавляем это
     )
 
     def __str__(self):
