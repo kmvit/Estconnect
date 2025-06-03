@@ -3,6 +3,11 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import translation
+from django.conf import settings
+from django.views.decorators.http import require_POST
+from django.utils.translation import check_for_language
+from django.urls import resolve
 
 
 def index(request):
@@ -65,3 +70,4 @@ def register(request):
         form = UserCreationForm()
     
     return render(request, 'pages/register.html', {'form': form})
+

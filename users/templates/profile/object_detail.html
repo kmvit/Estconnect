@@ -1,5 +1,6 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -14,7 +15,7 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_list' %}">Объекты</a>
+<a href="{% url 'users:object_list' %}">{% trans "Объекты" %}</a>
 <span class="separator"> > </span>
 <a href="{% url 'users:object_detail' object.pk %}">{{ object.name }}</a>
 {% endblock %}
@@ -68,27 +69,27 @@
             <p class="object_main-screen-info-price">от {{ object.price_per_sqm }} ₽/м²</p>
             <div class="object_main-screen-info-list">
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Класс жилья:</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Класс жилья" %}:</p>
                     <p class="object_main-screen-info-list-item-text">{{ object.get_comfort_type_display }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Тип дома:</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Тип дома" %}:</p>
                     <p class="object_main-screen-info-list-item-text">{{ object.get_property_type_display }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Срок сдачи:</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Срок сдачи" %}:</p>
                     <p class="object_main-screen-info-list-item-text">{{ object.completion_date|date:"Y-m-d" }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Парковка:</p>
-                    <p class="object_main-screen-info-list-item-text">{{ object.parking|yesno:"Есть,Нет" }}</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Парковка" %}:</p>
+                    <p class="object_main-screen-info-list-item-text">{{ object.parking|yesno:_("Есть,Нет") }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Этажность:</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Этажность" %}:</p>
                     <p class="object_main-screen-info-list-item-text">{{ object.floors }}</p>
                 </div>
                 <div class="object_main-screen-info-list-item">
-                    <p class="object_main-screen-info-list-item-title">Корпуса:</p>
+                    <p class="object_main-screen-info-list-item-title">{% trans "Корпуса" %}:</p>
                     <p class="object_main-screen-info-list-item-text">1</p>
                 </div>
             </div>
@@ -99,7 +100,7 @@
                         <img src="{% static 'assets/icons/file-icon.svg' %}" alt="">
                     </span>
                     <span class="object_main-screen-info-action-text">
-                        Файлы застройщика
+                        {% trans "Файлы застройщика" %}
                     </span>
                 </a>
                 {% endif %}
@@ -108,7 +109,7 @@
                         <img src="{% static 'assets/icons/procent-icon.svg' %}" alt="">
                     </span>
                     <span class="object_main-screen-info-action-text">
-                        Комиссии
+                        {% trans "Комиссии" %}
                     </span>
                 </a>
                 <a href="#" class="object_main-screen-info-action">
@@ -116,7 +117,7 @@
                         <img src="{% static 'assets/icons/phone-icon.svg' %}" alt="">
                     </span>
                     <span class="object_main-screen-info-action-text">
-                        Контакты
+                        {% trans "Контакты" %}
                     </span>
                 </a>
             </div>
@@ -134,7 +135,7 @@
                         </clipPath>
                     </defs>
                 </svg>
-                <span>Связаться со своим личным менеджером</span>
+                <span>{% trans "Связаться со своим личным менеджером" %}</span>
             </button>
         </div>
     </div>
@@ -142,31 +143,31 @@
 
 <div class="object_information">
     <div class="object_information-location">
-        <h4 class="object_information-title">Местонахождение</h4>
+        <h4 class="object_information-title">{% trans "Местонахождение" %}</h4>
         <div class="object_information-location-items">
             <div class="object_information-location-item">
-                <p class="object_information-location-item-title">Страна</p>
+                <p class="object_information-location-item-title">{% trans "Страна" %}</p>
                 <p class="object_information-location-country">{{ object.country }}</p>
             </div>
             <div class="object_information-location-item">
-                <p class="object_information-location-item-title">Город</p>
+                <p class="object_information-location-item-title">{% trans "Город" %}</p>
                 <p class="object_information-location-country">{{ object.city }}</p>
             </div>
             <div class="object_information-location-item">
-                <p class="object_information-location-item-title">Район</p>
+                <p class="object_information-location-item-title">{% trans "Район" %}</p>
                 <p class="object_information-location-country">{{ object.district }}</p>
             </div>
         </div>
     </div>
     <div class="object_information-char">
-        <h4 class="object_information-title">Характеристики объекта</h4>
+        <h4 class="object_information-title">{% trans "Характеристики объекта" %}</h4>
         <div class="object_information-char-items">
             <div class="object_information-char-item">
                 <div class="object_information-char-item-icon">
                     <img src="{% static 'assets/icons/class-icon.svg' %}" alt="">
                 </div>
                 <div class="object_information-info">
-                    <p class="object_information-char-item-title">Класс</p>
+                    <p class="object_information-char-item-title">{% trans "Класс" %}</p>
                     <p class="object_information-char-item-text">{{ object.get_comfort_type_display }}</p>
                 </div>
             </div>
@@ -175,7 +176,7 @@
                     <img src="{% static 'assets/icons/building-icon.svg' %}" alt="">
                 </div>
                 <div class="object_information-info">
-                    <p class="object_information-char-item-title">Тип строения</p>
+                    <p class="object_information-char-item-title">{% trans "Тип строения" %}</p>
                     <p class="object_information-char-item-text">{{ object.get_property_type_display }}</p>
                 </div>
             </div>
@@ -184,7 +185,7 @@
                     <img src="{% static 'assets/icons/key-icon.svg' %}" alt="">
                 </div>
                 <div class="object_information-info">
-                    <p class="object_information-char-item-title">Год сдачи</p>
+                    <p class="object_information-char-item-title">{% trans "Год сдачи" %}</p>
                     <p class="object_information-char-item-text">{{ object.completion_date|date:"Y" }}</p>
                 </div>
             </div>
@@ -193,22 +194,22 @@
                     <img src="{% static 'assets/icons/ladder-icon.svg' %}" alt="">
                 </div>
                 <div class="object_information-info">
-                    <p class="object_information-char-item-title">Кол-во этажей</p>
+                    <p class="object_information-char-item-title">{% trans "Кол-во этажей" %}</p>
                     <p class="object_information-char-item-text">{{ object.floors }}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="object_information-describe">
-        <h4 class="object_information-title">Описание</h4>
+        <h4 class="object_information-title">{% trans "Описание" %}</h4>
         <p class="object_information-describe-text">
             {{ object.description }}
         </p>
-        <p class="object_information-describe-date">Обновлено: {{ object.updated_at|date:"d.m.Y" }}</p>
+        <p class="object_information-describe-date">{% trans "Обновлено" %}: {{ object.updated_at|date:"d.m.Y" }}</p>
     </div>
     <div class="object_information-locationOnMap">
         <div class="object_information-locationOnMap-header">
-            <h4 class="object_information-title">Местонахождение на карте</h4>
+            <h4 class="object_information-title">{% trans "Местонахождение на карте" %}</h4>
             <div class="object-card-place">
                 <div class="object-card-place-icon">
                     <img src="{% static 'assets/icons/map-icon.svg' %}" alt="">
@@ -223,7 +224,7 @@
 </div>
 
 <div class="object_other">
-    <h4 class="object_other-title">Еще от застройщика</h4>
+    <h4 class="object_other-title">{% trans "Еще от застройщика" %}</h4>
     <div class="object_other-items">
         {% for other_object in other_objects %}
         <div class="object-card">

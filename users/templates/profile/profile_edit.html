@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Редактирование профиля{% endblock %}
+{% block title %}{% trans "Редактирование профиля" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -14,60 +15,60 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:profile' %}">Профиль</a>
+<a href="{% url 'users:profile' %}">{% trans "Профиль" %}</a>
 <span class="separator"> > </span>
-<span>Редактирование</span>
+<span>{% trans "Редактирование" %}</span>
 {% endblock %}
 
 {% block content %}
 <div class="profile-edit-content">
-    <h1 class="profile-edit-title">Редактирование профиля</h1>
+    <h1 class="profile-edit-title">{% trans "Редактирование профиля" %}</h1>
     
     <form method="post" enctype="multipart/form-data" class="profile-edit-form">
         {% csrf_token %}
         
         <div class="profile-edit-section">
-            <h2 class="profile-edit-section-title">Фото профиля</h2>
+            <h2 class="profile-edit-section-title">{% trans "Фото профиля" %}</h2>
             <div class="profile-edit-avatar">
                 <div class="profile-edit-avatar-preview">
                     {% if user.avatar %}
-                        <img src="{{ user.avatar.url }}" alt="Аватар">
+                        <img src="{{ user.avatar.url }}" alt="{% trans "Аватар" %}">
                     {% else %}
-                        <img src="{% static 'images/default-avatar.png' %}" alt="Аватар">
+                        <img src="{% static 'images/default-avatar.png' %}" alt="{% trans "Аватар" %}">
                     {% endif %}
                 </div>
                 <div class="profile-edit-avatar-upload">
                     {{ form.avatar }}
-                    <p class="profile-edit-avatar-hint">Рекомендуемый размер: 200x200px, до 2MB</p>
+                    <p class="profile-edit-avatar-hint">{% trans "Рекомендуемый размер: 200x200px, до 2MB" %}</p>
                 </div>
             </div>
         </div>
 
         <div class="profile-edit-section">
-            <h2 class="profile-edit-section-title">Основная информация</h2>
+            <h2 class="profile-edit-section-title">{% trans "Основная информация" %}</h2>
             <div class="profile-edit-grid">
                 <div class="profile-edit-field">
-                    <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                    <label for="{{ form.first_name.id_for_label }}">{% trans "Имя" %}</label>
                     {{ form.first_name }}
                     {{ form.first_name.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                    <label for="{{ form.last_name.id_for_label }}">{% trans "Фамилия" %}</label>
                     {{ form.last_name }}
                     {{ form.last_name.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    <label for="{{ form.email.id_for_label }}">{% trans "Email" %}</label>
                     {{ form.email }}
                     {{ form.email.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.phone.id_for_label }}">Телефон</label>
+                    <label for="{{ form.phone.id_for_label }}">{% trans "Телефон" %}</label>
                     {{ form.phone }}
                     {{ form.phone.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.country.id_for_label }}">Страна</label>
+                    <label for="{{ form.country.id_for_label }}">{% trans "Страна" %}</label>
                     {{ form.country }}
                     {{ form.country.errors }}
                 </div>
@@ -75,20 +76,20 @@
         </div>
 
         <div class="profile-edit-section">
-            <h2 class="profile-edit-section-title">Информация о компании</h2>
+            <h2 class="profile-edit-section-title">{% trans "Информация о компании" %}</h2>
             <div class="profile-edit-grid">
                 <div class="profile-edit-field">
-                    <label for="{{ form.company_name.id_for_label }}">Название компании</label>
+                    <label for="{{ form.company_name.id_for_label }}">{% trans "Название компании" %}</label>
                     {{ form.company_name }}
                     {{ form.company_name.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.legal_address.id_for_label }}">Юридический адрес</label>
+                    <label for="{{ form.legal_address.id_for_label }}">{% trans "Юридический адрес" %}</label>
                     {{ form.legal_address }}
                     {{ form.legal_address.errors }}
                 </div>
                 <div class="profile-edit-field">
-                    <label for="{{ form.website.id_for_label }}">Веб-сайт</label>
+                    <label for="{{ form.website.id_for_label }}">{% trans "Веб-сайт" %}</label>
                     {{ form.website }}
                     {{ form.website.errors }}
                 </div>
@@ -96,7 +97,7 @@
         </div>
 
         <div class="profile-edit-section">
-            <h2 class="profile-edit-section-title">О себе</h2>
+            <h2 class="profile-edit-section-title">{% trans "О себе" %}</h2>
             <div class="profile-edit-field">
                 {{ form.description }}
                 {{ form.description.errors }}
@@ -104,8 +105,8 @@
         </div>
 
         <div class="profile-edit-actions">
-            <button type="submit" class="platform_button_one">Сохранить изменения</button>
-            <a href="{% url 'users:profile' %}" class="platform_button_two">Отмена</a>
+            <button type="submit" class="platform_button_one">{% trans "Сохранить изменения" %}</button>
+            <a href="{% url 'users:profile' %}" class="platform_button_two">{% trans "Отмена" %}</a>
         </div>
     </form>
 </div>

@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Каталог объектов{% endblock %}
+{% block title %}{% trans "Каталог объектов" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -16,13 +17,13 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_list' %}">Каталог объектов</a>
+<a href="{% url 'users:object_list' %}">{% trans "Каталог объектов" %}</a>
 {% endblock %}
 
 
 {% block content %}
 <div class="katalog_objekt-content">
-    <h1 class="platform_h1">Каталог объектов</h1>
+    <h1 class="platform_h1">{% trans "Каталог объектов" %}</h1>
     {% if messages %}
     <div class="messages">
         {% for message in messages %}
@@ -34,23 +35,23 @@
     {% endif %}
 
     <div class="estate-search">
-        <h2 class="estate-search-title">Поиск недвижимости</h2>
+        <h2 class="estate-search-title">{% trans "Поиск недвижимости" %}</h2>
         <form action="" method="get" class="estate-search-form">
             <div class="estate-search-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Местонахождение объекта</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Местонахождение объекта" %}</p>
                     {{ search_form.country }}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Поиск по названию</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Поиск по названию" %}</p>
                     {{ search_form.name }}
                 </div>
                 <div class="estate-search-form-item estate-search-form-item-advanced">
-                    <p class="estate-search-form-item-subtitle">Поиск по названию застройщика</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Поиск по названию застройщика" %}</p>
                     {{ search_form.developer }}
                 </div>
                 <div class="estate-search-form-item estate-search-form-item-advanced">
-                    <p class="estate-search-form-item-subtitle">Цена</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Цена" %}</p>
                     <div class="estate-search-form-item-price">
                         {{ search_form.price_from }}
                         {{ search_form.price_to }}
@@ -71,11 +72,11 @@
                     </div>
                 </div>
                 <div class="estate-search-form-item estate-search-form-item-advanced">
-                    <p class="estate-search-form-item-subtitle">Тип объекта</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Тип объекта" %}</p>
                     <div class="objectType-dropdown search-dropdown estate-search-form-item-price-item">
                         <div class="objectType-dropdown-button-wrapper search-dropdown-button-wrapper">
                             <span class="objectType-dropdown-button search-dropdown-button">{{
-                                search_form.object_type.value|default:"- выберите -" }}</span>
+                                search_form.object_type.value|default:_("- выберите -") }}</span>
                             <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt=""
                                 class="search-dropdown-icon">
                         </div>
@@ -88,14 +89,14 @@
                     </div>
                 </div>
                 <div class="estate-search-form-item estate-search-form-item-advanced">
-                    <p class="estate-search-form-item-subtitle">До пляжа</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "До пляжа" %}</p>
                     <div class="estate-search-form-item-price">
                         {{ search_form.beach_distance_from }}
                         {{ search_form.beach_distance_to }}
                         <div class="beachWay-dropdown search-dropdown estate-search-form-item-price-item">
                             <div class="beachWay-dropdown-button-wrapper search-dropdown-button-wrapper">
                                 <span class="beachWay-dropdown-button search-dropdown-button">{{
-                                    search_form.beach_distance_unit.value|default:"Метров" }}</span>
+                                    search_form.beach_distance_unit.value|default:_("Метров") }}</span>
                                 <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt=""
                                     class="search-dropdown-icon">
                             </div>
@@ -113,29 +114,29 @@
                 <a href="#" class="estate-search-advanced-open">
                     <img class="estate-search-advanced-open-icon"
                         src="{% static 'assets/icons/advanced-search-icon.svg' %}" alt="">
-                    <span id="estate-search-advanced-open-span">Расширенный поиск</span>
+                    <span id="estate-search-advanced-open-span">{% trans "Расширенный поиск" %}</span>
                 </a>
                 <div class="estate-search-form-actions-buttons">
-                    <button type="submit" class="platform_button_one">Найти</button>
-                    <a href="{% url 'users:object_list' %}" class="platform_button_two">Очистить</a>
+                    <button type="submit" class="platform_button_one">{% trans "Найти" %}</button>
+                    <a href="{% url 'users:object_list' %}" class="platform_button_two">{% trans "Очистить" %}</a>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="sort-dropdown-wrapper">
-        <button class="showOnMap">Показать на карте</button>
+        <button class="showOnMap">{% trans "Показать на карте" %}</button>
         <div class="sort-dropdown">
             <div class="sort-dropdown-header">
-                <p class="sort-dropdown-header-title">Сортировать</p>
+                <p class="sort-dropdown-header-title">{% trans "Сортировать" %}</p>
                 <div class="sort-dropdown-button-wrapper">
-                    <span class="sort-dropdown-button">По умолчанию</span>
+                    <span class="sort-dropdown-button">{% trans "По умолчанию" %}</span>
                     <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="sort-dropdown-icon">
                 </div>
             </div>
             <div class="sort-dropdown-content">
-                <div>По алфавиту</div>
-                <div>По региону</div>
+                <div>{% trans "По алфавиту" %}</div>
+                <div>{% trans "По региону" %}</div>
             </div>
         </div>
     </div>
@@ -200,7 +201,7 @@
         </div>
         {% empty %}
         <div class="no-objects">
-            <p>У вас пока нет добавленных объектов</p>
+            <p>{% trans "У вас пока нет добавленных объектов" %}</p>
         </div>
         {% endfor %}
     </div>
@@ -216,6 +217,10 @@
 <script>
     // Глобальная переменная для маркеров
     let markers = [];
+
+    // Тексты для перевода
+    const expandedSearchText = '{% trans "Расширенный поиск" %}';
+    const hideExpandedSearchText = '{% trans "Скрыть расширенный поиск" %}';
 
     // Обработка выпадающих списков
     document.addEventListener('DOMContentLoaded', function () {
@@ -237,7 +242,7 @@
                 item.style.display = isExpanded ? 'none' : 'block';
             });
 
-            advancedSpan.textContent = isExpanded ? 'Расширенный поиск' : 'Скрыть расширенный поиск';
+            advancedSpan.textContent = isExpanded ? expandedSearchText : hideExpandedSearchText;
         });
 
         // Обработка всех выпадающих списков

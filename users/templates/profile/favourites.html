@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Избранное{% endblock %}
+{% block title %}{% trans "Избранное" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -14,18 +15,18 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_list' %}">Объекты</a>
+<a href="{% url 'users:object_list' %}">{% trans "Объекты" %}</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:favourites' %}">Избранное</a>
+<a href="{% url 'users:favourites' %}">{% trans "Избранное" %}</a>
 {% endblock %}
 
 {% block content %}
 <div class="favourites_switcher">
     <button class="favourites_switch active" id="favourites_switch-objects">
-        Объекты
+        {% trans "Объекты" %}
     </button>
     <button class="favourites_switch" id="favourites_switch-devs">
-        Застройщики
+        {% trans "Застройщики" %}
     </button>
 </div>
 
@@ -88,7 +89,7 @@
             {% endfor %}
         {% else %}
             <div class="empty-state">
-                <p>У вас пока нет избранных объектов</p>
+                <p>{% trans "У вас пока нет избранных объектов" %}</p>
             </div>
         {% endif %}
     </div>
@@ -138,7 +139,7 @@
             {% endfor %}
         {% else %}
             <div class="empty-state">
-                <p>У вас пока нет избранных застройщиков</p>
+                <p>{% trans "У вас пока нет избранных застройщиков" %}</p>
             </div>
         {% endif %}
     </div>
@@ -214,7 +215,7 @@ function toggleFavourite(element) {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Error: ' + error.message);
+        alert('{% trans "Error" %}: ' + error.message);
     });
 }
 

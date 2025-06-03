@@ -1,11 +1,14 @@
-from .models import Page
-from .models import SiteSettings
+from django.apps import apps
+from .models import Page, SiteSettings
 
 
 def site_settings(request):
     try:
-        settings = SiteSettings.objects.first()
-    except SiteSettings.DoesNotExist:
+        if apps.is_installed('pages'):
+            settings = SiteSettings.objects.first()
+        else:
+            settings = None
+    except Exception:
         settings = None
     return {'site_settings': settings}
 

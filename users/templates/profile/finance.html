@@ -1,45 +1,47 @@
 {% extends "profile/base_profile.html" %}
 {% load static %}
+{% load i18n %}
+
 {% block content %}
 <nav class="breadcrumb">
     <a href="{% url 'pages:index' %}">Estconnect</a>
     <span class="separator"> &gt; </span>
-    <a href="{% url 'users:profile' %}">Профиль</a>
+    <a href="{% url 'users:profile' %}">{% trans "Профиль" %}</a>
     <span class="separator"> &gt; </span>
-    <a href="{% url 'users:profile_finance' %}">Финансы</a>
+    <a href="{% url 'users:profile_finance' %}">{% trans "Финансы" %}</a>
 </nav>
 <h1 class="catalog-content-title">
-    Финансы
+    {% trans "Финансы" %}
 </h1>
 <div class="finance_main-screen">
     <div class="finance_main-screen-currentBalance-wrapper">
         <p class="finance_main-screen-currentBalance">{{ user.balance|default:"0" }} $</p>
-        <p class="finance_main-screen-currentBalance-text">Текущий баланс</p>
+        <p class="finance_main-screen-currentBalance-text">{% trans "Текущий баланс" %}</p>
     </div>
     <div class="finance_main-screen-subscription-wrapper">
-        <p class="finance_main-screen-subscription-text">Действие подписки</p>
+        <p class="finance_main-screen-subscription-text">{% trans "Действие подписки" %}</p>
         {% if subscription %}
-        <p class="finance_main-screen-subscription">{{ subscription.days_left }} дней</p>
+        <p class="finance_main-screen-subscription">{{ subscription.days_left }} {% trans "дней" %}</p>
         <a href="{% url 'subscriptions:extend' %}"
-            class="platform_button_one finance_main-screen-subscription-button">Продлить</a>
+            class="platform_button_one finance_main-screen-subscription-button">{% trans "Продлить" %}</a>
         {% else %}
-        <p class="finance_main-screen-subscription">Нет активной подписки</p>
+        <p class="finance_main-screen-subscription">{% trans "Нет активной подписки" %}</p>
         <a href="{% url 'subscriptions:plan_list' %}"
-            class="platform_button_one finance_main-screen-subscription-button">Подписаться</a>
+            class="platform_button_one finance_main-screen-subscription-button">{% trans "Подписаться" %}</a>
         {% endif %}
     </div>
 </div>
 <div class="finance_operations">
     <div class="finance_operations-header">
-        <p class="finance_operations-title">История операций</p>
+        <p class="finance_operations-title">{% trans "История операций" %}</p>
     </div>
     <div class="finance_operations-rows">
         <div class="finance_operations-row finance_operations-row-header">
-            <div class="finance_operation finance_operation-date">Дата и время операции</div>
-            <div class="finance_operation finance_operation-type">Тип операции</div>
-            <div class="finance_operation finance_operation-sum">Сумма операции</div>
-            <div class="finance_operation finance_operation-describe">Описание</div>
-            <div class="finance_operation finance_operation-status">Статус</div>
+            <div class="finance_operation finance_operation-date">{% trans "Дата и время операции" %}</div>
+            <div class="finance_operation finance_operation-type">{% trans "Тип операции" %}</div>
+            <div class="finance_operation finance_operation-sum">{% trans "Сумма операции" %}</div>
+            <div class="finance_operation finance_operation-describe">{% trans "Описание" %}</div>
+            <div class="finance_operation finance_operation-status">{% trans "Статус" %}</div>
         </div>
         <div class="line-rows"></div>
         {% for operation in operations %}
@@ -53,14 +55,14 @@
         {% empty %}
         <div class="finance_operations-row">
             <div class="finance_operation" style="text-align: center; grid-column: 1 / -1;">
-                Нет операций
+                {% trans "Нет операций" %}
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
 <div class="pricingPlans finance_pricingPlans">
-    <h3 class="text-box pricingPlans-title">Доступные тарифы</h3>
+    <h3 class="text-box pricingPlans-title">{% trans "Доступные тарифы" %}</h3>
     <div class="pricingPlans-items">
         {% for plan in plans %}
         <div class="pricingPlans-item finance_pricingPlans-item">
@@ -69,32 +71,32 @@
                 <p class="pricingPlans-item-price">{{ plan.price }}$</p>
                 <p class="pricingPlans-item-text">{{ plan.description }}</p>
             </div>
-            <a href="{% url 'subscriptions:create' plan.id %}" class="button pricingPlans-button">Подключить</a>
+            <a href="{% url 'subscriptions:create' plan.id %}" class="button pricingPlans-button">{% trans "Подключить" %}</a>
         </div>
         {% empty %}
         <div class="pricingPlans-item finance_pricingPlans-item">
             <div class="">
-                <p class="pricingPlans-item-title">Базовый тариф</p>
+                <p class="pricingPlans-item-title">{% trans "Базовый тариф" %}</p>
                 <p class="pricingPlans-item-price">50$</p>
-                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
+                <p class="pricingPlans-item-text">{% trans "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's" %}</p>
             </div>
-            <button class="button pricingPlans-button">Подключить</button>
+            <button class="button pricingPlans-button">{% trans "Подключить" %}</button>
         </div>
         <div class="pricingPlans-item finance_pricingPlans-item">
             <div class="">
-                <p class="pricingPlans-item-title">Расширенный с Due diligence</p>
+                <p class="pricingPlans-item-title">{% trans "Расширенный с Due diligence" %}</p>
                 <p class="pricingPlans-item-price">100$</p>
-                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum&nbsp;is simply dummy text of the </p>
+                <p class="pricingPlans-item-text">{% trans "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum is simply dummy text of the" %}</p>
             </div>
-            <button class="button pricingPlans-button">Подключить</button>
+            <button class="button pricingPlans-button">{% trans "Подключить" %}</button>
         </div>
         <div class="pricingPlans-item finance_pricingPlans-item">
             <div class="">
-                <p class="pricingPlans-item-title">Партнерский тариф</p>
+                <p class="pricingPlans-item-title">{% trans "Партнерский тариф" %}</p>
                 <p class="pricingPlans-item-price">150$</p>
-                <p class="pricingPlans-item-text">Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum&nbsp;is simply dummy text of the Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem</p>
+                <p class="pricingPlans-item-text">{% trans "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem" %}</p>
             </div>
-            <button class="button pricingPlans-button">Подключить</button>
+            <button class="button pricingPlans-button">{% trans "Подключить" %}</button>
         </div>
         {% endfor %}
     </div>
@@ -103,15 +105,15 @@
     {% csrf_token %}
     <div class="account-form-header">
         <img src="{% static 'assets/icons/account-icon.svg' %}" alt="">
-        <p class="finance_operations-title">Формирование счета</p>
+        <p class="finance_operations-title">{% trans "Формирование счета" %}</p>
     </div>
     <div class="account-form-items">
         <div class="estate-search-form-item">
-            <p class="estate-search-form-item-subtitle">Введите страну</p>
+            <p class="estate-search-form-item-subtitle">{% trans "Введите страну" %}</p>
             <div class="accountCountry-dropdown search-dropdown estate-search-form-item-price-item">
                 <div class="accountCountry-dropdown-button-wrapper search-dropdown-button-wrapper">
                     <span class="accountCountry-dropdown-button search-dropdown-button">
-                        {{ form.country.value|default:"Выберите страну" }}
+                        {{ form.country.value|default:_("Выберите страну") }}
                     </span>
                     <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="search-dropdown-icon">
                 </div>
@@ -121,11 +123,11 @@
             </div>
         </div>
         <div class="estate-search-form-item">
-            <p class="estate-search-form-item-subtitle">Введите способ оплаты</p>
+            <p class="estate-search-form-item-subtitle">{% trans "Введите способ оплаты" %}</p>
             <div class="paymentMethod-dropdown search-dropdown estate-search-form-item-price-item">
                 <div class="paymentMethod-dropdown-button-wrapper search-dropdown-button-wrapper">
                     <span class="paymentMethod-dropdown-button search-dropdown-button">
-                        {{ form.payment_method.value|default:"Выберите способ оплаты" }}
+                        {{ form.payment_method.value|default:_("Выберите способ оплаты") }}
                     </span>
                     <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="search-dropdown-icon">
                 </div>
@@ -135,12 +137,12 @@
             </div>
         </div>
         <div class="estate-search-form-item">
-            <p class="estate-search-form-item-subtitle">Куда направить счет</p>
+            <p class="estate-search-form-item-subtitle">{% trans "Куда направить счет" %}</p>
             <div class="estate-search-form-item-price-item">
                 {{ form.invoice_email }}
             </div>
         </div>
     </div>
-    <button type="submit" class="account-form-button platform_button_one">Отправить</button>
+    <button type="submit" class="account-form-button platform_button_one">{% trans "Отправить" %}</button>
 </form>
 {% endblock %}

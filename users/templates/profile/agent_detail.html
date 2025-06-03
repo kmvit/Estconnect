@@ -1,12 +1,13 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ agent.company_name }}{% endblock %}
 
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:agent_list' %}">Агенты</a>
+<a href="{% url 'users:agent_list' %}">{% trans "Агенты" %}</a>
 <span class="separator"> > </span>
 <a href="#">{{ agent.company_name }}</a>
 {% endblock %}
@@ -17,7 +18,7 @@
         {% if agent.first_name %}
         <h1 class="platform_h1">{{ agent.first_name }} {{ agent.last_name }}</h1>
         {% else %}
-        <h1 class="platform_h1">Не указано</h1>
+        <h1 class="platform_h1">{% trans "Не указано" %}</h1>
         {% endif %}
         <div class="object-card-place">
             <div class="object-card-place-icon">
@@ -49,8 +50,8 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-1.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Тип компании</p>
-                        <p class="stroy-content-information-about-item-text">Агент</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Тип компании" %}</p>
+                        <p class="stroy-content-information-about-item-text">{% trans "Агент" %}</p>
                     </div>
                 </div>
                 <div class="stroy-content-information-about-item">
@@ -58,7 +59,7 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-2.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">На платформе</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "На платформе" %}</p>
                         <p class="stroy-content-information-about-item-text">{{ agent.date_joined|date:"F Y" }}</p>
                     </div>
                 </div>
@@ -67,8 +68,8 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-3.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Веб-сайт</p>
-                        <p class="stroy-content-information-about-item-text">{{ agent.website|default:"Не указан" }}</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Веб-сайт" %}</p>
+                        <p class="stroy-content-information-about-item-text">{{ agent.website|default:_("Не указан") }}</p>
                     </div>
                 </div>
                 <div class="stroy-content-information-about-item">
@@ -76,49 +77,49 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-4.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Язык общения</p>
-                        <p class="stroy-content-information-about-item-text">{{ agent.languages|default:"Русский" }}</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Язык общения" %}</p>
+                        <p class="stroy-content-information-about-item-text">{{ agent.languages|default:_("Русский") }}</p>
                     </div>
                 </div>
             </div>
             <div class="stroy-content-information-jobTime">
                 <p class="stroy-content-information-jobTime-title">
-                    Время работы
+                    {% trans "Время работы" %}
                 </p>
                 <div class="stroy-content-information-jobTime-isOpen">
                     <div class="stroy-content-information-jobTime-isOpen-icon" style="background:#20BD00"></div>
-                    <p class="stroy-content-information-jobTime-isOpen-text">Открыто сейчас</p>
+                    <p class="stroy-content-information-jobTime-isOpen-text">{% trans "Открыто сейчас" %}</p>
                 </div>
                 <div class="stroy-content-information-jobTime-days">
                     <p class="stroy-content-information-jobTime-days-item">
-                        Понедельник - пятница <span>09:30 - 20:30</span>
+                        {% trans "Понедельник - пятница" %} <span>09:30 - 20:30</span>
                     </p>
                     <p class="stroy-content-information-jobTime-days-item">
-                        Суббота <span>10:00 - 17:30</span>
+                        {% trans "Суббота" %} <span>10:00 - 17:30</span>
                     </p>
                     <p class="stroy-content-information-jobTime-days-item">
-                        Воскресенье <span>выходной</span>
+                        {% trans "Воскресенье" %} <span>{% trans "выходной" %}</span>
                     </p>
                 </div>
             </div>
             <div class="stroy-content-information-socials">
                 <p class="stroy-content-information-socials-title">
-                    Соц. сети
+                    {% trans "Соц. сети" %}
                 </p>
                 <div class="stroy-content-information-socials-items">
                     {% if agent.telegram %}
                     <a href="{{ agent.telegram }}" class="stroy-content-information-socials-item">
-                        <img src="{% static 'assets/icons/tg-icon-blue.svg' %}" alt="Telegram">
+                        <img src="{% static 'assets/icons/tg-icon-blue.svg' %}" alt="{% trans "Telegram" %}">
                     </a>
                     {% endif %}
                     {% if agent.vk %}
                     <a href="{{ agent.vk }}" class="stroy-content-information-socials-item">
-                        <img src="{% static 'assets/icons/vk-icon-blue.svg' %}" alt="VK">
+                        <img src="{% static 'assets/icons/vk-icon-blue.svg' %}" alt="{% trans "VK" %}">
                     </a>
                     {% endif %}
                     {% if agent.instagram %}
                     <a href="{{ agent.instagram }}" class="stroy-content-information-socials-item">
-                        <img src="{% static 'assets/icons/inst-icon-blue.svg' %}" alt="Instagram">
+                        <img src="{% static 'assets/icons/inst-icon-blue.svg' %}" alt="{% trans "Instagram" %}">
                     </a>
                     {% endif %}
                 </div>
@@ -126,7 +127,7 @@
         </div>
         <div class="stroy-content-describe">
             <div class="stroy-content-block-header">
-                <h4 class="stroy-content-block-title">Описание</h4>
+                <h4 class="stroy-content-block-title">{% trans "Описание" %}</h4>
             </div>
             <div class="stroy-content-block-content">
                 {{ agent.description|linebreaks }}
