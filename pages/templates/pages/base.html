@@ -1,6 +1,7 @@
 {% load static %}
+{% load i18n %}
 <!doctype html>
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -18,25 +19,25 @@
 <header class="header">
     <div class="header-logo">
         <a href="{% url 'pages:index' %}">
-            <img src="{% static 'images/logo.svg' %}" alt="логотип">
+            <img src="{% static 'images/logo.svg' %}" alt="{% trans 'логотип' %}">
         </a>
     </div>
     <nav class="menu" id="menu">
         <div class="close-menu" id="close">
-            <img src="{% static 'assets/icons/close-icon.svg' %}" alt="">
+            <img src="{% static 'assets/icons/close-icon.svg' %}" alt="{% trans 'закрыть' %}">
         </div>
         <ul class="menu-items">
             <li class="menu-item">
-                <a href="{% url 'pages:about-us' %}" class="menu-item-link">О нас</a>
+                <a href="{% url 'pages:about-us' %}" class="menu-item-link">{% trans 'О нас' %}</a>
             </li>
             <li class="menu-item">
-                <a href="{% url 'pages:about-product' %}" class="menu-item-link">О продукте</a>
+                <a href="{% url 'pages:about-product' %}" class="menu-item-link">{% trans 'О продукте' %}</a>
             </li>
             <li class="menu-item">
-                <a href="{% url 'pages:why-we' %}" class="menu-item-link">Почему мы</a>
+                <a href="{% url 'pages:why-we' %}" class="menu-item-link">{% trans 'Почему мы' %}</a>
             </li>
             <li class="menu-item">
-                <a href="{% url 'pages:contacts' %}" class="menu-item-link">Контакты</a>
+                <a href="{% url 'pages:contacts' %}" class="menu-item-link">{% trans 'Контакты' %}</a>
             </li>
         </ul>
         {% if user.is_authenticated %}
@@ -46,11 +47,12 @@
                 </a>
             </div>
         {% else %}
-            <a href="{% url 'pages:sign-in' %}" class="auth-button">Вход</a>
+            <a href="{% url 'pages:sign-in' %}" class="auth-button">{% trans 'Вход' %}</a>
         {% endif %}
+        {% include 'includes/language_switcher.html' %}
     </nav>
     <div class="burger" id="burger">
-        <img src="{% static 'assets/icons/burger-icon.svg' %}" alt="">
+        <img src="{% static 'assets/icons/burger-icon.svg' %}" alt="{% trans 'меню' %}">
     </div>
 </header>
 
@@ -60,24 +62,23 @@
 
 <footer class="footer">
     <div class="footer-list">
-        <a href="{% url 'pages:index' %}" class="footer-list-link">Главная</a>
-        <a href="{% url 'pages:about-us' %}" class="footer-list-link">О нас</a>
-        <a href="{% url 'pages:about-product' %}" class="footer-list-link">О продукте</a>
-        <a href="{% url 'pages:why-we' %}" class="footer-list-link">Почему мы</a>
-        <a href="{% url 'pages:contacts' %}" class="footer-list-link">Контакты</a>
-</div>
+        <a href="{% url 'pages:about-us' %}" class="footer-list-link">{% trans 'О нас' %}</a>
+        <a href="{% url 'pages:about-product' %}" class="footer-list-link">{% trans 'О продукте' %}</a>
+        <a href="{% url 'pages:why-we' %}" class="footer-list-link">{% trans 'Почему мы' %}</a>
+        <a href="{% url 'pages:contacts' %}" class="footer-list-link">{% trans 'Контакты' %}</a>
+    </div>
     <div class="footer-socials">
         <a href="#" class="footer-social">
-            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="">
+            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="{% trans 'WhatsApp' %}">
         </a>
         <a href="#" class="footer-social">
-            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="">
+            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="{% trans 'Telegram' %}">
         </a>
         <a href="#" class="footer-social">
-            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="">
+            <img src="{% static 'assets/icons/wh-icon.svg' %}" alt="{% trans 'WhatsApp' %}">
         </a>
         <a href="#" class="footer-social">
-            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="">
+            <img src="{% static 'assets/icons/tg-icon.svg' %}" alt="{% trans 'Telegram' %}">
         </a>
     </div>
 </footer>

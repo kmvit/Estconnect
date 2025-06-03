@@ -1,12 +1,13 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ developer.company_name }}{% endblock %}
 
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:developer_list' %}">Застройщики</a>
+<a href="{% url 'users:developer_list' %}">{% trans "Застройщики" %}</a>
 <span class="separator"> > </span>
 <a href="#">{{ developer.company_name }}</a>
 {% endblock %}
@@ -45,8 +46,8 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-1.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Тип компании</p>
-                        <p class="stroy-content-information-about-item-text">Застройщик</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Тип компании" %}</p>
+                        <p class="stroy-content-information-about-item-text">{% trans "Застройщик" %}</p>
                     </div>
                 </div>
                 <div class="stroy-content-information-about-item">
@@ -54,7 +55,7 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-2.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">На платформе</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "На платформе" %}</p>
                         <p class="stroy-content-information-about-item-text">{{ developer.date_joined|date:"d.m.Y" }}
                         </p>
                     </div>
@@ -65,7 +66,7 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-3.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Веб-сайт</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Веб-сайт" %}</p>
                         <p class="stroy-content-information-about-item-text">{{ developer.website }}</p>
                     </div>
                 </div>
@@ -75,34 +76,34 @@
                         <img src="{% static 'assets/icons/stroy-content-information-about-item-icon-4.svg' %}" alt="">
                     </div>
                     <div class="stroy-content-information-about-item-container">
-                        <p class="stroy-content-information-about-item-title">Язык общения</p>
+                        <p class="stroy-content-information-about-item-title">{% trans "Язык общения" %}</p>
                         <p class="stroy-content-information-about-item-text">{{ developer.languages }}</p>
                     </div>
                 </div>
             </div>
             <div class="stroy-content-information-jobTime">
                 <p class="stroy-content-information-jobTime-title">
-                    Время работы
+                    {% trans "Время работы" %}
                 </p>
                 <div class="stroy-content-information-jobTime-isOpen">
                     <div class="stroy-content-information-jobTime-isOpen-icon" style="background:#20BD00"></div>
-                    <p class="stroy-content-information-jobTime-isOpen-text">Открыто сейчас</p>
+                    <p class="stroy-content-information-jobTime-isOpen-text">{% trans "Открыто сейчас" %}</p>
                 </div>
                 <div class="stroy-content-information-jobTime-days">
                     <p class="stroy-content-information-jobTime-days-item">
-                        Понедельник - пятница <span>09:30 - 20:30</span>
+                        {% trans "Понедельник - пятница" %} <span>09:30 - 20:30</span>
                     </p>
                     <p class="stroy-content-information-jobTime-days-item">
-                        Суббота <span>10:00 - 17:30</span>
+                        {% trans "Суббота" %} <span>10:00 - 17:30</span>
                     </p>
                     <p class="stroy-content-information-jobTime-days-item">
-                        Воскресенье <span>выходной</span>
+                        {% trans "Воскресенье" %} <span>{% trans "выходной" %}</span>
                     </p>
                 </div>
             </div>
             <div class="stroy-content-information-socials">
                 <p class="stroy-content-information-socials-title">
-                    Соц. сети
+                    {% trans "Соц. сети" %}
                 </p>
                 <div class="stroy-content-information-socials-items">
                     <a href="#" class="stroy-content-information-socials-item">
@@ -119,7 +120,7 @@
         </div>
         <div class="stroy-content-describe">
             <div class="stroy-content-block-header">
-                <h4 class="stroy-content-block-title">Описание</h4>
+                <h4 class="stroy-content-block-title">{% trans "Описание" %}</h4>
             </div>
             <p class="stroy-content-describe-text">
                 {{ developer.description }}
@@ -127,7 +128,7 @@
         </div>
         <div class="stroy-content-objects">
             <div class="stroy-content-block-header">
-                <h4 class="stroy-content-block-title">Объекты застройщика</h4>
+                <h4 class="stroy-content-block-title">{% trans "Объекты застройщика" %}</h4>
 
             </div>
             <div class="stroy-content-objects-items">
@@ -155,7 +156,7 @@
                             </div>
                             <div class="object-card-place-text">{{ object.country }}, {{ object.city.name }}</div>
                         </div>
-                        <p class="object-card-price">от {{ object.price_per_sqm }} $</p>
+                        <p class="object-card-price">{% trans "от" %} {{ object.price_per_sqm }} $</p>
                         <div class="object-card-info">
                             <div class="object-card-info-item">
                                 <div class="object-card-info-item-icon">
@@ -180,7 +181,7 @@
         </div>
         <div class="stroy-content-devs">
             <div class="stroy-content-block-header">
-                <h4 class="stroy-content-block-title">Другие застройщики</h4>
+                <h4 class="stroy-content-block-title">{% trans "Другие застройщики" %}</h4>
             </div>
             <div class="stroy-content-devs-items">
                 {% for developer in developers %}

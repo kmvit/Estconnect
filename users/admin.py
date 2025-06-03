@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from developers.admin import ConstructionObjectImageInline
 from users.models import CustomUser, UserActivityLog
 from developers.models import ConstructionObject, ConstructionObjectImage
 from support.models import SupportTicket, SupportMessage
@@ -168,8 +167,11 @@ class SubscriptionAdmin(admin.ModelAdmin):
         return super().get_queryset(request).select_related('user', 'plan')
 
 
-
 # Раздел застройщиков
+class ConstructionObjectImageInline(admin.TabularInline):
+    model = ConstructionObjectImage
+    extra = 1
+
 @admin.register(ConstructionObject, site=cam_admin_site)
 class ConstructionObjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'developer', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
@@ -188,10 +190,6 @@ class UserActivityLogAdmin(admin.ModelAdmin):
         "user__username", "action")  # Поиск по имени пользователя и действию
     ordering = ("-created_at",)  # Сортировка по дате
 
-
-class ConstructionObjectImageInline(admin.TabularInline):
-    model = ConstructionObjectImage
-    extra = 1
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):

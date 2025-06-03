@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Техническая поддержка{% endblock %}
+{% block title %}{% trans "Техническая поддержка" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -16,18 +17,18 @@
     <nav class="breadcrumb">
         <a href="{% url 'users:profile' %}">Estconnect</a>
         <span class="separator"> > </span>
-        <span>Техническая поддержка</span>
+        <span>{% trans "Техническая поддержка" %}</span>
     </nav>
     
     <div class="object_main-screen-header">
-        <h1 class="platform_h1">Техническая поддержка</h1>
+        <h1 class="platform_h1">{% trans "Техническая поддержка" %}</h1>
     </div>
 
     <div class="object-plus-form-block">
         <form method="post" class="support_form">
             {% csrf_token %}
             <div class="estate-search-form-item support_form-item1">
-                <p class="estate-search-form-item-subtitle">Категория</p>
+                <p class="estate-search-form-item-subtitle">{% trans "Категория" %}</p>
                 <div class="paymentMethod-dropdown search-dropdown estate-search-form-item-price-item">
                     <div class="paymentMethod-dropdown-button-wrapper search-dropdown-button-wrapper">
                         <select name="category" class="paymentMethod-dropdown-button search-dropdown-button">
@@ -39,14 +40,14 @@
                 </div>
             </div>
             <div class="estate-search-form-item support_form-item2">
-                <p class="estate-search-form-item-subtitle">Сообщение</p>
-                <textarea name="message" cols="30" rows="10" class="textarea object-plus-form-textarea" placeholder="Введите ваше сообщение"></textarea>
+                <p class="estate-search-form-item-subtitle">{% trans "Сообщение" %}</p>
+                <textarea name="message" cols="30" rows="10" class="textarea object-plus-form-textarea" placeholder="{% trans "Введите ваше сообщение" %}"></textarea>
             </div>
             <label class="checkbox-label">
                 <input type="checkbox" name="terms" class="checkbox" required>
-                <span class="checkbox-text">Я ознакомлен и согласен <a href="#">с правилами обработки персональных данных</a></span>
+                <span class="checkbox-text">{% blocktrans %}Я ознакомлен и согласен <a href="#">с правилами обработки персональных данных</a>{% endblocktrans %}</span>
             </label>
-            <button type="submit" class="platform_button_two support_form-button">Отправить</button>
+            <button type="submit" class="platform_button_two support_form-button">{% trans "Отправить" %}</button>
         </form>
     </div>
 
@@ -58,7 +59,7 @@
                 <div class="support-ticket-info">
                     <h3>{{ ticket.get_status_display }}</h3>
                     <p>{{ ticket.created_at|date:"d.m.Y" }}</p>
-                    <p>Обращение #{{ ticket.id }}</p>
+                    <p>{% trans "Обращение" %} #{{ ticket.id }}</p>
                     <p>{{ ticket.get_category_display }}</p>
                     {% with last_message=ticket.messages.last %}
                     {% if last_message %}
@@ -69,7 +70,7 @@
                 </div>
             </div>
             <div class="support-ticket-footer">
-                <a href="{% url 'support:ticket_detail' ticket_id=ticket.id %}" class="platform_button_two">Просмотреть</a>
+                <a href="{% url 'support:ticket_detail' ticket_id=ticket.id %}" class="platform_button_two">{% trans "Просмотреть" %}</a>
             </div>
         </div>
         {% endfor %}

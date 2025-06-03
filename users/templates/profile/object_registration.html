@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Регистрация объектов{% endblock %}
+{% block title %}{% trans "Регистрация объектов" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -16,71 +17,71 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_registration' %}">Регистрация объектов</a>
+<a href="{% url 'users:object_registration' %}">{% trans "Регистрация объектов" %}</a>
 {% endblock %}
 
 {% block content %}
 <div class="catalog-content">
     <h1 class="catalog-content-title">
-        Перечень заявок на регистрацию объектов
+        {% trans "Перечень заявок на регистрацию объектов" %}
     </h1>
     <div class="estate-search">
-        <h2 class="estate-search-title">Все заявки</h2>
+        <h2 class="estate-search-title">{% trans "Все заявки" %}</h2>
         <form action="{% url 'users:object_registration' %}" method="get" class="catalog-search-form" id="searchForm">
             <div class="estate-search-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Статус проекта</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Статус проекта" %}</p>
                     <div class="objectPlusStatus-dropdown search-dropdown estate-search-form-item-price-item">
                         <div class="objectPlusStatus-dropdown-button-wrapper search-dropdown-button-wrapper">
                             <span class="objectPlusStatus-dropdown-button search-dropdown-button">
                                 {% if status_filter == 'published' %}
-                                Опубликованные
+                                {% trans "Опубликованные" %}
                                 {% elif status_filter == 'unpublished' %}
-                                На модерации
+                                {% trans "На модерации" %}
                                 {% else %}
-                                Статус
+                                {% trans "Статус" %}
                                 {% endif %}
                             </span>
                             <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt=""
                                 class="search-dropdown-icon">
                         </div>
                         <div class="objectPlusStatus-dropdown-content search-dropdown-content">
-                            <div data-value="">Все статусы</div>
-                            <div data-value="published">Опубликованные</div>
-                            <div data-value="unpublished">Неопубликованные</div>
+                            <div data-value="">{% trans "Все статусы" %}</div>
+                            <div data-value="published">{% trans "Опубликованные" %}</div>
+                            <div data-value="unpublished">{% trans "Неопубликованные" %}</div>
                         </div>
                     </div>
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Дата сдачи проекта</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Дата сдачи проекта" %}</p>
                     <input type="date" name="completion_date" value="{{ completion_date }}"
                         class="input estate-search-form-item-input">
                 </div>
             </div>
             <input type="hidden" name="sort_by" value="{{ sort_by }}">
-            <button type="submit" class="platform_button_one catalog-search-form-button">Найти</button>
+            <button type="submit" class="platform_button_one catalog-search-form-button">{% trans "Найти" %}</button>
         </form>
     </div>
     <div class="catalog-sort-dropdown-wrapper sort-dropdown-wrapper">
         <div class="sort-dropdown catalog-sort-dropdown">
             <div class="sort-dropdown-header">
-                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">Сортировать</p>
+                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">{% trans "Сортировать" %}</p>
                 <div class="sort-dropdown-button-wrapper">
                     <span class="sort-dropdown-button">
                         {% if sort_by == 'oldest' %}
-                        от старых к новым
+                        {% trans "от старых к новым" %}
                         {% elif sort_by == 'newest' %}
-                        от новых к старым
+                        {% trans "от новых к старым" %}
                         {% else %}
-                        По умолчанию
+                        {% trans "По умолчанию" %}
                         {% endif %}
                     </span>
                     <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="sort-dropdown-icon">
                 </div>
             </div>
             <div class="sort-dropdown-content">
-                <div data-value="oldest">от старых к новым</div>
-                <div data-value="newest">от новых к старым</div>
+                <div data-value="oldest">{% trans "от старых к новым" %}</div>
+                <div data-value="newest">{% trans "от новых к старым" %}</div>
             </div>
         </div>
     </div>
@@ -101,7 +102,7 @@
                 </a>
                 {% else %}
                 <a href="{% url 'users:object_detail' object.pk %}">
-                    <img src="{% static 'images/object-placeholder.jpg' %}" alt="Нет изображения"
+                    <img src="{% static 'images/object-placeholder.jpg' %}" alt="{% trans "Нет изображения" %}"
                         style="width: 290px; height: 290px; object-fit: cover;">
                 </a>
                 {% endif %}

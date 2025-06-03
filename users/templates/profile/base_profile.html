@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -23,47 +24,47 @@
     </div>
     <nav class="navigation">
         <div class="header-logo platform_header-logo">
-            <a href="{% url 'pages:index' %}"><img src="{% static 'images/platform-logo.svg' %}" alt="логотип"></a>
+            <a href="{% url 'pages:index' %}"><img src="{% static 'images/platform-logo.svg' %}" alt="{% trans "логотип" %}"></a>
         </div>
         <div class="navigation-content">
             <div class="navigation-list">
                 <a href="{% url 'users:profile' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/home.svg' %}" alt="">
-                    <span>Главная</span>
+                    <span>{% trans "Главная" %}</span>
                 </a>
                 <a href="{% url 'users:profile_finance' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/finance.svg' %}" alt="">
-                    <span>Финансове операции</span>
+                    <span>{% trans "Финансовые операции" %}</span>
                 </a>
                 <a href="{% url 'users:object_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/view.svg' %}" alt="">
-                    <span>Просмотр объектов</span>
+                    <span>{% trans "Просмотр объектов" %}</span>
                 </a>
                 {% if user.role == 'developer' %}
                 <a href="{% url 'users:agent_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/builder.svg' %}" alt="">
-                    <span>Каталог агентов</span>
+                    <span>{% trans "Каталог агентов" %}</span>
                 </a>
                 {% elif user.role == 'agent' %}
                 <a href="{% url 'users:developer_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/builder.svg' %}" alt="">
-                    <span>Все застройщики</span>
+                    <span>{% trans "Все застройщики" %}</span>
                 </a>
                 {% endif %}
                 {% if user.role == 'developer' %}
                 <a href="{% url 'users:object_registration' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/object-icon.svg' %}" alt="">
-                    <span>Регистрация объектов</span>
+                    <span>{% trans "Регистрация объектов" %}</span>
                 </a>
                 {% endif %}
                 <a href="{% url 'support:support_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/help.svg' %}" alt="">
-                    <span>Тех. поддержка</span>
+                    <span>{% trans "Тех. поддержка" %}</span>
                 </a>
             </div>
             <div class="navigation-footer">
-                <a href="" class="navigation-footer-link">Политика конфиденциальности</a>
-                <a href="" class="navigation-footer-link">Условия использования</a>
+                <a href="" class="navigation-footer-link">{% trans "Политика конфиденциальности" %}</a>
+                <a href="" class="navigation-footer-link">{% trans "Условия использования" %}</a>
                 <p class="navigation-footer-copyright">© 2025 Estconnect</p>
             </div>
         </div>
@@ -71,7 +72,7 @@
     <div class="platform_content">
         <header class="platform_header">
             <div class="platform_header-logo_mobile">
-                <img src="{% static 'images/platform_header-logo_mobile.svg' %}" alt="логотип">
+                <img src="{% static 'images/platform_header-logo_mobile.svg' %}" alt="{% trans "логотип" %}">
             </div>
             <div class="platform_header-open">
                 <img src="{% static 'assets/icons/burger-icon.svg' %}" alt="">
@@ -84,7 +85,7 @@
                     <div class="platform_header-rate">
                         <p class="platform_header-rate-title">{{ user.subscription_plan|default:"Business" }}</p>
                         <div class="platform_header-rate-content">
-                            <p class="platform_header-rate-text">Тариф</p>
+                            <p class="platform_header-rate-text">{% trans "Тариф" %}</p>
                             <a href="#"><img src="{% static 'assets/icons/question-icon.svg' %}" alt=""></a>
                         </div>
                     </div>
@@ -94,13 +95,13 @@
                         </div>
                         <div class="platform_header-status-content">
                             <p class="platform_header-status-title">{{ user.get_role_display }}</p>
-                            <p class="platform_header-status-text">Статус</p>
+                            <p class="platform_header-status-text">{% trans "Статус" %}</p>
                         </div>
                     </div>
                 </div>
                 <div class="platform_header-right">
                     {% if user.role == 'developer' %}
-                    <a href="{% url 'users:object_add' %}" class="platform_button_two platform_header-button">Добавить объект</a>
+                    <a href="{% url 'users:object_add' %}" class="platform_button_two platform_header-button">{% trans "Добавить объект" %}</a>
                     {% endif %}
                     <div class="platform_header-actions">
                         <a href="{% url 'users:favourites' %}" class="platform_header-favourites">
@@ -119,10 +120,10 @@
                         </div>
                         <div class="platform_header-user-dropdown-content">
                            <div class="platform_header-user-dropdown-content-item">
-                            <a href="{% url 'users:profile' %}">Профиль</a>
+                            <a href="{% url 'users:profile' %}">{% trans "Профиль" %}</a>
                            </div>
                            <div class="platform_header-user-dropdown-content-item">
-                            <a href="{% url 'users:logout' %}">Выйти</a>
+                            <a href="{% url 'users:logout' %}">{% trans "Выйти" %}</a>
                            </div>
                         </div>
                     </div>

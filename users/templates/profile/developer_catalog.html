@@ -1,62 +1,63 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Каталог застройщиков{% endblock %}
+{% block title %}{% trans "Каталог застройщиков" %}{% endblock %}
 
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="#">Застройщики</a>
+<a href="#">{% trans "Застройщики" %}</a>
 {% endblock %}
 
 {% block content %}
 <div class="catalog-content">
     <h1 class="catalog-content-title">
-        Каталог застройщиков
+        {% trans "Каталог застройщиков" %}
     </h1>
     <div class="estate-search">
-        <h2 class="estate-search-title">Поиск застройщиков</h2>
+        <h2 class="estate-search-title">{% trans "Поиск застройщиков" %}</h2>
         <form action="" method="get" class="catalog-search-form">
             <div class="estate-search-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Страна</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Страна" %}</p>
                     <input type="text" name="country" value="{{ request.GET.country }}"
-                        class="input estate-search-form-item-input" placeholder="Таиланд">
+                        class="input estate-search-form-item-input" placeholder="{% trans "Таиланд" %}">
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Поиск по названию</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Поиск по названию" %}</p>
                     <input type="text" name="search" value="{{ request.GET.search }}"
-                        class="input estate-search-form-item-input" placeholder="Введите название застройщика">
+                        class="input estate-search-form-item-input" placeholder="{% trans "Введите название застройщика" %}">
                 </div>
             </div>
-            <button type="submit" class="platform_button_one catalog-search-form-button">Найти</button>
+            <button type="submit" class="platform_button_one catalog-search-form-button">{% trans "Найти" %}</button>
             {% if request.GET.country or request.GET.search %}
             <a href="{% url 'users:developer_list' %}" class="platform_button_one catalog-search-form-button"
-                style="margin-left: 10px;">Сбросить</a>
+                style="margin-left: 10px;">{% trans "Сбросить" %}</a>
             {% endif %}
         </form>
     </div>
     <div class="catalog-sort-dropdown-wrapper sort-dropdown-wrapper">
         <div class="sort-dropdown catalog-sort-dropdown">
             <div class="sort-dropdown-header">
-                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">Сортировать</p>
+                <p class="sort-dropdown-header-title catalog-sort-dropdown-header-title">{% trans "Сортировать" %}</p>
                 <div class="sort-dropdown-button-wrapper">
                     <span class="sort-dropdown-button">
-                        {% if sort == 'name_asc' %}от А до Я
-                        {% elif sort == 'name_desc' %}от Я до А
-                        {% elif sort == 'date_asc' %}от старых пользователей к новым
-                        {% elif sort == 'date_desc' %}от новых пользователей к старым
-                        {% else %}По умолчанию
+                        {% if sort == 'name_asc' %}{% trans "от А до Я" %}
+                        {% elif sort == 'name_desc' %}{% trans "от Я до А" %}
+                        {% elif sort == 'date_asc' %}{% trans "от старых пользователей к новым" %}
+                        {% elif sort == 'date_desc' %}{% trans "от новых пользователей к старым" %}
+                        {% else %}{% trans "По умолчанию" %}
                         {% endif %}
                     </span>
                     <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt="" class="sort-dropdown-icon">
                 </div>
             </div>
             <div class="sort-dropdown-content">
-                <div data-sort="name_asc">от А до Я</div>
-                <div data-sort="name_desc">от Я до А</div>
-                <div data-sort="date_asc">от старых пользователей к новым</div>
-                <div data-sort="date_desc">от новых пользователей к старым</div>
+                <div data-sort="name_asc">{% trans "от А до Я" %}</div>
+                <div data-sort="name_desc">{% trans "от Я до А" %}</div>
+                <div data-sort="date_asc">{% trans "от старых пользователей к новым" %}</div>
+                <div data-sort="date_desc">{% trans "от новых пользователей к старым" %}</div>
             </div>
         </div>
     </div>
@@ -195,7 +196,7 @@
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('{% trans "Error:" %}', error);
         });
     }
 

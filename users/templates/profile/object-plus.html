@@ -1,7 +1,8 @@
 {% extends 'profile/base_profile.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Добавление объекта{% endblock %}
+{% block title %}{% trans "Добавление объекта" %}{% endblock %}
 
 {% block nav_tabs %}
 <a href="#" class="nav-tab active">
@@ -14,14 +15,14 @@
 {% block breadcrumb %}
 <a href="{% url 'pages:index' %}">Estconnect</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_list' %}">Объекты</a>
+<a href="{% url 'users:object_list' %}">{% trans "Объекты" %}</a>
 <span class="separator"> > </span>
-<a href="{% url 'users:object_add' %}">Добавление объекта</a>
+<a href="{% url 'users:object_add' %}">{% trans "Добавление объекта" %}</a>
 {% endblock %}
 
 {% block content %}
     <h1 class="catalog-content-title">
-        Добавление объекта
+        {% trans "Добавление объекта" %}
     </h1>
 
     {% if messages %}
@@ -36,7 +37,7 @@
 
     {% if form.errors %}
     <div class="form-errors">
-        <p>Пожалуйста, исправьте следующие ошибки:</p>
+        <p>{% trans "Пожалуйста, исправьте следующие ошибки:" %}</p>
         <ul>
             {% for field, errors in form.errors.items %}
                 {% for error in errors %}
@@ -52,14 +53,14 @@
         
         <div class="object-plus-form-block">
             <div class="estate-search-form-item object-plus-form-item-name">
-                <p class="estate-search-form-item-subtitle">Название объекта</p>
+                <p class="estate-search-form-item-subtitle">{% trans "Название объекта" %}</p>
                 {{ form.name }}
                 {% if form.name.errors %}
                 <div class="error-message">{{ form.name.errors }}</div>
                 {% endif %}
             </div>
             <div class="estate-search-form-item">
-                <p class="estate-search-form-item-subtitle">Описание</p>
+                <p class="estate-search-form-item-subtitle">{% trans "Описание" %}</p>
                 {{ form.description }}
                 {% if form.description.errors %}
                 <div class="error-message">{{ form.description.errors }}</div>
@@ -69,33 +70,33 @@
 
         <div class="object-plus-form-block">
             <div class="object-plus-form-header">
-                <p class="finance_operations-title">Местонахождение</p>
-                <a href="#" class="finance_operations-viewAll" id="showMapBtn">Показать на карте</a>
+                <p class="finance_operations-title">{% trans "Местонахождение" %}</p>
+                <a href="#" class="finance_operations-viewAll" id="showMapBtn">{% trans "Показать на карте" %}</a>
             </div>
             <div class="account-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Страна</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Страна" %}</p>
                     {{ form.country }}
                     {% if form.country.errors %}
                     <div class="error-message">{{ form.country.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Город</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Город" %}</p>
                     {{ form.city }}
                     {% if form.city.errors %}
                     <div class="error-message">{{ form.city.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Район</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Район" %}</p>
                     {{ form.district }}
                     {% if form.district.errors %}
                     <div class="error-message">{{ form.district.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Адрес</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Адрес" %}</p>
                     {{ form.address }}
                     {% if form.address.errors %}
                     <div class="error-message">{{ form.address.errors }}</div>
@@ -105,32 +106,32 @@
             <div id="mapContainer" class="map-container" style="display: none;">
                 <div id="map" style="width: 100%; height: 400px;"></div>
                 <div class="map-controls">
-                    <button type="button" class="platform_button_two" id="closeMapBtn">Закрыть карту</button>
+                    <button type="button" class="platform_button_two" id="closeMapBtn">{% trans "Закрыть карту" %}</button>
                 </div>
             </div>
         </div>
 
         <div class="object-plus-form-block">
             <div class="object-plus-form-header">
-                <p class="finance_operations-title">Характеристики</p>
+                <p class="finance_operations-title">{% trans "Характеристики" %}</p>
             </div>
             <div class="account-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Тип недвижимости</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Тип недвижимости" %}</p>
                     {{ form.property_type }}
                     {% if form.property_type.errors %}
                     <div class="error-message">{{ form.property_type.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Класс жилья</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Класс жилья" %}</p>
                     {{ form.comfort_type }}
                     {% if form.comfort_type.errors %}
                     <div class="error-message">{{ form.comfort_type.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Перечень удобств</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Перечень удобств" %}</p>
                     {{ form.amenities }}
                     {% if form.amenities.errors %}
                     <div class="error-message">{{ form.amenities.errors }}</div>
@@ -141,25 +142,25 @@
 
         <div class="object-plus-form-block">
             <div class="object-plus-form-header">
-                <p class="finance_operations-title">Цена и сроки</p>
+                <p class="finance_operations-title">{% trans "Цена и сроки" %}</p>
             </div>
             <div class="account-form-items">
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Цена за м²</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Цена за м²" %}</p>
                     {{ form.price_per_sqm }}
                     {% if form.price_per_sqm.errors %}
                     <div class="error-message">{{ form.price_per_sqm.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Статус проекта</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Статус проекта" %}</p>
                     {{ form.project_status }}
                     {% if form.project_status.errors %}
                     <div class="error-message">{{ form.project_status.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="estate-search-form-item">
-                    <p class="estate-search-form-item-subtitle">Дата сдачи</p>
+                    <p class="estate-search-form-item-subtitle">{% trans "Дата сдачи" %}</p>
                     {{ form.completion_date }}
                     {% if form.completion_date.errors %}
                     <div class="error-message">{{ form.completion_date.errors }}</div>
@@ -170,19 +171,18 @@
 
         <div class="object-plus-form-block">
             <div class="object-plus-form-header">
-                <p class="finance_operations-title">Фотографии</p>
+                <p class="finance_operations-title">{% trans "Фотографии" %}</p>
             </div>
             <div class="upload-container">
                 <div class="upload-box" id="imagePreview">
-                    <img src="{% static 'images/placeholder-img.png' %}" alt="Загрузка" class="placeholder-img">
+                    <img src="{% static 'images/placeholder-img.png' %}" alt="{% trans "Загрузка" %}" class="placeholder-img">
                 </div>
                 <div class="file-upload">
-                    <label for="{{ form.images.id_for_label }}">Выберите файлы</label>
+                    <label for="{{ form.images.id_for_label }}">{% trans "Выберите файлы" %}</label>
                     {{ form.images }}
                 </div>
                 <p class="file-upload-text">
-                    JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте.
-                    Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены
+                    {% trans "JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте. Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены" %}
                 </p>
                 <div class="file-upload-line"></div>
             </div>
@@ -192,8 +192,8 @@
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="platform_button_one">Сохранить</button>
-            <a href="{% url 'users:object_list' %}" class="platform_button_two">Отмена</a>
+            <button type="submit" class="platform_button_one">{% trans "Сохранить" %}</button>
+            <a href="{% url 'users:object_list' %}" class="platform_button_two">{% trans "Отмена" %}</a>
         </div>
     </form>
 

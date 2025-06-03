@@ -1,0 +1,893 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 09:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: pages/templates/pages/base.html:22
+msgid "logo"
+msgstr "logo"
+
+#: pages/templates/pages/base.html:27
+msgid "close"
+msgstr "close"
+
+#: pages/templates/pages/base.html:31 pages/templates/pages/base.html:65
+msgid "About Us"
+msgstr "About Us"
+
+#: pages/templates/pages/base.html:34 pages/templates/pages/base.html:66
+msgid "About Product"
+msgstr "About Product"
+
+#: pages/templates/pages/base.html:37 pages/templates/pages/base.html:67
+msgid "Why Us"
+msgstr "Why Us"
+
+#: pages/templates/pages/base.html:40 pages/templates/pages/base.html:68
+msgid "Contacts"
+msgstr "Contacts"
+
+#: pages/templates/pages/base.html:50 pages/templates/pages/sign-in.html:11
+#: pages/templates/pages/sign-in.html:24
+msgid "Sign In"
+msgstr "Sign In"
+
+#: pages/templates/pages/base.html:55
+msgid "menu"
+msgstr "menu"
+
+#: pages/templates/pages/base.html:72 pages/templates/pages/base.html:78
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: pages/templates/pages/base.html:75 pages/templates/pages/base.html:81
+msgid "Telegram"
+msgstr "Telegram"
+
+#: pages/templates/pages/sign-in.html:18
+msgid "Registration Image"
+msgstr ""
+
+#: pages/templates/pages/sign-in.html:22
+msgid "Logo"
+msgstr ""
+
+#: pages/templates/pages/sign-in.html:27 pages/templates/pages/sign-in.html:28
+msgid "New User"
+msgstr ""
+
+#: pages/templates/pages/sign-in.html:31 pages/templates/pages/sign-in.html:32
+msgid "Existing User"
+msgstr ""
+
+#: subscriptions/admin.py:16 subscriptions/admin.py:43 users/admin.py:133
+#: users/admin.py:161
+msgid "Additional Information"
+msgstr ""
+
+#: subscriptions/admin.py:37 users/admin.py:155
+msgid "Main Information"
+msgstr ""
+
+#: subscriptions/admin.py:40 users/admin.py:158
+msgid "Payment Information"
+msgstr ""
+
+#: subscriptions/decorators.py:17
+msgid "You need to sign in to access this page"
+msgstr ""
+
+#: subscriptions/decorators.py:26
+msgid "An active subscription is required to access this page"
+msgstr ""
+
+#: subscriptions/models.py:6 subscriptions/models.py:29
+msgid "Name"
+msgstr ""
+
+#: subscriptions/models.py:7
+msgid "Price"
+msgstr ""
+
+#: subscriptions/models.py:8
+msgid "Duration (days)"
+msgstr ""
+
+#: subscriptions/models.py:9 subscriptions/models.py:30
+#: subscriptions/models.py:135
+msgid "Description"
+msgstr ""
+
+
+#: subscriptions/models.py:11 subscriptions/models.py:31
+msgid "Created"
+msgstr ""
+
+#: subscriptions/models.py:12
+msgid "Updated"
+msgstr ""
+
+#: subscriptions/models.py:15 subscriptions/models.py:27
+#: subscriptions/models.py:59
+msgid "Subscription Plan"
+msgstr ""
+
+#: subscriptions/models.py:16
+msgid "Subscription Plans"
+msgstr ""
+
+#: subscriptions/models.py:34
+msgid "Subscription Feature"
+msgstr ""
+
+#: subscriptions/models.py:35
+msgid "Subscription Features"
+msgstr ""
+
+#: subscriptions/models.py:43
+msgid "Pending Payment"
+msgstr ""
+
+#: subscriptions/models.py:44
+msgid "Paid"
+msgstr ""
+
+#: subscriptions/models.py:45
+msgid "Payment Error"
+msgstr ""
+
+#: subscriptions/models.py:46
+msgid "Refunded"
+msgstr ""
+
+#: subscriptions/models.py:53 subscriptions/models.py:123
+msgid "User"
+msgstr ""
+
+#: subscriptions/models.py:61
+msgid "Start Date"
+msgstr ""
+
+#: subscriptions/models.py:62
+msgid "End Date"
+msgstr ""
+
+#: subscriptions/models.py:63
+msgid "Active"
+msgstr ""
+
+#: subscriptions/models.py:65
+msgid "Payment Status"
+msgstr ""
+
+#: subscriptions/models.py:71
+msgid "Payment ID"
+msgstr ""
+
+#: subscriptions/models.py:77
+msgid "Auto Renewal"
+msgstr ""
+
+#: subscriptions/models.py:84 subscriptions/models.py:108
+msgid "Subscription"
+msgstr ""
+
+#: subscriptions/models.py:106
+msgid "Deposit"
+msgstr ""
+
+#: subscriptions/models.py:107
+msgid "Withdrawal"
+msgstr ""
+
+#: subscriptions/models.py:109
+msgid "Refund"
+msgstr ""
+
+#: subscriptions/models.py:113
+msgid "Processing"
+msgstr ""
+
+#: subscriptions/models.py:114
+msgid "Success"
+msgstr ""
+
+#: subscriptions/models.py:115
+msgid "Error"
+msgstr ""
+
+#: subscriptions/models.py:116
+msgid "Cancelled"
+msgstr ""
+
+#: subscriptions/models.py:126
+msgid "Operation Type"
+msgstr ""
+
+#: subscriptions/models.py:131
+msgid "Amount"
+msgstr ""
+
+#: subscriptions/models.py:137
+msgid "Status"
+msgstr ""
+
+
+#: subscriptions/views.py:38
+msgid "You already have an active subscription"
+msgstr ""
+
+#: subscriptions/views.py:66
+msgid "Subscription successfully cancelled"
+msgstr ""
+
+#: subscriptions/views.py:81
+msgid "Subscription successfully renewed"
+msgstr ""
+
+#: users/forms.py:325
+msgid "Thailand"
+msgstr ""
+
+#: users/forms.py:326
+msgid "Vietnam"
+msgstr ""
+
+#: users/forms.py:327
+msgid "Cambodia"
+msgstr ""
+
+#: users/forms.py:328
+msgid "Indonesia"
+msgstr ""
+
+#: users/forms.py:329
+msgid "Malaysia"
+msgstr ""
+
+#: users/forms.py:333
+msgid "Bank Transfer"
+msgstr ""
+
+#: users/forms.py:334
+msgid "Credit Card"
+msgstr ""
+
+#: users/forms.py:335
+msgid "Cryptocurrency"
+msgstr ""
+
+#: users/forms.py:340
+msgid "Country"
+msgstr ""
+
+#: users/forms.py:345
+msgid "Payment Method"
+msgstr ""
+
+#: users/forms.py:349
+msgid "Invoice Email"
+msgstr ""
+
+msgid "О нас"
+msgstr "About Us"
+
+msgid "О продукте"
+msgstr "About Product"
+
+msgid "Почему мы"
+msgstr "Why Us"
+
+msgid "Контакты"
+msgstr "Contacts"
+
+msgid "Вход"
+msgstr "Sign In"
+
+msgid "логотип"
+msgstr "logo"
+
+msgid "закрыть"
+msgstr "close"
+
+msgid "меню"
+msgstr "menu"
+
+msgid "Главная"
+msgstr "Home"
+
+msgid "Финансовые операции"
+msgstr "Financial Operations"
+
+msgid "Просмотр объектов"
+msgstr "View Objects"
+
+msgid "Каталог агентов"
+msgstr "Agents Catalog"
+
+msgid "Все застройщики"
+msgstr "All Developers"
+
+msgid "Регистрация объектов"
+msgstr "Object Registration"
+
+msgid "Тех. поддержка"
+msgstr "Technical Support"
+
+msgid "Политика конфиденциальности"
+msgstr "Privacy Policy"
+
+msgid "Условия использования"
+msgstr "Terms of Use"
+
+msgid "Тариф"
+msgstr "Tariff"
+
+msgid "Статус"
+msgstr "Status"
+
+msgid "Добавить объект"
+msgstr "Add Object"
+
+msgid "Профиль"
+msgstr "Profile"
+
+msgid "Выйти"
+msgstr "Logout"
+
+msgid "Баннер профиля"
+msgstr "Profile Banner"
+
+msgid "Баннер профиля по умолчанию"
+msgstr "Default Profile Banner"
+
+msgid "Добавить фото"
+msgstr "Add Photo"
+
+msgid "Фото профиля"
+msgstr "Profile Photo"
+
+msgid "Фото профиля по умолчанию"
+msgstr "Default Profile Photo"
+
+msgid "Текущий тариф"
+msgstr "Current Tariff"
+
+msgid "Действителен до"
+msgstr "Valid until"
+
+msgid "Изменить"
+msgstr "Change"
+
+msgid "Продлить"
+msgstr "Extend"
+
+msgid "Личные данные"
+msgstr "Personal Data"
+
+msgid "Имя"
+msgstr "First Name"
+
+msgid "Фамилия"
+msgstr "Last Name"
+
+msgid "Компания"
+msgstr "Company"
+
+msgid "Язык"
+msgstr "Language"
+
+msgid "Контактная информация"
+msgstr "Contact Information"
+
+msgid "Контактный номер"
+msgstr "Contact Number"
+
+msgid "Электронный адрес"
+msgstr "Email Address"
+
+msgid "Предпочтительный канал связи"
+msgstr "Preferred Contact Method"
+
+msgid "Сохранить изменения"
+msgstr "Save Changes"
+
+msgid "Каталог объектов"
+msgstr "Objects Catalog"
+
+msgid "Поиск недвижимости"
+msgstr "Real Estate Search"
+
+msgid "Местонахождение объекта"
+msgstr "Object Location"
+
+msgid "Поиск по названию"
+msgstr "Search by Name"
+
+msgid "Поиск по названию застройщика"
+msgstr "Search by Developer Name"
+
+msgid "Цена"
+msgstr "Price"
+
+msgid "Тип объекта"
+msgstr "Object Type"
+
+msgid "До пляжа"
+msgstr "Distance to Beach"
+
+msgid "Метров"
+msgstr "Meters"
+
+msgid "Расширенный поиск"
+msgstr "Advanced Search"
+
+msgid "Найти"
+msgstr "Search"
+
+msgid "Очистить"
+msgstr "Clear"
+
+msgid "Показать на карте"
+msgstr "Show on Map"
+
+msgid "Сортировать"
+msgstr "Sort"
+
+msgid "По умолчанию"
+msgstr "Default"
+
+msgid "По алфавиту"
+msgstr "Alphabetically"
+
+msgid "По региону"
+msgstr "By Region"
+
+msgid "Нет изображения"
+msgstr "No Image"
+
+msgid "У вас пока нет добавленных объектов"
+msgstr "You don't have any objects added yet"
+
+msgid "Скрыть расширенный поиск"
+msgstr "Hide Advanced Search"
+
+msgid "Объекты"
+msgstr "Objects"
+
+msgid "Класс жилья"
+msgstr "Housing Class"
+
+msgid "Тип дома"
+msgstr "House Type"
+
+msgid "Срок сдачи"
+msgstr "Completion Date"
+
+msgid "Парковка"
+msgstr "Parking"
+
+msgid "Этажность"
+msgstr "Number of Floors"
+
+msgid "Корпуса"
+msgstr "Buildings"
+
+msgid "Файлы застройщика"
+msgstr "Developer Files"
+
+msgid "Комиссии"
+msgstr "Commissions"
+
+msgid "Связаться со своим личным менеджером"
+msgstr "Contact Your Personal Manager"
+
+msgid "Местонахождение"
+msgstr "Location"
+
+msgid "Страна"
+msgstr "Country"
+
+msgid "Город"
+msgstr "City"
+
+msgid "Район"
+msgstr "District"
+
+msgid "Характеристики объекта"
+msgstr "Object Characteristics"
+
+msgid "Класс"
+msgstr "Class"
+
+msgid "Тип строения"
+msgstr "Building Type"
+
+msgid "Год сдачи"
+msgstr "Completion Year"
+
+msgid "Кол-во этажей"
+msgstr "Number of Floors"
+
+msgid "Описание"
+msgstr "Description"
+
+msgid "Обновлено"
+msgstr "Updated"
+
+msgid "Местонахождение на карте"
+msgstr "Location on Map"
+
+msgid "Еще от застройщика"
+msgstr "More from Developer"
+
+msgid "Избранное"
+msgstr "Favorites"
+
+msgid "Застройщики"
+msgstr "Developers"
+
+msgid "У вас пока нет избранных объектов"
+msgstr "You don't have any favorite objects yet"
+
+msgid "У вас пока нет избранных застройщиков"
+msgstr "You don't have any favorite developers yet"
+
+msgid "Финансы"
+msgstr "Finance"
+
+msgid "Текущий баланс"
+msgstr "Current Balance"
+
+msgid "Действие подписки"
+msgstr "Subscription Period"
+
+msgid "дней"
+msgstr "days"
+
+msgid "Нет активной подписки"
+msgstr "No Active Subscription"
+
+msgid "Подписаться"
+msgstr "Subscribe"
+
+msgid "История операций"
+msgstr "Transaction History"
+
+msgid "Дата и время операции"
+msgstr "Transaction Date and Time"
+
+msgid "Тип операции"
+msgstr "Transaction Type"
+
+msgid "Сумма операции"
+msgstr "Transaction Amount"
+
+msgid "Нет операций"
+msgstr "No Transactions"
+
+msgid "Доступные тарифы"
+msgstr "Available Plans"
+
+msgid "Базовый тариф"
+msgstr "Basic Plan"
+
+msgid "Расширенный с Due diligence"
+msgstr "Extended with Due Diligence"
+
+msgid "Партнерский тариф"
+msgstr "Partner Plan"
+
+msgid "Подключить"
+msgstr "Connect"
+
+msgid "Формирование счета"
+msgstr "Invoice Generation"
+
+msgid "Введите страну"
+msgstr "Enter Country"
+
+msgid "Выберите страну"
+msgstr "Select Country"
+
+msgid "Введите способ оплаты"
+msgstr "Enter Payment Method"
+
+msgid "Выберите способ оплаты"
+msgstr "Select Payment Method"
+
+msgid "Куда направить счет"
+msgstr "Where to Send Invoice"
+
+msgid "Отправить"
+msgstr "Send"
+
+msgid "Перечень заявок на регистрацию объектов"
+msgstr "List of Object Registration Applications"
+
+msgid "Все заявки"
+msgstr "All Applications"
+
+msgid "Опубликованные"
+msgstr "Published"
+
+msgid "На модерации"
+msgstr "Under Moderation"
+
+msgid "Все статусы"
+msgstr "All Statuses"
+
+msgid "Неопубликованные"
+msgstr "Unpublished"
+
+msgid "Дата сдачи проекта"
+msgstr "Project Completion Date"
+
+msgid "от старых к новым"
+msgstr "oldest to newest"
+
+msgid "от новых к старым"
+msgstr "newest to oldest"
+
+msgid "Каталог застройщиков"
+msgstr "Developers Catalog"
+
+msgid "Поиск застройщиков"
+msgstr "Search Developers"
+
+msgid "Таиланд"
+msgstr "Thailand"
+
+msgid "Введите название застройщика"
+msgstr "Enter Developer Name"
+
+msgid "Сбросить"
+msgstr "Reset"
+
+msgid "от А до Я"
+msgstr "A to Z"
+
+msgid "от Я до А"
+msgstr "Z to A"
+
+msgid "от старых пользователей к новым"
+msgstr "Oldest Users First"
+
+msgid "от новых пользователей к старым"
+msgstr "Newest Users First"
+
+msgid "Error:"
+msgstr "Error:"
+
+msgid "Тип компании"
+msgstr "Company Type"
+
+msgid "Застройщик"
+msgstr "Developer"
+
+msgid "На платформе"
+msgstr "On Platform"
+
+msgid "Веб-сайт"
+msgstr "Website"
+
+msgid "Язык общения"
+msgstr "Communication Language"
+
+msgid "Время работы"
+msgstr "Working Hours"
+
+msgid "Открыто сейчас"
+msgstr "Open Now"
+
+msgid "Понедельник - пятница"
+msgstr "Monday - Friday"
+
+msgid "Суббота"
+msgstr "Saturday"
+
+msgid "Воскресенье"
+msgstr "Sunday"
+
+msgid "выходной"
+msgstr "Day Off"
+
+msgid "Соц. сети"
+msgstr "Social Networks"
+
+msgid "Объекты застройщика"
+msgstr "Developer's Objects"
+
+msgid "Другие застройщики"
+msgstr "Other Developers"
+
+msgid "от"
+msgstr "from"
+
+msgid "Техническая поддержка"
+msgstr "Technical Support"
+
+msgid "Категория"
+msgstr "Category"
+
+msgid "Сообщение"
+msgstr "Message"
+
+msgid "Введите ваше сообщение"
+msgstr "Enter your message"
+
+msgid "Я ознакомлен и согласен с правилами обработки персональных данных"
+msgstr "I have read and agree to the personal data processing rules"
+
+msgid "Обращение"
+msgstr "Ticket"
+
+msgid "Просмотреть"
+msgstr "View"
+
+msgid "Агенты"
+msgstr "Agents"
+
+msgid "Поиск Агентов"
+msgstr "Search Agents"
+
+msgid "Введите название агента"
+msgstr "Enter Agent Name"
+
+
+msgid "Не указано"
+msgstr "Not Specified"
+
+msgid "Агент"
+msgstr "Agent"
+
+msgid "Не указан"
+msgstr "Not Specified"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "VK"
+msgstr "VK"
+
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid "Найдите надежного застройщика для вашего проекта"
+msgstr "Find a reliable developer for your project"
+
+msgid "Введите название компании"
+msgstr "Enter company name"
+
+msgid "Регион"
+msgstr "Region"
+
+msgid "Все регионы"
+msgstr "All Regions"
+
+msgid "Тип недвижимости"
+msgstr "Property Type"
+
+msgid "Все типы"
+msgstr "All Types"
+
+msgid "Жилая"
+msgstr "Residential"
+
+msgid "Коммерческая"
+msgstr "Commercial"
+
+msgid "Земельные участки"
+msgstr "Land Plots"
+
+msgid "Нет фото"
+msgstr "No Photo"
+
+msgid "Подробнее"
+msgstr "More Details"
+
+msgid "Застройщики не найдены"
+msgstr "No Developers Found"
+
+msgid "Предыдущая"
+msgstr "Previous"
+
+msgid "Следующая"
+msgstr "Next"
+
+msgid "Добавление объекта"
+msgstr "Add Object"
+
+msgid "Пожалуйста, исправьте следующие ошибки:"
+msgstr "Please correct the following errors:"
+
+msgid "Название объекта"
+msgstr "Object Name"
+
+msgid "Адрес"
+msgstr "Address"
+
+msgid "Закрыть карту"
+msgstr "Close Map"
+
+msgid "Характеристики"
+msgstr "Features"
+
+msgid "Перечень удобств"
+msgstr "Amenities List"
+
+msgid "Цена и сроки"
+msgstr "Price and Terms"
+
+msgid "Цена за м²"
+msgstr "Price per m²"
+
+msgid "Дата сдачи"
+msgstr "Completion Date"
+
+msgid "Фотографии"
+msgstr "Photos"
+
+msgid "Загрузка"
+msgstr "Upload"
+
+msgid "Выберите файлы"
+msgstr "Choose Files"
+
+msgid "JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте. Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены"
+msgstr "JPEG, file size no more than 4MB, image size no more than 1600px width / 3200px height. PNG images will be converted to JPEG. Images larger than 4MB or more than 1600px width / 3200px height will be reduced"
+
+msgid "Сохранить"
+msgstr "Save"
+
+msgid "Отмена"
+msgstr "Cancel"
+
+msgid "Редактирование профиля"
+msgstr "Edit Profile"
+
+msgid "Редактирование"
+msgstr "Edit"
+
+msgid "Аватар"
+msgstr "Avatar"
+
+msgid "Рекомендуемый размер: 200x200px, до 2MB"
+msgstr "Recommended size: 200x200px, up to 2MB"
+
+msgid "Основная информация"
+msgstr "Basic Information"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Телефон"
+msgstr "Phone"
+
+msgid "Информация о компании"
+msgstr "Company Information"
+
+msgid "Название компании"
+msgstr "Company Name"
+
+msgid "Юридический адрес"
+msgstr "Legal Address"
+
+msgid "О себе"
+msgstr "About Me"

@@ -1,13 +1,14 @@
 {% extends 'profile/profile_base.html' %}
+{% load i18n %}
 
-{% block title %}Каталог застройщиков{% endblock %}
+{% block title %}{% trans "Каталог застройщиков" %}{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <!-- Заголовок страницы -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Каталог застройщиков</h1>
-        <p class="mt-2 text-gray-600">Найдите надежного застройщика для вашего проекта</p>
+        <h1 class="text-3xl font-bold text-gray-900">{% trans "Каталог застройщиков" %}</h1>
+        <p class="mt-2 text-gray-600">{% trans "Найдите надежного застройщика для вашего проекта" %}</p>
     </div>
 
     <!-- Фильтры и поиск -->
@@ -16,18 +17,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- Поиск по названию -->
                 <div>
-                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Поиск по названию</label>
+                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Поиск по названию" %}</label>
                     <input type="text" name="search" id="search" 
                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                           placeholder="Введите название компании">
+                           placeholder="{% trans "Введите название компании" %}">
                 </div>
 
                 <!-- Регион -->
                 <div>
-                    <label for="region" class="block text-sm font-medium text-gray-700 mb-1">Регион</label>
+                    <label for="region" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Регион" %}</label>
                     <select name="region" id="region" 
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <option value="">Все регионы</option>
+                        <option value="">{% trans "Все регионы" %}</option>
                         {% for region in regions %}
                         <option value="{{ region.id }}">{{ region.name }}</option>
                         {% endfor %}
@@ -36,13 +37,13 @@
 
                 <!-- Тип недвижимости -->
                 <div>
-                    <label for="real_estate_type" class="block text-sm font-medium text-gray-700 mb-1">Тип недвижимости</label>
+                    <label for="real_estate_type" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Тип недвижимости" %}</label>
                     <select name="real_estate_type" id="real_estate_type" 
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <option value="">Все типы</option>
-                        <option value="residential">Жилая</option>
-                        <option value="commercial">Коммерческая</option>
-                        <option value="land">Земельные участки</option>
+                        <option value="">{% trans "Все типы" %}</option>
+                        <option value="residential">{% trans "Жилая" %}</option>
+                        <option value="commercial">{% trans "Коммерческая" %}</option>
+                        <option value="land">{% trans "Земельные участки" %}</option>
                     </select>
                 </div>
             </div>
@@ -51,11 +52,11 @@
             <div class="flex justify-end space-x-4">
                 <button type="submit" 
                         class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-                    Найти
+                    {% trans "Найти" %}
                 </button>
                 <a href="{% url 'users:developer_list' %}" 
                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                    Сбросить
+                    {% trans "Сбросить" %}
                 </a>
             </div>
         </form>
@@ -72,7 +73,7 @@
                      class="w-full h-full object-cover">
                 {% else %}
                 <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-400">Нет фото</span>
+                    <span class="text-gray-400">{% trans "Нет фото" %}</span>
                 </div>
                 {% endif %}
             </div>
@@ -104,13 +105,13 @@
                 <!-- Кнопка подробнее -->
                 <a href="{% url 'users:developer_detail' developer.id %}" 
                    class="block w-full text-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-                    Подробнее
+                    {% trans "Подробнее" %}
                 </a>
             </div>
         </div>
         {% empty %}
         <div class="col-span-full text-center py-12">
-            <p class="text-gray-500">Застройщики не найдены</p>
+            <p class="text-gray-500">{% trans "Застройщики не найдены" %}</p>
         </div>
         {% endfor %}
     </div>
@@ -122,7 +123,7 @@
             {% if page_obj.has_previous %}
             <a href="?page={{ page_obj.previous_page_number }}" 
                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">Предыдущая</span>
+                <span class="sr-only">{% trans "Предыдущая" %}</span>
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
@@ -145,7 +146,7 @@
             {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}" 
                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">Следующая</span>
+                <span class="sr-only">{% trans "Следующая" %}</span>
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>

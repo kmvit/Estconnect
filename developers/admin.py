@@ -3,6 +3,7 @@ from .models import (
     ConstructionObject, ConstructionObjectImage, HousingClass,
     HousingType, ContactMethod
 )
+from modeltranslation.admin import TabbedTranslationAdmin
 
 
 @admin.register(ContactMethod)
@@ -29,13 +30,14 @@ class ConstructionObjectImageInline(admin.TabularInline):
 
 # Админка для объектов застройки
 @admin.register(ConstructionObject)
-class ConstructionObjectAdmin(admin.ModelAdmin):
+class ConstructionObjectAdmin(TabbedTranslationAdmin):
     list_display = ('name', 'city', 'property_type', 'comfort_type', 'area', 'project_status', 'is_published')
     list_filter = ('property_type', 'comfort_type', 'project_status', 'ownership_type', 'is_published')
     search_fields = ('name', 'city', 'district')
     inlines = [ConstructionObjectImageInline]
     date_hierarchy = 'created_at'
     list_per_page = 20
+
 
 
 @admin.register(HousingClass)
