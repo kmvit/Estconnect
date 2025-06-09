@@ -1,13 +1,14 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Page Three{% endblock %}
+{% block title %}{% trans 'Page Three' %}{% endblock %}
 
 {% block content %}
 <section class="main-screen-bg">
     <div class="container">
         <img src="{% static 'images/main-screen-bg.png' %}" alt="">
-        <h1 class="main-screen-info-title main-screen-bg-title">Почему EstСonnect ?</h1>
+        <h1 class="main-screen-info-title main-screen-bg-title">{% trans 'Почему EstСonnect ?' %}</h1>
     </div>
 </section>
 <section class="subscribe subscribe-reverse">
@@ -16,41 +17,41 @@
             <img src="{% static 'images/subscribe-reverse-img.png' %}" alt="">
         </div>
         <div class="subscribe-info">
-            <p class="subscribe-info-title">Увеличиваем доходность бизнеса, благодаря одной подписке</p>
+            <p class="subscribe-info-title">{% trans 'Увеличиваем доходность бизнеса, благодаря одной подписке' %}</p>
             <div class="subscribe-info-items">
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">01</p>
                     <p class="subscribe-info-item-text">
-                        Регулярный анализ рынка спроса потребителей
+                        {% trans 'Регулярный анализ рынка спроса потребителей' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">02</p>
                     <p class="subscribe-info-item-text">
-                        Исключение специфических рисков, связанных <br> с покупкой объектов недвижимости
+                        {% trans 'Исключение специфических рисков, связанных с покупкой объектов недвижимости' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">03</p>
                     <p class="subscribe-info-item-text">
-                        Всегда свежая подборка новых предложений: все возможные локации
+                        {% trans 'Всегда свежая подборка новых предложений: все возможные локации' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">04</p>
                     <p class="subscribe-info-item-text">
-                        Удобная оптимизация поиска: необходимая информация в быстром доступе
+                        {% trans 'Удобная оптимизация поиска: необходимая информация в быстром доступе' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">05</p>
                     <p class="subscribe-info-item-text">
-                        Проверка репутации и рейтинга застройщика, проверка объекта на юридическую чистоту
+                        {% trans 'Проверка репутации и рейтинга застройщика, проверка объекта на юридическую чистоту' %}
                     </p>
                 </div>
             </div>
             <p class="subscribe-info-text">
-                Наши менеджеры лично выезжают <br> на объекты, и заключают соглашения <br> о сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным предложениям первыми!
+                {% trans 'Наши менеджеры лично выезжают на объекты, и заключают соглашения о сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным предложениям первыми!' %}
             </p>
         </div>
     </div>
@@ -58,10 +59,10 @@
 <section class="auth-cta">
     <div class="container">
         <div class="auth-cta-content">
-            <h3 class="auth-cta-title">С нами продавать недвижимость просто!</h3>
+            <h3 class="auth-cta-title">{% trans 'С нами продавать недвижимость просто!' %}</h3>
             <div class="auth-cta-buttons">
-                <button class="button auth-cta-button">Вход</button>
-                <button class="button auth-cta-button">Регистрация</button>
+                <button class="button auth-cta-button">{% trans 'Вход' %}</button>
+                <button class="button auth-cta-button">{% trans 'Регистрация' %}</button>
             </div>
         </div>
     </div>
