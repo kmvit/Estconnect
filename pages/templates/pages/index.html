@@ -1,13 +1,14 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <section class="main-screen">
     <div class="container">
         <div class="main-screen-info">
-            <h1 class="main-screen-info-title">Выход на международный рынок недвижимости</h1>
-            <p class="main-screen-info-text">Эксклюзивные предложения <br> и безопасные сделки</p>
-            <button class="button main-screen-button">Оставить заявку</button>
+            <h1 class="main-screen-info-title">{% trans 'Выход на международный рынок недвижимости' %}</h1>
+            <p class="main-screen-info-text">{% trans 'Эксклюзивные предложения' %} <br> {% trans 'и безопасные сделки' %}</p>
+            <button class="button main-screen-button">{% trans 'Оставить заявку' %}</button>
         </div>
         <div class="main-screen-image">
             <img src="{% static 'images/main-screen-img.png' %}" alt="">
@@ -17,25 +18,24 @@
 <section class="text-box">
     <div class="container">
         <h3 class="text-box-title">EstConnect</h3>
-        <p class="text-box-text">EstConnect - digital сервис работы с объектами недвижимости по всему миру, который
-            исключает риски и содействует быстрой интеграции в сегмент первичного риэлтерского рынка</p>
+        <p class="text-box-text">{% trans 'EstConnect - digital сервис работы с объектами недвижимости по всему миру, который исключает риски и содействует быстрой интеграции в сегмент первичного риэлтерского рынка' %}</p>
     </div>
 </section>
 <section class="workAreas">
     <div class="container">
-        <h3 class="workAreas-title">Три направления работы сервиса</h3>
+        <h3 class="workAreas-title">{% trans 'Три направления работы сервиса' %}</h3>
         <div class="workAreas-items">
             <div class="workAreas-item">
                 <img src="{% static 'images/workAreas-img-1.png' %}" alt="">
-                <h4 class="workAreas-item-title">Каталог недвижимости</h4>
+                <h4 class="workAreas-item-title">{% trans 'Каталог недвижимости' %}</h4>
             </div>
             <div class="workAreas-item">
                 <img src="{% static 'images/workAreas-img-2.png' %}" alt="">
-                <h4 class="workAreas-item-title">Юридический мониторинг</h4>
+                <h4 class="workAreas-item-title">{% trans 'Юридический мониторинг' %}</h4>
             </div>
             <div class="workAreas-item">
                 <img src="{% static 'images/workAreas-img-3.png' %}" alt="">
-                <h4 class="workAreas-item-title">Прямые контракты с застройщиками</h4>
+                <h4 class="workAreas-item-title">{% trans 'Прямые контракты с застройщиками' %}</h4>
             </div>
         </div>
     </div>
@@ -43,10 +43,10 @@
 <section class="auth-cta">
     <div class="container">
         <div class="auth-cta-content">
-            <h3 class="auth-cta-title">С нами продавать недвижимость просто!</h3>
+            <h3 class="auth-cta-title">{% trans 'С нами продавать недвижимость просто!' %}</h3>
             <div class="auth-cta-buttons">
-                <a href="{% url 'users:login' %}" class="button auth-cta-button">Вход</a>
-                <a href="{% url 'users:register' %}" class="button auth-cta-button">Регистрация</a>
+                <a href="{% url 'users:login' %}" class="button auth-cta-button">{% trans 'Вход' %}</a>
+                <a href="{% url 'users:register' %}" class="button auth-cta-button">{% trans 'Регистрация' %}</a>
             </div>
         </div>
     </div>

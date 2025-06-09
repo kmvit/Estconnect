@@ -130,8 +130,10 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ru'
 
 LANGUAGES = [
-    ('ru', 'Русский'),
-    ('en', 'English'),
+    ('ru', 'RU'),
+    ('en', 'EN'),
+    ('zh-hans', 'CH'),  # Китайский (упрощенный)
+    ('th', 'TH'),  # Тайский
 ]
 
 LOCALE_PATHS = [
@@ -164,8 +166,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Modeltranslation settings
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
-MODELTRANSLATION_LANGUAGES = ('ru', 'en')
-MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en')
+MODELTRANSLATION_LANGUAGES = ('ru', 'en', 'zh-hans', 'th')
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en', 'zh-hans', 'th')
 
 # Session settings
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -176,3 +178,6 @@ LANGUAGE_COOKIE_NAME = 'django_language'
 LANGUAGE_COOKIE_AGE = None  # Кука будет жить до закрытия браузера
 LANGUAGE_COOKIE_DOMAIN = None
 LANGUAGE_COOKIE_PATH = '/'
+LANGUAGE_COOKIE_SECURE = False
+LANGUAGE_COOKIE_HTTPONLY = False
+LANGUAGE_COOKIE_SAMESITE = None

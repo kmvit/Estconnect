@@ -1,7 +1,8 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Контакты{% endblock %}
+{% block title %}{% trans 'Контакты' %}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
@@ -9,33 +10,33 @@
 
 {% block breadcrumb %}
 <div class="breadcrumb-content">
-    <a href="{% url 'users:profile' %}">Главная</a>
+    <a href="{% url 'users:profile' %}">{% trans 'Главная' %}</a>
     <span>/</span>
-    <span>Контакты</span>
+    <span>{% trans 'Контакты' %}</span>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="contacts-page">
-        <h2 class="text-box-title">Офисы Estconnect</h2>
+        <h2 class="text-box-title">{% trans 'Офисы Estconnect' %}</h2>
         <div class="contacts-container">
             <!-- Левая колонка с контактами -->
         <div class="contacts-info">
             <!-- Первый блок контактов -->
             <div class="contact-block">
-                <h3>Главный офис</h3>
+                <h3>{% trans 'Главный офис' %}</h3>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <span class="contact-label">Страна:</span>
-                        <span class="contact-value">Эстония</span>
+                        <span class="contact-label">{% trans 'Страна' %}:</span>
+                        <span class="contact-value">{% trans 'Эстония' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Адрес:</span>
-                        <span class="contact-value">ул. Примерная, 123, Таллинн</span>
+                        <span class="contact-label">{% trans 'Адрес' %}:</span>
+                        <span class="contact-value">{% trans 'ул. Примерная, 123, Таллинн' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-label">{% trans 'Телефон' %}:</span>
                         <span class="contact-value">+372 1234 5678</span>
                     </div>
                     <div class="contact-item">
@@ -47,18 +48,18 @@
 
             <!-- Второй блок контактов -->
             <div class="contact-block">
-                <h3>Региональный офис</h3>
+                <h3>{% trans 'Региональный офис' %}</h3>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <span class="contact-label">Страна:</span>
-                        <span class="contact-value">Эстония</span>
+                        <span class="contact-label">{% trans 'Страна' %}:</span>
+                        <span class="contact-value">{% trans 'Эстония' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Адрес:</span>
-                        <span class="contact-value">пр. Деловой, 45, Тарту</span>
+                        <span class="contact-label">{% trans 'Адрес' %}:</span>
+                        <span class="contact-value">{% trans 'пр. Деловой, 45, Тарту' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-label">{% trans 'Телефон' %}:</span>
                         <span class="contact-value">+372 8765 4321</span>
                     </div>
                     <div class="contact-item">
@@ -70,18 +71,18 @@
 
             <!-- Третий блок контактов -->
             <div class="contact-block">
-                <h3>Поддержка</h3>
+                <h3>{% trans 'Поддержка' %}</h3>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <span class="contact-label">Страна:</span>
-                        <span class="contact-value">Эстония</span>
+                        <span class="contact-label">{% trans 'Страна' %}:</span>
+                        <span class="contact-value">{% trans 'Эстония' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Адрес:</span>
-                        <span class="contact-value">ул. Техническая, 67, Нарва</span>
+                        <span class="contact-label">{% trans 'Адрес' %}:</span>
+                        <span class="contact-value">{% trans 'ул. Техническая, 67, Нарва' %}</span>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-label">Телефон:</span>
+                        <span class="contact-label">{% trans 'Телефон' %}:</span>
                         <span class="contact-value">+372 2468 1357</span>
                     </div>
                     <div class="contact-item">
@@ -115,19 +116,19 @@
         // Добавляем метки для каждого офиса
         var offices = [
             {
-                name: 'Главный офис',
+                name: '{% trans "Главный офис" %}',
                 coords: [59.436962, 24.753574],
-                address: 'ул. Примерная, 123, Таллинн'
+                address: '{% trans "ул. Примерная, 123, Таллинн" %}'
             },
             {
-                name: 'Региональный офис',
+                name: '{% trans "Региональный офис" %}',
                 coords: [58.377625, 26.729006],
-                address: 'пр. Деловой, 45, Тарту'
+                address: '{% trans "пр. Деловой, 45, Тарту" %}'
             },
             {
-                name: 'Поддержка',
+                name: '{% trans "Поддержка" %}',
                 coords: [59.377625, 28.190277],
-                address: 'ул. Техническая, 67, Нарва'
+                address: '{% trans "ул. Техническая, 67, Нарва" %}'
             }
         ];
 

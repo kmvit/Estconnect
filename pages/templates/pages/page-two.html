@@ -1,25 +1,26 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Page Two{% endblock %}
+{% block title %}{% trans 'Page Two' %}{% endblock %}
 
 {% block content %}
 <section class="main-screen-bg">
     <div class="container">
         <img src="{% static 'images/main-screen-bg.png' %}" alt="">
-        <h1 class="main-screen-info-title main-screen-bg-title">Lorem Ipsum is simply dummy text of the printing </h1>
+        <h1 class="main-screen-info-title main-screen-bg-title">{% trans 'Откройте новые горизонты для бизнеса — без лишних затрат и рисков' %}</h1>
     </div>
 </section>
 <section class="whatDoing">
     <div class="container">
-        <h3 class="text-box-title whatDoing-title">Делегируем Ваши бизнес - задачи</h3>
+        <h3 class="text-box-title whatDoing-title">{% trans 'Делегируем Ваши бизнес - задачи' %}</h3>
         <div class="whatDoing-items">
             <div class="whatDoing-item">
                 <div class="whatDoing-item-icon">
                     <img src="{% static 'images/whatDoing-item-icon-1.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Заключаем договор  сотрудничества с застройщиком
+                    {% trans 'Заключаем договор сотрудничества с застройщиком' %}
                 </p>
             </div>
             <div class="whatDoing-item">
@@ -27,7 +28,7 @@
                     <img src="{% static 'images/whatDoing-item-icon-2.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Изучаем и анализируем информацию
+                    {% trans 'Изучаем и анализируем информацию' %}
                 </p>
             </div>
             <div class="whatDoing-item">
@@ -35,7 +36,7 @@
                     <img src="{% static 'images/whatDoing-item-icon-3.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Анализируем рентабельность и риски
+                    {% trans 'Анализируем рентабельность и риски' %}
                 </p>
             </div>
             <div class="whatDoing-item">
@@ -43,7 +44,7 @@
                     <img src="{% static 'images/whatDoing-item-icon-4.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Ищем подходящие объекты и локации
+                    {% trans 'Ищем подходящие объекты и локации' %}
                 </p>
             </div>
             <div class="whatDoing-item">
@@ -51,7 +52,7 @@
                     <img src="{% static 'images/whatDoing-item-icon-5.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Проверяем застройщика и юридическую чистоту объекта
+                    {% trans 'Проверяем застройщика и юридическую чистоту объекта' %}
                 </p>
             </div>
             <div class="whatDoing-item">
@@ -59,7 +60,7 @@
                     <img src="{% static 'images/whatDoing-item-icon-6.svg' %}" alt="">
                 </div>
                 <p class="whatDoing-item-title">
-                    Публикуем собранную информацию о ТОП объектах
+                    {% trans 'Публикуем собранную информацию о ТОП объектах' %}
                 </p>
             </div>
         </div>
@@ -71,105 +72,105 @@
             <img src="{% static 'images/subscribe-img.png' %}" alt="">
         </div>
         <div class="subscribe-info">
-            <p class="subscribe-info-title">Увеличиваем доходность бизнеса, благодаря одной подписке</p>
+            <p class="subscribe-info-title">{% trans 'Увеличиваем доходность бизнеса, благодаря одной подписке' %}</p>
             <div class="subscribe-info-items">
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">01</p>
                     <p class="subscribe-info-item-text">
-                        Получение информации одними из первых
+                        {% trans 'Получение информации одними из первых' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">02</p>
                     <p class="subscribe-info-item-text">
-                        Возможность доступа к информации для всех менеджеров
+                        {% trans 'Возможность доступа к информации для всех менеджеров' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">03</p>
                     <p class="subscribe-info-item-text">
-                        Получение новых конкурентных преимуществ
+                        {% trans 'Получение новых конкурентных преимуществ' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">04</p>
                     <p class="subscribe-info-item-text">
-                        Увеличение базы клиентов
+                        {% trans 'Увеличение базы клиентов' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">05</p>
                     <p class="subscribe-info-item-text">
-                        Повышение качества сервиса работы клиентов
+                        {% trans 'Повышение качества сервиса работы клиентов' %}
                     </p>
                 </div>
                 <div class="subscribe-info-item">
                     <p class="subscribe-info-item-num">06</p>
                     <p class="subscribe-info-item-text">
-                        Экономим время вашей команды
+                        {% trans 'Экономим время вашей команды' %}
                     </p>
                 </div>
             </div>
-            <p class="subscribe-info-text">Наша интернациональная команда уже работает в более чем 30 странах, и это еще не предел!</p>
+            <p class="subscribe-info-text">{% trans 'Наша интернациональная команда уже работает в более чем 30 странах, и это еще не предел!' %}</p>
         </div>
     </div>
 </section>
 <section class="scope">
     <div class="container">
-        <h3 class="text-box-title scope-title">Возможности, которые дает Estconnect</h3>
+        <h3 class="text-box-title scope-title">{% trans 'Возможности, которые дает Estconnect' %}</h3>
         <div class="scope-items">
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-1.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Масштабировать бизнес</p>
+                <p class="scope-item-title">{% trans 'Масштабировать бизнес' %}</p>
                 <p class="scope-item-text">
-                    снизить порог входа на мировой рынок недвижимости; избежать рисков кадровых, финансовых, операционных и др.
+                    {% trans 'снизить порог входа на мировой рынок недвижимости; избежать рисков кадровых, финансовых, операционных и др.' %}
                 </p>
             </div>
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-2.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Оптимизировать бизнес процессы</p>
+                <p class="scope-item-title">{% trans 'Оптимизировать бизнес процессы' %}</p>
                 <p class="scope-item-text">
-                    сократить время на поиски объектов, получить доступ к современным business инструментам
+                    {% trans 'сократить время на поиски объектов, получить доступ к современным business инструментам' %}
                 </p>
             </div>
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-3.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Увеличить базу клиентов</p>
+                <p class="scope-item-title">{% trans 'Увеличить базу клиентов' %}</p>
                 <p class="scope-item-text">
-                    улучшить интеграцию работы клиентами; пополнить список дополнительных услуг
+                    {% trans 'улучшить интеграцию работы клиентами; пополнить список дополнительных услуг' %}
                 </p>
             </div>
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-4.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Повысить деловой рейтинг</p>
+                <p class="scope-item-title">{% trans 'Повысить деловой рейтинг' %}</p>
                 <p class="scope-item-text">
-                    получить доступ к эксклюзивным предложения
+                    {% trans 'получить доступ к эксклюзивным предложения' %}
                 </p>
             </div>
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-5.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Сэкономить на логистике</p>
+                <p class="scope-item-title">{% trans 'Сэкономить на логистике' %}</p>
                 <p class="scope-item-text">
-                    Отсутствие необходимости личного выезда на объект
+                    {% trans 'Отсутствие необходимости личного выезда на объект' %}
                 </p>
             </div>
             <div class="scope-item">
                 <div class="scope-item-icon">
                     <img src="{% static 'images/scope-icon-6.png' %}" alt="">
                 </div>
-                <p class="scope-item-title">Избежать ошибок</p>
+                <p class="scope-item-title">{% trans 'Избежать ошибок' %}</p>
                 <p class="scope-item-text">
-                    информация сервиса основана на практическом опыте
+                    {% trans 'информация сервиса основана на практическом опыте' %}
                 </p>
             </div>
         </div>
@@ -178,15 +179,15 @@
 <section class="auth-cta auth-cta-one-button">
     <div class="container">
         <div class="auth-cta-content-one-button">
-            <button class="button auth-cta-button cta-content-one-button" onclick="openModal()">Оставить заявку</button>
+            <button class="button auth-cta-button cta-content-one-button" onclick="openModal()">{% trans 'Оставить заявку' %}</button>
             
             <div id="modal" class="modal" onclick="closeModalOnOutsideClick(event)">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">&times;</span>
                     <form class="contact-form">
-                        <input type="text" name="name" placeholder="Имя" required>
-                        <input type="tel" name="phone" placeholder="Телефон" required>
-                        <button type="submit" class="button">Отправить</button>
+                        <input type="text" name="name" placeholder="{% trans 'Имя' %}" required>
+                        <input type="tel" name="phone" placeholder="{% trans 'Телефон' %}" required>
+                        <button type="submit" class="button">{% trans 'Отправить' %}</button>
                     </form>
                 </div>
             </div>

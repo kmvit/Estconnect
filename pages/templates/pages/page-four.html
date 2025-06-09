@@ -1,13 +1,14 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Page Four{% endblock %}
+{% block title %}{% trans 'Page Four' %}{% endblock %}
 
 {% block content %}
 <section class="text-box">
     <div class="container">
-        <h2 class="text-box-title">Почему EstСonnect ?</h2>
-        <p class="text-box-subtitle">Создание безопасной цифровой среды для эффективной работы с объектами недвижимости в мировых масштабах</p>
+        <h2 class="text-box-title">{% trans 'Почему EstСonnect ?' %}</h2>
+        <p class="text-box-subtitle">{% trans 'Создание безопасной цифровой среды для эффективной работы с объектами недвижимости в мировых масштабах' %}</p>
     </div>
 </section>
 <section class="advantages-slider">
@@ -16,9 +17,8 @@
         <div class="owl-carousel advantages-carousel">
             <div class="advantages-carousel-item">
                 <div class="advantages-carousel-item-info">
-                    <h2 class="advantages-carousel-item-title">Инновации</h2>
-                    <p class="advantages-carousel-item-text">It технологии для возможности прямого сотрудничества
-                        <br> с застройщиками</p>
+                    <h2 class="advantages-carousel-item-title">{% trans 'Инновации' %}</h2>
+                    <p class="advantages-carousel-item-text">{% trans 'It технологии для возможности прямого сотрудничества с застройщиками' %}</p>
                 </div>
                 <div class="advantages-carousel-item-image">
                     <img src="{% static 'images/advantages-img-1.png' %}" alt="">
@@ -26,8 +26,8 @@
             </div>
             <div class="advantages-carousel-item">
                 <div class="advantages-carousel-item-info">
-                    <h2 class="advantages-carousel-item-title">Честность</h2>
-                    <p class="advantages-carousel-item-text">Исключительно достоверная <br> и объективная информация</p>
+                    <h2 class="advantages-carousel-item-title">{% trans 'Честность' %}</h2>
+                    <p class="advantages-carousel-item-text">{% trans 'Исключительно достоверная и объективная информация' %}</p>
                 </div>
                 <div class="advantages-carousel-item-image">
                     <img src="{% static 'images/advantages-img-2.png' %}" alt="">
@@ -35,8 +35,8 @@
             </div>
             <div class="advantages-carousel-item">
                 <div class="advantages-carousel-item-info">
-                    <h2 class="advantages-carousel-item-title">Надежность</h2>
-                    <p class="advantages-carousel-item-text">Актуальная юридическая информация в рамках национального законодательства</p>
+                    <h2 class="advantages-carousel-item-title">{% trans 'Надежность' %}</h2>
+                    <p class="advantages-carousel-item-text">{% trans 'Актуальная юридическая информация в рамках национального законодательства' %}</p>
                 </div>
                 <div class="advantages-carousel-item-image">
                     <img src="{% static 'images/advantages-img-3.png' %}" alt="">
@@ -44,8 +44,8 @@
             </div>
             <div class="advantages-carousel-item">
                 <div class="advantages-carousel-item-info">
-                    <h2 class="advantages-carousel-item-title">Рентабельность</h2>
-                    <p class="advantages-carousel-item-text">Оценка объекта недвижимости на доходный потенциал</p>
+                    <h2 class="advantages-carousel-item-title">{% trans 'Рентабельность' %}</h2>
+                    <p class="advantages-carousel-item-text">{% trans 'Оценка объекта недвижимости на доходный потенциал' %}</p>
                 </div>
                 <div class="advantages-carousel-item-image">
                     <img src="{% static 'images/advantages-img-4.png' %}" alt="">
@@ -53,8 +53,8 @@
             </div>
             <div class="advantages-carousel-item">
                 <div class="advantages-carousel-item-info">
-                    <h2 class="advantages-carousel-item-title">Экспертность</h2>
-                    <p class="advantages-carousel-item-text">Использование интернационального опыта для выбора объектов</p>
+                    <h2 class="advantages-carousel-item-title">{% trans 'Экспертность' %}</h2>
+                    <p class="advantages-carousel-item-text">{% trans 'Использование интернационального опыта для выбора объектов' %}</p>
                 </div>
                 <div class="advantages-carousel-item-image">
                     <img src="{% static 'images/advantages-img-5.png' %}" alt="">
@@ -66,17 +66,16 @@
 
 <section class="text-box">
     <div class="container">
-        <h3 class="text-box-title">Открытая политика взаимодействия</h3>
-        <p class="text-box-text">Поддержание партнерских отношений среди агентств и девелоперов с помощью двустороннего потока информации, при котором отзывы, идеи, мнения и мысли свободно обмениваются между пользователями сервиса</p>
+        <h3 class="text-box-title">{% trans 'Открытая политика взаимодействия' %}</h3>
+        <p class="text-box-text">{% trans 'Поддержание партнерских отношений среди агентств и девелоперов с помощью двустороннего потока информации, при котором отзывы, идеи, мнения и мысли свободно обмениваются между пользователями сервиса' %}</p>
         <div class="text-box-line"></div>
-        <p class="text-box-big-text">Условия на рынке недвижимости постоянно меняются, EstСonnect следит и информирует пользователей о современных тенденциях,
-            <br> и анализирует риски 24/7</p>
+        <p class="text-box-big-text">{% trans 'Условия на рынке недвижимости постоянно меняются, EstСonnect следит и информирует пользователей о современных тенденциях, и анализирует риски 24/7' %}</p>
     </div>
 </section>
 <section class="main-screen">
     <div class="container">
         <div class="main-screen-info">
-            <h1 class="main-screen-info-title">Почему легко сотрудничать <br> с EstConnect?</h1>
+            <h1 class="main-screen-info-title">{% trans 'Почему легко сотрудничать с EstConnect?' %}</h1>
         </div>
         <div class="main-screen-image">
             <img src="{% static 'images/main-screen-img-2.png' %}" alt="">
@@ -85,7 +84,7 @@
 </section>
 <section class="text-box">
     <div class="container">
-        <h3 class="text-box-title text-box-fz-mobile">Наши менеджеры лично выезжают на объекты, и заключают соглашения о сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным предложениям первыми!</h3>
+        <h3 class="text-box-title text-box-fz-mobile">{% trans 'Наши менеджеры лично выезжают на объекты, и заключают соглашения о сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным предложениям первыми!' %}</h3>
     </div>
 </section>
 <section class="services">
@@ -95,31 +94,31 @@
                 <div class="services-item-icon">
                     <img src="{% static 'images/services-icon-1.png' %}" alt="">
                 </div>
-                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+                <p class="services-item-title">{% trans 'Регулярный анализ рынка спроса потребителей' %}</p>
             </div>
             <div class="services-item">
                 <div class="services-item-icon">
                     <img src="{% static 'images/services-icon-2.png' %}" alt="">
                 </div>
-                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+                <p class="services-item-title">{% trans 'Проверка репутации и рейтинга застройщика, проверка объекта на юридическую чистоту' %}</p>
             </div>
             <div class="services-item">
                 <div class="services-item-icon">
                     <img src="{% static 'images/services-icon-3.png' %}" alt="">
                 </div>
-                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+                <p class="services-item-title">{% trans 'Исключение специфических рисков, связанных с покупкой объектов недвижимости' %}</p>
             </div>
             <div class="services-item">
                 <div class="services-item-icon">
                     <img src="{% static 'images/services-icon-4.png' %}" alt="">
                 </div>
-                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+                <p class="services-item-title">{% trans 'Удобная оптимизация поиска: необходимая информация в быстром доступе' %}</p>
             </div>
             <div class="services-item">
                 <div class="services-item-icon">
                     <img src="{% static 'images/services-icon-5.png' %}" alt="">
                 </div>
-                <p class="services-item-title">Исключение специфических рисков, связанных с покупкой объектов недвижимости</p>
+                <p class="services-item-title">{% trans 'Всегда свежая подборка новых предложений: все возможные локации' %}</p>
             </div>
         </div>
     </div>
@@ -127,7 +126,7 @@
 <section class="auth-cta auth-cta-one-button">
     <div class="container">
         <div class="auth-cta-content-one-button">
-            <a href="{% url 'pages:about-product' %}#pricingPlans" class="button auth-cta-button cta-content-one-button">Узнать о тарифах подписки</a>
+            <a href="{% url 'pages:about-product' %}#pricingPlans" class="button auth-cta-button cta-content-one-button">{% trans 'Узнать о тарифах подписки' %}</a>
         </div>
     </div>
 </section>
