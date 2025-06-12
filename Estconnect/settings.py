@@ -132,8 +132,8 @@ LANGUAGE_CODE = 'ru'
 LANGUAGES = [
     ('ru', 'RU'),
     ('en', 'EN'),
-    ('zh-hans', 'CH'),  # Китайский (упрощенный)
-    ('th', 'TH'),  # Тайский
+    ('th', 'TH'),
+    ('zh-hans', 'CH'),
 ]
 
 LOCALE_PATHS = [
@@ -166,8 +166,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Modeltranslation settings
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
-MODELTRANSLATION_LANGUAGES = ('ru', 'en', 'zh-hans', 'th')
-MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en', 'zh-hans', 'th')
+MODELTRANSLATION_LANGUAGES = ('ru', 'en', 'th', 'zh-hans')
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en', 'th', 'zh-hans')
 
 # Session settings
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
