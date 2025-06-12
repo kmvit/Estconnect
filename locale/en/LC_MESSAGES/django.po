@@ -8,48 +8,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 09:32+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2025-06-09 14:01+0000\n"
+"PO-Revision-Date: 2025-06-12 00:00+0000\n"
+"Last-Translator: ChatGPT <noreply@example.com>\n"
+"Language-Team: English <LL@li.org>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-
 #: pages/templates/pages/base.html:22
-msgid "logo"
+#: users/templates/profile/base_profile.html:27
+#: users/templates/profile/base_profile.html:75
+msgid "логотип"
 msgstr "logo"
 
 #: pages/templates/pages/base.html:27
-msgid "close"
+msgid "закрыть"
 msgstr "close"
 
 #: pages/templates/pages/base.html:31 pages/templates/pages/base.html:65
-msgid "About Us"
+msgid "О нас"
 msgstr "About Us"
 
 #: pages/templates/pages/base.html:34 pages/templates/pages/base.html:66
-msgid "About Product"
+msgid "О продукте"
 msgstr "About Product"
 
 #: pages/templates/pages/base.html:37 pages/templates/pages/base.html:67
-msgid "Why Us"
+msgid "Почему мы"
 msgstr "Why Us"
 
 #: pages/templates/pages/base.html:40 pages/templates/pages/base.html:68
-msgid "Contacts"
+#: pages/templates/pages/contacts.html:5 pages/templates/pages/contacts.html:15
+#: users/templates/profile/object_detail.html:120
+msgid "Контакты"
 msgstr "Contacts"
 
-#: pages/templates/pages/base.html:50 pages/templates/pages/sign-in.html:11
-#: pages/templates/pages/sign-in.html:24
-msgid "Sign In"
+#: pages/templates/pages/base.html:50 pages/templates/pages/index.html:48
+#: pages/templates/pages/page-five.html:50
+#: pages/templates/pages/page-three.html:64
+#: pages/templates/pages/sign-in.html:11 pages/templates/pages/sign-in.html:24
+msgid "Вход"
 msgstr "Sign In"
 
 #: pages/templates/pages/base.html:55
-msgid "menu"
+msgid "меню"
 msgstr "menu"
 
 #: pages/templates/pages/base.html:72 pages/templates/pages/base.html:78
@@ -57,837 +62,1487 @@ msgid "WhatsApp"
 msgstr "WhatsApp"
 
 #: pages/templates/pages/base.html:75 pages/templates/pages/base.html:81
+#: users/templates/profile/agent_detail.html:112
 msgid "Telegram"
 msgstr "Telegram"
 
-#: pages/templates/pages/sign-in.html:18
-msgid "Registration Image"
-msgstr ""
-
-#: pages/templates/pages/sign-in.html:22
-msgid "Logo"
-msgstr ""
-
-#: pages/templates/pages/sign-in.html:27 pages/templates/pages/sign-in.html:28
-msgid "New User"
-msgstr ""
-
-#: pages/templates/pages/sign-in.html:31 pages/templates/pages/sign-in.html:32
-msgid "Existing User"
-msgstr ""
-
-#: subscriptions/admin.py:16 subscriptions/admin.py:43 users/admin.py:133
-#: users/admin.py:161
-msgid "Additional Information"
-msgstr ""
-
-#: subscriptions/admin.py:37 users/admin.py:155
-msgid "Main Information"
-msgstr ""
-
-#: subscriptions/admin.py:40 users/admin.py:158
-msgid "Payment Information"
-msgstr ""
-
-#: subscriptions/decorators.py:17
-msgid "You need to sign in to access this page"
-msgstr ""
-
-#: subscriptions/decorators.py:26
-msgid "An active subscription is required to access this page"
-msgstr ""
-
-#: subscriptions/models.py:6 subscriptions/models.py:29
-msgid "Name"
-msgstr ""
-
-#: subscriptions/models.py:7
-msgid "Price"
-msgstr ""
-
-#: subscriptions/models.py:8
-msgid "Duration (days)"
-msgstr ""
-
-#: subscriptions/models.py:9 subscriptions/models.py:30
-#: subscriptions/models.py:135
-msgid "Description"
-msgstr ""
-
-
-#: subscriptions/models.py:11 subscriptions/models.py:31
-msgid "Created"
-msgstr ""
-
-#: subscriptions/models.py:12
-msgid "Updated"
-msgstr ""
-
-#: subscriptions/models.py:15 subscriptions/models.py:27
-#: subscriptions/models.py:59
-msgid "Subscription Plan"
-msgstr ""
-
-#: subscriptions/models.py:16
-msgid "Subscription Plans"
-msgstr ""
-
-#: subscriptions/models.py:34
-msgid "Subscription Feature"
-msgstr ""
-
-#: subscriptions/models.py:35
-msgid "Subscription Features"
-msgstr ""
-
-#: subscriptions/models.py:43
-msgid "Pending Payment"
-msgstr ""
-
-#: subscriptions/models.py:44
-msgid "Paid"
-msgstr ""
-
-#: subscriptions/models.py:45
-msgid "Payment Error"
-msgstr ""
-
-#: subscriptions/models.py:46
-msgid "Refunded"
-msgstr ""
-
-#: subscriptions/models.py:53 subscriptions/models.py:123
-msgid "User"
-msgstr ""
-
-#: subscriptions/models.py:61
-msgid "Start Date"
-msgstr ""
-
-#: subscriptions/models.py:62
-msgid "End Date"
-msgstr ""
-
-#: subscriptions/models.py:63
-msgid "Active"
-msgstr ""
-
-#: subscriptions/models.py:65
-msgid "Payment Status"
-msgstr ""
-
-#: subscriptions/models.py:71
-msgid "Payment ID"
-msgstr ""
-
-#: subscriptions/models.py:77
-msgid "Auto Renewal"
-msgstr ""
-
-#: subscriptions/models.py:84 subscriptions/models.py:108
-msgid "Subscription"
-msgstr ""
-
-#: subscriptions/models.py:106
-msgid "Deposit"
-msgstr ""
-
-#: subscriptions/models.py:107
-msgid "Withdrawal"
-msgstr ""
-
-#: subscriptions/models.py:109
-msgid "Refund"
-msgstr ""
-
-#: subscriptions/models.py:113
-msgid "Processing"
-msgstr ""
-
-#: subscriptions/models.py:114
-msgid "Success"
-msgstr ""
-
-#: subscriptions/models.py:115
-msgid "Error"
-msgstr ""
-
-#: subscriptions/models.py:116
-msgid "Cancelled"
-msgstr ""
-
-#: subscriptions/models.py:126
-msgid "Operation Type"
-msgstr ""
-
-#: subscriptions/models.py:131
-msgid "Amount"
-msgstr ""
-
-#: subscriptions/models.py:137
-msgid "Status"
-msgstr ""
-
-
-#: subscriptions/views.py:38
-msgid "You already have an active subscription"
-msgstr ""
-
-#: subscriptions/views.py:66
-msgid "Subscription successfully cancelled"
-msgstr ""
-
-#: subscriptions/views.py:81
-msgid "Subscription successfully renewed"
-msgstr ""
-
-#: users/forms.py:325
-msgid "Thailand"
-msgstr ""
-
-#: users/forms.py:326
-msgid "Vietnam"
-msgstr ""
-
-#: users/forms.py:327
-msgid "Cambodia"
-msgstr ""
-
-#: users/forms.py:328
-msgid "Indonesia"
-msgstr ""
-
-#: users/forms.py:329
-msgid "Malaysia"
-msgstr ""
-
-#: users/forms.py:333
-msgid "Bank Transfer"
-msgstr ""
-
-#: users/forms.py:334
-msgid "Credit Card"
-msgstr ""
-
-#: users/forms.py:335
-msgid "Cryptocurrency"
-msgstr ""
-
-#: users/forms.py:340
-msgid "Country"
-msgstr ""
-
-#: users/forms.py:345
-msgid "Payment Method"
-msgstr ""
-
-#: users/forms.py:349
-msgid "Invoice Email"
-msgstr ""
-
-msgid "О нас"
-msgstr "About Us"
-
-msgid "О продукте"
-msgstr "About Product"
-
-msgid "Почему мы"
-msgstr "Why Us"
-
-msgid "Контакты"
-msgstr "Contacts"
-
-msgid "Вход"
-msgstr "Sign In"
-
-msgid "логотип"
-msgstr "logo"
-
-msgid "закрыть"
-msgstr "close"
-
-msgid "меню"
-msgstr "menu"
-
+#: pages/templates/pages/contacts.html:13
+#: users/templates/profile/base_profile.html:33
 msgid "Главная"
 msgstr "Home"
 
-msgid "Финансовые операции"
-msgstr "Financial Operations"
+#: pages/templates/pages/contacts.html:22
+msgid "Офисы Estconnect"
+msgstr "Estconnect Offices"
 
-msgid "Просмотр объектов"
-msgstr "View Objects"
+#: pages/templates/pages/contacts.html:28
+#: pages/templates/pages/contacts.html:119
+msgid "Главный офис"
+msgstr "Main Office"
 
-msgid "Каталог агентов"
-msgstr "Agents Catalog"
-
-msgid "Все застройщики"
-msgstr "All Developers"
-
-msgid "Регистрация объектов"
-msgstr "Object Registration"
-
-msgid "Тех. поддержка"
-msgstr "Technical Support"
-
-msgid "Политика конфиденциальности"
-msgstr "Privacy Policy"
-
-msgid "Условия использования"
-msgstr "Terms of Use"
-
-msgid "Тариф"
-msgstr "Tariff"
-
-msgid "Статус"
-msgstr "Status"
-
-msgid "Добавить объект"
-msgstr "Add Object"
-
-msgid "Профиль"
-msgstr "Profile"
-
-msgid "Выйти"
-msgstr "Logout"
-
-msgid "Баннер профиля"
-msgstr "Profile Banner"
-
-msgid "Баннер профиля по умолчанию"
-msgstr "Default Profile Banner"
-
-msgid "Добавить фото"
-msgstr "Add Photo"
-
-msgid "Фото профиля"
-msgstr "Profile Photo"
-
-msgid "Фото профиля по умолчанию"
-msgstr "Default Profile Photo"
-
-msgid "Текущий тариф"
-msgstr "Current Tariff"
-
-msgid "Действителен до"
-msgstr "Valid until"
-
-msgid "Изменить"
-msgstr "Change"
-
-msgid "Продлить"
-msgstr "Extend"
-
-msgid "Личные данные"
-msgstr "Personal Data"
-
-msgid "Имя"
-msgstr "First Name"
-
-msgid "Фамилия"
-msgstr "Last Name"
-
-msgid "Компания"
-msgstr "Company"
-
-msgid "Язык"
-msgstr "Language"
-
-msgid "Контактная информация"
-msgstr "Contact Information"
-
-msgid "Контактный номер"
-msgstr "Contact Number"
-
-msgid "Электронный адрес"
-msgstr "Email Address"
-
-msgid "Предпочтительный канал связи"
-msgstr "Preferred Contact Method"
-
-msgid "Сохранить изменения"
-msgstr "Save Changes"
-
-msgid "Каталог объектов"
-msgstr "Objects Catalog"
-
-msgid "Поиск недвижимости"
-msgstr "Real Estate Search"
-
-msgid "Местонахождение объекта"
-msgstr "Object Location"
-
-msgid "Поиск по названию"
-msgstr "Search by Name"
-
-msgid "Поиск по названию застройщика"
-msgstr "Search by Developer Name"
-
-msgid "Цена"
-msgstr "Price"
-
-msgid "Тип объекта"
-msgstr "Object Type"
-
-msgid "До пляжа"
-msgstr "Distance to Beach"
-
-msgid "Метров"
-msgstr "Meters"
-
-msgid "Расширенный поиск"
-msgstr "Advanced Search"
-
-msgid "Найти"
-msgstr "Search"
-
-msgid "Очистить"
-msgstr "Clear"
-
-msgid "Показать на карте"
-msgstr "Show on Map"
-
-msgid "Сортировать"
-msgstr "Sort"
-
-msgid "По умолчанию"
-msgstr "Default"
-
-msgid "По алфавиту"
-msgstr "Alphabetically"
-
-msgid "По региону"
-msgstr "By Region"
-
-msgid "Нет изображения"
-msgstr "No Image"
-
-msgid "У вас пока нет добавленных объектов"
-msgstr "You don't have any objects added yet"
-
-msgid "Скрыть расширенный поиск"
-msgstr "Hide Advanced Search"
-
-msgid "Объекты"
-msgstr "Objects"
-
-msgid "Класс жилья"
-msgstr "Housing Class"
-
-msgid "Тип дома"
-msgstr "House Type"
-
-msgid "Срок сдачи"
-msgstr "Completion Date"
-
-msgid "Парковка"
-msgstr "Parking"
-
-msgid "Этажность"
-msgstr "Number of Floors"
-
-msgid "Корпуса"
-msgstr "Buildings"
-
-msgid "Файлы застройщика"
-msgstr "Developer Files"
-
-msgid "Комиссии"
-msgstr "Commissions"
-
-msgid "Связаться со своим личным менеджером"
-msgstr "Contact Your Personal Manager"
-
-msgid "Местонахождение"
-msgstr "Location"
-
+#: pages/templates/pages/contacts.html:31
+#: pages/templates/pages/contacts.html:54
+#: pages/templates/pages/contacts.html:77 users/forms.py:340
+#: users/templates/profile/agent_catalog.html:23
+#: users/templates/profile/developer_catalog.html:23
+#: users/templates/profile/object-plus.html:78
+#: users/templates/profile/object_detail.html:149
+#: users/templates/profile/profile_edit.html:71
 msgid "Страна"
 msgstr "Country"
 
-msgid "Город"
-msgstr "City"
-
-msgid "Район"
-msgstr "District"
-
-msgid "Характеристики объекта"
-msgstr "Object Characteristics"
-
-msgid "Класс"
-msgstr "Class"
-
-msgid "Тип строения"
-msgstr "Building Type"
-
-msgid "Год сдачи"
-msgstr "Completion Year"
-
-msgid "Кол-во этажей"
-msgstr "Number of Floors"
-
-msgid "Описание"
-msgstr "Description"
-
-msgid "Обновлено"
-msgstr "Updated"
-
-msgid "Местонахождение на карте"
-msgstr "Location on Map"
-
-msgid "Еще от застройщика"
-msgstr "More from Developer"
-
-msgid "Избранное"
-msgstr "Favorites"
-
-msgid "Застройщики"
-msgstr "Developers"
-
-msgid "У вас пока нет избранных объектов"
-msgstr "You don't have any favorite objects yet"
-
-msgid "У вас пока нет избранных застройщиков"
-msgstr "You don't have any favorite developers yet"
-
-msgid "Финансы"
-msgstr "Finance"
-
-msgid "Текущий баланс"
-msgstr "Current Balance"
-
-msgid "Действие подписки"
-msgstr "Subscription Period"
-
-msgid "дней"
-msgstr "days"
-
-msgid "Нет активной подписки"
-msgstr "No Active Subscription"
-
-msgid "Подписаться"
-msgstr "Subscribe"
-
-msgid "История операций"
-msgstr "Transaction History"
-
-msgid "Дата и время операции"
-msgstr "Transaction Date and Time"
-
-msgid "Тип операции"
-msgstr "Transaction Type"
-
-msgid "Сумма операции"
-msgstr "Transaction Amount"
-
-msgid "Нет операций"
-msgstr "No Transactions"
-
-msgid "Доступные тарифы"
-msgstr "Available Plans"
-
-msgid "Базовый тариф"
-msgstr "Basic Plan"
-
-msgid "Расширенный с Due diligence"
-msgstr "Extended with Due Diligence"
-
-msgid "Партнерский тариф"
-msgstr "Partner Plan"
-
-msgid "Подключить"
-msgstr "Connect"
-
-msgid "Формирование счета"
-msgstr "Invoice Generation"
-
-msgid "Введите страну"
-msgstr "Enter Country"
-
-msgid "Выберите страну"
-msgstr "Select Country"
-
-msgid "Введите способ оплаты"
-msgstr "Enter Payment Method"
-
-msgid "Выберите способ оплаты"
-msgstr "Select Payment Method"
-
-msgid "Куда направить счет"
-msgstr "Where to Send Invoice"
-
-msgid "Отправить"
-msgstr "Send"
-
-msgid "Перечень заявок на регистрацию объектов"
-msgstr "List of Object Registration Applications"
-
-msgid "Все заявки"
-msgstr "All Applications"
-
-msgid "Опубликованные"
-msgstr "Published"
-
-msgid "На модерации"
-msgstr "Under Moderation"
-
-msgid "Все статусы"
-msgstr "All Statuses"
-
-msgid "Неопубликованные"
-msgstr "Unpublished"
-
-msgid "Дата сдачи проекта"
-msgstr "Project Completion Date"
-
-msgid "от старых к новым"
-msgstr "oldest to newest"
-
-msgid "от новых к старым"
-msgstr "newest to oldest"
-
-msgid "Каталог застройщиков"
-msgstr "Developers Catalog"
-
-msgid "Поиск застройщиков"
-msgstr "Search Developers"
-
-msgid "Таиланд"
-msgstr "Thailand"
-
-msgid "Введите название застройщика"
-msgstr "Enter Developer Name"
-
-msgid "Сбросить"
-msgstr "Reset"
-
-msgid "от А до Я"
-msgstr "A to Z"
-
-msgid "от Я до А"
-msgstr "Z to A"
-
-msgid "от старых пользователей к новым"
-msgstr "Oldest Users First"
-
-msgid "от новых пользователей к старым"
-msgstr "Newest Users First"
-
-msgid "Error:"
-msgstr "Error:"
-
-msgid "Тип компании"
-msgstr "Company Type"
-
-msgid "Застройщик"
-msgstr "Developer"
-
-msgid "На платформе"
-msgstr "On Platform"
-
-msgid "Веб-сайт"
-msgstr "Website"
-
-msgid "Язык общения"
-msgstr "Communication Language"
-
-msgid "Время работы"
-msgstr "Working Hours"
-
-msgid "Открыто сейчас"
-msgstr "Open Now"
-
-msgid "Понедельник - пятница"
-msgstr "Monday - Friday"
-
-msgid "Суббота"
-msgstr "Saturday"
-
-msgid "Воскресенье"
-msgstr "Sunday"
-
-msgid "выходной"
-msgstr "Day Off"
-
-msgid "Соц. сети"
-msgstr "Social Networks"
-
-msgid "Объекты застройщика"
-msgstr "Developer's Objects"
-
-msgid "Другие застройщики"
-msgstr "Other Developers"
-
-msgid "от"
-msgstr "from"
-
-msgid "Техническая поддержка"
-msgstr "Technical Support"
-
-msgid "Категория"
-msgstr "Category"
-
-msgid "Сообщение"
-msgstr "Message"
-
-msgid "Введите ваше сообщение"
-msgstr "Enter your message"
-
-msgid "Я ознакомлен и согласен с правилами обработки персональных данных"
-msgstr "I have read and agree to the personal data processing rules"
-
-msgid "Обращение"
-msgstr "Ticket"
-
-msgid "Просмотреть"
-msgstr "View"
-
-msgid "Агенты"
-msgstr "Agents"
-
-msgid "Поиск Агентов"
-msgstr "Search Agents"
-
-msgid "Введите название агента"
-msgstr "Enter Agent Name"
-
-
-msgid "Не указано"
-msgstr "Not Specified"
-
-msgid "Агент"
-msgstr "Agent"
-
-msgid "Не указан"
-msgstr "Not Specified"
-
-msgid "Русский"
-msgstr "Russian"
-
-msgid "VK"
-msgstr "VK"
-
-msgid "Instagram"
-msgstr "Instagram"
-
-msgid "Найдите надежного застройщика для вашего проекта"
-msgstr "Find a reliable developer for your project"
-
-msgid "Введите название компании"
-msgstr "Enter company name"
-
-msgid "Регион"
-msgstr "Region"
-
-msgid "Все регионы"
-msgstr "All Regions"
-
-msgid "Тип недвижимости"
-msgstr "Property Type"
-
-msgid "Все типы"
-msgstr "All Types"
-
-msgid "Жилая"
-msgstr "Residential"
-
-msgid "Коммерческая"
-msgstr "Commercial"
-
-msgid "Земельные участки"
-msgstr "Land Plots"
-
-msgid "Нет фото"
-msgstr "No Photo"
-
-msgid "Подробнее"
-msgstr "More Details"
-
-msgid "Застройщики не найдены"
-msgstr "No Developers Found"
-
-msgid "Предыдущая"
-msgstr "Previous"
-
-msgid "Следующая"
-msgstr "Next"
-
-msgid "Добавление объекта"
-msgstr "Add Object"
-
-msgid "Пожалуйста, исправьте следующие ошибки:"
-msgstr "Please correct the following errors:"
-
-msgid "Название объекта"
-msgstr "Object Name"
-
+#: pages/templates/pages/contacts.html:32
+#: pages/templates/pages/contacts.html:55
+#: pages/templates/pages/contacts.html:78
+msgid "Эстония"
+msgstr "Estonia"
+
+#: pages/templates/pages/contacts.html:35
+#: pages/templates/pages/contacts.html:58
+#: pages/templates/pages/contacts.html:81
+#: users/templates/profile/object-plus.html:99
 msgid "Адрес"
 msgstr "Address"
 
-msgid "Закрыть карту"
-msgstr "Close Map"
+#: pages/templates/pages/contacts.html:36
+#: pages/templates/pages/contacts.html:121
+msgid "ул. Примерная, 123, Таллинн"
+msgstr "Example St. 123, Tallinn"
 
-msgid "Характеристики"
-msgstr "Features"
-
-msgid "Перечень удобств"
-msgstr "Amenities List"
-
-msgid "Цена и сроки"
-msgstr "Price and Terms"
-
-msgid "Цена за м²"
-msgstr "Price per m²"
-
-msgid "Дата сдачи"
-msgstr "Completion Date"
-
-msgid "Фотографии"
-msgstr "Photos"
-
-msgid "Загрузка"
-msgstr "Upload"
-
-msgid "Выберите файлы"
-msgstr "Choose Files"
-
-msgid "JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте. Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены"
-msgstr "JPEG, file size no more than 4MB, image size no more than 1600px width / 3200px height. PNG images will be converted to JPEG. Images larger than 4MB or more than 1600px width / 3200px height will be reduced"
-
-msgid "Сохранить"
-msgstr "Save"
-
-msgid "Отмена"
-msgstr "Cancel"
-
-msgid "Редактирование профиля"
-msgstr "Edit Profile"
-
-msgid "Редактирование"
-msgstr "Edit"
-
-msgid "Аватар"
-msgstr "Avatar"
-
-msgid "Рекомендуемый размер: 200x200px, до 2MB"
-msgstr "Recommended size: 200x200px, up to 2MB"
-
-msgid "Основная информация"
-msgstr "Basic Information"
-
-msgid "Email"
-msgstr "Email"
-
+#: pages/templates/pages/contacts.html:39
+#: pages/templates/pages/contacts.html:62
+#: pages/templates/pages/contacts.html:85
+#: pages/templates/pages/page-two.html:189
+#: users/templates/profile/profile_edit.html:66
 msgid "Телефон"
 msgstr "Phone"
 
+#: pages/templates/pages/contacts.html:51
+#: pages/templates/pages/contacts.html:124
+msgid "Региональный офис"
+msgstr "Regional Office"
+
+#: pages/templates/pages/contacts.html:59
+#: pages/templates/pages/contacts.html:126
+msgid "пр. Деловой, 45, Тарту"
+msgstr "Business Ave. 45, Tartu"
+
+#: pages/templates/pages/contacts.html:74
+#: pages/templates/pages/contacts.html:129
+msgid "Поддержка"
+msgstr "Support"
+
+#: pages/templates/pages/contacts.html:82
+#: pages/templates/pages/contacts.html:131
+msgid "ул. Техническая, 67, Нарва"
+msgstr "Technical St. 67, Narva"
+
+#: pages/templates/pages/index.html:9 pages/templates/pages/page-five.html:11
+msgid "Выход на международный рынок недвижимости"
+msgstr "Entering the International Real Estate Market"
+
+#: pages/templates/pages/index.html:10 pages/templates/pages/page-five.html:12
+msgid "Эксклюзивные предложения"
+msgstr "Exclusive Offers"
+
+#: pages/templates/pages/index.html:10 pages/templates/pages/page-five.html:12
+msgid "и безопасные сделки"
+msgstr "and Safe Transactions"
+
+#: pages/templates/pages/index.html:11 pages/templates/pages/page-five.html:13
+#: pages/templates/pages/page-two.html:182
+msgid "Оставить заявку"
+msgstr "Submit Application"
+
+#: pages/templates/pages/index.html:21 pages/templates/pages/page-five.html:23
+msgid ""
+"EstConnect - digital сервис работы с объектами недвижимости по всему миру, "
+"который исключает риски и содействует быстрой интеграции в сегмент "
+"первичного риэлтерского рынка"
+msgstr ""
+"EstConnect – a digital service for working with real-estate objects worldwide "
+"that eliminates risks and speeds up integration into the primary real-estate "
+"market segment"
+
+#: pages/templates/pages/index.html:26 pages/templates/pages/page-five.html:28
+msgid "Три направления работы сервиса"
+msgstr "Three Service Areas"
+
+#: pages/templates/pages/index.html:30 pages/templates/pages/page-five.html:32
+msgid "Каталог недвижимости"
+msgstr "Real Estate Catalog"
+
+#: pages/templates/pages/index.html:34 pages/templates/pages/page-five.html:36
+msgid "Юридический мониторинг"
+msgstr "Legal Monitoring"
+
+#: pages/templates/pages/index.html:38 pages/templates/pages/page-five.html:40
+msgid "Прямые контракты с застройщиками"
+msgstr "Direct Contracts with Developers"
+
+#: pages/templates/pages/index.html:46 pages/templates/pages/page-five.html:48
+#: pages/templates/pages/page-three.html:62
+msgid "С нами продавать недвижимость просто!"
+msgstr "Selling Real Estate is Easy with Us!"
+
+#: pages/templates/pages/index.html:49 pages/templates/pages/page-five.html:51
+#: pages/templates/pages/page-three.html:65
+msgid "Регистрация"
+msgstr "Registration"
+
+#: pages/templates/pages/page-five.html:5
+msgid "Page Five"
+msgstr "Page Five"
+
+#: pages/templates/pages/page-four.html:5
+msgid "Page Four"
+msgstr "Page Four"
+
+#: pages/templates/pages/page-four.html:10
+#: pages/templates/pages/page-three.html:11
+msgid "Почему EstСonnect ?"
+msgstr "Why EstConnect?"
+
+#: pages/templates/pages/page-four.html:11
+msgid ""
+"Создание безопасной цифровой среды для эффективной работы с объектами "
+"недвижимости в мировых масштабах"
+msgstr ""
+"Creating a secure digital environment for efficient work with real-estate "
+"objects on a global scale"
+
+#: pages/templates/pages/page-four.html:20
+msgid "Инновации"
+msgstr "Innovation"
+
+#: pages/templates/pages/page-four.html:21
+msgid "It технологии для возможности прямого сотрудничества с застройщиками"
+msgstr "IT technologies for direct collaboration with developers"
+
+#: pages/templates/pages/page-four.html:29
+msgid "Честность"
+msgstr "Honesty"
+
+#: pages/templates/pages/page-four.html:30
+msgid "Исключительно достоверная и объективная информация"
+msgstr "Exclusively reliable and objective information"
+
+#: pages/templates/pages/page-four.html:38
+msgid "Надежность"
+msgstr "Reliability"
+
+#: pages/templates/pages/page-four.html:39
+msgid ""
+"Актуальная юридическая информация в рамках национального законодательства"
+msgstr "Up-to-date legal information within national legislation"
+
+#: pages/templates/pages/page-four.html:47
+msgid "Рентабельность"
+msgstr "Profitability"
+
+#: pages/templates/pages/page-four.html:48
+msgid "Оценка объекта недвижимости на доходный потенциал"
+msgstr "Assessment of a property's income potential"
+
+#: pages/templates/pages/page-four.html:56
+msgid "Экспертность"
+msgstr "Expertise"
+
+#: pages/templates/pages/page-four.html:57
+msgid "Использование интернационального опыта для выбора объектов"
+msgstr "Using international experience for object selection"
+
+#: pages/templates/pages/page-four.html:69
+msgid "Открытая политика взаимодействия"
+msgstr "Open Interaction Policy"
+
+#: pages/templates/pages/page-four.html:70
+msgid ""
+"Поддержание партнерских отношений среди агентств и девелоперов с помощью "
+"двустороннего потока информации, при котором отзывы, идеи, мнения и мысли "
+"свободно обмениваются между пользователями сервиса"
+msgstr ""
+"Maintaining partner relations among agencies and developers via a two-way "
+"information flow where feedback, ideas, opinions and thoughts are freely "
+"exchanged between service users"
+
+#: pages/templates/pages/page-four.html:72
+msgid ""
+"Условия на рынке недвижимости постоянно меняются, EstСonnect следит и "
+"информирует пользователей о современных тенденциях, и анализирует риски 24/7"
+msgstr ""
+"Real-estate market conditions constantly change; EstConnect monitors trends "
+"and analyzes risks 24/7, keeping users informed"
+
+#: pages/templates/pages/page-four.html:78
+msgid "Почему легко сотрудничать с EstConnect?"
+msgstr "Why is it easy to cooperate with EstConnect?"
+
+#: pages/templates/pages/page-four.html:87
+#: pages/templates/pages/page-three.html:54
+msgid ""
+"Наши менеджеры лично выезжают на объекты, и заключают соглашения о "
+"сотрудничестве, чтобы Вы одним кликом получали доступ к уникальным "
+"предложениям первыми!"
+msgstr ""
+"Our managers personally visit properties and sign cooperation agreements so "
+"that you get one-click access to unique offers first!"
+
+#: pages/templates/pages/page-four.html:97
+#: pages/templates/pages/page-three.html:25
+msgid "Регулярный анализ рынка спроса потребителей"
+msgstr "Regular analysis of consumer demand"
+
+#: pages/templates/pages/page-four.html:103
+#: pages/templates/pages/page-three.html:49
+msgid "Проверка репутации и рейтинга застройщика, проверка объекта на юридическую чистоту"
+msgstr "Checking the developer's reputation and rating, verifying the property's legal cleanliness"
+
+#: pages/templates/pages/page-four.html:109
+#: pages/templates/pages/page-three.html:31
+msgid "Исключение специфических рисков, связанных с покупкой объектов недвижимости"
+msgstr "Elimination of specific risks associated with purchasing real-estate properties"
+
+#: pages/templates/pages/page-four.html:115
+#: pages/templates/pages/page-three.html:43
+msgid "Удобная оптимизация поиска: необходимая информация в быстром доступе"
+msgstr "Convenient search optimisation – essential information always at hand"
+
+#: pages/templates/pages/page-four.html:121
+#: pages/templates/pages/page-three.html:37
+msgid "Всегда свежая подборка новых предложений: все возможные локации"
+msgstr "Always a fresh selection of new offers across every possible location"
+
+#: pages/templates/pages/page-four.html:129
+msgid "Узнать о тарифах подписки"
+msgstr "Learn about subscription plans"
+
+#: pages/templates/pages/page-three.html:5
+msgid "Page Three"
+msgstr "Page Three"
+
+#: pages/templates/pages/page-three.html:20
+#: pages/templates/pages/page-two.html:75
+msgid "Увеличиваем доходность бизнеса, благодаря одной подписке"
+msgstr "We increase business profitability thanks to a single subscription"
+
+#: pages/templates/pages/page-two.html:5
+msgid "Page Two"
+msgstr "Page Two"
+
+#: pages/templates/pages/page-two.html:11
+msgid "Откройте новые горизонты для бизнеса — без лишних затрат и рисков"
+msgstr "Open new horizons for your business – with no extra costs or risks"
+
+#: pages/templates/pages/page-two.html:16
+msgid "Делегируем Ваши бизнес - задачи"
+msgstr "We delegate your business tasks"
+
+#: pages/templates/pages/page-two.html:23
+msgid "Заключаем договор сотрудничества с застройщиком"
+msgstr "We sign a cooperation agreement with the developer"
+
+#: pages/templates/pages/page-two.html:31
+msgid "Изучаем и анализируем информацию"
+msgstr "We study and analyse information"
+
+#: pages/templates/pages/page-two.html:39
+msgid "Анализируем рентабельность и риски"
+msgstr "We analyse profitability and risks"
+
+#: pages/templates/pages/page-two.html:47
+msgid "Ищем подходящие объекты и локации"
+msgstr "We search for suitable properties and locations"
+
+#: pages/templates/pages/page-two.html:55
+msgid "Проверяем застройщика и юридическую чистоту объекта"
+msgstr "We check the developer and the property's legal cleanliness"
+
+#: pages/templates/pages/page-two.html:63
+msgid "Публикуем собранную информацию о ТОП объектах"
+msgstr "We publish the collected information about TOP properties"
+
+#: pages/templates/pages/page-two.html:80
+msgid "Получение информации одними из первых"
+msgstr "Getting information among the first"
+
+#: pages/templates/pages/page-two.html:86
+msgid "Возможность доступа к информации для всех менеджеров"
+msgstr "Information access for all managers"
+
+#: pages/templates/pages/page-two.html:92
+msgid "Получение новых конкурентных преимуществ"
+msgstr "Gaining new competitive advantages"
+
+#: pages/templates/pages/page-two.html:98
+msgid "Увеличение базы клиентов"
+msgstr "Expanding the client base"
+
+#: pages/templates/pages/page-two.html:104
+msgid "Повышение качества сервиса работы клиентов"
+msgstr "Improving the quality of customer service"
+
+#: pages/templates/pages/page-two.html:110
+msgid "Экономим время вашей команды"
+msgstr "We save your team's time"
+
+#: pages/templates/pages/page-two.html:114
+msgid "Наша интернациональная команда уже работает в более чем 30 странах, и это ещё не предел!"
+msgstr "Our international team already operates in more than 30 countries – and that’s not the limit!"
+
+#: pages/templates/pages/page-two.html:120
+msgid "Возможности, которые дает Estconnect"
+msgstr "Opportunities provided by Estconnect"
+
+#: pages/templates/pages/page-two.html:126
+msgid "Масштабировать бизнес"
+msgstr "Scale the business"
+
+#: pages/templates/pages/page-two.html:128
+msgid "снизить порог входа на мировой рынок недвижимости; избежать рисков кадровых, финансовых, операционных и др."
+msgstr "lower the entry barrier to the global real-estate market; avoid staffing, financial, operational and other risks"
+
+#: pages/templates/pages/page-two.html:135
+msgid "Оптимизировать бизнес процессы"
+msgstr "Optimise business processes"
+
+#: pages/templates/pages/page-two.html:137
+msgid "сократить время на поиски объектов, получить доступ к современным business инструментам"
+msgstr "reduce the time spent searching for properties, gain access to modern business tools"
+
+#: pages/templates/pages/page-two.html:144
+msgid "Увеличить базу клиентов"
+msgstr "Grow the client base"
+
+#: pages/templates/pages/page-two.html:146
+msgid "улучшить интеграцию работы клиентами; пополнить список дополнительных услуг"
+msgstr "improve customer integration and expand the list of additional services"
+
+#: pages/templates/pages/page-two.html:153
+msgid "Повысить деловой рейтинг"
+msgstr "Increase business rating"
+
+#: pages/templates/pages/page-two.html:155
+msgid "получить доступ к эксклюзивным предложения"
+msgstr "gain access to exclusive offers"
+
+#: pages/templates/pages/page-two.html:162
+msgid "Сэкономить на логистике"
+msgstr "Save on logistics"
+
+#: pages/templates/pages/page-two.html:164
+msgid "Отсутствие необходимости личного выезда на объект"
+msgstr "No need for personal site visits"
+
+#: pages/templates/pages/page-two.html:171
+msgid "Избежать ошибок"
+msgstr "Avoid mistakes"
+
+#: pages/templates/pages/page-two.html:173
+msgid "информация сервиса основана на практическом опыте"
+msgstr "the service information is based on practical experience"
+
+#: pages/templates/pages/page-two.html:188
+#: users/templates/profile/profile.html:95
+#: users/templates/profile/profile_edit.html:51
+msgid "Имя"
+msgstr "Name"
+
+#: pages/templates/pages/page-two.html:190
+#: users/templates/profile/dev_support.html:50
+#: users/templates/profile/finance.html:146
+msgid "Отправить"
+msgstr "Send"
+
+#: pages/templates/pages/sign-in.html:18
+msgid "Изображение регистрации"
+msgstr "Registration image"
+
+#: pages/templates/pages/sign-in.html:22
+msgid "Логотип"
+msgstr "Logo"
+
+#: pages/templates/pages/sign-in.html:27 pages/templates/pages/sign-in.html:28
+msgid "Новый пользователь"
+msgstr "New user"
+
+#: pages/templates/pages/sign-in.html:31 pages/templates/pages/sign-in.html:32
+msgid "Существующий пользователь"
+msgstr "Existing user"
+
+#: subscriptions/admin.py:16 subscriptions/admin.py:43 users/admin.py:132
+#: users/admin.py:160
+msgid "Дополнительная информация"
+msgstr "Additional information"
+
+#: subscriptions/admin.py:37 users/admin.py:154
+#: users/templates/profile/profile_edit.html:48
+msgid "Основная информация"
+msgstr "Basic information"
+
+#: subscriptions/admin.py:40 users/admin.py:157
+msgid "Информация об оплате"
+msgstr "Payment information"
+
+#: subscriptions/decorators.py:17
+msgid "Для доступа к этой странице необходимо войти в систему"
+msgstr "You must log in to access this page"
+
+#: subscriptions/decorators.py:26
+msgid "Для доступа к этой странице необходима активная подписка"
+msgstr "An active subscription is required to access this page"
+
+
+#: subscriptions/models.py:6 subscriptions/models.py:29
+msgid "Название"
+msgstr "Name"
+
+#: subscriptions/models.py:7 users/templates/profile/object_list.html:54
+msgid "Цена"
+msgstr "Price"
+
+#: subscriptions/models.py:8
+msgid "Длительность (дни)"
+msgstr "Duration (days)"
+
+#: subscriptions/models.py:9 subscriptions/models.py:30 \
+   subscriptions/models.py:135 users/templates/profile/agent_detail.html:130 \
+   users/templates/profile/developer_detail.html:123 \
+   users/templates/profile/finance.html:43 \
+   users/templates/profile/object-plus.html:63 \
+   users/templates/profile/object_detail.html:204
+msgid "Описание"
+msgstr "Description"
+
+#: subscriptions/models.py:10
+msgid "Активен"
+msgstr "Active"
+
+#: subscriptions/models.py:11 subscriptions/models.py:31
+msgid "Создан"
+msgstr "Created"
+
+#: subscriptions/models.py:12
+msgid "Обновлен"
+msgstr "Updated"
+
+#: subscriptions/models.py:15 subscriptions/models.py:27 \
+   subscriptions/models.py:59
+msgid "План подписки"
+msgstr "Subscription Plan"
+
+#: subscriptions/models.py:16
+msgid "Планы подписки"
+msgstr "Subscription Plans"
+
+#: subscriptions/models.py:34
+msgid "Возможность подписки"
+msgstr "Subscription Feature"
+
+#: subscriptions/models.py:35
+msgid "Возможности подписки"
+msgstr "Subscription Features"
+
+#: subscriptions/models.py:43
+msgid "Ожидает оплаты"
+msgstr "Awaiting Payment"
+
+#: subscriptions/models.py:44
+msgid "Оплачено"
+msgstr "Paid"
+
+#: subscriptions/models.py:45
+msgid "Ошибка оплаты"
+msgstr "Payment Error"
+
+#: subscriptions/models.py:46
+msgid "Возвращено"
+msgstr "Refunded"
+
+#: subscriptions/models.py:53 subscriptions/models.py:123
+msgid "Пользователь"
+msgstr "User"
+
+#: subscriptions/models.py:61
+msgid "Дата начала"
+msgstr "Start Date"
+
+#: subscriptions/models.py:62
+msgid "Дата окончания"
+msgstr "End Date"
+
+#: subscriptions/models.py:63
+msgid "Активна"
+msgstr "Active"
+
+#: subscriptions/models.py:65
+msgid "Статус оплаты"
+msgstr "Payment Status"
+
+#: subscriptions/models.py:71
+msgid "ID платежа"
+msgstr "Payment ID"
+
+#: subscriptions/models.py:77
+msgid "Автоматическое продление"
+msgstr "Auto-Renewal"
+
+#: subscriptions/models.py:80
+msgid "Создана"
+msgstr "Created"
+
+#: subscriptions/models.py:81
+msgid "Обновлена"
+msgstr "Updated"
+
+#: subscriptions/models.py:84 subscriptions/models.py:108
+msgid "Подписка"
+msgstr "Subscription"
+
+#: subscriptions/models.py:85
+msgid "Подписки"
+msgstr "Subscriptions"
+
+#: subscriptions/models.py:106
+msgid "Пополнение"
+msgstr "Deposit"
+
+#: subscriptions/models.py:107
+msgid "Вывод"
+msgstr "Withdrawal"
+
+#: subscriptions/models.py:109
+msgid "Возврат"
+msgstr "Refund"
+
+#: subscriptions/models.py:113
+msgid "В обработке"
+msgstr "Processing"
+
+#: subscriptions/models.py:114
+msgid "Успешно"
+msgstr "Successful"
+
+#: subscriptions/models.py:115
+msgid "Ошибка"
+msgstr "Error"
+
+#: subscriptions/models.py:116
+msgid "Отменено"
+msgstr "Cancelled"
+
+#: subscriptions/models.py:126 users/templates/profile/finance.html:41
+msgid "Тип операции"
+msgstr "Operation Type"
+
+#: subscriptions/models.py:131
+msgid "Сумма"
+msgstr "Amount"
+
+#: subscriptions/models.py:137 users/templates/profile/base_profile.html:98 \
+   users/templates/profile/finance.html:44 \
+   users/templates/profile/object_registration.html:42
+msgid "Статус"
+msgstr "Status"
+
+#: subscriptions/models.py:142
+msgid "Создано"
+msgstr "Created"
+
+#: subscriptions/models.py:143 users/templates/profile/object_detail.html:208
+msgid "Обновлено"
+msgstr "Updated"
+
+#: subscriptions/models.py:146
+msgid "Финансовая операция"
+msgstr "Financial Operation"
+
+#: subscriptions/models.py:147 users/templates/profile/base_profile.html:37
+msgid "Финансовые операции"
+msgstr "Financial Operations"
+
+#: subscriptions/views.py:38
+msgid "У вас уже есть активная подписка"
+msgstr "You already have an active subscription"
+
+#: subscriptions/views.py:49
+msgid "Подписка успешно создана"
+msgstr "Subscription created successfully"
+
+#: subscriptions/views.py:66
+msgid "Подписка успешно отменена"
+msgstr "Subscription cancelled successfully"
+
+#: subscriptions/views.py:81
+msgid "Подписка успешно продлена"
+msgstr "Subscription renewed successfully"
+
+#: users/forms.py:325 users/templates/profile/agent_catalog.html:25 \
+   users/templates/profile/developer_catalog.html:25
+msgid "Таиланд"
+msgstr "Thailand"
+
+#: users/forms.py:326
+msgid "Вьетнам"
+msgstr "Vietnam"
+
+#: users/forms.py:327
+msgid "Камбоджа"
+msgstr "Cambodia"
+
+#: users/forms.py:328
+msgid "Индонезия"
+msgstr "Indonesia"
+
+#: users/forms.py:329
+msgid "Малайзия"
+msgstr "Malaysia"
+
+#: users/forms.py:333
+msgid "Банковский перевод"
+msgstr "Bank Transfer"
+
+#: users/forms.py:334
+msgid "Кредитная карта"
+msgstr "Credit Card"
+
+#: users/forms.py:335
+msgid "Криптовалюта"
+msgstr "Cryptocurrency"
+
+#: users/forms.py:345
+msgid "Способ оплаты"
+msgstr "Payment Method"
+
+#: users/forms.py:349
+msgid "Email для счета"
+msgstr "Billing Email"
+
+#: users/templates/profile/agent_catalog.html:5 \
+   users/templates/profile/agent_catalog.html:16 \
+   users/templates/profile/base_profile.html:46
+msgid "Каталог агентов"
+msgstr "Agent Catalog"
+
+#: users/templates/profile/agent_catalog.html:10 \
+   users/templates/profile/agent_detail.html:10
+msgid "Агенты"
+msgstr "Agents"
+
+#: users/templates/profile/agent_catalog.html:19
+msgid "Поиск Агентов"
+msgstr "Agent Search"
+
+#: users/templates/profile/agent_catalog.html:28 \
+   users/templates/profile/dev_catalog.html:20 \
+   users/templates/profile/developer_catalog.html:28 \
+   users/templates/profile/object_list.html:46
+msgid "Поиск по названию"
+msgstr "Search by Name"
+
+#: users/templates/profile/agent_catalog.html:30
+msgid "Введите название агента"
+msgstr "Enter agent name"
+
+#: users/templates/profile/agent_catalog.html:33 \
+   users/templates/profile/dev_catalog.html:55 \
+   users/templates/profile/developer_catalog.html:33 \
+   users/templates/profile/object_list.html:120 \
+   users/templates/profile/object_registration.html:62
+msgid "Найти"
+msgstr "Search"
+
+#: users/templates/profile/agent_catalog.html:36 \
+   users/templates/profile/dev_catalog.html:59 \
+   users/templates/profile/developer_catalog.html:36
+msgid "Сбросить"
+msgstr "Reset"
+
+#: users/templates/profile/agent_catalog.html:43 \
+   users/templates/profile/developer_catalog.html:43 \
+   users/templates/profile/object_list.html:131 \
+   users/templates/profile/object_registration.html:68
+msgid "Сортировать"
+msgstr "Sort"
+
+#: users/templates/profile/agent_catalog.html:46 \
+   users/templates/profile/agent_catalog.html:57 \
+   users/templates/profile/developer_catalog.html:46 \
+   users/templates/profile/developer_catalog.html:57
+msgid "от А до Я"
+msgstr "A to Z"
+
+#: users/templates/profile/agent_catalog.html:47 \
+   users/templates/profile/agent_catalog.html:58 \
+   users/templates/profile/developer_catalog.html:47 \
+   users/templates/profile/developer_catalog.html:58
+msgid "от Я до А"
+msgstr "Z to A"
+
+#: users/templates/profile/agent_catalog.html:48 \
+   users/templates/profile/agent_catalog.html:59 \
+   users/templates/profile/developer_catalog.html:48 \
+   users/templates/profile/developer_catalog.html:59
+msgid "от старых пользователей к новым"
+msgstr "Oldest to Newest Users"
+
+#: users/templates/profile/agent_catalog.html:49 \
+   users/templates/profile/agent_catalog.html:60 \
+   users/templates/profile/developer_catalog.html:49 \
+   users/templates/profile/developer_catalog.html:60
+msgid "от новых пользователей к старым"
+msgstr "Newest to Oldest Users"
+
+#: users/templates/profile/agent_catalog.html:50 \
+   users/templates/profile/developer_catalog.html:50 \
+   users/templates/profile/object_list.html:133 \
+   users/templates/profile/object_registration.html:76
+msgid "По умолчанию"
+msgstr "Default"
+
+#: users/templates/profile/agent_detail.html:21
+msgid "Не указано"
+msgstr "Not specified"
+
+#: users/templates/profile/agent_detail.html:53 \
+   users/templates/profile/developer_detail.html:49
+msgid "Тип компании"
+msgstr "Company Type"
+
+#: users/templates/profile/agent_detail.html:54
+msgid "Агент"
+msgstr "Agent"
+
+#: users/templates/profile/agent_detail.html:62 \
+   users/templates/profile/developer_detail.html:58
+msgid "На платформе"
+msgstr "On the platform"
+
+#: users/templates/profile/agent_detail.html:71 \
+   users/templates/profile/developer_detail.html:69 \
+   users/templates/profile/profile_edit.html:92
+msgid "Веб-сайт"
+msgstr "Website"
+
+#: users/templates/profile/agent_detail.html:72
+msgid "Не указан"
+msgstr "Not specified"
+
+#: users/templates/profile/agent_detail.html:80 \
+   users/templates/profile/developer_detail.html:79
+msgid "Язык общения"
+msgstr "Communication Language"
+
+#: users/templates/profile/agent_detail.html:81
+msgid "Русский"
+msgstr "Russian"
+
+#: users/templates/profile/agent_detail.html:87 \
+   users/templates/profile/developer_detail.html:86
+msgid "Время работы"
+msgstr "Working Hours"
+
+#: users/templates/profile/agent_detail.html:91 \
+   users/templates/profile/developer_detail.html:90
+msgid "Открыто сейчас"
+msgstr "Open now"
+
+#: users/templates/profile/agent_detail.html:95 \
+   users/templates/profile/developer_detail.html:97
+msgid "Понедельник - пятница"
+msgstr "Monday – Friday"
+
+#: users/templates/profile/agent_detail.html:98 \
+   users/templates/profile/developer_detail.html:97
+msgid "Суббота"
+msgstr "Saturday"
+
+#: users/templates/profile/agent_detail.html:101 \
+   users/templates/profile/developer_detail.html:100
+msgid "Воскресенье"
+msgstr "Sunday"
+
+#: users/templates/profile/agent_detail.html:101 \
+   users/templates/profile/developer_detail.html:100
+msgid "выходной"
+msgstr "day off"
+
+#: users/templates/profile/agent_detail.html:107 \
+   users/templates/profile/developer_detail.html:106
+msgid "Соц. сети"
+msgstr "Social networks"
+
+#: users/templates/profile/agent_detail.html:117
+msgid "VK"
+msgstr "VK"
+
+#: users/templates/profile/agent_detail.html:122
+msgid "Instagram"
+msgstr "Instagram"
+
+#: users/templates/profile/base_profile.html:41
+msgid "Просмотр объектов"
+msgstr "View Properties"
+
+#: users/templates/profile/base_profile.html:51
+msgid "Все застройщики"
+msgstr "All Developers"
+
+#: users/templates/profile/base_profile.html:57 \
+   users/templates/profile/object_registration.html:5 \
+   users/templates/profile/object_registration.html:20
+msgid "Регистрация объектов"
+msgstr "Property Registration"
+
+#: users/templates/profile/base_profile.html:62
+msgid "Тех. поддержка"
+msgstr "Tech Support"
+
+#: users/templates/profile/base_profile.html:66
+msgid "Политика конфиденциальности"
+msgstr "Privacy Policy"
+
+#: users/templates/profile/base_profile.html:67
+msgid "Условия использования"
+msgstr "Terms of Use"
+
+#: users/templates/profile/base_profile.html:88
+msgid "Тариф"
+msgstr "Plan"
+
+#: users/templates/profile/base_profile.html:104
+msgid "Добавить объект"
+msgstr "Add Property"
+
+#: users/templates/profile/base_profile.html:123 \
+   users/templates/profile/finance.html:9 \
+   users/templates/profile/profile.html:5 \
+   users/templates/profile/profile.html:18 \
+   users/templates/profile/profile.html:26 \
+   users/templates/profile/profile.html:41 \
+   users/templates/profile/profile_edit.html:18
+msgid "Профиль"
+msgstr "Profile"
+
+#: users/templates/profile/base_profile.html:126
+msgid "Выйти"
+msgstr "Log Out"
+
+#: users/templates/profile/dev_catalog.html:4 \
+   users/templates/profile/dev_catalog.html:10 \
+   users/templates/profile/developer_catalog.html:5 \
+   users/templates/profile/developer_catalog.html:16
+msgid "Каталог застройщиков"
+msgstr "Developer Catalog"
+
+#: users/templates/profile/dev_catalog.html:11
+msgid "Найдите надежного застройщика для вашего проекта"
+msgstr "Find a reliable developer for your project"
+
+#: users/templates/profile/dev_catalog.html:23
+msgid "Введите название компании"
+msgstr "Enter company name"
+
+#: users/templates/profile/dev_catalog.html:28
+msgid "Регион"
+msgstr "Region"
+
+#: users/templates/profile/dev_catalog.html:31
+msgid "Все регионы"
+msgstr "All regions"
+
+#: users/templates/profile/dev_catalog.html:40 \
+   users/templates/profile/object-plus.html:120
+msgid "Тип недвижимости"
+msgstr "Property Type"
+
+#: users/templates/profile/dev_catalog.html:43
+msgid "Все типы"
+msgstr "All types"
+
+#: users/templates/profile/dev_catalog.html:44
+msgid "Жилая"
+msgstr "Residential"
+
+#: users/templates/profile/dev_catalog.html:45
+msgid "Коммерческая"
+msgstr "Commercial"
+
+#: users/templates/profile/dev_catalog.html:46
+msgid "Земельные участки"
+msgstr "Land Plots"
+
+#: users/templates/profile/dev_catalog.html:76
+msgid "Нет фото"
+msgstr "No photo"
+
+#: users/templates/profile/dev_catalog.html:108
+msgid "Подробнее"
+msgstr "More details"
+
+#: users/templates/profile/dev_catalog.html:114
+msgid "Застройщики не найдены"
+msgstr "No developers found"
+
+#: users/templates/profile/dev_catalog.html:126
+msgid "Предыдущая"
+msgstr "Previous"
+
+#: users/templates/profile/dev_catalog.html:149
+msgid "Следующая"
+msgstr "Next"
+
+#: users/templates/profile/dev_support.html:5 \
+   users/templates/profile/dev_support.html:20 \
+   users/templates/profile/dev_support.html:24
+msgid "Техническая поддержка"
+msgstr "Technical Support"
+
+#: users/templates/profile/dev_support.html:31
+msgid "Категория"
+msgstr "Category"
+
+#: users/templates/profile/dev_support.html:43
+msgid "Сообщение"
+msgstr "Message"
+
+#: users/templates/profile/dev_support.html:44
+msgid "Введите ваше сообщение"
+msgstr "Enter your message"
+
+#: users/templates/profile/dev_support.html:48
+msgid "Я ознакомлен и согласен <a href=\"#\">с правилами обработки персональных данных</a>"
+msgstr "I have read and agree to the <a href=\"#\">personal data processing policy</a>"
+
+#: users/templates/profile/dev_support.html:62
+msgid "Обращение"
+msgstr "Request"
+
+#: users/templates/profile/dev_support.html:73
+msgid "Просмотреть"
+msgstr "View"
+
+#: users/templates/profile/developer_catalog.html:10 \
+   users/templates/profile/developer_detail.html:10 \
+   users/templates/profile/favourites.html:29
+msgid "Застройщики"
+msgstr "Developers"
+
+#: users/templates/profile/developer_catalog.html:19
+msgid "Поиск застройщиков"
+msgstr "Developer Search"
+
+#: users/templates/profile/developer_catalog.html:30
+msgid "Введите название застройщика"
+msgstr "Enter developer name"
+
+#: users/templates/profile/developer_catalog.html:199
+msgid "Error:"
+msgstr "Error:"
+
+#: users/templates/profile/developer_detail.html:50
+msgid "Застройщик"
+msgstr "Developer"
+
+#: users/templates/profile/developer_detail.html:131
+msgid "Объекты застройщика"
+msgstr "Developer's Properties"
+
+#: users/templates/profile/developer_detail.html:159
+msgid "от"
+msgstr "from"
+
+#: users/templates/profile/developer_detail.html:184
+msgid "Другие застройщики"
+msgstr "Other Developers"
+
+#: users/templates/profile/favourites.html:5 \
+   users/templates/profile/favourites.html:20
+msgid "Избранное"
+msgstr "Favorites"
+
+#: users/templates/profile/favourites.html:18 \
+   users/templates/profile/favourites.html:26 \
+   users/templates/profile/object-plus.html:18 \
+   users/templates/profile/object_detail.html:18
+msgid "Объекты"
+msgstr "Properties"
+
+#: users/templates/profile/favourites.html:92
+msgid "У вас пока нет избранных объектов"
+msgstr "You don't have any favorite properties yet"
+
+#: users/templates/profile/favourites.html:142
+msgid "У вас пока нет избранных застройщиков"
+msgstr "You don't have any favorite developers yet"
+
+#: users/templates/profile/favourites.html:218
+msgid "Error"
+msgstr "Error"
+
+#: users/templates/profile/finance.html:11 \
+   users/templates/profile/finance.html:14
+msgid "Финансы"
+msgstr "Finances"
+
+#: users/templates/profile/finance.html:19
+msgid "Текущий баланс"
+msgstr "Current Balance"
+
+#: users/templates/profile/finance.html:22
+msgid "Действие подписки"
+msgstr "Subscription validity"
+
+#: users/templates/profile/finance.html:24
+msgid "дней"
+msgstr "days"
+
+#: users/templates/profile/finance.html:26 \
+   users/templates/profile/profile.html:82
+msgid "Продлить"
+msgstr "Renew"
+
+#: users/templates/profile/finance.html:28
+msgid "Нет активной подписки"
+msgstr "No active subscription"
+
+#: users/templates/profile/finance.html:30
+msgid "Подписаться"
+msgstr "Subscribe"
+
+#: users/templates/profile/finance.html:36
+msgid "История операций"
+msgstr "Transaction History"
+
+#: users/templates/profile/finance.html:40
+msgid "Дата и время операции"
+msgstr "Transaction Date & Time"
+
+#: users/templates/profile/finance.html:42
+msgid "Сумма операции"
+msgstr "Transaction Amount"
+
+#: users/templates/profile/finance.html:58
+msgid "Нет операций"
+msgstr "No transactions"
+
+#: users/templates/profile/finance.html:65
+msgid "Доступные тарифы"
+msgstr "Available Plans"
+
+#: users/templates/profile/finance.html:74 \
+   users/templates/profile/finance.html:83 \
+   users/templates/profile/finance.html:91 \
+   users/templates/profile/finance.html:99
+msgid "Подключить"
+msgstr "Activate"
+
+#: users/templates/profile/finance.html:79
+msgid "Базовый тариф"
+msgstr "Basic Plan"
+
+#: users/templates/profile/finance.html:81
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
+msgstr "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
+
+#: users/templates/profile/finance.html:87
+msgid "Расширенный с Due diligence"
+msgstr "Extended with Due Diligence"
+
+#: users/templates/profile/finance.html:89
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum is simply dummy text of the"
+msgstr "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the"
+
+#: users/templates/profile/finance.html:95
+msgid "Партнерский тариф"
+msgstr "Partner Plan"
+
+#: users/templates/profile/finance.html:97
+msgid "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sLorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem"
+msgstr "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem"
+
+#: users/templates/profile/finance.html:108
+msgid "Формирование счета"
+msgstr "Invoice Generation"
+
+#: users/templates/profile/finance.html:112
+msgid "Введите страну"
+msgstr "Enter country"
+
+#: users/templates/profile/finance.html:116
+msgid "Выберите страну"
+msgstr "Select country"
+
+#: users/templates/profile/finance.html:126
+msgid "Введите способ оплаты"
+msgstr "Enter payment method"
+
+#: users/templates/profile/finance.html:130
+msgid "Выберите способ оплаты"
+msgstr "Select payment method"
+
+#: users/templates/profile/finance.html:140
+msgid "Куда направить счет"
+msgstr "Where to send the invoice"
+
+#: users/templates/profile/object-plus.html:5 \
+   users/templates/profile/object-plus.html:20 \
+   users/templates/profile/object-plus.html:25
+msgid "Добавление объекта"
+msgstr "Add Property"
+
+#: users/templates/profile/object-plus.html:40
+msgid "Пожалуйста, исправьте следующие ошибки:"
+msgstr "Please correct the following errors:"
+
+#: users/templates/profile/object-plus.html:56
+msgid "Название объекта"
+msgstr "Property Name"
+
+#: users/templates/profile/object-plus.html:73 \
+   users/templates/profile/object_detail.html:146
+msgid "Местонахождение"
+msgstr "Location"
+
+#: users/templates/profile/object-plus.html:74 \
+   users/templates/profile/object_list.html:128
+msgid "Показать на карте"
+msgstr "Show on map"
+
+#: users/templates/profile/object-plus.html:85 \
+   users/templates/profile/object_detail.html:153
+msgid "Город"
+msgstr "City"
+
+#: users/templates/profile/object-plus.html:92 \
+   users/templates/profile/object_detail.html:157
+msgid "Район"
+msgstr "District"
+
+#: users/templates/profile/object-plus.html:109
+msgid "Закрыть карту"
+msgstr "Close map"
+
+#: users/templates/profile/object-plus.html:116
+msgid "Характеристики"
+msgstr "Features"
+
+#: users/templates/profile/object-plus.html:127 \
+   users/templates/profile/object_detail.html:72
+msgid "Класс жилья"
+msgstr "Housing Class"
+
+#: users/templates/profile/object-plus.html:134
+msgid "Перечень удобств"
+msgstr "Amenities"
+
+#: users/templates/profile/object-plus.html:145
+msgid "Цена и сроки"
+msgstr "Price and Timing"
+
+#: users/templates/profile/object-plus.html:149
+msgid "Цена за м²"
+msgstr "Price per m²"
+
+#: users/templates/profile/object-plus.html:156 \
+   users/templates/profile/object_registration.html:33
+msgid "Статус проекта"
+msgstr "Project Status"
+
+#: users/templates/profile/object-plus.html:163
+msgid "Дата сдачи"
+msgstr "Completion Date"
+
+#: users/templates/profile/object-plus.html:174
+msgid "Фотографии"
+msgstr "Photos"
+
+#: users/templates/profile/object-plus.html:178
+msgid "Загрузка"
+msgstr "Upload"
+
+#: users/templates/profile/object-plus.html:181
+msgid "Выберите файлы"
+msgstr "Choose files"
+
+#: users/templates/profile/object-plus.html:185
+msgid "JPEG, размер файла не более 4MБ, размер изображения не более 1600px по ширине / 3200px по высоте. Изображения PNG будут преобразованы в JPEG. Изображения размером более 4MБ или более 1600px по ширине / 3200px по высоте будут уменьшены"
+msgstr "JPEG, file size no more than 4 MB, image size no more than 1600 px wide / 3200 px high. PNG images will be converted to JPEG. Images larger than 4 MB or larger than 1600 px wide / 3200 px high will be resized"
+
+#: users/templates/profile/object-plus.html:195
+msgid "Сохранить"
+msgstr "Save"
+
+#: users/templates/profile/object-plus.html:196 \
+   users/templates/profile/profile_edit.html:109
+msgid "Отмена"
+msgstr "Cancel"
+
+#: users/templates/profile/object_detail.html:76
+msgid "Тип дома"
+msgstr "Building Type"
+
+#: users/templates/profile/object_detail.html:80
+msgid "Срок сдачи"
+msgstr "Completion Date"
+
+#: users/templates/profile/object_detail.html:84
+msgid "Парковка"
+msgstr "Parking"
+
+#: users/templates/profile/object_detail.html:85
+msgid "Есть,Нет"
+msgstr "Yes,No"
+
+#: users/templates/profile/object_detail.html:88
+msgid "Этажность"
+msgstr "Number of Storeys"
+
+#: users/templates/profile/object_detail.html:92
+msgid "Корпуса"
+msgstr "Buildings"
+
+#: users/templates/profile/object_detail.html:103
+msgid "Файлы застройщика"
+msgstr "Developer Files"
+
+#: users/templates/profile/object_detail.html:112
+msgid "Комиссии"
+msgstr "Commissions"
+
+#: users/templates/profile/object_detail.html:138
+msgid "Связаться со своим личным менеджером"
+msgstr "Contact your personal manager"
+
+#: users/templates/profile/object_detail.html:163
+msgid "Характеристики объекта"
+msgstr "Property Features"
+
+#: users/templates/profile/object_detail.html:170
+msgid "Класс"
+msgstr "Class"
+
+#: users/templates/profile/object_detail.html:179
+msgid "Тип строения"
+msgstr "Building Type"
+
+#: users/templates/profile/object_detail.html:188
+msgid "Год сдачи"
+msgstr "Completion Year"
+
+#: users/templates/profile/object_detail.html:197
+msgid "Кол-во этажей"
+msgstr "Number of Floors"
+
+#: users/templates/profile/object_detail.html:212
+msgid "Местонахождение на карте"
+msgstr "Location on map"
+
+#: users/templates/profile/object_detail.html:227
+msgid "Еще от застройщика"
+msgstr "More from this developer"
+
+#: users/templates/profile/object_list.html:5 \
+   users/templates/profile/object_list.html:20 \
+   users/templates/profile/object_list.html:26
+msgid "Каталог объектов"
+msgstr "Property Catalog"
+
+#: users/templates/profile/object_list.html:38
+msgid "Поиск недвижимости"
+msgstr "Property Search"
+
+#: users/templates/profile/object_list.html:42
+msgid "Местонахождение объекта"
+msgstr "Property Location"
+
+#: users/templates/profile/object_list.html:50
+msgid "Поиск по названию застройщика"
+msgstr "Search by developer name"
+
+#: users/templates/profile/object_list.html:75
+msgid "Тип объекта"
+msgstr "Property Type"
+
+#: users/templates/profile/object_list.html:92
+msgid "До пляжа"
+msgstr "To the beach"
+
+#: users/templates/profile/object_list.html:117 \
+   users/templates/profile/object_list.html:222
+msgid "Расширенный поиск"
+msgstr "Advanced Search"
+
+#: users/templates/profile/object_list.html:121
+msgid "Очистить"
+msgstr "Clear"
+
+#: users/templates/profile/object_list.html:138
+msgid "По алфавиту"
+msgstr "Alphabetically"
+
+#: users/templates/profile/object_list.html:139
+msgid "По региону"
+msgstr "By region"
+
+#: users/templates/profile/object_list.html:204
+msgid "У вас пока нет добавленных объектов"
+msgstr "You haven't added any properties yet"
+
+#: users/templates/profile/object_list.html:223
+msgid "Скрыть расширенный поиск"
+msgstr "Hide advanced search"
+
+#: users/templates/profile/object_registration.html:26
+msgid "Перечень заявок на регистрацию объектов"
+msgstr "List of property registration requests"
+
+#: users/templates/profile/object_registration.html:29
+msgid "Все заявки"
+msgstr "All requests"
+
+#: users/templates/profile/object_registration.html:38 \
+   users/templates/profile/object_registration.html:50
+msgid "Опубликованные"
+msgstr "Published"
+
+#: users/templates/profile/object_registration.html:40
+msgid "На модерации"
+msgstr "Under moderation"
+
+#: users/templates/profile/object_registration.html:49
+msgid "Все статусы"
+msgstr "All statuses"
+
+#: users/templates/profile/object_registration.html:51
+msgid "Неопубликованные"
+msgstr "Unpublished"
+
+#: users/templates/profile/object_registration.html:56
+msgid "Дата сдачи проекта"
+msgstr "Project completion date"
+
+#: users/templates/profile/object_registration.html:72 \
+   users/templates/profile/object_registration.html:83
+msgid "от старых к новым"
+msgstr "oldest to newest"
+
+#: users/templates/profile/object_registration.html:74 \
+   users/templates/profile/object_registration.html:84
+msgid "от новых к старым"
+msgstr "newest to oldest"
+
+#: users/templates/profile/object_registration.html:105
+msgid "Нет изображения"
+msgstr "No image"
+
+#: users/templates/profile/profile.html:48
+msgid "Баннер профиля"
+msgstr "Profile banner"
+
+#: users/templates/profile/profile.html:50
+msgid "Баннер профиля по умолчанию"
+msgstr "Default profile banner"
+
+#: users/templates/profile/profile.html:53 \
+   users/templates/profile/profile.html:59
+msgid "Добавить фото"
+msgstr "Add photo"
+
+#: users/templates/profile/profile.html:64 \
+   users/templates/profile/profile_edit.html:31
+msgid "Фото профиля"
+msgstr "Profile photo"
+
+#: users/templates/profile/profile.html:66
+msgid "Фото профиля по умолчанию"
+msgstr "Default profile photo"
+
+#: users/templates/profile/profile.html:73
+msgid "Текущий тариф"
+msgstr "Current plan"
+
+#: users/templates/profile/profile.html:79
+msgid "Действителен до"
+msgstr "Valid until"
+
+#: users/templates/profile/profile.html:81
+msgid "Изменить"
+msgstr "Change"
+
+#: users/templates/profile/profile.html:91
+msgid "Личные данные"
+msgstr "Personal details"
+
+#: users/templates/profile/profile.html:99 \
+   users/templates/profile/profile_edit.html:56
+msgid "Фамилия"
+msgstr "Last name"
+
+#: users/templates/profile/profile.html:103
+msgid "Компания"
+msgstr "Company"
+
+#: users/templates/profile/profile.html:107
+msgid "Язык"
+msgstr "Language"
+
+#: users/templates/profile/profile.html:117
+msgid "Контактная информация"
+msgstr "Contact information"
+
+#: users/templates/profile/profile.html:121
+msgid "Контактный номер"
+msgstr "Contact number"
+
+#: users/templates/profile/profile.html:125
+msgid "Электронный адрес"
+msgstr "Email address"
+
+#: users/templates/profile/profile.html:129
+msgid "Предпочтительный канал связи"
+msgstr "Preferred contact channel"
+
+#: users/templates/profile/profile.html:135 \
+   users/templates/profile/profile_edit.html:108
+msgid "Сохранить изменения"
+msgstr "Save changes"
+
+#: users/templates/profile/profile_edit.html:5 \
+   users/templates/profile/profile_edit.html:25
+msgid "Редактирование профиля"
+msgstr "Edit profile"
+
+#: users/templates/profile/profile_edit.html:20
+msgid "Редактирование"
+msgstr "Editing"
+
+#: users/templates/profile/profile_edit.html:35 \
+   users/templates/profile/profile_edit.html:37
+msgid "Аватар"
+msgstr "Avatar"
+
+#: users/templates/profile/profile_edit.html:42
+msgid "Рекомендуемый размер: 200x200px, до 2MB"
+msgstr "Recommended size: 200×200 px, up to 2 MB"
+
+#: users/templates/profile/profile_edit.html:61
+msgid "Email"
+msgstr "Email"
+
+#: users/templates/profile/profile_edit.html:79
 msgid "Информация о компании"
-msgstr "Company Information"
+msgstr "Company information"
 
+#: users/templates/profile/profile_edit.html:82
 msgid "Название компании"
-msgstr "Company Name"
+msgstr "Company name"
 
+#: users/templates/profile/profile_edit.html:87
 msgid "Юридический адрес"
-msgstr "Legal Address"
+msgstr "Legal address"
 
+#: users/templates/profile/profile_edit.html:100
 msgid "О себе"
-msgstr "About Me"
+msgstr "About me"
+
