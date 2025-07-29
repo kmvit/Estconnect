@@ -8,6 +8,9 @@ import django
 import json
 from collections import defaultdict
 
+# Добавляем путь к проекту в sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # Настройка Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Estconnect.settings')
 django.setup()
@@ -86,7 +89,7 @@ def main():
     """
     Основная функция
     """
-    fixture_file = 'construction_objects_fixture_new.json'
+    fixture_file = 'parsing_utils/construction_objects_fixture_new.json'
     
     print("=== Извлечение городов из fixture ===")
     cities_by_country = extract_cities_from_fixture(fixture_file)
