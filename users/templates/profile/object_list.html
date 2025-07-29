@@ -58,7 +58,7 @@
                         <div class="price-dropdown search-dropdown estate-search-form-item-price-item">
                             <div class="price-dropdown-button-wrapper search-dropdown-button-wrapper">
                                 <span class="price-dropdown-button search-dropdown-button">{{
-                                    search_form.price_currency.value|default:"USD" }}</span>
+                                    search_form.price_currency.value|default:"THB" }}</span>
                                 <img src="{% static 'assets/icons/arrow-bottom-icon.svg' %}" alt=""
                                     class="search-dropdown-icon">
                             </div>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="object-card-place-text">{{ object.address }}</div>
                 </div>
-                <p class="object-card-price">{{ object.price_per_sqm }} ₽/м²</p>
+                <p class="object-card-price">{{ object.price_per_sqm }} {{ search_form.price_currency.value|default:"THB" }}/м²</p>
                 <div class="object-card-info">
                     <div class="object-card-info-item">
                         <div class="object-card-info-item-icon">
@@ -361,7 +361,7 @@
             document.getElementById('map'),
             {
                 location: {
-                    center: [37.588144, 55.733842],
+                    center: [98.3384, 7.8804],
                     zoom: 10
                 }
             }
@@ -462,7 +462,7 @@
             map.update({
                 location: {
                     center: firstMarker.coordinates,
-                    zoom: 8
+                    zoom: 10
                 }
             });
         }
