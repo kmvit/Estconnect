@@ -255,11 +255,12 @@ class EstateSearchForm(forms.Form):
     
     price_currency = forms.ChoiceField(
         choices=[
+            ('THB', 'THB'),
             ('USD', 'USD'),
             ('RUB', 'RUB'),
             ('UK', 'UK')
         ],
-        initial='USD',
+        initial='THB',
         required=False,
         widget=forms.Select(attrs={
             'class': 'input estate-search-form-item-input',

@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="object_main-screen-info">
-            <p class="object_main-screen-info-price">от {{ object.price_per_sqm }} ₽/м²</p>
+            <p class="object_main-screen-info-price">от {{ object.price_per_sqm }} {{ search_form.price_currency.value|default:"THB" }}/м²</p>
             <div class="object_main-screen-info-list">
                 <div class="object_main-screen-info-list-item">
                     <p class="object_main-screen-info-list-item-title">{% trans "Класс жилья" %}:</p>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="object-card-place-text">{{ other_object.city }}, {{ other_object.country }}</div>
                 </div>
-                <p class="object-card-price">от {{ other_object.price_per_sqm }} ₽/м²</p>
+                <p class="object-card-price">от {{ other_object.price_per_sqm }} {{ search_form.price_currency.value|default:"THB" }}/м²</p>
                 <div class="object-card-info">
                     <div class="object-card-info-item">
                         <div class="object-card-info-item-icon">

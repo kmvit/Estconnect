@@ -88,7 +88,7 @@ class ConstructionObject(models.Model):
     project_status = models.CharField('Статус проекта', max_length=20, choices=PROJECT_STATUS_CHOICES, default='in_progress')
     
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    price_per_sqm = models.DecimalField('Цена за м²', max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)])
+    price_per_sqm = models.DecimalField('Цена за м²', max_digits=10, decimal_places=0, null=True, blank=True, validators=[MinValueValidator(0)])
     
     completion_date = models.DateField('Дата сдачи проекта', null=True, blank=True)
     address = models.TextField(verbose_name='Адрес', blank=True, null=True)
