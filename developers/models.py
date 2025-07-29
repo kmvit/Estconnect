@@ -113,7 +113,7 @@ class ConstructionObjectImage(models.Model):
         on_delete=models.CASCADE,
         related_name='images'
     )
-    image = models.ImageField(upload_to='construction_objects/')
+    image = models.ImageField(upload_to='construction_objects/', max_length=255)
     created_at = models.DateTimeField('Дата создания', default=timezone.now)
 
     class Meta:
