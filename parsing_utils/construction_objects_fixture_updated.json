@@ -5,7 +5,7 @@
         "fields": {
             "name": "DCondo Reef",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 7,
             "district": null,
             "property_type": "apartment",
@@ -148,7 +148,7 @@
         "fields": {
             "name": "Sunshine Beach Resort & Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -363,7 +363,7 @@
         "fields": {
             "name": "Wanda Vista (Laya)",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -551,7 +551,7 @@
         "fields": {
             "name": "The Forest Patong",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 16,
             "district": null,
             "property_type": "apartment",
@@ -676,7 +676,7 @@
         "fields": {
             "name": "Utopia Karon",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -765,7 +765,7 @@
         "fields": {
             "name": "PEYLAA",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -908,7 +908,7 @@
         "fields": {
             "name": "Laguna Seaside Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -1042,7 +1042,7 @@
         "fields": {
             "name": "Garrya Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -1194,7 +1194,7 @@
         "fields": {
             "name": "Botanica Hythe",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -1337,7 +1337,7 @@
         "fields": {
             "name": "Bliss Beachfront",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 6,
             "district": null,
             "property_type": "apartment",
@@ -1462,7 +1462,7 @@
         "fields": {
             "name": "Above Element",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -1731,7 +1731,7 @@
         "fields": {
             "name": "The Panora Condo",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 12,
             "district": null,
             "property_type": "apartment",
@@ -1838,7 +1838,7 @@
         "fields": {
             "name": "Momentum",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -1936,7 +1936,7 @@
         "fields": {
             "name": "Dominion Rawai",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -2052,7 +2052,7 @@
         "fields": {
             "name": "The Title Heritage",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -2195,7 +2195,7 @@
         "fields": {
             "name": "The Proud Residence Karon Beach",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -2311,7 +2311,7 @@
         "fields": {
             "name": "Gardens of Eden",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -2445,7 +2445,7 @@
         "fields": {
             "name": "Andamaya Surin Bay",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 12,
             "district": null,
             "property_type": "apartment",
@@ -2525,7 +2525,7 @@
         "fields": {
             "name": "BB Horizon Resort",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 18,
             "district": null,
             "property_type": "apartment",
@@ -2614,7 +2614,7 @@
         "fields": {
             "name": "Wyndham Fantasea Chalong",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 15,
             "district": null,
             "property_type": "apartment",
@@ -2775,7 +2775,7 @@
         "fields": {
             "name": "ENIGMA RESIDENCE",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -2882,7 +2882,7 @@
         "fields": {
             "name": "Bluepoint Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 16,
             "district": null,
             "property_type": "apartment",
@@ -3052,7 +3052,7 @@
         "fields": {
             "name": "The Base Rise",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 19,
             "district": null,
             "property_type": "apartment",
@@ -3141,7 +3141,7 @@
         "fields": {
             "name": "Citygate Kamala",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -3473,7 +3473,7 @@
         "fields": {
             "name": "Fantasea Condo Kamala",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -3562,7 +3562,7 @@
         "fields": {
             "name": "Sudara",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -3642,7 +3642,7 @@
         "fields": {
             "name": "Zen Space",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -3749,7 +3749,7 @@
         "fields": {
             "name": "Sole Mio Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -3883,7 +3883,7 @@
         "fields": {
             "name": "The One Naiharn",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 13,
             "district": null,
             "property_type": "apartment",
@@ -4287,7 +4287,7 @@
         "fields": {
             "name": "Wekata3",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 3,
             "district": null,
             "property_type": "apartment",
@@ -4493,7 +4493,7 @@
         "fields": {
             "name": "Ayana Heights",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -4663,7 +4663,7 @@
         "fields": {
             "name": "Rawayana North",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -4788,7 +4788,7 @@
         "fields": {
             "name": "The Zero BangTao",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -4877,7 +4877,7 @@
         "fields": {
             "name": "SO Lagoon by Origin",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -4966,7 +4966,7 @@
         "fields": {
             "name": "Chalong Marina Bay View",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 15,
             "district": null,
             "property_type": "apartment",
@@ -5064,7 +5064,7 @@
         "fields": {
             "name": "ANDAMAN CITY: Boutique Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -5153,7 +5153,7 @@
         "fields": {
             "name": "Blue Canyon Property",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 19,
             "district": null,
             "property_type": "apartment",
@@ -5251,7 +5251,7 @@
         "fields": {
             "name": "The Base Bukit",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 9,
             "district": null,
             "property_type": "apartment",
@@ -5349,7 +5349,7 @@
         "fields": {
             "name": "The Title Cielo",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -5438,7 +5438,7 @@
         "fields": {
             "name": "ANDAMAN CITY: Atrium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -5536,7 +5536,7 @@
         "fields": {
             "name": "Laguna Beachside Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -5661,7 +5661,7 @@
         "fields": {
             "name": "The Marin Phuket",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -5921,7 +5921,7 @@
         "fields": {
             "name": "Melia Karon",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -6028,7 +6028,7 @@
         "fields": {
             "name": "Babylon Sky Garden 2",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -6234,7 +6234,7 @@
         "fields": {
             "name": "DANDARA Residental Complex",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -6287,7 +6287,7 @@
         "fields": {
             "name": "The Title Serenity",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 6,
             "district": null,
             "property_type": "apartment",
@@ -6403,7 +6403,7 @@
         "fields": {
             "name": "Sea Heaven",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 8,
             "district": null,
             "property_type": "apartment",
@@ -6636,7 +6636,7 @@
         "fields": {
             "name": "The Residences Overlooking Layan",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -6743,7 +6743,7 @@
         "fields": {
             "name": "Cassia Phase 2",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -6967,7 +6967,7 @@
         "fields": {
             "name": "Cascade Bangtao",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -7074,7 +7074,7 @@
         "fields": {
             "name": "Surin Sands",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 12,
             "district": null,
             "property_type": "apartment",
@@ -7316,7 +7316,7 @@
         "fields": {
             "name": "Angsana Oceanview Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -7432,7 +7432,7 @@
         "fields": {
             "name": "Aura Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 15,
             "district": null,
             "property_type": "apartment",
@@ -7584,7 +7584,7 @@
         "fields": {
             "name": "The Cube Amaze",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 19,
             "district": null,
             "property_type": "apartment",
@@ -7673,7 +7673,7 @@
         "fields": {
             "name": "Condominium Bright Phuket",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -7924,7 +7924,7 @@
         "fields": {
             "name": "SO Origin Kata Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 3,
             "district": null,
             "property_type": "apartment",
@@ -8013,7 +8013,7 @@
         "fields": {
             "name": "The ORIGIN Khatu-Patong",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 7,
             "district": null,
             "property_type": "apartment",
@@ -8111,7 +8111,7 @@
         "fields": {
             "name": "Palmyrah Surin Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 12,
             "district": null,
             "property_type": "apartment",
@@ -8299,7 +8299,7 @@
         "fields": {
             "name": "Royal Lee Terminal",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 10,
             "district": null,
             "property_type": "apartment",
@@ -8397,7 +8397,7 @@
         "fields": {
             "name": "Capri Residence",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -8504,7 +8504,7 @@
         "fields": {
             "name": "ESSENCE by Harmony Group",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -8629,7 +8629,7 @@
         "fields": {
             "name": "Layan Green Park Phase 2 Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -8907,7 +8907,7 @@
         "fields": {
             "name": "Radisson Mai Khao",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 10,
             "district": null,
             "property_type": "apartment",
@@ -9050,7 +9050,7 @@
         "fields": {
             "name": "The Ozone Signature",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -9274,7 +9274,7 @@
         "fields": {
             "name": "The City Phuket",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 9,
             "district": null,
             "property_type": "apartment",
@@ -9462,7 +9462,7 @@
         "fields": {
             "name": "Lakeside Residences condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -9551,7 +9551,7 @@
         "fields": {
             "name": "Pier 22 Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -9631,7 +9631,7 @@
         "fields": {
             "name": "Angsana Beachfront Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -9711,7 +9711,7 @@
         "fields": {
             "name": "Siamese Bangtao Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -9827,7 +9827,7 @@
         "fields": {
             "name": "Highland Park Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -9916,7 +9916,7 @@
         "fields": {
             "name": "Oceana Kamala Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -10212,7 +10212,7 @@
         "fields": {
             "name": "Arise Vibe Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 19,
             "district": null,
             "property_type": "apartment",
@@ -10382,7 +10382,7 @@
         "fields": {
             "name": "Utopia Lux Glam",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 13,
             "district": null,
             "property_type": "apartment",
@@ -10534,7 +10534,7 @@
         "fields": {
             "name": "Skypark Celeste Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -10650,7 +10650,7 @@
         "fields": {
             "name": "ANDAMAN CITY: Riviera",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -10730,7 +10730,7 @@
         "fields": {
             "name": "Etherhome Seaview",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -10936,7 +10936,7 @@
         "fields": {
             "name": "The VIP Great Hill condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 6,
             "district": null,
             "property_type": "apartment",
@@ -11016,7 +11016,7 @@
         "fields": {
             "name": "Ozone Oasis Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -11402,7 +11402,7 @@
         "fields": {
             "name": "Maviston Mai Khao Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 10,
             "district": null,
             "property_type": "apartment",
@@ -11599,7 +11599,7 @@
         "fields": {
             "name": "Sunny Moon",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 13,
             "district": null,
             "property_type": "apartment",
@@ -11832,7 +11832,7 @@
         "fields": {
             "name": "La Belle",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -11948,7 +11948,7 @@
         "fields": {
             "name": "The Base Cherngtalay Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -11992,7 +11992,7 @@
         "fields": {
             "name": "The Title ArtRio",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -12099,7 +12099,7 @@
         "fields": {
             "name": "The Title Legendary Bang Tao",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -12278,7 +12278,7 @@
         "fields": {
             "name": "Cassia Phase 1",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -12439,7 +12439,7 @@
         "fields": {
             "name": "The REGENT residence",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -12537,7 +12537,7 @@
         "fields": {
             "name": "Phenomenon",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 3,
             "district": null,
             "property_type": "apartment",
@@ -12635,7 +12635,7 @@
         "fields": {
             "name": "Kiara Reserve",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -12715,7 +12715,7 @@
         "fields": {
             "name": "Wyndham La Vita",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 13,
             "district": null,
             "property_type": "apartment",
@@ -12894,7 +12894,7 @@
         "fields": {
             "name": "Hennessy Residence",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -13046,7 +13046,7 @@
         "fields": {
             "name": "The Ozon Oasis",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -13144,7 +13144,7 @@
         "fields": {
             "name": "Platinum Bay Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -13440,7 +13440,7 @@
         "fields": {
             "name": "The Standard Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -13565,7 +13565,7 @@
         "fields": {
             "name": "Laguna Lakeland Residences",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -13690,7 +13690,7 @@
         "fields": {
             "name": "California Rawai",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -13959,7 +13959,7 @@
         "fields": {
             "name": "VIP Space Odyssey",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -14111,7 +14111,7 @@
         "fields": {
             "name": "Surfhouse Phuket Bangtao",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -14209,7 +14209,7 @@
         "fields": {
             "name": "Harmony Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -14307,7 +14307,7 @@
         "fields": {
             "name": "Rawayana South",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -14495,7 +14495,7 @@
         "fields": {
             "name": "The Title Halo 1",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 6,
             "district": null,
             "property_type": "apartment",
@@ -14611,7 +14611,7 @@
         "fields": {
             "name": "Layan Verde",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -14718,7 +14718,7 @@
         "fields": {
             "name": "VIP Karon Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -14951,7 +14951,7 @@
         "fields": {
             "name": "Canvas",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -15013,7 +15013,7 @@
         "fields": {
             "name": "SunHills Layan",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 5,
             "district": null,
             "property_type": "apartment",
@@ -15066,7 +15066,7 @@
         "fields": {
             "name": "The Ozone Lagunia Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 14,
             "district": null,
             "property_type": "apartment",
@@ -15272,7 +15272,7 @@
         "fields": {
             "name": "The Modeva",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -15397,7 +15397,7 @@
         "fields": {
             "name": "VIP Venus Karon",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 11,
             "district": null,
             "property_type": "apartment",
@@ -15513,7 +15513,7 @@
         "fields": {
             "name": "VIP TROPIKA",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -15647,7 +15647,7 @@
         "fields": {
             "name": "The Title Adora Rawai",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -15799,7 +15799,7 @@
         "fields": {
             "name": "Pandora Residence",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 20,
             "district": null,
             "property_type": "apartment",
@@ -15933,7 +15933,7 @@
         "fields": {
             "name": "Icon Park",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -16049,7 +16049,7 @@
         "fields": {
             "name": "Montazure MGallery",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 4,
             "district": null,
             "property_type": "apartment",
@@ -16228,7 +16228,7 @@
         "fields": {
             "name": "Serene Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 12,
             "district": null,
             "property_type": "apartment",
@@ -16380,7 +16380,7 @@
         "fields": {
             "name": "The Balance",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 3,
             "district": null,
             "property_type": "apartment",
@@ -16478,7 +16478,7 @@
         "fields": {
             "name": "So Origin BangTao Beach",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
@@ -16567,7 +16567,7 @@
         "fields": {
             "name": "The Title Katabello",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 3,
             "district": null,
             "property_type": "apartment",
@@ -16728,7 +16728,7 @@
         "fields": {
             "name": "Vega Condominium",
             "developer": 1,
-            "country": 5,
+            "country": 1,
             "city": 17,
             "district": null,
             "property_type": "apartment",
