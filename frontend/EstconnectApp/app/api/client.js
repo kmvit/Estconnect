@@ -1,11 +1,14 @@
+import { DEV_IP, PROD_IP } from '@env';
+
 // Конфигурация API для разных окружений
 const getApiUrl = () => {
   // Для разработки используем локальный сервер
   if (__DEV__) {
-    return 'http://127.0.0.1:8000/api/v1';
+    // Используем переменную окружения или fallback на IP адрес
+    return DEV_IP || 'http://192.168.1.134:8000/api/v1';
   }
   // Для продакшена используйте ваш домен
-  return 'https://estconnect.ru/api/v1';
+  return PROD_IP || 'https://estconnect.ru/api/v1';
 };
 
 const API_BASE_URL = getApiUrl();
