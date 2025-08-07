@@ -8,6 +8,7 @@ from users.admin import cam_admin_site
 
 # URL-паттерны, которые не требуют языкового префикса
 urlpatterns = [
+    path('api/v1/', include('api.urls', namespace='api')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
