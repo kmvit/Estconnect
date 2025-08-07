@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # Добавляем для поддержки сайтов
     'django.contrib.sitemaps',  # Добавляем для карты сайта
 
+    'rest_framework',
+    'corsheaders',
+
+    'api',
     'users',
     'core',
     'pages',
@@ -56,6 +60,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',  # Добавляем middleware для локализации
     'django.middleware.common.CommonMiddleware',
@@ -181,3 +186,6 @@ LANGUAGE_COOKIE_PATH = '/'
 LANGUAGE_COOKIE_SECURE = False
 LANGUAGE_COOKIE_HTTPONLY = False
 LANGUAGE_COOKIE_SAMESITE = None
+
+
+CORS_ALLOW_ALL_ORIGINS = True
