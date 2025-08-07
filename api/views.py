@@ -15,7 +15,7 @@ class HomePageAPIView(APIView):
                 'text_line_1': _('Эксклюзивные предложения'),
                 'text_line_2': _('и безопасные сделки'),
                 'button_text': _('Оставить заявку'),
-                'image_url': '/static/images/main-screen-img.png'
+                'image_url': request.build_absolute_uri(static('images/main-screen-img.png'))
             },
             'text_box': {
                 'title': 'EstConnect',
