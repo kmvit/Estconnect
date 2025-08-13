@@ -7,7 +7,7 @@ import BuilderIcon from './icons/BuilderIcon';
 import HelpIcon from './icons/HelpIcon';
 import { COLORS } from '../styles/colors';
 
-const BottomNavigation = () => {
+const BottomNavigation = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('home');
 
   const navigationItems = [
@@ -15,32 +15,43 @@ const BottomNavigation = () => {
       id: 'home',
       title: 'Главная',
       icon: HomeIcon,
+      screen: 'Home',
     },
     {
       id: 'finance',
       title: 'Финансы',
       icon: FinanceIcon,
+      screen: null, // Пока не реализовано
     },
     {
       id: 'view',
       title: 'Объекты',
       icon: ViewIcon,
+      screen: null, // Пока не реализовано
     },
     {
       id: 'builder',
       title: 'Застройщики',
       icon: BuilderIcon,
+      screen: null, // Пока не реализовано
     },
     {
       id: 'help',
       title: 'Поддержка',
       icon: HelpIcon,
+      screen: null, // Пока не реализовано
     },
   ];
 
   const handleTabPress = (tabId) => {
+    const item = navigationItems.find(item => item.id === tabId);
     setActiveTab(tabId);
-    Alert.alert('Информация', `Переход на экран: ${navigationItems.find(item => item.id === tabId)?.title}`);
+    
+    if (item.screen) {
+      navigation.navigate(item.screen);
+    } else {
+      Alert.alert('Информация', `Экран "${item.title}" находится в разработке`);
+    }
   };
 
   return (

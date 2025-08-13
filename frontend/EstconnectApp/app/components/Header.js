@@ -8,8 +8,8 @@ import {
   ScrollView,
   Alert
 } from 'react-native';
-import BurgerIcon from './BurgerIcon';
-import CloseIcon from './CloseIcon';
+import BurgerIcon from './icons/BurgerIcon';
+import CloseIcon from './icons/CloseIcon';
 import Logo from './Logo';
 import { COLORS } from '../styles/colors';
 import { headerStyles as styles } from '../styles/components/header';

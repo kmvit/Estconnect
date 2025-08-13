@@ -10,4 +10,5 @@ export {
 } from './spacing';
 export { commonStyles } from './components/common';
 export { headerStyles } from './components/header';
-export { homeStyles } from './screens/home'; 
+export { homeStyles } from './screens/home';
+export { authStyles } from './screens/auth'; 

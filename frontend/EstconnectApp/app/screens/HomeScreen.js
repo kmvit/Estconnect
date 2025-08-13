@@ -16,7 +16,7 @@ import { COLORS } from '../styles/colors';
 import { homeStyles as styles } from '../styles/screens/home';
 import { commonStyles } from '../styles/components/common';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -117,18 +117,18 @@ const HomeScreen = () => {
           <View style={styles.authCtaButtons}>
             <Button 
               title={homeData.auth_cta.login_button_text}
-              onPress={() => Alert.alert('Информация', 'Переход на экран входа')}
+              onPress={() => navigation.navigate('Login')}
               style={commonStyles.button}
             />
             <Button 
               title={homeData.auth_cta.register_button_text}
-              onPress={() => Alert.alert('Информация', 'Переход на экран регистрации')}
+              onPress={() => navigation.navigate('Register')}
               style={commonStyles.button}
             />
           </View>
         </ImageBackground>
       </ScrollView>
-      <BottomNavigation />
+      <BottomNavigation navigation={navigation} />
     </View>
   );
 };

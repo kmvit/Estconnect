@@ -1,14 +1,17 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-import HomeScreen from './app/screens/HomeScreen';
+import AppNavigator from './app/navigation/AppNavigator';
 import { COLORS } from './app/styles/colors';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
-      <HomeScreen />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
+        <AppNavigator />
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
