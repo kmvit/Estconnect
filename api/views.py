@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from django.utils.translation import gettext_lazy as _
 from django.templatetags.static import static
 
@@ -7,6 +8,7 @@ class HomePageAPIView(APIView):
     """
     API view для получения данных главной страницы.
     """
+    permission_classes = [AllowAny]
     def get(self, request, *args, **kwargs):
         # build_absolute_uri нужен, чтобы Expo-приложение получило полные URL-адреса для изображений
         data = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { 
   View, 
   Text, 
@@ -14,11 +14,13 @@ import Logo from './Logo';
 import { COLORS } from '../styles/colors';
 import { headerStyles as styles } from '../styles/components/header';
 import { commonStyles } from '../styles/components/common';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('ru');
-
+  const navigation = useNavigation();
   const menuItems = [
     { title: 'О нас', url: '/about-us/' },
     { title: 'О продукте', url: '/about-product/' },
@@ -53,15 +55,30 @@ const Header = () => {
 
   const handleLoginPress = () => {
     Alert.alert('Информация', 'Переход на страницу входа');
+  }
+
+  const handleHomePress = () => {
+    navigation.navigate('Home');
+  };
+
+  const handleProfilePress = () => {
+    navigation.navigate('Profile');
   };
 
   return (
     <View style={styles.header}>
       {/* Логотип */}
       <View style={styles.headerLogo}>
-        <TouchableOpacity onPress={() => Alert.alert('Информация', 'Переход на главную')}>
+        <TouchableOpacity onPress={() => handleHomePress()}>
           <Logo width={143} height={24} />
         </TouchableOpacity>
+      </View>
+      <View style={styles.headerRight}>
+      <View style={styles.profileContainer}>
+        <TouchableOpacity onPress={() => handleProfilePress()}>
+          <Text>Профиль</Text>
+        </TouchableOpacity>
+      </View>
       </View>
 
       {/* Временно скрыто: Бургер меню */}
