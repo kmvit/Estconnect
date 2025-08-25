@@ -9,7 +9,7 @@ const getApiUrl = () => {
     return DEV_IP || 'http://127.0.0.1:8000/api/v1';
   }
   // Для продакшена используйте ваш домен
-  return PROD_IP || 'https://estconnect.ru/api/v1';
+  return PROD_IP || 'https://estconnect.asia/api/v1';
 };
 
 const API_BASE_URL = getApiUrl();
