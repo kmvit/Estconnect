@@ -77,6 +77,9 @@ class ConstructionObject(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, verbose_name='Страна', null=True, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Город', null=True, blank=True)
     district = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name='Район', null=True, blank=True)
+
+    latitude = models.DecimalField('Широта', max_digits=10, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField('Долгота', max_digits=10, decimal_places=6, null=True, blank=True)
     
     property_type = models.CharField('Тип недвижимости', max_length=20, choices=PROPERTY_TYPE_CHOICES, null=True, blank=True)
     comfort_type = models.CharField('Комфорт', max_length=20, choices=COMFORT_CHOICES, null=True, blank=True)

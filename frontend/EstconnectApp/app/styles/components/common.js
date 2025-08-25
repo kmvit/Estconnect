@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../colors';
 import { SPACING, GAPS } from '../spacing';
+import { buttonStyles } from './buttons';
+import { FONTS } from '../typography';
 
 // Общие стили для переиспользования
 export const commonStyles = StyleSheet.create({
@@ -26,6 +28,7 @@ export const commonStyles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
   errorContainer: {
@@ -37,6 +40,7 @@ export const commonStyles = StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
     marginBottom: 20,
     textAlign: 'center',
@@ -44,8 +48,10 @@ export const commonStyles = StyleSheet.create({
   
   // Кнопки
   button: {
+    ...buttonStyles.primary,
     width: 150,
   },
+  buttonText: buttonStyles.primaryText,
   authButton: {
     width: 100,
     height: 45,
@@ -58,7 +64,7 @@ export const commonStyles = StyleSheet.create({
   },
   authButtonText: {
     fontSize: 14,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
     textTransform: 'capitalize',
   },
@@ -108,7 +114,7 @@ export const commonStyles = StyleSheet.create({
   },
   languageLabel: {
     fontSize: 14,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
     marginBottom: 10,
   },
@@ -130,12 +136,12 @@ export const commonStyles = StyleSheet.create({
   },
   languageButtonText: {
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
   languageButtonTextActive: {
     color: COLORS.white,
-    fontWeight: 'bold',
+    fontFamily: FONTS.univiaPro.bold,
   },
   
   // Иконки

@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from '../colors';
+import { FONTS } from '../typography';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +32,7 @@ export const authStyles = StyleSheet.create({
     width: 550,
   },
   title: {
-    fontWeight: '500',
+    fontFamily: FONTS.univiaPro.medium,
     fontSize: width > 480 ? 28 : 24,
     textTransform: 'uppercase',
     color: '#000',
@@ -88,10 +89,11 @@ export const authStyles = StyleSheet.create({
   checkmark: {
     color: 'white',
     fontSize: 14,
-    fontWeight: 'bold',
+    fontFamily: FONTS.univiaPro.bold,
   },
   checkboxText: {
     fontSize: width > 480 ? 16 : 14,
+    fontFamily: FONTS.univiaPro.regular,
     color: '#666',
     flex: 1,
     lineHeight: width > 480 ? 22 : 20,

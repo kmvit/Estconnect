@@ -15,12 +15,15 @@ import { COLORS } from '../styles/colors';
 import { headerStyles as styles } from '../styles/components/header';
 import { commonStyles } from '../styles/components/common';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../hooks/useAuth';
+
 
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('ru');
   const navigation = useNavigation();
+  const { user, isAuthenticated, loading } = useAuth();
   const menuItems = [
     { title: 'О нас', url: '/about-us/' },
     { title: 'О продукте', url: '/about-product/' },
@@ -62,7 +65,11 @@ const Header = () => {
   };
 
   const handleProfilePress = () => {
-    navigation.navigate('Profile');
+    if (isAuthenticated) {
+      navigation.navigate('Profile');
+    } else {
+      navigation.navigate('Login');
+    }
   };
 
   return (
@@ -73,13 +80,18 @@ const Header = () => {
           <Logo width={143} height={24} />
         </TouchableOpacity>
       </View>
-      <View style={styles.headerRight}>
-      <View style={styles.profileContainer}>
-        <TouchableOpacity onPress={() => handleProfilePress()}>
-          <Text>Профиль</Text>
-        </TouchableOpacity>
-      </View>
-      </View>
+        <View style={styles.headerRight}>
+          <View style={styles.profileContainer}>
+            <TouchableOpacity onPress={() => handleProfilePress()}>
+              <Text>
+                {loading ? 'Загрузка...' : 
+                 isAuthenticated && user ? 
+                   (user.username || user.first_name || user.email || 'Пользователь') : 
+                   'Вход'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
       {/* Временно скрыто: Бургер меню */}
       {/* <TouchableOpacity style={styles.burger} onPress={handleMenuPress}>

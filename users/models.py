@@ -97,6 +97,14 @@ class CustomUser(AbstractUser):
         limit_choices_to={'role': 'developer'},
         symmetrical=False  # Добавляем это
     )
+    _favourite_agents = models.ManyToManyField(
+        'self',
+        related_name='favourited_by_agents',
+        blank=True,
+        verbose_name='Избранные агенты',
+        limit_choices_to={'role': 'agent'},
+        symmetrical=False
+    )
 
     def __str__(self):
         return f"{self.get_full_name()} ({self.get_role_display()})"
@@ -111,6 +119,10 @@ class CustomUser(AbstractUser):
     @property
     def favourite_developers(self):
         return self._favourite_developers.all()
+    
+    @property
+    def favourite_agents(self):
+        return self._favourite_agents.all()
 
     class Meta:
         verbose_name = "Пользователь"

@@ -14,6 +14,8 @@ import AuthContainer from '../components/AuthContainer';
 import AgentIcon from '../components/icons/AgentIcon';
 import BuilderIcon from '../components/icons/BuilderIcon';
 import BottomNavigation from '../components/BottomNavigation';
+import apiClient from '../api/client';
+import { useAuth } from '../hooks/useAuth';
 
 const RegisterScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,7 @@ const RegisterScreen = ({ navigation }) => {
   });
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleRegister = async () => {
     if (!formData.username || !formData.email || !formData.password || !formData.password2) {
@@ -49,12 +52,31 @@ const RegisterScreen = ({ navigation }) => {
 
     setLoading(true);
     try {
-      // Здесь будет вызов API
-      Alert.alert('Успех', 'Регистрация выполнена успешно', [
-        { text: 'OK', onPress: () => navigation.navigate('Home') }
-      ]);
+      console.log('Отправка запроса на регистрацию...');
+      const response = await apiClient.register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        password2: formData.password2,
+        role: formData.role
+      });
+      
+      console.log('Ответ от сервера:', response);
+      
+      if (response.token) {
+        await login({
+          username: formData.username,
+          password: formData.password
+        });
+        Alert.alert('Успех', 'Регистрация выполнена успешно', [
+          { text: 'OK', onPress: () => navigation.navigate('Home') }
+        ]);
+      } else {
+        Alert.alert('Ошибка', 'Неверный ответ от сервера');
+      }
     } catch (error) {
-      Alert.alert('Ошибка', 'Ошибка при регистрации. Возможно, пользователь уже существует.');
+      console.error('Ошибка регистрации:', error);
+      Alert.alert('Ошибка', error.message || 'Ошибка при регистрации. Возможно, пользователь уже существует.');
     } finally {
       setLoading(false);
     }

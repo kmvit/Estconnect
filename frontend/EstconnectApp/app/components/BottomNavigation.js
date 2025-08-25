@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import HomeIcon from './icons/HomeIcon';
 import FinanceIcon from './icons/FinanceIcon';
 import ViewIcon from './icons/ViewIcon';
 import BuilderIcon from './icons/BuilderIcon';
+import AgentIcon from './icons/AgentIcon';
 import HelpIcon from './icons/HelpIcon';
 import { COLORS } from '../styles/colors';
+import { useAuth } from '../hooks/useAuth';
 
-const BottomNavigation = ({ navigation }) => {
-  const [activeTab, setActiveTab] = useState('home');
+const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
+  const [currentTab, setCurrentTab] = useState(activeTab);
+  const { user } = useAuth();
+
+  // Синхронизируем состояние при изменении activeTab
+  useEffect(() => {
+    setCurrentTab(activeTab);
+  }, [activeTab]);
 
   const navigationItems = [
     {
@@ -21,31 +29,31 @@ const BottomNavigation = ({ navigation }) => {
       id: 'finance',
       title: 'Финансы',
       icon: FinanceIcon,
-      screen: null, // Пока не реализовано
+      screen: 'Finance',
     },
     {
       id: 'view',
       title: 'Объекты',
       icon: ViewIcon,
-      screen: null, // Пока не реализовано
+      screen: 'Objects',
     },
     {
-      id: 'builder',
-      title: 'Застройщики',
-      icon: BuilderIcon,
-      screen: null, // Пока не реализовано
+      id: 'catalog',
+      title: user?.role === 'agent' ? 'Застройщики' : 'Агенты',
+      icon: user?.role === 'agent' ? BuilderIcon : AgentIcon,
+      screen: 'Catalog',
     },
     {
       id: 'help',
       title: 'Поддержка',
       icon: HelpIcon,
-      screen: null, // Пока не реализовано
+      screen: 'Support',
     },
   ];
 
   const handleTabPress = (tabId) => {
     const item = navigationItems.find(item => item.id === tabId);
-    setActiveTab(tabId);
+    setCurrentTab(tabId);
     
     if (item.screen) {
       navigation.navigate(item.screen);
@@ -58,7 +66,7 @@ const BottomNavigation = ({ navigation }) => {
     <View style={styles.container}>
       {navigationItems.map((item) => {
         const IconComponent = item.icon;
-        const isActive = activeTab === item.id;
+        const isActive = currentTab === item.id;
         
         return (
           <TouchableOpacity
