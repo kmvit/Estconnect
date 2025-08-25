@@ -11,7 +11,7 @@ import {
 import Button from '../components/Button';
 import Header from '../components/Header';
 import BottomNavigation from '../components/BottomNavigation';
-import ApiClient from '../api/client';
+import apiClient from '../api/client';
 import { COLORS } from '../styles/colors';
 import { homeStyles as styles } from '../styles/screens/home';
 import { commonStyles } from '../styles/components/common';
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
 
   const loadHomeData = async () => {
     try {
-      const data = await ApiClient.getHomePageData();
+      const data = await apiClient.getHomePageData();
       setHomeData(data);
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось загрузить данные главной страницы');
@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
     return (
       <View style={commonStyles.errorContainer}>
         <Text style={commonStyles.errorText}>Не удалось загрузить данные</Text>
-        <Button title="Повторить" onPress={loadHomeData} />
+        <Button title="Повторить" onPress={loadHomeData} style={commonStyles.button} />
       </View>
     );
   }
@@ -71,6 +71,7 @@ const HomeScreen = ({ navigation }) => {
             <Button 
               title={homeData.main_screen.button_text}
               onPress={() => Alert.alert('Информация', 'Функция в разработке')}
+              style={styles.mainScreenButton}
             />
           </View>
           {homeData.main_screen.image_url && (
@@ -118,17 +119,17 @@ const HomeScreen = ({ navigation }) => {
             <Button 
               title={homeData.auth_cta.login_button_text}
               onPress={() => navigation.navigate('Login')}
-              style={commonStyles.button}
+              style={styles.authButton}
             />
             <Button 
               title={homeData.auth_cta.register_button_text}
               onPress={() => navigation.navigate('Register')}
-              style={commonStyles.button}
+              style={styles.authButton}
             />
           </View>
         </ImageBackground>
       </ScrollView>
-      <BottomNavigation navigation={navigation} />
+      <BottomNavigation navigation={navigation} activeTab="home" />
     </View>
   );
 };

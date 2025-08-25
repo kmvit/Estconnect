@@ -1,0 +1,295 @@
+import { StyleSheet, Dimensions } from 'react-native';
+import { COLORS } from '../colors';
+import { SPACING } from '../spacing';
+
+const { width } = Dimensions.get('window');
+const isMobile = width <= 768;
+
+export const catalogStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  header: {
+    paddingHorizontal: SPACING.lg,
+    paddingTop: SPACING.xl,
+    paddingBottom: SPACING.lg,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '600',
+    color: COLORS.text,
+    textAlign: 'center',
+    fontFamily: 'Univia Pro Bold',
+  },
+  searchSection: {
+    paddingHorizontal: SPACING.lg,
+    marginBottom: SPACING.xl,
+  },
+  searchTitle: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: SPACING.md,
+    fontFamily: 'Univia Pro Bold',
+  },
+  searchForm: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    padding: SPACING.lg,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  searchRow: {
+    marginBottom: SPACING.lg,
+  },
+  searchField: {
+    marginBottom: SPACING.md,
+  },
+  fieldLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.text,
+    marginBottom: SPACING.xs,
+    fontFamily: 'Univia Pro Bold',
+  },
+  dropdownButton: {
+    backgroundColor: COLORS.lightGray,
+    borderRadius: 8,
+    padding: SPACING.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  dropdownButtonText: {
+    fontSize: 16,
+    fontWeight: '400',
+    fontFamily: 'Univia Pro Regular',
+  },
+  searchInput: {
+    backgroundColor: COLORS.lightGray,
+    borderRadius: 8,
+    padding: SPACING.md,
+    fontSize: 16,
+    fontWeight: '400',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    fontFamily: 'Univia Pro Regular',
+  },
+  searchButtons: {
+    flexDirection: 'row',
+    gap: SPACING.md,
+  },
+  searchButton: {
+    flex: 1,
+    backgroundColor: COLORS.primary,
+    borderRadius: 8,
+    paddingVertical: SPACING.md,
+    alignItems: 'center',
+  },
+  resetButton: {
+    flex: 1,
+    backgroundColor: COLORS.secondary,
+    borderRadius: 8,
+    paddingVertical: SPACING.md,
+    alignItems: 'center',
+  },
+  sortSection: {
+    paddingHorizontal: SPACING.lg,
+    marginBottom: SPACING.xl,
+  },
+  sortDropdownWrapper: {
+    marginBottom: 20,
+  },
+  sortDropdown: {
+    position: 'relative',
+    width: '100%',
+    maxWidth: isMobile ? 170 : 351,
+  },
+  sortDropdownHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: 17,
+  },
+  sortDropdownHeaderTitle: {
+    fontWeight: '350',
+    fontSize: 16,
+    color: '#979797',
+    fontFamily: 'Univia Pro Regular',
+  },
+  sortDropdownButtonWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: 12,
+    width: '100%',
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: '#d3d3d3',
+    borderRadius: 8,
+    paddingVertical: 7,
+    paddingHorizontal: 11,
+  },
+  sortDropdownButton: {
+    fontWeight: '350',
+    fontSize: 16,
+    color: COLORS.text,
+    fontFamily: 'Univia Pro Regular',
+  },
+  sortDropdownIcon: {
+    width: 16,
+    height: 16,
+  },
+  sortDropdownIconActive: {
+    transform: [{ rotate: '180deg' }],
+  },
+  sortDropdownContent: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    marginTop: 14,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 30,
+    elevation: 3,
+    zIndex: 100,
+  },
+  sortDropdownOption: {
+    paddingVertical: 9,
+    paddingHorizontal: 23,
+  },
+  sortDropdownOptionText: {
+    fontWeight: '350',
+    fontSize: 16,
+    color: COLORS.text,
+    fontFamily: 'Univia Pro Regular',
+  },
+  catalogList: {
+    paddingHorizontal: SPACING.lg,
+    paddingBottom: SPACING.xl,
+  },
+  catalogItem: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    marginBottom: SPACING.lg,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    overflow: 'hidden',
+  },
+  itemImageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 209,
+  },
+  itemImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  favouriteButton: {
+    position: 'absolute',
+    top: SPACING.md,
+    right: SPACING.md,
+    width: 32,
+    height: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  favouriteIcon: {
+    width: 24,
+    height: 20,
+  },
+  itemContent: {
+    padding: SPACING.lg,
+  },
+  itemTitle: {
+    fontSize: 20,
+    fontWeight: '400',
+    color: COLORS.text,
+    marginBottom: SPACING.sm,
+    fontFamily: 'Univia Pro Bold',
+  },
+  itemLocation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  locationIcon: {
+    width: 16,
+    height: 16,
+    marginRight: SPACING.xs,
+    tintColor: COLORS.gray,
+  },
+  locationText: {
+    fontSize: 16,
+    fontWeight: '350',
+    color: COLORS.gray,
+    fontFamily: 'Univia Pro Regular',
+  },
+  itemInfo: {
+    marginBottom: SPACING.md,
+  },
+  infoItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.blue,
+    borderRadius: 8,
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
+    alignSelf: 'flex-start',
+  },
+  infoIcon: {
+    width: 16,
+    height: 16,
+    marginRight: SPACING.xs,
+    tintColor: COLORS.text,
+  },
+  infoText: {
+    fontSize: 12,
+    fontWeight: '400',
+    color: COLORS.text,
+    textTransform: 'capitalize',
+    fontFamily: 'Univia Pro Medium',
+  },
+  itemDescription: {
+    fontSize: 16,
+    fontWeight: '300',
+    color: COLORS.text,
+    lineHeight: 22,
+    fontFamily: 'Univia Pro Regular',
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.xxl,
+  },
+  emptyStateText: {
+    fontSize: 18,
+    fontWeight: '400',
+    color: COLORS.gray,
+    textAlign: 'center',
+    fontFamily: 'Univia Pro Regular',
+  },
+});

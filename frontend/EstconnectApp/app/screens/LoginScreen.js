@@ -12,12 +12,15 @@ import {
 } from 'react-native';
 import { authStyles } from '../styles/screens/auth';
 import AuthContainer from '../components/AuthContainer';
+import apiClient from '../api/client';
+import { useAuth } from '../hooks/useAuth';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -27,12 +30,24 @@ const LoginScreen = ({ navigation }) => {
 
     setLoading(true);
     try {
-      // Здесь будет вызов API
-      Alert.alert('Успех', 'Вход выполнен успешно', [
-        { text: 'OK', onPress: () => navigation.navigate('Home') }
-      ]);
+      console.log('Отправка запроса на авторизацию...');
+      const response = await login({
+        username: username,
+        password: password
+      });
+      
+      console.log('Ответ от сервера:', response);
+      
+      if (response.token) {
+        Alert.alert('Успех', 'Вход выполнен успешно', [
+          { text: 'OK', onPress: () => navigation.navigate('Home') }
+        ]);
+      } else {
+        Alert.alert('Ошибка', 'Неверный ответ от сервера');
+      }
     } catch (error) {
-      Alert.alert('Ошибка', 'Неверный логин или пароль');
+      console.error('Ошибка авторизации:', error);
+      Alert.alert('Ошибка', error.message || 'Неверный логин или пароль');
     } finally {
       setLoading(false);
     }

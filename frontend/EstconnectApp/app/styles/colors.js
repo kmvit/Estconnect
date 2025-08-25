@@ -7,6 +7,12 @@ export const COLORS = {
   white: '#fff',          // --pattern
   menuColor: '#cfbcf2',   // --menucolor
   breadcrumbs: '#979797', // --hlebnye-kroshki
+  gray: '#666666',        // Дополнительный серый цвет
+  lightGray: '#e0e0e0',   // Светло-серый для границ
+  black: '#000000',       // Черный цвет
+  success: '#4CAF50',     // Зеленый для успешных операций
+  error: '#F44336',       // Красный для ошибок
+  border: '#e0e0e0',      // Цвет границ
 };
 
 // Базовые размеры
@@ -18,8 +24,3 @@ export const SIZES = {
   buttonWidth: 202,
 };
 
-// Шрифты
-export const FONTS = {
-  primary: 'Univia Pro',
-  secondary: 'Open Sans',
-};

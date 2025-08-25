@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { COLORS, SIZES } from '../colors';
 import { MARGINS, HORIZONTAL_PADDING, VERTICAL_PADDING, GAPS } from '../spacing';
+import { FONTS } from '../typography';
 
 // Стили для экрана HomeScreen
 export const homeStyles = StyleSheet.create({
@@ -27,7 +28,7 @@ export const homeStyles = StyleSheet.create({
   },
   mainScreenTitle: {
     fontSize: 36,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
     marginBottom: MARGINS.bottom.large,
     lineHeight: 44,
@@ -35,7 +36,7 @@ export const homeStyles = StyleSheet.create({
   },
   mainScreenText: {
     fontSize: 20,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
     marginBottom: MARGINS.bottom.large,
     lineHeight: 26,
@@ -49,6 +50,23 @@ export const homeStyles = StyleSheet.create({
     width: '100%',
     height: 320,
   },
+  mainScreenButton: {
+    width: 202,
+    backgroundColor: COLORS.primary,
+    borderRadius: 30,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 8,
+  },
   
   // Текстовый блок
   textBox: {
@@ -57,14 +75,14 @@ export const homeStyles = StyleSheet.create({
   },
   textBoxTitle: {
     fontSize: 28,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     textAlign: 'center',
     color: COLORS.text,
     marginBottom: MARGINS.bottom.small,
   },
   textBoxText: {
     fontSize: 18,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     textAlign: 'center',
     color: COLORS.text,
     lineHeight: 24,
@@ -77,7 +95,7 @@ export const homeStyles = StyleSheet.create({
   },
   workAreasTitle: {
     fontSize: 28,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     textAlign: 'center',
     color: COLORS.text,
     marginBottom: MARGINS.xl,
@@ -114,7 +132,7 @@ export const homeStyles = StyleSheet.create({
     left: 25,
     right: 25,
     fontSize: 18,
-    fontWeight: '500',
+    fontFamily: FONTS.univiaPro.medium,
     color: COLORS.white,
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -129,7 +147,7 @@ export const homeStyles = StyleSheet.create({
   },
   authCtaTitle: {
     fontSize: 24,
-    fontWeight: '400',
+    fontFamily: FONTS.univiaPro.regular,
     textAlign: 'center',
     color: COLORS.text,
     marginBottom: 20,
@@ -141,5 +159,19 @@ export const homeStyles = StyleSheet.create({
   },
   authButton: {
     width: 150,
+    backgroundColor: COLORS.primary,
+    borderRadius: 30,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 8,
   },
 }); 
