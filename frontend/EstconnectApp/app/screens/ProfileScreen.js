@@ -17,6 +17,8 @@ import { profileStyles as styles } from '../styles/screens/profile';
 import ProfileIcon from '../components/icons/ProfileIcon';
 import ContactIcon from '../components/icons/ContactIcon';
 import CalendarIcon from '../components/icons/CalendarIcon';
+import AgentIcon from '../components/icons/AgentIcon';
+import BuilderIcon from '../components/icons/BuilderIcon';
 import ApiClient from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 
@@ -31,6 +33,7 @@ const ProfileScreen = () => {
     phone: '+7 (999) 123-45-67',
     email: 'ivan.ivanov@example.com',
     preferredContact: 'Телефон',
+    role: 'agent', // По умолчанию агент
   });
 
   const [subscriptionData, setSubscriptionData] = useState({
@@ -40,6 +43,48 @@ const ProfileScreen = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Функция для получения отображаемого названия роли
+  const getRoleDisplayName = (role) => {
+    switch (role) {
+      case 'developer':
+        return 'Застройщик';
+      case 'agent':
+        return 'Агент';
+      case 'admin':
+        return 'КАМ-менеджер';
+      default:
+        return 'Пользователь';
+    }
+  };
+
+  // Функция для получения цвета роли
+  const getRoleColor = (role) => {
+    switch (role) {
+      case 'developer':
+        return '#2E7D32'; // Зеленый для застройщиков
+      case 'agent':
+        return '#1976D2'; // Синий для агентов  
+      case 'admin':
+        return '#7B1FA2'; // Фиолетовый для админов
+      default:
+        return COLORS.primary;
+    }
+  };
+
+  // Функция для получения иконки роли
+  const getRoleIcon = (role) => {
+    switch (role) {
+      case 'developer':
+        return <BuilderIcon width={20} height={20} color={COLORS.white} />;
+      case 'agent':
+        return <AgentIcon width={20} height={20} color={COLORS.white} />;
+      case 'admin':
+        return <ProfileIcon width={20} height={20} color={COLORS.white} />;
+      default:
+        return <ProfileIcon width={20} height={20} color={COLORS.white} />;
+    }
+  };
 
   const handleSaveChanges = async () => {
     try {
@@ -99,6 +144,7 @@ const ProfileScreen = () => {
         phone: profileData.phone || userData.phone,
         email: profileData.email || userData.email,
         preferredContact: profileData.preferred_contact_method === 'email' ? 'Электронная почта' : 'Телефон',
+        role: profileData.role || userData.role,
       });
       
       // Обновляем данные подписки
@@ -129,6 +175,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
+      
       {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color={COLORS.primary} />
@@ -147,6 +194,21 @@ const ProfileScreen = () => {
       )}
       
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Роль пользователя */}
+        <View style={styles.roleContainer}>
+          <View style={[styles.roleBadge, { backgroundColor: getRoleColor(userData.role) }]}>
+            <View style={styles.roleContent}>
+              {getRoleIcon(userData.role)}
+              <Text style={styles.roleText}>{getRoleDisplayName(userData.role)}</Text>
+            </View>
+          </View>
+          <Text style={styles.roleSubtitle}>
+            {userData.firstName && userData.lastName 
+              ? `${userData.firstName} ${userData.lastName}` 
+              : 'Профиль пользователя'}
+          </Text>
+        </View>
+
         {/* Баннер профиля */}
         <View style={styles.bannerContainer}>
           <Image

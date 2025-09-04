@@ -6,10 +6,51 @@ export const profileStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  // Стили для роли пользователя
+  roleContainer: {
+    alignItems: 'center',
+    paddingHorizontal: SIZES.padding,
+    paddingVertical: 20,
+    backgroundColor: COLORS.white,
+    marginBottom: 20,
+    borderRadius: SIZES.borderRadius,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  roleBadge: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginBottom: 10,
+  },
+  roleContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  roleText: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginLeft: 8,
+  },
+  roleSubtitle: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
+    fontWeight: '400',
+  },
   scrollView: {
     flex: 1,
     paddingHorizontal: SIZES.padding,
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 100, // Место для BottomNavigation
   },
   bannerContainer: {

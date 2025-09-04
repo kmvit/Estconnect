@@ -50,9 +50,9 @@ class UserSerializer(serializers.ModelSerializer):
             current_user = request.user
             # Проверяем, находится ли пользователь в избранном в зависимости от его роли
             if obj.role == 'agent':
-                return current_user.favourite_agents.filter(id=obj.id).exists()
+                return current_user._favourite_agents.filter(id=obj.id).exists()
             elif obj.role == 'developer':
-                return current_user.favourite_developers.filter(id=obj.id).exists()
+                return current_user._favourite_developers.filter(id=obj.id).exists()
         return False
 
 

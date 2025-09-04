@@ -266,21 +266,21 @@ class UserListViewSet(ViewSet):
             
             # Определяем тип пользователя и соответствующее поле избранного
             if user_to_toggle.role == 'agent':
-                if user_to_toggle in current_user.favourite_agents.all():
-                    current_user.favourite_agents.remove(user_to_toggle)
+                if user_to_toggle in current_user._favourite_agents.all():
+                    current_user._favourite_agents.remove(user_to_toggle)
                     is_favourite = False
                     action_text = "Удалил агента из избранного"
                 else:
-                    current_user.favourite_agents.add(user_to_toggle)
+                    current_user._favourite_agents.add(user_to_toggle)
                     is_favourite = True
                     action_text = "Добавил агента в избранное"
             elif user_to_toggle.role == 'developer':
-                if user_to_toggle in current_user.favourite_developers.all():
-                    current_user.favourite_developers.remove(user_to_toggle)
+                if user_to_toggle in current_user._favourite_developers.all():
+                    current_user._favourite_developers.remove(user_to_toggle)
                     is_favourite = False
                     action_text = "Удалил застройщика из избранного"
                 else:
-                    current_user.favourite_developers.add(user_to_toggle)
+                    current_user._favourite_developers.add(user_to_toggle)
                     is_favourite = True
                     action_text = "Добавил застройщика в избранное"
             else:
