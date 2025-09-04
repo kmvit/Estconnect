@@ -6,7 +6,7 @@ const getApiUrl = () => {
   // Для разработки используем локальный сервер
   if (__DEV__) {
     // Используем переменную окружения или fallback на IP адрес
-    return DEV_IP || 'http://127.0.0.1:8000/api/v1';
+    return DEV_IP || 'http://192.168.1.138:8000/api/v1';
   }
   // Для продакшена используйте ваш домен
   return PROD_IP || 'https://estconnect.asia/api/v1';
@@ -214,7 +214,7 @@ class ApiClient {
   }
 
   async toggleAgentFavourite(agentId) {
-    return this.post(`/users/${agentId}/toggle-favourite/`);
+    return this.post(`/users/${agentId}/toggle_favourite/`);
   }
 
   // Методы для работы с каталогом застройщиков
@@ -229,7 +229,7 @@ class ApiClient {
   }
 
   async toggleDeveloperFavourite(developerId) {
-    return this.post(`/users/${developerId}/toggle-favourite/`);
+    return this.post(`/users/${developerId}/toggle_favourite/`);
   }
 
   // Методы для работы с поддержкой
