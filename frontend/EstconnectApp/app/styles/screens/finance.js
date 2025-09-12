@@ -123,7 +123,7 @@ export const financeStyles = StyleSheet.create({
     flex: 1,
   },
   operationDateText: {
-    fontSize: 16,
+    fontSize: 8,
     fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
@@ -131,7 +131,7 @@ export const financeStyles = StyleSheet.create({
     flex: 1,
   },
   operationTypeText: {
-    fontSize: 16,
+    fontSize: 7,
     fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
@@ -139,14 +139,14 @@ export const financeStyles = StyleSheet.create({
     flex: 1,
   },
   operationAmountText: {
-    fontSize: 16,
+    fontSize: 10,
     fontFamily: FONTS.univiaPro.medium,
   },
   operationDescription: {
     flex: 2,
   },
   operationDescriptionText: {
-    fontSize: 16,
+    fontSize: 10,
     fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
@@ -154,7 +154,7 @@ export const financeStyles = StyleSheet.create({
     flex: 1,
   },
   operationStatusText: {
-    fontSize: 16,
+    fontSize: 8,
     fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
