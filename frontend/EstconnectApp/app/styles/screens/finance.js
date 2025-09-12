@@ -146,7 +146,7 @@ export const financeStyles = StyleSheet.create({
     flex: 2,
   },
   operationDescriptionText: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: FONTS.univiaPro.regular,
     color: COLORS.text,
   },
