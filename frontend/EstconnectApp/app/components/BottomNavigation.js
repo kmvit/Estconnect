@@ -37,12 +37,13 @@ const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
       icon: ViewIcon,
       screen: 'Objects',
     },
-    {
+    // Показываем каталог только для агентов и застройщиков
+    ...(user?.role !== 'admin' ? [{
       id: 'catalog',
       title: user?.role === 'agent' ? 'Застройщики' : 'Агенты',
       icon: user?.role === 'agent' ? BuilderIcon : AgentIcon,
       screen: 'Catalog',
-    },
+    }] : []),
     {
       id: 'help',
       title: 'Поддержка',
