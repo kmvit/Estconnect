@@ -10,32 +10,27 @@ import {
 } from 'react-native';
 import BurgerIcon from './icons/BurgerIcon';
 import CloseIcon from './icons/CloseIcon';
+import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import { COLORS } from '../styles/colors';
 import { headerStyles as styles } from '../styles/components/header';
 import { commonStyles } from '../styles/components/common';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../hooks/useAuth';
+import { useLanguage } from '../contexts/LanguageContext';
 
 
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('ru');
   const navigation = useNavigation();
   const { user, isAuthenticated, loading } = useAuth();
+  const { currentLanguage } = useLanguage();
   const menuItems = [
     { title: 'О нас', url: '/about-us/' },
     { title: 'О продукте', url: '/about-product/' },
     { title: 'Почему мы', url: '/why-we/' },
     { title: 'Контакты', url: '/contacts/' },
-  ];
-
-  const languages = [
-    { code: 'ru', name: 'RU' },
-    { code: 'en', name: 'EN' },
-    { code: 'th', name: 'TH' },
-    { code: 'zh-hans', name: 'CH' },
   ];
 
   const handleMenuPress = () => {
@@ -49,11 +44,6 @@ const Header = () => {
   const handleMenuItemPress = (item) => {
     Alert.alert('Информация', `Переход на страницу: ${item.title}`);
     setMenuVisible(false);
-  };
-
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language);
-    Alert.alert('Информация', `Язык изменен на: ${language}`);
   };
 
   const handleLoginPress = () => {
@@ -81,9 +71,10 @@ const Header = () => {
         </TouchableOpacity>
       </View>
         <View style={styles.headerRight}>
+          <LanguageSelector />
           <View style={styles.profileContainer}>
             <TouchableOpacity onPress={() => handleProfilePress()}>
-              <Text>
+              <Text style={styles.profileText}>
                 {loading ? 'Загрузка...' : 
                  isAuthenticated && user ? 
                    (user.username || user.first_name || user.email || 'Пользователь') : 

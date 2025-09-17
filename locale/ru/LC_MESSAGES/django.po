@@ -23,6 +23,36 @@ msgstr ""
 msgid "логотип"
 msgstr ""
 
+msgid "Поиск"
+msgstr "Поиск"
+
+msgid "Создать обращение"
+msgstr "Создать обращение"
+
+msgid "Открыто"
+msgstr "Открыто"
+
+msgid "Проблемы с сайтом"
+msgstr "Проблемы с сайтом"
+
+msgid "Оплата"
+msgstr "Оплата"
+
+msgid "Личный кабинет"
+msgstr "Личный кабинет"
+
+msgid "Карта"
+msgstr "Карта"
+
+msgid "Не указана"
+msgstr "Не указана"
+
+msgid "Введите страну или регион"
+msgstr "Введите страну или регион"
+
+msgid "Введите название объекта"
+msgstr "Введите название объекта"
+
 #: pages/templates/pages/base.html:27
 msgid "закрыть"
 msgstr ""
@@ -807,7 +837,7 @@ msgstr ""
 
 #: users/templates/profile/agent_detail.html:54
 msgid "Агент"
-msgstr ""
+msgstr "Агент"
 
 #: users/templates/profile/agent_detail.html:62
 #: users/templates/profile/developer_detail.html:58
@@ -1040,7 +1070,7 @@ msgstr ""
 
 #: users/templates/profile/developer_detail.html:50
 msgid "Застройщик"
-msgstr ""
+msgstr "Застройщик"
 
 #: users/templates/profile/developer_detail.html:131
 msgid "Объекты застройщика"

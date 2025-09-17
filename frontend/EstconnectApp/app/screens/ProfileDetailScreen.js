@@ -23,17 +23,39 @@ import LanguageIcon from '../components/icons/LanguageIcon';
 import TelegramIcon from '../components/icons/TelegramIcon';
 import VKIcon from '../components/icons/VKIcon';
 import InstagramIcon from '../components/icons/InstagramIcon';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 
 const ProfileDetailScreen = ({ navigation, route }) => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFavourite, setIsFavourite] = useState(false);
-  
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const { userId, type } = route.params;
 
   useEffect(() => {
+    loadTranslations([
+      'Тип компании',
+      'На платформе',
+      'Веб-сайт',
+      'Язык общения',
+      'Время работы',
+      'выходной',
+      'Соц. сети',
+      'Описание',
+      'Посмотреть проекты',
+      'Понедельник - пятница',
+      'Суббота',
+      'Воскресенье',
+      'Открыто сейчас',
+      'Описание не указано',
+    ]);
+  }, [currentLanguage]);
+
+  useEffect(() => {
     loadProfileData();
-  }, [userId]);
+  }, [userId, currentLanguage]); // Перезагружаем при смене языка
 
   const loadProfileData = async () => {
     try {
@@ -156,7 +178,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
             <View style={styles.infoItem}>
               <CompanyTypeIcon width={24} height={24} color={COLORS.text} />
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>Тип компании</Text>
+                <Text style={styles.infoLabel}>{trans('Тип компании')}</Text>
                 <Text style={styles.infoValue}>
                   {profileData.role === 'developer' ? 'Застройщик' : 'Агент'}
                 </Text>
@@ -166,10 +188,10 @@ const ProfileDetailScreen = ({ navigation, route }) => {
             <View style={styles.infoItem}>
               <PlatformIcon width={24} height={24} color={COLORS.text} />
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>На платформе</Text>
+                <Text style={styles.infoLabel}>{trans('На платформе')}</Text>
                 <Text style={styles.infoValue}>
                   {(() => {
-                    if (!profileData.date_joined) return 'Не указана';
+                    if (!profileData.date_joined) return trans('Не указана');
                     try {
                       const date = new Date(profileData.date_joined);
                       return date.toLocaleDateString('ru-RU', {
@@ -178,7 +200,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
                         year: 'numeric'
                       });
                     } catch (error) {
-                      return 'Не указана';
+                      return trans('Не указана');
                     }
                   })()}
                 </Text>
@@ -189,7 +211,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
               <View style={styles.infoItem}>
                 <WebsiteIcon width={24} height={24} color={COLORS.text} />
                 <View style={styles.infoContent}>
-                  <Text style={styles.infoLabel}>Веб-сайт</Text>
+                  <Text style={styles.infoLabel}>{trans('Веб-сайт')}</Text>
                   <Text style={styles.infoValue}>{profileData.website}</Text>
                 </View>
               </View>
@@ -198,7 +220,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
             <View style={styles.infoItem}>
               <LanguageIcon width={24} height={24} color={COLORS.text} />
               <View style={styles.infoContent}>
-                <Text style={styles.infoLabel}>Язык общения</Text>
+                <Text style={styles.infoLabel}>{trans('Язык общения')}</Text>
                 <Text style={styles.infoValue}>
                   {profileData.language === 'en' ? 'English' : 'Русский'}
                 </Text>
@@ -209,21 +231,21 @@ const ProfileDetailScreen = ({ navigation, route }) => {
 
         {/* Время работы */}
         <View style={styles.workingHoursSection}>
-          <Text style={styles.sectionTitle}>Время работы</Text>
+          <Text style={styles.sectionTitle}>{trans('Время работы')}</Text>
           <View style={styles.workingStatus}>
             <View style={styles.statusIndicator} />
-            <Text style={styles.statusText}>Открыто сейчас</Text>
+            <Text style={styles.statusText}>{trans('Открыто сейчас')}</Text>
           </View>
           <View style={styles.workingSchedule}>
-            <Text style={styles.scheduleItem}>Понедельник - пятница <Text style={styles.scheduleTime}>09:30 - 20:30</Text></Text>
-            <Text style={styles.scheduleItem}>Суббота <Text style={styles.scheduleTime}>10:00 - 17:30</Text></Text>
-            <Text style={styles.scheduleItem}>Воскресенье <Text style={styles.scheduleTime}>выходной</Text></Text>
+            <Text style={styles.scheduleItem}>{trans('Понедельник - пятница')} <Text style={styles.scheduleTime}>09:30 - 20:30</Text></Text>
+            <Text style={styles.scheduleItem}>{trans('Суббота')} <Text style={styles.scheduleTime}>10:00 - 17:30</Text></Text>
+            <Text style={styles.scheduleItem}>{trans('Воскресенье')} <Text style={styles.scheduleTime}>{trans('выходной')}</Text></Text>
           </View>
         </View>
 
         {/* Социальные сети */}
         <View style={styles.socialsSection}>
-          <Text style={styles.sectionTitle}>Соц. сети</Text>
+          <Text style={styles.sectionTitle}>{trans('Соц. сети')}</Text>
           <View style={styles.socialsGrid}>
             <TouchableOpacity style={styles.socialButton}>
               <TelegramIcon width={24} height={24} color={COLORS.text} />
@@ -239,9 +261,9 @@ const ProfileDetailScreen = ({ navigation, route }) => {
 
         {/* Описание */}
         <View style={styles.descriptionSection}>
-          <Text style={styles.sectionTitle}>Описание</Text>
+          <Text style={styles.sectionTitle}>{trans('Описание')}</Text>
           <Text style={styles.descriptionText}>
-            {profileData.description || 'Описание не указано'}
+            {profileData.description}
           </Text>
         </View>
 
@@ -249,7 +271,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
         <View style={styles.actionButtons}>
           {profileData.role === 'developer' && (
             <Button 
-              title="Посмотреть проекты"
+              title={trans('Посмотреть проекты')}
               onPress={handleViewProjects}
               style={styles.projectsButton}
             />

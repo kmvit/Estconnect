@@ -15,6 +15,8 @@ import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/Header';
 import BottomNavigation from '../components/BottomNavigation';
 import ObjectCard from '../components/ObjectCard';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import apiClient from '../api/client';
 import { COLORS, commonStyles, objectsStyles as styles } from '../styles';
 
@@ -25,6 +27,8 @@ const ObjectsScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [filters, setFilters] = useState({
     country: '',
     developer: '',
@@ -44,7 +48,45 @@ const ObjectsScreen = ({ navigation }) => {
 
   useEffect(() => {
     loadObjects();
-  }, []); // Убираем зависимости filters и sortBy
+    
+    // Загружаем переводы для интерфейса
+    loadTranslations([
+      'Введите страну или регион',
+      'Введите название объекта',
+      'Поиск недвижимости',
+      'Поиск по названию',
+      'Поиск по названию застройщика',
+      'закрыть',
+      'Загрузка объектов...',
+      'Сортировать по',
+      'Фильтр',
+      'Применить',
+      'Сбросить',
+      'Страна',
+      'Застройщик',
+      'Цена от',
+      'Цена до',
+      'Объекты не найдены',
+      'Показать на карте',
+      'Попробуйте изменить параметры поиска',
+      'Компактный поиск',
+      'Расширенный поиск',
+      'По умолчанию',
+      'По алфавиту',
+      'По региону',
+      'Местонахождение объекта',
+      'До пляжа',
+      'Тип объекта',
+      'Цена',
+      'От',
+      'До',
+      'Выберите',
+      'Найти',
+      'Очистить',
+      'Поиск',
+      'Карта'
+    ]);
+  }, [currentLanguage]); // Перезагружаем при смене языка
 
   const loadObjects = async (customFilters = null, customSortBy = null, customSearchQuery = null) => {
     try {
@@ -136,12 +178,12 @@ const ObjectsScreen = ({ navigation }) => {
     
     return (
       <View style={styles.estateSearch}>
-        <Text style={styles.estateSearchTitle}>Поиск недвижимости</Text>
+        <Text style={styles.estateSearchTitle}>{trans('Поиск недвижимости')}</Text>
         
         <View style={styles.estateSearchFormItems}>
           {/* Местонахождение объекта */}
           <View style={styles.estateSearchFormItem}>
-            <Text style={styles.estateSearchFormItemSubtitle}>Местонахождение объекта</Text>
+            <Text style={styles.estateSearchFormItemSubtitle}>{trans('Местонахождение объекта')}</Text>
             <TextInput
               style={styles.input}
               placeholder="Введите страну или регион"
@@ -152,7 +194,7 @@ const ObjectsScreen = ({ navigation }) => {
 
           {/* Поиск по названию */}
           <View style={styles.estateSearchFormItem}>
-            <Text style={styles.estateSearchFormItemSubtitle}>Поиск по названию</Text>
+            <Text style={styles.estateSearchFormItemSubtitle}>{trans('Поиск по названию')}</Text>
             <TextInput
               style={styles.input}
               placeholder="Введите название объекта"
@@ -166,7 +208,7 @@ const ObjectsScreen = ({ navigation }) => {
             <>
               {/* Поиск по названию застройщика */}
               <View style={styles.estateSearchFormItem}>
-                <Text style={styles.estateSearchFormItemSubtitle}>Поиск по названию застройщика</Text>
+                <Text style={styles.estateSearchFormItemSubtitle}>{trans('Поиск по названию застройщика')}</Text>
                 <TextInput
                   style={styles.input}
                   placeholder="Введите название застройщика"
@@ -177,7 +219,7 @@ const ObjectsScreen = ({ navigation }) => {
 
               {/* Цена */}
               <View style={styles.estateSearchFormItem}>
-                <Text style={styles.estateSearchFormItemSubtitle}>Цена</Text>
+                <Text style={styles.estateSearchFormItemSubtitle}>{trans('Цена')}</Text>
                 <View style={styles.estateSearchFormItemPrice}>
                   <TextInput
                     style={[styles.input, styles.priceInput]}
@@ -204,7 +246,7 @@ const ObjectsScreen = ({ navigation }) => {
 
               {/* Тип объекта */}
               <View style={styles.estateSearchFormItem}>
-                <Text style={styles.estateSearchFormItemSubtitle}>Тип объекта</Text>
+                <Text style={styles.estateSearchFormItemSubtitle}>{trans('Тип объекта')}</Text>
                 <View style={styles.searchDropdown}>
                   <TouchableOpacity style={styles.searchDropdownButtonWrapper}>
                     <Text style={styles.searchDropdownButton}>
@@ -217,7 +259,7 @@ const ObjectsScreen = ({ navigation }) => {
 
               {/* До пляжа */}
               <View style={styles.estateSearchFormItem}>
-                <Text style={styles.estateSearchFormItemSubtitle}>До пляжа</Text>
+                <Text style={styles.estateSearchFormItemSubtitle}>{trans('До пляжа')}</Text>
                 <View style={styles.estateSearchFormItemPrice}>
                   <TextInput
                     style={[styles.input, styles.priceInput]}
@@ -256,7 +298,7 @@ const ObjectsScreen = ({ navigation }) => {
               color={COLORS.primary} 
             />
             <Text style={styles.estateSearchAdvancedOpenText}>
-              {showAdvancedSearch ? 'Компактный поиск' : 'Расширенный поиск'}
+              {showAdvancedSearch ? trans('Компактный поиск') : trans('Расширенный поиск')}
             </Text>
           </TouchableOpacity>
           
@@ -265,14 +307,14 @@ const ObjectsScreen = ({ navigation }) => {
               style={styles.platformButtonOne}
               onPress={performSearch}
             >
-              <Text style={styles.platformButtonOneText}>Найти</Text>
+              <Text style={styles.platformButtonOneText}>{trans('Найти')}</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
               style={styles.platformButtonTwo}
               onPress={clearFilters}
             >
-              <Text style={styles.platformButtonTwoText}>Очистить</Text>
+              <Text style={styles.platformButtonTwoText}>{trans('Очистить')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -292,7 +334,7 @@ const ObjectsScreen = ({ navigation }) => {
           color={COLORS.primary} 
         />
         <Text style={styles.actionButtonText}>
-          {showSearch ? 'Закрыть' : 'Поиск'}
+          {showSearch ? trans('закрыть') : trans('Поиск')}
         </Text>
       </TouchableOpacity>
       
@@ -311,8 +353,8 @@ const ObjectsScreen = ({ navigation }) => {
       >
         <Ionicons name="swap-vertical" size={20} color={COLORS.primary} />
         <Text style={styles.actionButtonText}>
-          {sortBy === 'default' ? 'По умолчанию' : 
-           sortBy === 'alphabet' ? 'По алфавиту' : 'По региону'}
+          {sortBy === 'default' ? trans('По умолчанию') : 
+           sortBy === 'alphabet' ? trans('По алфавиту') : trans('По региону')}
         </Text>
       </TouchableOpacity>
       
@@ -327,7 +369,7 @@ const ObjectsScreen = ({ navigation }) => {
         }}
       >
         <Ionicons name="map" size={20} color={COLORS.primary} />
-        <Text style={styles.actionButtonText}>На карте</Text>
+        <Text style={styles.actionButtonText}>{trans('Карта')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -336,7 +378,7 @@ const ObjectsScreen = ({ navigation }) => {
     return (
       <View style={commonStyles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={commonStyles.loadingText}>Загрузка объектов...</Text>
+        <Text style={commonStyles.loadingText}>{trans('Loading...')}</Text>
       </View>
     );
   }
@@ -360,9 +402,9 @@ const ObjectsScreen = ({ navigation }) => {
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
               <Ionicons name="home-outline" size={64} color={COLORS.gray} />
-              <Text style={styles.emptyText}>Объекты не найдены</Text>
+              <Text style={styles.emptyText}>{trans('Объекты не найдены')}</Text>
               <Text style={styles.emptySubtext}>
-                Попробуйте изменить параметры поиска
+                {trans('Попробуйте изменить параметры поиска')}
               </Text>
             </View>
           }

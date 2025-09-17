@@ -8,10 +8,29 @@ import AgentIcon from './icons/AgentIcon';
 import HelpIcon from './icons/HelpIcon';
 import { COLORS } from '../styles/colors';
 import { useAuth } from '../hooks/useAuth';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 
 const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
   const [currentTab, setCurrentTab] = useState(activeTab);
   const { user } = useAuth();
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
+
+  // Загружаем переводы при инициализации
+  useEffect(() => {
+    loadTranslations([
+      'Главная',
+      'Финансы',
+      'Объекты',
+      'Застройщики',
+      'Агенты',
+      'Поддержка',
+      'Информация',
+      'находится в разработке',
+      'Экран',
+    ]);
+  }, [currentLanguage]);
 
   // Синхронизируем состояние при изменении activeTab
   useEffect(() => {
@@ -21,32 +40,32 @@ const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
   const navigationItems = [
     {
       id: 'home',
-      title: 'Главная',
+      title: trans('Главная'),
       icon: HomeIcon,
       screen: 'Home',
     },
     {
       id: 'finance',
-      title: 'Финансы',
+      title: trans('Финансы'),
       icon: FinanceIcon,
       screen: 'Finance',
     },
     {
       id: 'view',
-      title: 'Объекты',
+      title: trans('Объекты'),
       icon: ViewIcon,
       screen: 'Objects',
     },
     // Показываем каталог только для агентов и застройщиков
     ...(user?.role !== 'admin' ? [{
       id: 'catalog',
-      title: user?.role === 'agent' ? 'Застройщики' : 'Агенты',
+      title: user?.role === 'agent' ? trans('Застройщики') : trans('Агенты'),
       icon: user?.role === 'agent' ? BuilderIcon : AgentIcon,
       screen: 'Catalog',
     }] : []),
     {
       id: 'help',
-      title: 'Поддержка',
+      title: trans('Поддержка'),
       icon: HelpIcon,
       screen: 'Support',
     },
@@ -59,7 +78,7 @@ const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
     if (item.screen) {
       navigation.navigate(item.screen);
     } else {
-      Alert.alert('Информация', `Экран "${item.title}" находится в разработке`);
+      Alert.alert(trans('Информация'), `${trans('Экран')} "${item.title}" ${trans('находится в разработке')}`);
     }
   };
 

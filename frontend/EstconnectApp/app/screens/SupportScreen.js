@@ -15,12 +15,16 @@ import { useNavigation } from '@react-navigation/native';
 import { supportStyles as styles } from '../styles/screens/support';
 import HelpIcon from '../components/icons/HelpIcon';
 import ChatIcon from '../components/icons/ChatIcon';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import ApiClient from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 
 const SupportScreen = () => {
   const navigation = useNavigation();
   const { isAuthenticated } = useAuth();
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -30,7 +34,39 @@ const SupportScreen = () => {
     if (isAuthenticated) {
       loadTickets();
     }
-  }, [isAuthenticated]);
+    
+    // Загружаем переводы для интерфейса
+    loadTranslations([
+      'Поддержка',
+      'Ошибка загрузки обращений:',
+      'Не удалось загрузить обращения',
+      'Открыто',
+      'Закрыто',
+      'В работе',
+      'Неизвестно',
+      'Проблемы с сайтом',
+      'Оплата',
+      'Личный кабинет',
+      'Технические вопросы',
+      'Другое',
+      'Пользователь',
+      'Загрузка...',
+      'Обновление...',
+      'Загрузка обращений...',
+      'Для доступа к поддержке необходимо войти в систему',
+      'Техническая поддержка',
+      'Создать обращение',
+      'Повторить',
+      'У вас пока нет обращений',
+      'Создайте первое обращение, если у вас есть вопросы или проблемы',
+      'Обращение',
+      'Просмотреть',
+      'Проблемы с сайтом',
+      'Оплата',
+      'Личный кабинет',
+      'Технические вопросы'
+    ]);
+  }, [isAuthenticated, currentLanguage]);
 
   const loadTickets = async () => {
     try {
@@ -41,8 +77,8 @@ const SupportScreen = () => {
       const ticketsData = response.results || response || [];
       setTickets(Array.isArray(ticketsData) ? ticketsData : []);
     } catch (error) {
-      console.error('Ошибка загрузки обращений:', error);
-      setError('Не удалось загрузить обращения');
+      console.error(trans('Ошибка загрузки обращений:'), error);
+      setError(trans('Не удалось загрузить обращения'));
     } finally {
       setLoading(false);
     }
@@ -78,30 +114,30 @@ const SupportScreen = () => {
   const getStatusText = (status) => {
     switch (status) {
       case 'open':
-        return 'Открыто';
+        return trans('Открыто');
       case 'closed':
-        return 'Закрыто';
+        return trans('Закрыто');
       case 'in_progress':
-        return 'В работе';
+        return trans('В работе');
       default:
-        return status || 'Неизвестно';
+        return status || trans('Неизвестно');
     }
   };
 
   const getCategoryText = (category) => {
     switch (category) {
       case 'site':
-        return 'Проблемы с сайтом';
+        return trans('Проблемы с сайтом');
       case 'payment':
-        return 'Оплата';
+        return trans('Оплата');
       case 'account':
-        return 'Личный кабинет';
+        return trans('Личный кабинет');
       case 'technical':
-        return 'Технические вопросы';
+        return trans('Технические вопросы');
       case 'other':
-        return 'Другое';
+        return trans('Другое');
       default:
-        return category || 'Неизвестно';
+        return category || trans('Неизвестно');
     }
   };
 
@@ -140,7 +176,7 @@ const SupportScreen = () => {
   };
 
   const getSenderName = (message) => {
-    if (!message || !message.sender) return 'Пользователь';
+    if (!message || !message.sender) return trans('Пользователь');
     
     // Проверяем разные возможные форматы имени
     if (message.sender.get_full_name) {
@@ -155,16 +191,16 @@ const SupportScreen = () => {
     if (message.sender.username) {
       return message.sender.username;
     }
-    return 'Пользователь';
+    return trans('Пользователь');
   };
 
   if (!isAuthenticated) {
     return (
       <View style={styles.container}>
-        <Header title="Поддержка" />
+        <Header title={trans('Поддержка')} />
         <View style={styles.centerContainer}>
           <Text style={styles.authMessage}>
-            Для доступа к поддержке необходимо войти в систему
+            {trans('Для доступа к поддержке необходимо войти в систему')}
           </Text>
         </View>
         <BottomNavigation navigation={navigation} activeTab="help" />
@@ -184,40 +220,40 @@ const SupportScreen = () => {
       >
         <View style={styles.header}>
           <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Техническая поддержка</Text>
+            <Text style={styles.headerTitle}>{trans('Техническая поддержка')}</Text>
           </View>
           <TouchableOpacity
             style={styles.createButton}
             onPress={handleCreateTicket}
           >
-            <Text style={styles.createButtonText}>Создать обращение</Text>
+            <Text style={styles.createButtonText}>{trans('Создать обращение')}</Text>
           </TouchableOpacity>
         </View>
 
         {loading ? (
           <View style={styles.centerContainer}>
             <ActivityIndicator size="large" color={COLORS.primary} />
-            <Text style={styles.loadingText}>Загрузка обращений...</Text>
+            <Text style={styles.loadingText}>{trans('Загрузка обращений...')}</Text>
           </View>
         ) : error ? (
           <View style={styles.centerContainer}>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity style={styles.retryButton} onPress={loadTickets}>
-              <Text style={styles.retryButtonText}>Повторить</Text>
+              <Text style={styles.retryButtonText}>{trans('Повторить')}</Text>
             </TouchableOpacity>
           </View>
         ) : tickets.length === 0 ? (
           <View style={styles.emptyContainer}>
             <ChatIcon width={64} height={64} color={COLORS.gray} />
-            <Text style={styles.emptyTitle}>У вас пока нет обращений</Text>
+            <Text style={styles.emptyTitle}>{trans('У вас пока нет обращений')}</Text>
             <Text style={styles.emptyText}>
-              Создайте первое обращение, если у вас есть вопросы или проблемы
+              {trans('Создайте первое обращение, если у вас есть вопросы или проблемы')}
             </Text>
             <TouchableOpacity
               style={styles.createButton}
               onPress={handleCreateTicket}
             >
-              <Text style={styles.createButtonText}>Создать обращение</Text>
+              <Text style={styles.createButtonText}>{trans('Создать обращение')}</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -234,7 +270,7 @@ const SupportScreen = () => {
                         </Text>
                       </View>
                       <Text style={styles.ticketDate}>{formatDate(ticket.created_at)}</Text>
-                      <Text style={styles.ticketId}>Обращение #{ticket.id}</Text>
+                      <Text style={styles.ticketId}>{trans('Обращение')} #{ticket.id}</Text>
                       <Text style={styles.ticketCategory}>{getCategoryText(ticket.category)}</Text>
                       {lastMessage && (
                         <>
@@ -253,7 +289,7 @@ const SupportScreen = () => {
                       style={styles.viewButton}
                       onPress={() => handleTicketPress(ticket)}
                     >
-                      <Text style={styles.viewButtonText}>Просмотреть</Text>
+                      <Text style={styles.viewButtonText}>{trans('Просмотреть')}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>

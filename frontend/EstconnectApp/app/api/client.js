@@ -36,7 +36,7 @@ class ApiClient {
     await AsyncStorage.removeItem('auth_token');
   }
 
-  getHeaders() {
+  async getHeaders() {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -45,14 +45,25 @@ class ApiClient {
       headers['Authorization'] = `Token ${this.token}`;
     }
     
+    // Добавляем заголовок языка
+    try {
+      const savedLanguage = await AsyncStorage.getItem('app_language');
+      if (savedLanguage) {
+        headers['Accept-Language'] = savedLanguage;
+      }
+    } catch (error) {
+      console.error('Ошибка получения языка для заголовка:', error);
+    }
+    
     return headers;
   }
 
   async get(endpoint) {
     try {
       console.log(`Making request to: ${API_BASE_URL}${endpoint}`);
+      const headers = await this.getHeaders();
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        headers: this.getHeaders(),
+        headers: headers,
       });
       
       if (!response.ok) {
@@ -70,9 +81,10 @@ class ApiClient {
 
   async post(endpoint, data) {
     try {
+      const headers = await this.getHeaders();
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         method: 'POST',
-        headers: this.getHeaders(),
+        headers: headers,
         body: JSON.stringify(data),
       });
       
@@ -89,9 +101,10 @@ class ApiClient {
 
   async put(endpoint, data) {
     try {
+      const headers = await this.getHeaders();
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         method: 'PUT',
-        headers: this.getHeaders(),
+        headers: headers,
         body: JSON.stringify(data),
       });
       
@@ -108,9 +121,10 @@ class ApiClient {
 
   async patch(endpoint, data) {
     try {
+      const headers = await this.getHeaders();
       const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         method: 'PATCH',
-        headers: this.getHeaders(),
+        headers: headers,
         body: JSON.stringify(data),
       });
       
@@ -147,6 +161,15 @@ class ApiClient {
 
   async updateProfile(profileData) {
     return this.patch('/profile/update_me/', profileData);
+  }
+
+  // Методы для работы с языком
+  async setLanguage(languageCode) {
+    return this.post('/set-language/', { language: languageCode });
+  }
+
+  async translate(strings) {
+    return this.post('/translate/', { strings });
   }
 
   // Специальный метод для получения данных главной страницы

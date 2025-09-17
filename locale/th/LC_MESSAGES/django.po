@@ -22,6 +22,36 @@ msgstr "โลโก้"
 msgid "закрыть"
 msgstr "ปิด"
 
+msgid "Поиск"
+msgstr "ค้นหา"
+
+msgid "Создать обращение"
+msgstr "สร้างตั๋ว"
+
+msgid "Открыто"
+msgstr "เปิด"
+
+msgid "Проблемы с сайтом"
+msgstr "ปัญหาเว็บไซต์"
+
+msgid "Оплата"
+msgstr "การชำระเงิน"
+
+msgid "Личный кабинет"
+msgstr "บัญชีส่วนตัว"
+
+msgid "Карта"
+msgstr "แผนที่"
+
+msgid "Не указана"
+msgstr "ไม่ระบุ"
+
+msgid "Введите страну или регион"
+msgstr "ใส่ประเทศหรือภูมิภาค"
+
+msgid "Введите название объекта"
+msgstr "ใส่ชื่อวัตถุ"
+
 #: pages/templates/pages/base.html:31 pages/templates/pages/base.html:65
 msgid "О нас"
 msgstr "เกี่ยวกับเรา"

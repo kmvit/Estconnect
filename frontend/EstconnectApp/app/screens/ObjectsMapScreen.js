@@ -11,12 +11,16 @@ import { WebView } from 'react-native-webview';
 import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/Header';
 import BottomNavigation from '../components/BottomNavigation';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import apiClient from '../api/client';
 import { COLORS, commonStyles, objectsMapStyles as styles } from '../styles';
 
 const ObjectsMapScreen = ({ navigation, route }) => {
   const [objects, setObjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [mapLoading, setMapLoading] = useState(true);
   const [mapMarkers, setMapMarkers] = useState([]);
   const [webViewRef, setWebViewRef] = useState(null);
@@ -25,8 +29,16 @@ const ObjectsMapScreen = ({ navigation, route }) => {
   const [searchQuery, setSearchQuery] = useState(route.params?.searchQuery || '');
 
   useEffect(() => {
+    loadTranslations([
+      'Объекты на карте',
+      'Объекты не найдены',
+      'Найдено объектов на карте',
+      'Объекты не найдены',
+      'Попробуйте изменить параметры поиска',
+    ]);
     loadObjects();
-  }, []);
+  }, [currentLanguage]); // Перезагружаем при смене языка
+
 
   const loadObjects = async () => {
     try {
@@ -233,7 +245,7 @@ const ObjectsMapScreen = ({ navigation, route }) => {
     return (
       <View style={commonStyles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={commonStyles.loadingText}>Загрузка объектов...</Text>
+        <Text style={commonStyles.loadingText}>{trans('Loading...')}</Text>
       </View>
     );
   }
@@ -244,34 +256,6 @@ const ObjectsMapScreen = ({ navigation, route }) => {
       
       <View style={styles.content}>
         {/* Заголовок */}
-        <View style={styles.headerOverlay}>
-          <Text style={styles.headerTitle}>Объекты на карте</Text>
-          <Text style={styles.headerSubtitle}>
-            {objects.length > 0 
-              ? (() => {
-                  const objectsWithCoordinates = getObjectsWithCoordinates(objects);
-                  const objectsWithoutCoordinates = objects.length - objectsWithCoordinates.length;
-                  
-                  if (objectsWithCoordinates.length === 0) {
-                    return 'Нет объектов с координатами на карте';
-                  }
-                  
-                  let subtitle = `Найдено ${objectsWithCoordinates.length} ${objectsWithCoordinates.length === 1 ? 'объект' : objectsWithCoordinates.length < 5 ? 'объекта' : 'объектов'} на карте`;
-                  
-                  if (objectsWithoutCoordinates > 0) {
-                    subtitle += ` (${objectsWithoutCoordinates} без координат)`;
-                  }
-                  
-                  if (mapLoading) {
-                    subtitle += ' • Загрузка карты...';
-                  }
-                  
-                  return subtitle;
-                })()
-              : 'Объекты не найдены'
-            }
-          </Text>
-        </View>
 
         {/* Карта */}
         <View style={styles.mapContainer}>
