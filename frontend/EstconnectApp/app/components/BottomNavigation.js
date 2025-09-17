@@ -56,12 +56,37 @@ const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
       icon: ViewIcon,
       screen: 'Objects',
     },
-    // Показываем каталог только для агентов и застройщиков
-    ...(user?.role !== 'admin' ? [{
+    // Для CAM-менеджеров показываем и агентов, и застройщиков
+    ...(user?.role === 'admin' ? [
+      {
+        id: 'agents',
+        title: trans('Агенты'),
+        icon: AgentIcon,
+        screen: 'Catalog',
+        catalogType: 'agents'
+      },
+      {
+        id: 'developers',
+        title: trans('Застройщики'),
+        icon: BuilderIcon,
+        screen: 'Catalog',
+        catalogType: 'developers'
+      }
+    ] : []),
+    // Для агентов и застройщиков показываем соответствующий каталог
+    ...(user?.role === 'agent' ? [{
       id: 'catalog',
-      title: user?.role === 'agent' ? trans('Застройщики') : trans('Агенты'),
-      icon: user?.role === 'agent' ? BuilderIcon : AgentIcon,
+      title: trans('Застройщики'),
+      icon: BuilderIcon,
       screen: 'Catalog',
+      catalogType: 'developers'
+    }] : []),
+    ...(user?.role === 'developer' ? [{
+      id: 'catalog',
+      title: trans('Агенты'),
+      icon: AgentIcon,
+      screen: 'Catalog',
+      catalogType: 'agents'
     }] : []),
     {
       id: 'help',
@@ -76,7 +101,12 @@ const BottomNavigation = ({ navigation, activeTab = 'home' }) => {
     setCurrentTab(tabId);
     
     if (item.screen) {
-      navigation.navigate(item.screen);
+      // Передаем catalogType как параметр для экрана Catalog
+      if (item.screen === 'Catalog' && item.catalogType) {
+        navigation.navigate(item.screen, { catalogType: item.catalogType });
+      } else {
+        navigation.navigate(item.screen);
+      }
     } else {
       Alert.alert(trans('Информация'), `${trans('Экран')} "${item.title}" ${trans('находится в разработке')}`);
     }
@@ -136,7 +166,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   tabText: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: '400',
     color: COLORS.text,
     marginTop: 4,

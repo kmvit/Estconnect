@@ -35,9 +35,11 @@ const CatalogScreen = ({ navigation, route }) => {
   const { currentLanguage } = useLanguage();
   const { trans, loadTranslations } = useTrans();
   
-  // Определяем тип каталога в зависимости от роли пользователя
-  // Если пользователь агент - показываем застройщиков, если застройщик - показываем агентов
-  const catalogType = user?.role === 'agent' ? 'developers' : 'agents';
+  // Определяем тип каталога из параметров навигации или по роли пользователя
+  // Для CAM-менеджеров (admin) тип передается через route.params
+  const catalogType = route?.params?.catalogType || 
+    (user?.role === 'agent' ? 'developers' : 
+     user?.role === 'developer' ? 'agents' : 'agents');
 
   // Определяем заголовки в зависимости от типа каталога
   const getCatalogInfo = () => {
@@ -465,7 +467,11 @@ const CatalogScreen = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
-      <BottomNavigation navigation={navigation} activeTab="catalog" />
+      <BottomNavigation 
+        navigation={navigation} 
+        activeTab={catalogType === 'agents' ? 'agents' : 
+                   catalogType === 'developers' ? 'developers' : 'catalog'} 
+      />
     </View>
   );
 };

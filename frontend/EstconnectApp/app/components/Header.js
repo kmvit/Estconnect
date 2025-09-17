@@ -6,10 +6,12 @@ import {
   Image, 
   Modal,
   ScrollView,
-  Alert
+  Alert,
+  Dimensions
 } from 'react-native';
 import BurgerIcon from './icons/BurgerIcon';
 import CloseIcon from './icons/CloseIcon';
+import ChevronDownIcon from './icons/ChevronDownIcon';
 import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import { COLORS } from '../styles/colors';
@@ -21,11 +23,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 
 
+const { width: screenWidth } = Dimensions.get('window');
+
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, right: 0 });
   const navigation = useNavigation();
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading, logout } = useAuth();
   const { currentLanguage } = useLanguage();
+  const profileButtonRef = useRef(null);
   const menuItems = [
     { title: 'О нас', url: '/about-us/' },
     { title: 'О продукте', url: '/about-product/' },
@@ -56,10 +63,37 @@ const Header = () => {
 
   const handleProfilePress = () => {
     if (isAuthenticated) {
-      navigation.navigate('Profile');
+      // Показываем выпадающее меню для авторизованных пользователей
+      if (profileButtonRef.current) {
+        profileButtonRef.current.measure((x, y, width, height, pageX, pageY) => {
+          setDropdownPosition({
+            top: pageY + height + 5,
+            right: screenWidth - pageX - width,
+          });
+          setProfileDropdownVisible(true);
+        });
+      }
     } else {
       navigation.navigate('Login');
     }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setProfileDropdownVisible(false);
+      Alert.alert('Успех', 'Вы успешно вышли из системы', [
+        { text: 'OK', onPress: () => navigation.navigate('Home') }
+      ]);
+    } catch (error) {
+      console.error('Ошибка при выходе:', error);
+      Alert.alert('Ошибка', 'Не удалось выйти из системы');
+    }
+  };
+
+  const handleProfileMenuPress = () => {
+    setProfileDropdownVisible(false);
+    navigation.navigate('Profile');
   };
 
   return (
@@ -73,13 +107,20 @@ const Header = () => {
         <View style={styles.headerRight}>
           <LanguageSelector />
           <View style={styles.profileContainer}>
-            <TouchableOpacity onPress={() => handleProfilePress()}>
+            <TouchableOpacity 
+              ref={profileButtonRef}
+              onPress={() => handleProfilePress()}
+              style={styles.profileButton}
+            >
               <Text style={styles.profileText}>
                 {loading ? 'Загрузка...' : 
                  isAuthenticated && user ? 
                    (user.username || user.first_name || user.email || 'Пользователь') : 
                    'Вход'}
               </Text>
+              {isAuthenticated && (
+                <ChevronDownIcon width={12} height={12} color={COLORS.text} />
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -143,6 +184,44 @@ const Header = () => {
           </View>
         </View>
       </Modal> */}
+
+      {/* Выпадающее меню профиля */}
+      <Modal
+        visible={profileDropdownVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setProfileDropdownVisible(false)}
+      >
+        <TouchableOpacity
+          style={styles.profileDropdownOverlay}
+          activeOpacity={1}
+          onPress={() => setProfileDropdownVisible(false)}
+        >
+          <View
+            style={[
+              styles.profileDropdown,
+              {
+                top: dropdownPosition.top,
+                right: dropdownPosition.right,
+              }
+            ]}
+          >
+            <TouchableOpacity
+              style={styles.profileDropdownItem}
+              onPress={handleProfileMenuPress}
+            >
+              <Text style={styles.profileDropdownItemText}>Профиль</Text>
+            </TouchableOpacity>
+            <View style={styles.profileDropdownSeparator} />
+            <TouchableOpacity
+              style={styles.profileDropdownItem}
+              onPress={handleLogout}
+            >
+              <Text style={[styles.profileDropdownItemText, styles.logoutText]}>Выход</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };

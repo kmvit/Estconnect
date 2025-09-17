@@ -29,10 +29,18 @@ export const headerStyles = StyleSheet.create({
   profileContainer: {
     marginLeft: 4,
   },
+  profileButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
   profileText: {
     fontSize: 14,
     fontWeight: '400',
     color: COLORS.text,
+    marginRight: 4,
   },
   burger: {
     width: 24,
@@ -57,5 +65,42 @@ export const headerStyles = StyleSheet.create({
     fontWeight: '400',
     color: COLORS.text,
     textTransform: 'uppercase',
+  },
+  // Стили для выпадающего меню профиля
+  profileDropdownOverlay: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  profileDropdown: {
+    position: 'absolute',
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    minWidth: 120,
+    maxWidth: 160,
+  },
+  profileDropdownItem: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  profileDropdownItemText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: COLORS.text,
+  },
+  profileDropdownSeparator: {
+    height: 1,
+    backgroundColor: '#f0f0f0',
+    marginHorizontal: 8,
+  },
+  logoutText: {
+    color: '#e74c3c', // Красный цвет для кнопки выхода
   },
 }); 
