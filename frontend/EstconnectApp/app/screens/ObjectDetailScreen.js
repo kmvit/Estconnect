@@ -24,6 +24,8 @@ import ClassIcon from '../components/icons/ClassIcon';
 import BuildingIcon from '../components/icons/BuildingIcon';
 import KeyIcon from '../components/icons/KeyIcon';
 import LadderIcon from '../components/icons/LadderIcon';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import apiClient from '../api/client';
 import { COLORS, commonStyles, objectDetailStyles as styles } from '../styles';
 
@@ -33,6 +35,8 @@ const ObjectDetailScreen = ({ navigation, route }) => {
   const { objectId } = route.params;
   const [object, setObject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [mapCoordinates, setMapCoordinates] = useState({
     latitude: 13.7563, // Bangkok default
@@ -44,7 +48,58 @@ const ObjectDetailScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     loadObjectDetail();
-  }, [objectId]);
+    
+    // Загружаем переводы для интерфейса
+    loadTranslations([
+      'Описание',
+      'Этажность:',
+      'Связаться со своим личным менеджером',
+      'Местоположение не указано',
+      'Похожие объекты',
+      'Загрузка...',
+      'Ошибка загрузки',
+      'Документы',
+      'Контакты',
+      'Детали',
+      'Парковка:',
+      'Корпуса:',
+      'Есть',
+      'Нет',
+      'Обновлено:',
+      'Загрузка объекта...',
+      'Загрузка карты...',
+      'Загрузка других объектов...',
+      'Еще от застройщика',
+      'Объект недвижимости',
+      'Ошибка',
+      'Не удалось загрузить информацию об объекте',
+      'Не удалось обновить избранное',
+      'Информация',
+      'Открытие файлов застройщика будет добавлено позже',
+      'Не удалось открыть карту',
+      'Класс жилья:',
+      'Тип дома:',
+      'Не указан',
+      'Страна',
+      'Город',
+      'Район',
+      'Не указана',
+      'Не указан',
+      'Класс',
+      'Тип строения',
+      'Срок сдачи:',
+      'Местонахождение',
+      'Местонахождение на карте',
+      'Год сдачи',
+      'Кол-во этажей',
+      'Корпуса',
+      'Парковка',
+      'Файлы застройщика',
+      'Комиссии',
+      'Контакты',
+      'Характеристики объекта',
+    ]);
+  }, [objectId, currentLanguage]); // Перезагружаем при смене языка
 
   useEffect(() => {
     if (object && object.developer !== null && object.developer !== undefined) {
@@ -144,7 +199,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
   const getMapHtml = () => {
     const { latitude, longitude } = mapCoordinates;
     const address = object?.address || '';
-    const name = object?.name || 'Объект недвижимости';
+    const name = object?.name || trans('Объект недвижимости');
     
     return `
       <!DOCTYPE html>
@@ -194,7 +249,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
         await geocodeWithNominatim(data.address, data.country_name, data.city_name);
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось загрузить информацию об объекте');
+      Alert.alert(trans('Ошибка'), trans('Не удалось загрузить информацию об объекте'));
       console.error('Failed to load object detail:', error);
     } finally {
       setLoading(false);
@@ -218,7 +273,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
       const response = await apiClient.toggleFavourite(objectId);
       setObject(prev => ({ ...prev, is_favourite: response.is_favourite }));
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось обновить избранное');
+      Alert.alert(trans('Ошибка'), trans('Не удалось обновить избранное'));
       console.error('Failed to toggle favourite:', error);
     }
   };
@@ -226,7 +281,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
   const handleOpenDocumentation = () => {
     if (object.documentations_link) {
       // Здесь можно добавить открытие ссылки в браузере или встроенном просмотрщике
-      Alert.alert('Информация', 'Открытие файлов застройщика будет добавлено позже');
+      Alert.alert(trans('Информация'), trans('Открытие файлов застройщика будет добавлено позже'));
     }
   };
 
@@ -236,7 +291,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
       const url = `https://maps.google.com/?q=${encodeURIComponent(address)}`;
       await Linking.openURL(url);
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось открыть карту');
+      Alert.alert(trans('Ошибка'), trans('Не удалось открыть карту'));
       console.error('Failed to open maps:', error);
     }
   };
@@ -257,7 +312,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
         )
       );
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось обновить избранное');
+      Alert.alert(trans('Ошибка'), trans('Не удалось обновить избранное'));
       console.error('Failed to toggle favourite:', error);
     }
   };
@@ -272,7 +327,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
     } else if (country) {
       return country;
     }
-    return 'Местоположение не указано';
+    return trans('Местоположение не указано');
   };
 
   const renderImageCarousel = () => {
@@ -364,7 +419,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
     return (
       <View style={commonStyles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={commonStyles.loadingText}>Загрузка объекта...</Text>
+        <Text style={commonStyles.loadingText}>{trans('Загрузка объекта...')}</Text>
       </View>
     );
   }
@@ -414,28 +469,20 @@ const ObjectDetailScreen = ({ navigation, route }) => {
           {/* Основные характеристики */}
           <View style={styles.infoSection}>
             <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Класс жилья:</Text>
-              <Text style={styles.infoItemText}>{object.comfort_type || 'Не указан'}</Text>
+              <Text style={styles.infoItemTitle}>{trans('Класс')}</Text>
+              <Text style={styles.infoItemText}>{object.comfort_type || trans('Не указан')}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Тип дома:</Text>
-              <Text style={styles.infoItemText}>{object.property_type || 'Не указан'}</Text>
+              <Text style={styles.infoItemTitle}>{trans('Тип строения')}</Text>
+              <Text style={styles.infoItemText}>{object.property_type || trans('Не указан')}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Срок сдачи:</Text>
+              <Text style={styles.infoItemTitle}>{trans('Год сдачи')}</Text>
               <Text style={styles.infoItemText}>{new Date(object.completion_date).toLocaleDateString()}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Парковка:</Text>
-              <Text style={styles.infoItemText}>{object.parking ? 'Есть' : 'Нет'}</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Этажность:</Text>
+              <Text style={styles.infoItemTitle}>{trans('Кол-во этажей')}</Text>
               <Text style={styles.infoItemText}>{object.floors}</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoItemTitle}>Корпуса:</Text>
-              <Text style={styles.infoItemText}>{object.corpus_count}</Text>
             </View>
           </View>
 
@@ -444,56 +491,56 @@ const ObjectDetailScreen = ({ navigation, route }) => {
             {object.documentations_link && (
               <TouchableOpacity style={styles.actionButton} onPress={handleOpenDocumentation}>
                 <FileIcon width={17} height={19} color={COLORS.primary} />
-                <Text style={styles.actionButtonText}>Файлы застройщика</Text>
+                <Text style={styles.actionButtonText}>{trans('Файлы застройщика')}</Text>
               </TouchableOpacity>
             )}
             <TouchableOpacity style={styles.actionButton}>
               <ProcentIcon width={14} height={14} color={COLORS.primary} />
-              <Text style={styles.actionButtonText}>Комиссии</Text>
+              <Text style={styles.actionButtonText}>{trans('Комиссии')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionButton}>
               <PhoneIcon width={16} height={17} color={COLORS.primary} />
-              <Text style={styles.actionButtonText}>Контакты</Text>
+              <Text style={styles.actionButtonText}>{trans('Контакты')}</Text>
             </TouchableOpacity>
           </View>
 
           {/* Основная кнопка */}
           <TouchableOpacity style={styles.mainButton}>
             <ChatIcon width={17} height={17} color={COLORS.white} />
-            <Text style={styles.mainButtonText}>Связаться со своим личным менеджером</Text>
+            <Text style={styles.mainButtonText}>{trans('Связаться со своим личным менеджером')}</Text>
           </TouchableOpacity>
         </View>
 
         {/* Местонахождение */}
         <View style={styles.informationSection}>
-          <Text style={styles.sectionTitle}>Местонахождение</Text>
+          <Text style={styles.sectionTitle}>{trans('Местонахождение')}</Text>
           <View style={styles.locationItems}>
             <View style={styles.locationItem}>
-              <Text style={styles.locationItemTitle}>Страна</Text>
-              <Text style={styles.locationItemText}>{object.country_name || 'Не указана'}</Text>
+              <Text style={styles.locationItemTitle}>{trans('Страна')}</Text>
+              <Text style={styles.locationItemText}>{object.country_name || trans('Не указана')}</Text>
             </View>
             <View style={styles.locationItem}>
-              <Text style={styles.locationItemTitle}>Город</Text>
-              <Text style={styles.locationItemText}>{object.city_name || 'Не указан'}</Text>
+              <Text style={styles.locationItemTitle}>{trans('Город')}</Text>
+              <Text style={styles.locationItemText}>{object.city_name || trans('Не указан')}</Text>
             </View>
             <View style={styles.locationItem}>
-              <Text style={styles.locationItemTitle}>Район</Text>
-              <Text style={styles.locationItemText}>{object.district_name || 'Не указан'}</Text>
+              <Text style={styles.locationItemTitle}>{trans('Район')}</Text>
+              <Text style={styles.locationItemText}>{object.district_name || trans('Не указан')}</Text>
             </View>
           </View>
         </View>
 
         {/* Характеристики объекта */}
         <View style={styles.informationSection}>
-          <Text style={styles.sectionTitle}>Характеристики объекта</Text>
+          <Text style={styles.sectionTitle}>{trans('Характеристики объекта')}</Text>
                       <View style={styles.characteristicsItems}>
               <View style={styles.characteristicsItem}>
                 <View style={styles.characteristicsIcon}>
                   <ClassIcon width={20} height={20} color={COLORS.primary} />
                 </View>
                 <View style={styles.characteristicsInfo}>
-                  <Text style={styles.characteristicsTitle}>Класс</Text>
-                  <Text style={styles.characteristicsText}>{object.comfort_type || 'Не указан'}</Text>
+                  <Text style={styles.characteristicsTitle}>{trans('Класс')}</Text>
+                  <Text style={styles.characteristicsText}>{object.comfort_type || trans('Не указан')}</Text>
                 </View>
               </View>
               <View style={styles.characteristicsItem}>
@@ -501,8 +548,8 @@ const ObjectDetailScreen = ({ navigation, route }) => {
                   <BuildingIcon width={20} height={20} color={COLORS.primary} />
                 </View>
                 <View style={styles.characteristicsInfo}>
-                  <Text style={styles.characteristicsTitle}>Тип строения</Text>
-                  <Text style={styles.characteristicsText}>{object.property_type || 'Не указан'}</Text>
+                  <Text style={styles.characteristicsTitle}>{trans('Тип строения')}</Text>
+                  <Text style={styles.characteristicsText}>{object.property_type || trans('Не указан')}</Text>
                 </View>
               </View>
               <View style={styles.characteristicsItem}>
@@ -510,7 +557,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
                   <KeyIcon width={20} height={20} color={COLORS.primary} />
                 </View>
                 <View style={styles.characteristicsInfo}>
-                  <Text style={styles.characteristicsTitle}>Год сдачи</Text>
+                  <Text style={styles.characteristicsTitle}>{trans('Год сдачи')}</Text>
                   <Text style={styles.characteristicsText}>{new Date(object.completion_date).getFullYear()}</Text>
                 </View>
               </View>
@@ -519,7 +566,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
                   <LadderIcon width={20} height={20} color={COLORS.primary} />
                 </View>
                 <View style={styles.characteristicsInfo}>
-                  <Text style={styles.characteristicsTitle}>Кол-во этажей</Text>
+                  <Text style={styles.characteristicsTitle}>{trans('Кол-во этажей')}</Text>
                   <Text style={styles.characteristicsText}>{object.floors}</Text>
                 </View>
               </View>
@@ -529,11 +576,11 @@ const ObjectDetailScreen = ({ navigation, route }) => {
         {/* Описание */}
         {object.description && (
           <View style={styles.informationSection}>
-            <Text style={styles.sectionTitle}>Описание</Text>
+            <Text style={styles.sectionTitle}>{trans('Описание')}</Text>
             <View style={styles.descriptionContainer}>
               <Text style={styles.descriptionText}>{object.description}</Text>
               <Text style={styles.descriptionDate}>
-                Обновлено: {new Date(object.updated_at).toLocaleDateString()}
+                {trans('Обновлено:')} {new Date(object.updated_at).toLocaleDateString()}
               </Text>
             </View>
           </View>
@@ -541,7 +588,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
 
         {/* Местонахождение на карте */}
         <View style={styles.informationSection}>
-          <Text style={styles.sectionTitle}>Местонахождение на карте</Text>
+          <Text style={styles.sectionTitle}>{trans('Местонахождение на карте')}</Text>
           <View style={styles.mapLocation}>
             <Ionicons name="location" size={16} color={COLORS.gray} />
             <Text style={styles.mapLocationText}>{object.address}</Text>
@@ -550,7 +597,7 @@ const ObjectDetailScreen = ({ navigation, route }) => {
             {mapLoading && (
               <View style={styles.mapLoadingContainer}>
                 <ActivityIndicator size="large" color={COLORS.primary} />
-                <Text style={styles.mapLoadingText}>Загрузка карты...</Text>
+                <Text style={styles.mapLoadingText}>{trans('Загрузка карты...')}</Text>
               </View>
             )}
             <WebView
@@ -578,12 +625,12 @@ const ObjectDetailScreen = ({ navigation, route }) => {
         {/* Еще от застройщика */}
         {object.developer && (
           <View style={styles.informationSection}>
-            <Text style={styles.sectionTitle}>Еще от застройщика</Text>
+            <Text style={styles.sectionTitle}>{trans('Еще от застройщика')}</Text>
             {otherObjectsLoading ? (
               <View style={styles.otherObjectsContainer}>
                 <ActivityIndicator size="large" color={COLORS.primary} />
                 <Text style={styles.otherObjectsPlaceholder}>
-                  Загрузка других объектов...
+                  {trans('Загрузка других объектов...')}
                 </Text>
               </View>
             ) : otherObjects.length > 0 ? (

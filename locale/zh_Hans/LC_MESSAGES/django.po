@@ -30,6 +30,37 @@ msgstr "标志"
 msgid "закрыть"
 msgstr "关闭"
 
+msgid "Поиск"
+msgstr "搜索"
+
+msgid "Создать обращение"
+msgstr "创建工单"
+
+msgid "Открыто"
+msgstr "打开"
+
+msgid "Проблемы с сайтом"
+msgstr "网站问题"
+
+msgid "Оплата"
+msgstr "付款"
+
+msgid "Личный кабинет"
+msgstr "个人账户"
+
+msgid "Карта"
+msgstr "地图"
+
+msgid "Не указана"
+msgstr "未指定"
+
+msgid "Введите страну или регион"
+msgstr "输入国家或地区"
+
+msgid "Введите название объекта"
+msgstr "输入对象名称"
+
+
 #: pages/templates/pages/base.html:31 pages/templates/pages/base.html:65
 msgid "О нас"
 msgstr "关于我们"

@@ -22,6 +22,18 @@ export const headerStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileContainer: {
+    marginLeft: 4,
+  },
+  profileText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: COLORS.text,
+  },
   burger: {
     width: 24,
     height: 24,

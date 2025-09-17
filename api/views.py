@@ -1,8 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from django.utils.translation import gettext_lazy as _
+from rest_framework import status
+from django.utils.translation import gettext_lazy as _, activate, check_for_language
 from django.templatetags.static import static
+from django.conf import settings
 
 class HomePageAPIView(APIView):
     """
@@ -47,3 +49,71 @@ class HomePageAPIView(APIView):
             }
         }
         return Response(data)
+
+
+class SetLanguageAPIView(APIView):
+    """
+    API view для смены языка приложения.
+    Использует Django встроенную систему интернационализации.
+    """
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        language_code = request.data.get('language')
+        
+        if not language_code:
+            return Response(
+                {'error': _('Код языка обязателен')}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Проверяем, поддерживается ли язык
+        if not check_for_language(language_code):
+            return Response(
+                {'error': _('Неподдерживаемый код языка')}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Активируем язык для текущего запроса
+        activate(language_code)
+        
+        # Устанавливаем язык в сессию
+        request.session['django_language'] = language_code
+        
+        # Если пользователь аутентифицирован, обновляем его языковые настройки
+        if request.user.is_authenticated:
+            request.user.language = language_code
+            request.user.save(update_fields=['language'])
+        
+        return Response({
+            'message': _('Язык успешно изменен'),
+            'language': language_code,
+            'available_languages': dict(settings.LANGUAGES)
+        })
+
+
+class TranslateAPIView(APIView):
+    """
+    API для получения переводов строк (аналог {% trans %} для React Native)
+    """
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        strings_to_translate = request.data.get('strings', [])
+        language = request.session.get('django_language', 'ru')
+        
+        if check_for_language(language):
+            activate(language)
+        
+        translations = {}
+        for string in strings_to_translate:
+            translations[string] = str(_(string))
+        
+        return Response({
+            'language': language,
+            'translations': translations
+        })
+
+
+
+

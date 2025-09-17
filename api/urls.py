@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import HomePageAPIView
+from .views import HomePageAPIView, SetLanguageAPIView, TranslateAPIView
 from rest_framework.routers import DefaultRouter
 from api.apps.users.views import AuthViewSet, UserProfileViewSet, UserListViewSet, ObjectViewSet, SupportViewSet
 
@@ -23,6 +23,10 @@ support_router.register(r'support/tickets', SupportViewSet, basename='support')
 
 urlpatterns = [
     path('home/', HomePageAPIView.as_view(), name='home'),
+    
+    # Language endpoints
+    path('set-language/', SetLanguageAPIView.as_view(), name='set-language'),
+    path('translate/', TranslateAPIView.as_view(), name='translate'),
     
     # Auth endpoints
     path('', include(auth_router.urls)),

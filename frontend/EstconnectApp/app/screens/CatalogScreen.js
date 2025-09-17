@@ -18,6 +18,8 @@ import { COLORS } from '../styles/colors';
 import { commonStyles } from '../styles/components/common';
 import { catalogStyles as styles } from '../styles/screens/catalog';
 import { useAuth } from '../hooks/useAuth';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import apiClient from '../api/client';
 
 const CatalogScreen = ({ navigation, route }) => {
@@ -30,6 +32,8 @@ const CatalogScreen = ({ navigation, route }) => {
   const [filteredData, setFilteredData] = useState([]);
   
   const { user } = useAuth();
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   
   // Определяем тип каталога в зависимости от роли пользователя
   // Если пользователь агент - показываем застройщиков, если застройщик - показываем агентов
@@ -39,17 +43,17 @@ const CatalogScreen = ({ navigation, route }) => {
   const getCatalogInfo = () => {
     if (catalogType === 'agents') {
       return {
-        title: 'Каталог агентов',
-        searchTitle: 'Поиск агентов',
-        searchPlaceholder: 'Введите название агента',
-        emptyText: 'Агенты не найдены'
+        title: trans('Каталог агентов'),
+        searchTitle: trans('Поиск Агентов'),
+        searchPlaceholder: trans('Введите название агента'),
+        emptyText: trans('Агенты не найдены')
       };
     } else {
       return {
-        title: 'Каталог застройщиков',
-        searchTitle: 'Поиск застройщиков',
-        searchPlaceholder: 'Введите название застройщика',
-        emptyText: 'Застройщики не найдены'
+        title: trans('Каталог застройщиков'),
+        searchTitle: trans('Поиск застройщиков'),
+        searchPlaceholder: trans('Введите название застройщика'),
+        emptyText: trans('Застройщики не найдены')
       };
     }
   };
@@ -58,24 +62,59 @@ const CatalogScreen = ({ navigation, route }) => {
 
   // Опции сортировки
   const sortOptions = [
-    { value: 'name_asc', label: 'от А до Я' },
-    { value: 'name_desc', label: 'от Я до А' },
-    { value: 'date_asc', label: 'от старых пользователей к новым' },
-    { value: 'date_desc', label: 'от новых пользователей к старым' }
+    { value: 'name_asc', label: trans('от А до Я') },
+    { value: 'name_desc', label: trans('от Я до А') },
+    { value: 'date_asc', label: trans('от старых пользователей к новым') },
+    { value: 'date_desc', label: trans('от новых пользователей к старым') }
   ];
 
   // Страны для фильтра
   const countries = [
-    { value: 'thailand', label: 'Таиланд' },
-    { value: 'vietnam', label: 'Вьетнам' },
-    { value: 'cambodia', label: 'Камбоджа' },
-    { value: 'indonesia', label: 'Индонезия' },
-    { value: 'malaysia', label: 'Малайзия' },
+    { value: 'thailand', label: trans('Таиланд') },
+    { value: 'vietnam', label: trans('Вьетнам') },
+    { value: 'cambodia', label: trans('Камбоджа') },
+    { value: 'indonesia', label: trans('Индонезия') },
+    { value: 'malaysia', label: trans('Малайзия') },
   ];
 
   useEffect(() => {
     loadCatalogData();
-  }, [catalogType]);
+    
+    // Загружаем переводы для интерфейса
+    loadTranslations([
+      'Каталог агентов',
+      'Поиск Агентов',
+      'Введите название агента',
+      'Агенты не найдены',
+      'Каталог застройщиков',
+      'Поиск застройщиков',
+      'Введите название застройщика',
+      'Застройщики не найдены',
+      'Загрузка...',
+      'Ошибка',
+      'Не удалось загрузить данные каталога',
+      'Повторить',
+      'Поиск',
+      'Сортировать',
+      'По умолчанию',
+      'По алфавиту',
+      'По рейтингу',
+      'Таиланд',
+      'Вьетнам',
+      'Камбоджа',
+      'Индонезия',
+      'Малайзия',
+      'Не удалось загрузить данные каталога',
+      'Не удалось применить фильтры',
+      'Не удалось обновить избранное',
+      'Поиск по названию',
+      'от А до Я',
+      'от Я до А',
+      'от старых пользователей к новым',
+      'от новых пользователей к старым',
+      'Все страны',
+    ]);
+  }, [catalogType, currentLanguage]); // Перезагружаем при смене языка
 
   useEffect(() => {
     // Загружаем данные при изменении типа каталога
@@ -97,8 +136,8 @@ const CatalogScreen = ({ navigation, route }) => {
       setCatalogData(results);
       setFilteredData(results);
     } catch (error) {
-      console.error('Ошибка загрузки данных:', error);
-      Alert.alert('Ошибка', 'Не удалось загрузить данные каталога');
+      console.error(trans('Ошибка'), error);
+      Alert.alert(trans('Ошибка'), trans('Не удалось загрузить данные каталога'));
     } finally {
       setLoading(false);
     }
@@ -133,8 +172,8 @@ const CatalogScreen = ({ navigation, route }) => {
       
       setFilteredData(data.results || data);
     } catch (error) {
-      console.error('Ошибка при фильтрации данных:', error);
-      Alert.alert('Ошибка', 'Не удалось применить фильтры');
+      console.error(trans('Ошибка'), error);
+      Alert.alert(trans('Ошибка'), trans('Не удалось применить фильтры'));
     } finally {
       setLoading(false);
     }
@@ -180,8 +219,8 @@ const CatalogScreen = ({ navigation, route }) => {
         )
       );
     } catch (error) {
-      console.error('Ошибка при добавлении/удалении из избранного:', error);
-      Alert.alert('Ошибка', 'Не удалось обновить избранное');
+      console.error(trans('Ошибка'), error);
+      Alert.alert(trans('Ошибка'), trans('Не удалось обновить избранное'));
     }
   };
 
@@ -287,14 +326,14 @@ const CatalogScreen = ({ navigation, route }) => {
 
   const getSortLabel = () => {
     const option = sortOptions.find(opt => opt.value === sortOption);
-    return option ? option.label : 'По умолчанию';
+    return option ? option.label : trans('По умолчанию');
   };
 
   if (loading) {
     return (
       <View style={commonStyles.loadingContainer}>
         <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text style={commonStyles.loadingText}>Загрузка...</Text>
+        <Text style={commonStyles.loadingText}>{trans('Загрузка...')}</Text>
       </View>
     );
   }
@@ -315,7 +354,7 @@ const CatalogScreen = ({ navigation, route }) => {
           <View style={styles.searchForm}>
             <View style={styles.searchRow}>
               <View style={styles.searchField}>
-                <Text style={styles.fieldLabel}>Страна</Text>
+                <Text style={styles.fieldLabel}>{trans('Страна')}</Text>
                 <TouchableOpacity 
                   style={styles.dropdownButton}
                   onPress={() => {
@@ -345,7 +384,7 @@ const CatalogScreen = ({ navigation, route }) => {
               </View>
               
               <View style={styles.searchField}>
-                <Text style={styles.fieldLabel}>Поиск по названию</Text>
+                <Text style={styles.fieldLabel}>{trans('Поиск по названию')}</Text>
                 <TextInput
                   style={styles.searchInput}
                   placeholder={catalogInfo.searchPlaceholder}
@@ -378,7 +417,7 @@ const CatalogScreen = ({ navigation, route }) => {
           <View style={styles.sortDropdownWrapper}>
             <View style={styles.sortDropdown}>
               <View style={styles.sortDropdownHeader}>
-                <Text style={styles.sortDropdownHeaderTitle}>Сортировать</Text>
+                <Text style={styles.sortDropdownHeaderTitle}>{trans('Сортировать')}</Text>
                 <TouchableOpacity 
                   style={styles.sortDropdownButtonWrapper}
                   onPress={() => setShowSortDropdown(!showSortDropdown)}

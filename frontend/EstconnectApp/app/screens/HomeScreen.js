@@ -11,6 +11,7 @@ import {
 import Button from '../components/Button';
 import Header from '../components/Header';
 import BottomNavigation from '../components/BottomNavigation';
+import { useLanguage } from '../contexts/LanguageContext';
 import apiClient from '../api/client';
 import { COLORS } from '../styles/colors';
 import { homeStyles as styles } from '../styles/screens/home';
@@ -19,10 +20,11 @@ import { commonStyles } from '../styles/components/common';
 const HomeScreen = ({ navigation }) => {
   const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { currentLanguage } = useLanguage();
 
   useEffect(() => {
      loadHomeData();
-  }, []);
+  }, [currentLanguage]); // Перезагружаем данные при смене языка
 
   const loadHomeData = async () => {
     try {

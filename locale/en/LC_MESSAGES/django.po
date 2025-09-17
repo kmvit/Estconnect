@@ -28,6 +28,36 @@ msgstr "logo"
 msgid "закрыть"
 msgstr "close"
 
+msgid "Поиск"
+msgstr "Search"
+
+msgid "Создать обращение"
+msgstr "Create Ticket"
+
+msgid "Открыто"
+msgstr "Open"
+
+msgid "Проблемы с сайтом"
+msgstr "Website Issues"
+
+msgid "Оплата"
+msgstr "Payment"
+
+msgid "Личный кабинет"
+msgstr "Personal Account"
+
+msgid "Карта"
+msgstr "Map"
+
+msgid "Не указана"
+msgstr "Not specified"
+
+msgid "Введите страну или регион"
+msgstr "Enter country or region"
+
+msgid "Введите название объекта"
+msgstr "Enter object name"
+
 #: pages/templates/pages/base.html:31 pages/templates/pages/base.html:65
 msgid "О нас"
 msgstr "About Us"

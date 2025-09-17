@@ -14,25 +14,57 @@ import BottomNavigation from '../components/BottomNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { supportStyles as styles } from '../styles/screens/support';
 import HelpIcon from '../components/icons/HelpIcon';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import ApiClient from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 
 const CreateTicketScreen = () => {
   const navigation = useNavigation();
   const { isAuthenticated } = useAuth();
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [category, setCategory] = useState('site');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Загружаем переводы при инициализации
+  React.useEffect(() => {
+    loadTranslations([
+      'Проблемы с сайтом',
+      'Оплата',
+      'Личный кабинет',
+      'Технические вопросы',
+      'Другое',
+      'Ошибка',
+      'Пожалуйста, введите сообщение',
+      'Успех',
+      'Обращение создано успешно',
+      'ОК',
+      'Ошибка создания обращения:',
+      'Не удалось создать обращение. Попробуйте еще раз.',
+      'Внимание',
+      'У вас есть несохраненные изменения. Вы уверены, что хотите выйти?',
+      'Отмена',
+      'Выйти',
+      'Создать обращение',
+      'Категория',
+      'Категория обращения',
+      'Сообщение',
+      'Опишите вашу проблему или вопрос...',
+      'Отправить',
+    ]);
+  }, [currentLanguage]);
+
   const categories = [
-    { key: 'site', label: 'Проблемы с сайтом' },
-    { key: 'payment', label: 'Оплата' },
-    { key: 'account', label: 'Личный кабинет' },
+    { key: 'site', label: trans('Проблемы с сайтом') },
+    { key: 'payment', label: trans('Оплата') },
+    { key: 'account', label: trans('Личный кабинет') },
   ];
 
   const handleSubmit = async () => {
     if (!message.trim()) {
-      Alert.alert('Ошибка', 'Пожалуйста, введите сообщение');
+      Alert.alert(trans('Ошибка'), trans('Пожалуйста, введите сообщение'));
       return;
     }
 
@@ -55,8 +87,8 @@ const CreateTicketScreen = () => {
         ]
       );
     } catch (error) {
-      console.error('Ошибка создания обращения:', error);
-      Alert.alert('Ошибка', 'Не удалось создать обращение. Попробуйте еще раз.');
+      console.error(trans('Ошибка создания обращения:'), error);
+      Alert.alert(trans('Ошибка'), trans('Не удалось создать обращение. Попробуйте еще раз.'));
     } finally {
       setLoading(false);
     }
@@ -65,11 +97,11 @@ const CreateTicketScreen = () => {
   const handleBack = () => {
     if (message.trim()) {
       Alert.alert(
-        'Внимание',
-        'У вас есть несохраненные изменения. Вы уверены, что хотите выйти?',
+        trans('Внимание'),
+        trans('У вас есть несохраненные изменения. Вы уверены, что хотите выйти?'),
         [
-          { text: 'Отмена', style: 'cancel' },
-          { text: 'Выйти', onPress: () => navigation.goBack() },
+          { text: trans('Отмена'), style: 'cancel' },
+          { text: trans('Выйти'), onPress: () => navigation.goBack() },
         ]
       );
     } else {
@@ -80,10 +112,10 @@ const CreateTicketScreen = () => {
   if (!isAuthenticated) {
     return (
       <View style={styles.container}>
-        <Header title="Создать обращение" onBack={handleBack} />
+        <Header title={trans('Создать обращение')} onBack={handleBack} />
         <View style={styles.centerContainer}>
           <Text style={styles.authMessage}>
-            Для создания обращения необходимо войти в систему
+            {trans('Для создания обращения необходимо войти в систему')}
           </Text>
         </View>
         <BottomNavigation navigation={navigation} activeTab="help" />
@@ -96,11 +128,11 @@ const CreateTicketScreen = () => {
       <Header title="Создать обращение" onBack={handleBack} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.createHeader}>
-          <Text style={styles.createHeaderTitle}>Новое обращение</Text>
+          <Text style={styles.createHeaderTitle}>{trans('Новое обращение')}</Text>
         </View>
 
         <View style={styles.formContainer}>
-          <Text style={styles.formLabel}>Категория обращения</Text>
+          <Text style={styles.formLabel}>{trans('Категория обращения')}</Text>
           <View style={styles.categoriesContainer}>
             {categories.map((cat) => (
               <TouchableOpacity
@@ -123,10 +155,10 @@ const CreateTicketScreen = () => {
             ))}
           </View>
 
-          <Text style={styles.formLabel}>Сообщение</Text>
+          <Text style={styles.formLabel}>{trans('Сообщение')}</Text>
           <TextInput
             style={styles.messageInput}
-            placeholder="Опишите вашу проблему или вопрос..."
+            placeholder={trans('Опишите вашу проблему или вопрос...')}
             placeholderTextColor={COLORS.gray}
             value={message}
             onChangeText={setMessage}
@@ -143,7 +175,7 @@ const CreateTicketScreen = () => {
             {loading ? (
               <ActivityIndicator size="small" color={COLORS.white} />
             ) : (
-              <Text style={styles.submitButtonText}>Отправить обращение</Text>
+              <Text style={styles.submitButtonText}>{trans('Отправить')}</Text> 
             )}
           </TouchableOpacity>
         </View>

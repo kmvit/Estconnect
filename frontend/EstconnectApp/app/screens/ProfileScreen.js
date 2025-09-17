@@ -19,12 +19,16 @@ import ContactIcon from '../components/icons/ContactIcon';
 import CalendarIcon from '../components/icons/CalendarIcon';
 import AgentIcon from '../components/icons/AgentIcon';
 import BuilderIcon from '../components/icons/BuilderIcon';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTrans } from '../hooks/useTrans';
 import ApiClient from '../api/client';
 import { useAuth } from '../hooks/useAuth';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const { user, isAuthenticated, logout } = useAuth();
+  const { currentLanguage } = useLanguage();
+  const { trans, loadTranslations } = useTrans();
   const [userData, setUserData] = useState({
     firstName: 'Иван',
     lastName: 'Иванов',
@@ -48,13 +52,13 @@ const ProfileScreen = () => {
   const getRoleDisplayName = (role) => {
     switch (role) {
       case 'developer':
-        return 'Застройщик';
+        return trans('Застройщик');
       case 'agent':
-        return 'Агент';
+        return trans('Агент');
       case 'admin':
-        return 'КАМ-менеджер';
+        return trans('CAM-менеджер');
       default:
-        return 'Пользователь';
+        return trans('Пользователь');
     }
   };
 
@@ -167,9 +171,33 @@ const ProfileScreen = () => {
     }
   };
 
-  // Загружаем профиль при монтировании компонента
+  // Загружаем профиль и переводы при монтировании компонента
   useEffect(() => {
     loadProfile();
+    
+    // Загружаем переводы для всех строк, используемых в компоненте
+    loadTranslations([
+      'Имя',
+      'Фамилия', 
+      'Компания',
+      'Язык',
+      'Телефон',
+      'Email',
+      'Личные данные',
+      'Сохранить',
+      'Загрузка...',
+      'Ошибка',
+      'Добавить фото',
+      'Текущий тариф',
+      'Действителен до',
+      'Изменить',
+      'Продлить',
+      'Контактная информация',
+      'Контактный номер',
+      'Электронный адрес',
+      'Предпочтительный канал связи',
+      'Сохранить изменения',
+    ]);
   }, []);
 
   return (
@@ -217,7 +245,7 @@ const ProfileScreen = () => {
             resizeMode="cover"
           />
           <TouchableOpacity style={styles.bannerAddButton} onPress={handleAddBanner}>
-            <Text style={styles.bannerAddText}>Добавить фото</Text>
+            <Text style={styles.bannerAddText}>{trans('Добавить фото')}</Text>
           </TouchableOpacity>
           
           {/* Фото профиля */}
@@ -228,7 +256,7 @@ const ProfileScreen = () => {
               resizeMode="cover"
             />
             <TouchableOpacity style={styles.profilePhotoAddButton} onPress={handleAddPhoto}>
-              <Text style={styles.profilePhotoAddText}>Добавить фото</Text>
+              <Text style={styles.profilePhotoAddText}>{trans('Добавить фото')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -237,20 +265,20 @@ const ProfileScreen = () => {
         <View style={styles.statusesContainer}>
           <View style={styles.statusCard}>
             <Text style={styles.statusTitle}>{subscriptionData.plan}</Text>
-            <Text style={styles.statusText}>Текущий тариф</Text>
+            <Text style={styles.statusText}>{trans('Текущий тариф')}</Text>
           </View>
           
           <View style={styles.statusCard}>
             <View style={styles.statusIconContainer}>
               <CalendarIcon width={48} height={48} color={COLORS.text} />
             </View>
-            <Text style={styles.statusText}>Действителен до {subscriptionData.validUntil}</Text>
+            <Text style={styles.statusText}>{trans('Действителен до')} {subscriptionData.validUntil}</Text>
             <View style={styles.statusActions}>
               <TouchableOpacity style={styles.statusButtonSecondary} onPress={handleChangePlan}>
-                <Text style={styles.statusButtonSecondaryText}>Изменить</Text>
+                <Text style={styles.statusButtonSecondaryText}>{trans('Изменить')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.statusButtonPrimary} onPress={handleExtendPlan}>
-                <Text style={styles.statusButtonPrimaryText}>Продлить</Text>
+                <Text style={styles.statusButtonPrimaryText}>{trans('Продлить')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -262,12 +290,12 @@ const ProfileScreen = () => {
             <View style={styles.sectionIconContainer}>
               <ProfileIcon width={32} height={32} color={COLORS.text} />
             </View>
-            <Text style={styles.sectionTitle}>Личные данные</Text>
+            <Text style={styles.sectionTitle}>{trans('Личные данные')}</Text>
           </View>
           
           <View style={styles.formContainer}>
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Имя</Text>
+              <Text style={styles.inputLabel}>{trans('Имя')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.firstName}
@@ -277,7 +305,7 @@ const ProfileScreen = () => {
             </View>
             
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Фамилия</Text>
+              <Text style={styles.inputLabel}>{trans('Фамилия')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.lastName}
@@ -287,7 +315,7 @@ const ProfileScreen = () => {
             </View>
             
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Компания</Text>
+              <Text style={styles.inputLabel}>{trans('Компания')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.companyName}
@@ -297,7 +325,7 @@ const ProfileScreen = () => {
             </View>
             
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Язык</Text>
+              <Text style={styles.inputLabel}>{trans('Язык')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.language}
@@ -314,12 +342,12 @@ const ProfileScreen = () => {
             <View style={styles.sectionIconContainer}>
               <ContactIcon width={32} height={32} color={COLORS.text} />
             </View>
-            <Text style={styles.sectionTitle}>Контактная информация</Text>
+            <Text style={styles.sectionTitle}>{trans('Контактная информация')}</Text>
           </View>
           
           <View style={styles.formContainer}>
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Контактный номер</Text>
+              <Text style={styles.inputLabel}>{trans('Контактный номер')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.phone}
@@ -330,7 +358,7 @@ const ProfileScreen = () => {
             </View>
             
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Электронный адрес</Text>
+              <Text style={styles.inputLabel}>{trans('Электронный адрес')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.email}
@@ -341,7 +369,7 @@ const ProfileScreen = () => {
             </View>
             
             <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Предпочтительный канал связи</Text>
+              <Text style={styles.inputLabel}>{trans('Предпочтительный канал связи')}</Text>
               <TextInput
                 style={styles.textInput}
                 value={userData.preferredContact}
@@ -362,7 +390,7 @@ const ProfileScreen = () => {
             {loading ? (
               <ActivityIndicator size="small" color={COLORS.white} />
             ) : (
-              <Text style={styles.saveButtonText}>Сохранить изменения</Text>
+              <Text style={styles.saveButtonText}>{trans('Сохранить изменения')}</Text>
             )}
           </TouchableOpacity>
         </View>
