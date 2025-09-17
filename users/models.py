@@ -18,6 +18,8 @@ class CustomUser(AbstractUser):
     LANGUAGE_CHOICES = [
         ('ru', 'Русский'),
         ('en', 'English'),
+        ('th', 'ไทย'),
+        ('zh-hans', '中文'),
     ]
 
     SUBSCRIPTION_CHOICES = [
@@ -44,7 +46,7 @@ class CustomUser(AbstractUser):
     fio = models.CharField(max_length=255, blank=True, null=True,
                            verbose_name='ФИО')
     website = models.URLField(blank=True, null=True, verbose_name='Вебсайт')
-    language = models.CharField('Язык', max_length=2, choices=LANGUAGE_CHOICES,
+    language = models.CharField('Язык', max_length=10, choices=LANGUAGE_CHOICES,
                               default='ru')
     profile_photo = models.ImageField(
         'Фото профиля',

@@ -160,7 +160,7 @@ class UserProfileForm(forms.ModelForm):
             }),
             'language': forms.Select(attrs={
                 'class': 'input estate-search-form-item-input profile_language-dropdown-button'
-            }, choices=[('ru', 'Русский'), ('en', 'English')]),
+            }),
             'preferred_contact_method': forms.Select(attrs={
                 'class': 'input estate-search-form-item-input profile_communication-dropdown-button'
             }, choices=[('email', 'Электронная почта'), ('phone', 'Телефон')]),
