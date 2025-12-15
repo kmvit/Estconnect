@@ -12,50 +12,50 @@ class CustomUserCreationForm(UserCreationForm):
     Форма регистрации
     """
     username = forms.CharField(
-        label="Логин",
+        label=_("Логин"),
         widget=forms.TextInput(attrs={
             'class': 'input',
-            'placeholder': 'Логин'
+            'placeholder': _('Логин')
         })
     )
     
     email = forms.EmailField(
-        label="Email",
+        label=_("Email"),
         widget=forms.EmailInput(attrs={
             'class': 'input',
-            'placeholder': 'Email'
+            'placeholder': _('Email')
         })
     )
     
     password1 = forms.CharField(
-        label="Пароль",
+        label=_("Пароль"),
         widget=forms.PasswordInput(attrs={
             'class': 'input',
-            'placeholder': 'Пароль'
+            'placeholder': _('Пароль')
         })
     )
     
     password2 = forms.CharField(
-        label="Подтверждение пароля",
+        label=_("Подтверждение пароля"),
         widget=forms.PasswordInput(attrs={
             'class': 'input',
-            'placeholder': 'Повторите пароль'
+            'placeholder': _('Повторите пароль')
         })
     )
-
+    
     phone = forms.CharField(
-        label="Телефон",
+        label=_("Телефон"),
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'input',
-            'placeholder': 'Телефон'
+            'placeholder': _('Телефон')
         })
     )
-
+    
     country = forms.ModelChoiceField(
-        label="Страна",
+        label=_("Страна"),
         queryset=Country.objects.all(),
-        empty_label="Выберите страну",
+        empty_label=_("Выберите страну"),
         widget=forms.Select(attrs={
             'class': 'input country-select'
         })
@@ -73,15 +73,15 @@ class CustomUserCreationForm(UserCreationForm):
             }),
             'company_name': forms.TextInput(attrs={
                 'class': 'input',
-                'placeholder': 'Название компании'
+                'placeholder': _('Название компании')
             }),
             'legal_address': forms.TextInput(attrs={
                 'class': 'input',
-                'placeholder': 'Юридический адрес'
+                'placeholder': _('Юридический адрес')
             }),
             'website': forms.URLInput(attrs={
                 'class': 'input',
-                'placeholder': 'Веб-сайт'
+                'placeholder': _('Веб-сайт')
             })
         }
 
@@ -95,6 +95,18 @@ class CustomUserCreationForm(UserCreationForm):
         optional_fields = ['company_name', 'legal_address', 'website']
         for field in optional_fields:
             self.fields[field].required = False
+        # Обновляем плейсхолдеры для динамического перевода
+        self.fields['username'].widget.attrs['placeholder'] = _('Логин')
+        self.fields['email'].widget.attrs['placeholder'] = _('Email')
+        self.fields['password1'].widget.attrs['placeholder'] = _('Пароль')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Повторите пароль')
+        self.fields['phone'].widget.attrs['placeholder'] = _('Телефон')
+        if 'company_name' in self.fields:
+            self.fields['company_name'].widget.attrs['placeholder'] = _('Название компании')
+        if 'legal_address' in self.fields:
+            self.fields['legal_address'].widget.attrs['placeholder'] = _('Юридический адрес')
+        if 'website' in self.fields:
+            self.fields['website'].widget.attrs['placeholder'] = _('Веб-сайт')
 
     # def clean_phone(self):
     #     phone = self.cleaned_data['phone']
@@ -110,17 +122,25 @@ class CustomLoginForm(forms.Form):
     Форма авторизации
     """
     username = forms.CharField(
-        label="Логин, телефон или email",
+        label=_("Логин, телефон или email"),
         max_length=255,
         required=True,
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Логин, телефон (8XXXXXXXXXX) или email'}),
+        widget=forms.TextInput(),
     )
     password = forms.CharField(
-        label="Пароль",
+        label=_("Пароль"),
         required=True,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Пароль'}),
+        widget=forms.PasswordInput(),
     )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Устанавливаем плейсхолдеры для динамического перевода
+        self.fields['username'].widget.attrs['placeholder'] = _('Логин, телефон (8XXXXXXXXXX) или email')
+        self.fields['password'].widget.attrs['placeholder'] = _('Пароль')
+        # Добавляем классы к виджетам
+        self.fields['username'].widget.attrs['class'] = 'input'
+        self.fields['password'].widget.attrs['class'] = 'input'
 
 
 class UserProfileForm(forms.ModelForm):
@@ -139,31 +159,26 @@ class UserProfileForm(forms.ModelForm):
         ]
         widgets = {
             'first_name': forms.TextInput(attrs={
-                'class': 'input estate-search-form-item-input',
-                'placeholder': 'Имя'
+                'class': 'input estate-search-form-item-input'
             }),
             'last_name': forms.TextInput(attrs={
-                'class': 'input estate-search-form-item-input',
-                'placeholder': 'Фамилия'
+                'class': 'input estate-search-form-item-input'
             }),
             'email': forms.EmailInput(attrs={
-                'class': 'input estate-search-form-item-input',
-                'placeholder': 'example@mail.ru'
+                'class': 'input estate-search-form-item-input'
             }),
             'phone': forms.TextInput(attrs={
-                'class': 'input estate-search-form-item-input',
-                'placeholder': '+7 (999) 999-99-99'
+                'class': 'input estate-search-form-item-input'
             }),
             'company_name': forms.TextInput(attrs={
-                'class': 'input estate-search-form-item-input',
-                'placeholder': 'Название компании'
+                'class': 'input estate-search-form-item-input'
             }),
             'language': forms.Select(attrs={
                 'class': 'input estate-search-form-item-input profile_language-dropdown-button'
             }),
             'preferred_contact_method': forms.Select(attrs={
                 'class': 'input estate-search-form-item-input profile_communication-dropdown-button'
-            }, choices=[('email', 'Электронная почта'), ('phone', 'Телефон')]),
+            }, choices=[('email', _('Электронная почта')), ('phone', _('Телефон'))]),
             'profile_photo': forms.FileInput(attrs={
                 'class': 'profile_logo-add',
                 'accept': 'image/*',
@@ -175,6 +190,15 @@ class UserProfileForm(forms.ModelForm):
                 'style': 'display: none;'
             })
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Устанавливаем плейсхолдеры для динамического перевода
+        self.fields['first_name'].widget.attrs['placeholder'] = str(_('Имя'))
+        self.fields['last_name'].widget.attrs['placeholder'] = str(_('Фамилия'))
+        self.fields['email'].widget.attrs['placeholder'] = str(_('example@mail.ru'))
+        self.fields['phone'].widget.attrs['placeholder'] = str(_('+7 (999) 999-99-99'))
+        self.fields['company_name'].widget.attrs['placeholder'] = str(_('Название компании'))
 
     def clean_profile_photo(self):
         photo = self.cleaned_data.get('profile_photo')
@@ -211,46 +235,41 @@ class EstateSearchForm(forms.Form):
     country = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input estate-search-form-item-input',
-            'placeholder': 'Таиланд'
+            'class': 'input estate-search-form-item-input'
         }),
-        label='Местонахождение объекта'
+        label=_('Местонахождение объекта')
     )
     
     name = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input estate-search-form-item-input',
-            'placeholder': 'Введите название ЖК'
+            'class': 'input estate-search-form-item-input'
         }),
-        label='Название объекта'
+        label=_('Название объекта')
     )
     
     developer = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={
-            'class': 'input estate-search-form-item-input',
-            'placeholder': 'Введите название застройщика'
+            'class': 'input estate-search-form-item-input'
         }),
-        label='Название застройщика'
+        label=_('Название застройщика')
     )
     
     price_from = forms.DecimalField(
         required=False,
         widget=forms.NumberInput(attrs={
-            'class': 'input estate-search-form-item-input estate-search-form-item-price-item',
-            'placeholder': 'От'
+            'class': 'input estate-search-form-item-input estate-search-form-item-price-item'
         }),
-        label='Цена от'
+        label=_('Цена от')
     )
     
     price_to = forms.DecimalField(
         required=False,
         widget=forms.NumberInput(attrs={
-            'class': 'input estate-search-form-item-input estate-search-form-item-price-item',
-            'placeholder': 'До'
+            'class': 'input estate-search-form-item-input estate-search-form-item-price-item'
         }),
-        label='Цена до'
+        label=_('Цена до')
     )
     
     price_currency = forms.ChoiceField(
@@ -266,47 +285,45 @@ class EstateSearchForm(forms.Form):
             'class': 'input estate-search-form-item-input',
             'style': 'display: none;'
         }),
-        label='Валюта'
+        label=_('Валюта')
     )
     
     object_type = forms.ChoiceField(
         choices=[
-            ('', '- выберите -'),
-            ('apartment', 'Квартира'),
-            ('house', 'Дом'),
-            ('land', 'Участок'),
-            ('commercial', 'Коммерческая недвижимость')
+            ('', _('- выберите -')),
+            ('apartment', _('Квартира')),
+            ('house', _('Дом')),
+            ('land', _('Участок')),
+            ('commercial', _('Коммерческая недвижимость'))
         ],
         required=False,
         widget=forms.Select(attrs={
             'class': 'input estate-search-form-item-input',
             'style': 'display: none;'
         }),
-        label='Тип объекта'
+        label=_('Тип объекта')
     )
     
     beach_distance_from = forms.IntegerField(
         required=False,
         widget=forms.NumberInput(attrs={
-            'class': 'input estate-search-form-item-input estate-search-form-item-price-item',
-            'placeholder': 'От'
+            'class': 'input estate-search-form-item-input estate-search-form-item-price-item'
         }),
-        label='Расстояние до пляжа от'
+        label=_('Расстояние до пляжа от')
     )
     
     beach_distance_to = forms.IntegerField(
         required=False,
         widget=forms.NumberInput(attrs={
-            'class': 'input estate-search-form-item-input estate-search-form-item-price-item',
-            'placeholder': 'До'
+            'class': 'input estate-search-form-item-input estate-search-form-item-price-item'
         }),
-        label='Расстояние до пляжа до'
+        label=_('Расстояние до пляжа до')
     )
     
     beach_distance_unit = forms.ChoiceField(
         choices=[
-            ('meters', 'Метров'),
-            ('kilometers', 'Километров')
+            ('meters', _('Метров')),
+            ('kilometers', _('Километров'))
         ],
         initial='meters',
         required=False,
@@ -314,8 +331,20 @@ class EstateSearchForm(forms.Form):
             'class': 'input estate-search-form-item-input',
             'style': 'display: none;'
         }),
-        label='Единица измерения'
+        label=_('Единица измерения')
     )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Устанавливаем плейсхолдеры для динамического перевода
+        # LocaleMiddleware устанавливает язык для запроса, поэтому str(_('От')) переведет правильно
+        self.fields['country'].widget.attrs['placeholder'] = str(_('Таиланд'))
+        self.fields['name'].widget.attrs['placeholder'] = str(_('Введите название ЖК'))
+        self.fields['developer'].widget.attrs['placeholder'] = str(_('Введите название застройщика'))
+        self.fields['price_from'].widget.attrs['placeholder'] = str(_('От'))
+        self.fields['price_to'].widget.attrs['placeholder'] = str(_('До'))
+        self.fields['beach_distance_from'].widget.attrs['placeholder'] = str(_('От'))
+        self.fields['beach_distance_to'].widget.attrs['placeholder'] = str(_('До'))
 
 
 class InvoiceForm(forms.Form):

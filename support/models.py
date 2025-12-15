@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
 class SupportTicket(models.Model):
     STATUS_CHOICES = [
-        ('open', 'Открыто'),
-        ('closed', 'Закрыто'),
+        ('open', _('Открыто')),
+        ('closed', _('Закрыто')),
     ]
     CATEGORY_CHOICES = [
-        ('site', 'Проблемы с сайтом'),
-        ('payment', 'Оплата'),
-        ('account', 'Личный кабинет'),
+        ('site', _('Проблемы с сайтом')),
+        ('payment', _('Оплата')),
+        ('account', _('Личный кабинет')),
     ]
 
     creator = models.ForeignKey(

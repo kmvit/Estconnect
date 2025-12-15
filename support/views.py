@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from datetime import datetime
+from django.utils.translation import gettext_lazy as _
 
 from .models import SupportTicket, SupportMessage
 from .forms import SupportMessageForm
@@ -20,9 +21,11 @@ class SupportViewSet(LoginRequiredMixin, View):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
+        # Переводим категории для шаблона
+        categories = [(id, str(name)) for id, name in SupportTicket.CATEGORY_CHOICES]
         context = {
             'current_date': datetime.now(),
-            'categories': SupportTicket.CATEGORY_CHOICES,
+            'categories': categories,
         }
         
         if 'ticket_id' in kwargs:

@@ -45,7 +45,7 @@ Estconnect - это специализированная платформа дл
 
 ## Общая информация
 - **Тип проекта**: Веб-приложение на Django 5.1.3
-- **Язык интерфейса**: Русский
+- **Языки интерфейса**: Русский (по умолчанию), Английский, Тайский, Китайский упрощенный
 - **База данных**: Поддерживает различные СУБД (в разработке используется SQLite)
 
 ## Структура проекта
@@ -111,6 +111,83 @@ sqlparse==0.5.2
 - Часовой пояс: UTC
 - Кастомная модель пользователя: `users.CustomUser`
 - Настроенные middleware для безопасности и аутентификации
+
+## Локализация и переводы
+
+### Поддерживаемые языки
+Проект поддерживает многоязычность с использованием Django i18n и django-modeltranslation:
+
+- **Русский (ru)** - язык по умолчанию
+- **Английский (en)** - English
+- **Тайский (th)** - ไทย
+- **Китайский упрощенный (zh-hans)** - 中文 (отображается как CH в интерфейсе)
+
+### Файлы переводов
+Файлы переводов находятся в директории `locale/`:
+```
+locale/
+├── ru/LC_MESSAGES/
+│   ├── django.po
+│   └── django.mo
+├── en/LC_MESSAGES/
+│   ├── django.po
+│   └── django.mo
+├── th/LC_MESSAGES/
+│   ├── django.po
+│   └── django.mo
+└── zh_Hans/LC_MESSAGES/
+    ├── django.po
+    └── django.mo
+```
+
+### Работа с переводами
+
+#### Обновление файлов переводов
+После добавления новых строк для перевода в шаблонах или коде:
+
+```bash
+# Обновить файлы переводов для всех языков
+python manage.py makemessages -a
+
+# Или для конкретного языка
+python manage.py makemessages -l ru
+python manage.py makemessages -l en
+python manage.py makemessages -l th
+python manage.py makemessages -l zh_Hans
+```
+
+#### Компиляция переводов
+После редактирования файлов `.po` необходимо скомпилировать их:
+
+```bash
+python manage.py compilemessages
+```
+
+#### Требования для работы с переводами
+На сервере должны быть установлены инструменты GNU gettext:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install gettext
+
+# CentOS/RHEL
+sudo yum install gettext
+```
+
+### Переключение языка
+- **Веб-интерфейс**: Язык переключается через интерфейс и сохраняется в сессии пользователя
+- **Мобильное приложение**: Язык сохраняется локально и синхронизируется с сервером через API
+- **API**: Эндпоинт `/api/v1/set-language/` для установки языка в сессии
+
+### Перевод моделей
+Используется `django-modeltranslation` для перевода полей моделей:
+- Названия объектов недвижимости
+- Описания
+- Адреса
+- Удобства
+- И другие переводимые поля
+
+Файлы конфигурации переводов моделей находятся в `*/translation.py` каждого приложения.
 
 ## Структура URL
 Основной файл конфигурации URL: `Estconnect/urls.py`
@@ -178,12 +255,21 @@ python manage.py migrate
 python manage.py collectstatic
 ```
 
-6. **Создание суперпользователя**
+6. **Компиляция переводов**
+```bash
+# Убедитесь, что установлены инструменты gettext
+# Ubuntu/Debian: sudo apt-get install gettext
+# CentOS/RHEL: sudo yum install gettext
+
+python manage.py compilemessages
+```
+
+7. **Создание суперпользователя**
 ```bash
 python manage.py createsuperuser
 ```
 
-7. **Запуск через Gunicorn (рекомендуется для продакшена)**
+8. **Запуск через Gunicorn (рекомендуется для продакшена)**
 ```bash
 pip install gunicorn
 gunicorn Estconnect.wsgi:application --bind 0.0.0.0:8000
