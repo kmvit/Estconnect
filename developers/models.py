@@ -95,7 +95,8 @@ class ConstructionObject(models.Model):
     
     completion_date = models.DateField('Дата сдачи проекта', null=True, blank=True)
     address = models.TextField(verbose_name='Адрес', blank=True, null=True)
-    documentations_link = models.URLField(verbose_name='Ссылка на документы', blank=True, null=True) 
+    documentations_link = models.URLField(verbose_name='Ссылка на документы', blank=True, null=True)
+    commission = models.TextField(verbose_name='Комиссии', blank=True, null=True, help_text='Информация о комиссиях')
     
     created_at = models.DateTimeField('Дата создания', default=timezone.now)
     updated_at = models.DateTimeField('Дата обновления', auto_now=True)

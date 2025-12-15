@@ -37,6 +37,21 @@ class ConstructionObjectAdmin(TabbedTranslationAdmin):
     inlines = [ConstructionObjectImageInline]
     date_hierarchy = 'created_at'
     list_per_page = 20
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('name', 'developer', 'country', 'city', 'district', 'address', 'latitude', 'longitude')
+        }),
+        ('Характеристики', {
+            'fields': ('property_type', 'comfort_type', 'amenities', 'ownership_type', 'area', 'floors', 'project_status', 'completion_date')
+        }),
+        ('Описание и цены', {
+            'fields': ('description', 'price_per_sqm')
+        }),
+        ('Дополнительно', {
+            'fields': ('documentations_link', 'commission', 'is_published', 'created_at', 'updated_at')
+        }),
+    )
+    readonly_fields = ('created_at', 'updated_at')
 
 
 
