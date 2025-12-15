@@ -32,10 +32,12 @@
                     <img src="{% static 'assets/icons/home.svg' %}" alt="">
                     <span>{% trans "Главная" %}</span>
                 </a>
+                {% comment %}
                 <a href="{% url 'users:profile_finance' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/finance.svg' %}" alt="">
                     <span>{% trans "Финансовые операции" %}</span>
                 </a>
+                {% endcomment %}
                 <a href="{% url 'users:object_list' %}" class="navigation-list-link">
                     <img src="{% static 'assets/icons/view.svg' %}" alt="">
                     <span>{% trans "Просмотр объектов" %}</span>
