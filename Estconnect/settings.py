@@ -146,6 +146,30 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
 
+# Переопределяем загрузку переводов для zh-hans, чтобы использовать только переводы проекта
+# и не загружать системные переводы Django
+import django.utils.translation.trans_real as trans_real
+
+# Сохраняем оригинальную функцию
+_original_translation = trans_real.translation
+
+def translation(language, domain='django', localedirs=None):
+    """
+    Переопределяем загрузку переводов для zh-hans/zh_hans,
+    чтобы загружать только из нашего проекта, а не из системных приложений Django
+    """
+    # Нормализуем код языка
+    normalized_lang = language.replace('-', '_').lower()
+    
+    # Для китайского языка загружаем только из нашего проекта
+    if normalized_lang in ('zh_hans', 'zh-hans'):
+        localedirs = LOCALE_PATHS
+    
+    return _original_translation(language, domain, localedirs)
+
+# Заменяем функцию
+trans_real.translation = translation
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
